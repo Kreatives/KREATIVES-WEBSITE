@@ -126,23 +126,21 @@ export default async function ProjectDetailPage({
                 )}
 
                 <div className={styles.blockText}>
-                  <div className={styles.column}>
-                    {s.heading && (
-                      <h2 className={styles.blockHeading} data-reveal>
-                        {s.heading}
-                      </h2>
-                    )}
+                  {s.heading && (
+                    <h2 className={styles.blockHeading} data-reveal>
+                      {s.heading}
+                    </h2>
+                  )}
+                  <div className={styles.blockCols}>
                     <p className={styles.blockBody} data-reveal>
                       {s.body}
                     </p>
-                  </div>
-                  {s.bodyExtra && (
-                    <div className={styles.column}>
+                    {s.bodyExtra && (
                       <p className={styles.blockBody} data-reveal>
                         {s.bodyExtra}
                       </p>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

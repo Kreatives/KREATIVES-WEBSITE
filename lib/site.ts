@@ -606,9 +606,15 @@ export const contact = {
 export const footer = {
   tagline:
     "Maatwerk websites voor ondernemers die hun online uitstraling in lijn willen brengen met hun bedrijf.",
+  social: [
+    { label: "LinkedIn", href: "#", icon: "linkedin" as const },
+    { label: "TikTok", href: "#", icon: "tiktok" as const },
+    { label: "Instagram", href: "#", icon: "instagram" as const },
+  ],
   columns: [
     {
       title: "Menu",
+      cols: 2,
       links: [
         { label: "Werkwijze", href: "/werkwijze" },
         { label: "Diensten", href: "/diensten" },
@@ -622,17 +628,11 @@ export const footer = {
     },
     {
       title: "Diensten",
+      cols: 1,
       links: [
         { label: "Maatwerk website", href: "/#prijzen" },
         { label: "Maatwerk webshop", href: "/#prijzen" },
         { label: "Redesign", href: "/contact" },
-      ],
-    },
-    {
-      title: "Social",
-      links: [
-        { label: "LinkedIn", href: "#" },
-        { label: "Instagram", href: "#" },
       ],
     },
   ],
@@ -791,7 +791,7 @@ export const webdesignFunnel = {
       "Als één van die twee herkenbaar is, zit je hier goed. We pakken allebei aan.",
   },
   tracks: {
-    eyebrow: "Wat je kunt afnemen",
+    eyebrow: "Hoe wij jou kunnen helpen",
     title: "Twee duidelijke trajecten",
     accent: "trajecten",
     items: [
@@ -1070,7 +1070,7 @@ export const werkwijzePage = {
     body:
       "Vier dingen die bij elk traject vaststaan, zodat je nooit voor verrassingen komt te staan.",
     stats: [
-      { number: "4 wk", label: "Vaste tijdlijn", body: "Van eerste gesprek tot livegang werk je met een planning die we vooraf vastleggen." },
+      { number: "4", label: "Weken tot oplevering", body: "Van eerste gesprek tot livegang werk je met een planning die we vooraf vastleggen." },
       { number: "1", label: "Vast aanspreekpunt", body: "Eén persoon die je project kent, van begin tot eind. Geen doorverbinden." },
       { number: "0", label: "Verborgen kosten", body: "Eén heldere prijs vooraf. Wat we afspreken is wat je betaalt." },
       { number: "2", label: "Revisierondes inbegrepen", body: "Ruimte om aan te scherpen tot het klopt, zonder meerwerk-discussie." },

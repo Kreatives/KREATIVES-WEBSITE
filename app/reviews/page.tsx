@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import RevealInit from "@/components/RevealInit";
 import { reviewsPage } from "@/lib/site";
 import styles from "./reviews.module.css";
@@ -58,23 +57,6 @@ export default function ReviewsPage() {
                       </span>
                     </div>
                   </div>
-                  <span className={styles.logo}>
-                    {r.logo ? (
-                      <Image
-                        src={r.logo}
-                        alt={r.company}
-                        width={110}
-                        height={28}
-                        style={{
-                          objectFit: "contain",
-                          height: "1.35rem",
-                          width: "auto",
-                        }}
-                      />
-                    ) : (
-                      r.company
-                    )}
-                  </span>
                 </div>
               </article>
             ))}

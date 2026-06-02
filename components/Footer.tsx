@@ -1,6 +1,13 @@
 import { footer, site } from "@/lib/site";
 import Logo from "@/components/Logo";
+import { LinkedIn, TikTok, Instagram } from "@/components/icons";
 import styles from "./Footer.module.css";
+
+const socialIcons = {
+  linkedin: LinkedIn,
+  tiktok: TikTok,
+  instagram: Instagram,
+};
 
 export default function Footer() {
   return (
@@ -10,12 +17,33 @@ export default function Footer() {
           <div className={styles.brandCol}>
             <Logo className={styles.brand} />
             <p className={styles.tagline}>{footer.tagline}</p>
+            <div className={styles.social}>
+              {footer.social.map((s) => {
+                const Icon = socialIcons[s.icon];
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    className={styles.socialLink}
+                    aria-label={s.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           {footer.columns.map((c) => (
-            <nav key={c.title} className={styles.col} aria-label={c.title}>
+            <nav
+              key={c.title}
+              className={`${styles.col} ${c.cols === 2 ? styles.colWide : ""}`}
+              aria-label={c.title}
+            >
               <span className={styles.colTitle}>{c.title}</span>
-              <ul>
+              <ul className={c.cols === 2 ? styles.linksTwo : ""}>
                 {c.links.map((l) => (
                   <li key={l.label}>
                     <a href={l.href}>{l.label}</a>
@@ -33,12 +61,8 @@ export default function Footer() {
             >
               {footer.contact.email}
             </a>
-            <span className={styles.contactSub}>
-              {footer.contact.response}
-            </span>
-            <span className={styles.contactSub}>
-              {footer.contact.location}
-            </span>
+            <span className={styles.contactSub}>{footer.contact.response}</span>
+            <span className={styles.contactSub}>{footer.contact.location}</span>
           </div>
         </div>
 

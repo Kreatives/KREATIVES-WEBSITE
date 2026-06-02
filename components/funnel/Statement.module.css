@@ -44,8 +44,8 @@
   align-self: flex-start;
   align-items: stretch;
   margin-top: 0.5rem;
-  background: var(--ink);
-  color: var(--on-dark);
+  background: var(--orange);
+  color: #fff;
   border-radius: var(--radius-btn);
   overflow: hidden;
   font-weight: 600;
@@ -53,7 +53,7 @@
   transition: background 0.3s var(--ease);
 }
 .cta:hover {
-  background: var(--ink-soft);
+  background: var(--orange-deep);
 }
 .ctaLabel {
   display: inline-flex;
@@ -65,8 +65,8 @@
   display: grid;
   place-items: center;
   width: 2.6rem;
-  background: var(--orange);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
 }
 .ctaIco svg {
   width: 0.9rem;
