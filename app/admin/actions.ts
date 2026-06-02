@@ -17,6 +17,13 @@ function revalidateProjects() {
 export async function seedDatabase() {
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: "Je bent niet ingelogd." };
+
+  const errors: string[] = [];
+
   const [p, r, f] = await Promise.all([
     supabase.from("projects").select("*", { count: "exact", head: true }),
     supabase.from("reviews").select("*", { count: "exact", head: true }),
@@ -24,7 +31,7 @@ export async function seedDatabase() {
   ]);
 
   if (!p.count) {
-    await supabase.from("projects").insert(
+    const { error } = await supabase.from("projects").insert(
       staticProjects.map((x, i) => ({
         position: i,
         slug: x.slug,
@@ -39,9 +46,10 @@ export async function seedDatabase() {
         sections: x.sections,
       }))
     );
+    if (error) errors.push(`projecten: ${error.message}`);
   }
   if (!r.count) {
-    await supabase.from("reviews").insert(
+    const { error } = await supabase.from("reviews").insert(
       reviewsPage.items.map((x, i) => ({
         position: i,
         author: x.author,
@@ -52,9 +60,10 @@ export async function seedDatabase() {
         color: x.color,
       }))
     );
+    if (error) errors.push(`reviews: ${error.message}`);
   }
   if (!f.count) {
-    await supabase.from("faqs").insert(
+    const { error } = await supabase.from("faqs").insert(
       faqHome.items.map((x, i) => ({
         position: i,
         category: x.category,
@@ -62,12 +71,16 @@ export async function seedDatabase() {
         answer: x.a,
       }))
     );
+    if (error) errors.push(`vragen: ${error.message}`);
   }
 
   revalidateProjects();
   revalidatePath("/reviews");
   revalidatePath("/faq");
   revalidatePath("/admin");
+
+  if (errors.length) return { ok: false, error: errors.join(" | ") };
+  return { ok: true };
 }
 
 /* ---------- Projecten ---------- */

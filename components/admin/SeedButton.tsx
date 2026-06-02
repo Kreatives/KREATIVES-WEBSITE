@@ -16,7 +16,10 @@ export default function SeedButton() {
       disabled={pending}
       onClick={() =>
         start(async () => {
-          await seedDatabase();
+          const res = await seedDatabase();
+          if (res && !res.ok) {
+            alert("Importeren mislukt:\n\n" + res.error);
+          }
           router.refresh();
         })
       }
