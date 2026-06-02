@@ -1145,3 +1145,35 @@ export const overOnsCta = {
   privacy:
     "Door op verzenden te klikken ga je akkoord met onze privacyverklaring.",
 };
+
+// ============================================================
+// "Binnenkort live" — tijdelijke linktree-style screen
+// Verwijderen: in app/page.tsx <HomeContent /> renderen i.p.v. <ComingSoon />.
+// ============================================================
+
+export const comingSoon = {
+  status: "Wij zijn bezig met de website",
+  title: "KREATIVES",
+  subtitle:
+    "Onze nieuwe site staat bijna live. Tot die tijd bereik je ons hier direct.",
+  background: hero.background,
+  // TODO: echte telefoonnummer invullen (nu placeholder).
+  links: [
+    {
+      label: "Bel ons",
+      sub: "Direct telefonisch contact",
+      href: "tel:+31600000000",
+    },
+    {
+      label: "Mail ons",
+      sub: site.email,
+      href: `mailto:${site.email}`,
+    },
+    {
+      label: "Plan een gesprek",
+      sub: "Gratis & vrijblijvend",
+      href: overOnsCta.calendly,
+      primary: true,
+    },
+  ],
+};
