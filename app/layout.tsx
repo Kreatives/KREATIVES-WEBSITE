@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { instrumentSerif, dmMono, TYPEKIT_CSS } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -56,11 +57,14 @@ const jsonLd = {
   serviceType: "Webdesign en website-ontwikkeling",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = (await headers()).get("x-pathname") || "";
+  const bare = pathname.startsWith("/login") || pathname.startsWith("/admin");
+
   return (
     <html
       lang="nl"
@@ -80,12 +84,16 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SmoothScroll>
-          <Nav />
-          <main>{children}</main>
-          <Footer />
-          <BookCallButton />
-        </SmoothScroll>
+        {bare ? (
+          children
+        ) : (
+          <SmoothScroll>
+            <Nav />
+            <main>{children}</main>
+            <Footer />
+            <BookCallButton />
+          </SmoothScroll>
+        )}
       </body>
     </html>
   );

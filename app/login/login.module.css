@@ -1,0 +1,94 @@
+.screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: var(--off-white);
+}
+.card {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 70px -45px rgba(0, 0, 0, 0.4);
+}
+.logo {
+  height: 1.3rem;
+  width: auto;
+  color: var(--ink);
+}
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+.sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.field label {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.field input {
+  background: var(--off-white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-btn);
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.field input:focus {
+  border-color: var(--ink);
+  background: #fff;
+}
+.error {
+  color: var(--orange-deep);
+  font-size: 0.9rem;
+}
+.submit {
+  margin-top: 0.25rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--orange);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius-btn);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s var(--ease);
+}
+.submit:hover {
+  background: var(--orange-deep);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
