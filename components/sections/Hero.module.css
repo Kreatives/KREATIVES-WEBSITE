@@ -1,0 +1,196 @@
+.hero {
+  position: relative;
+  min-height: 96vh;
+  display: flex;
+  overflow: hidden;
+  color: var(--on-dark);
+  isolation: isolate;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #000;
+}
+.bg :global(img) {
+  opacity: 0.72;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.inner {
+  display: flex;
+  align-items: flex-end;
+  padding-top: 9rem;
+  padding-bottom: clamp(7rem, 5rem + 5vw, 9rem); /* ruimte voor logo-strip onderaan */
+  padding-left: clamp(1.25rem, 0.5rem + 2vw, 3rem);
+  padding-right: clamp(1.25rem, 0.5rem + 2vw, 3rem);
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  max-width: 46rem;
+}
+
+.proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.avatars {
+  display: inline-flex;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  margin-left: -0.5rem;
+}
+.avatar:first-child {
+  margin-left: 0;
+}
+.proofMeta {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--orange);
+}
+.stars svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+.proofLabel {
+  font-size: 0.78rem;
+  color: var(--on-dark);
+}
+.proofLabel strong {
+  font-weight: 600;
+}
+
+.title {
+  margin-top: 0.2rem;
+  color: var(--on-dark);
+  font-size: var(--fs-hero);
+}
+.title :global(.accent) {
+  color: var(--on-dark);
+}
+
+.body {
+  color: rgba(244, 243, 239, 0.78);
+  max-width: 38ch;
+  font-size: 1.02rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+/* Secundair: transparant met onderstreepte tekst, geen pijl */
+.secondaryLink {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--on-dark);
+  padding: 0.6rem 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.25s var(--ease);
+}
+.secondaryLink:hover {
+  opacity: 0.7;
+}
+
+/* ---------- Logo-strip onderaan de hero ---------- */
+.logos {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  padding-inline: clamp(1rem, 2vw, 2rem);
+}
+.logoCell {
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 1.5vw, 1.5rem) 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+.logoCell:first-child {
+  border-left: 0;
+}
+.logoImg {
+  height: clamp(1.6rem, 1.2rem + 1vw, 2.1rem);
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.72;
+  transition: opacity 0.3s var(--ease);
+}
+.logoCell:hover .logoImg {
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .hero {
+    min-height: 88vh;
+  }
+  .actions {
+    width: 100%;
+  }
+  .actions :global(.btn) {
+    flex: 1 1 auto;
+  }
+  .logos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .logos > .logoCell:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bg :global(img) {
+    transition: transform 1.4s var(--ease);
+  }
+  .hero:hover .bg :global(img) {
+    transform: scale(1.02);
+  }
+}

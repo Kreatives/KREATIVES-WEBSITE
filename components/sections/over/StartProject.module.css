@@ -1,0 +1,246 @@
+.sec {
+  padding-block: clamp(5rem, 4rem + 4vw, 8rem);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: #fff;
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- Links ---- */
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.9rem;
+  background: var(--off-white-2);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dot {
+  position: relative;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--orange);
+  border-radius: 999px;
+  flex: none;
+}
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--orange);
+  animation: dotPulse 2s var(--ease) infinite;
+}
+@keyframes dotPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dot::after {
+    animation: none;
+  }
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.04;
+  font-size: var(--fs-h2);
+  max-width: 14ch;
+}
+
+.body {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 38ch;
+}
+
+.team {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+  border: 2px solid #fff;
+  margin-left: -0.7rem;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.calendly {
+  display: inline-flex;
+  align-items: stretch;
+  margin-top: 0.5rem;
+  background: var(--orange);
+  color: #fff;
+  border-radius: var(--radius-btn);
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: background 0.3s var(--ease);
+}
+.calendly:hover {
+  background: var(--orange-deep);
+}
+.calendlyLabel {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.95rem;
+}
+.calendlyIco {
+  display: grid;
+  place-items: center;
+  width: 2.85rem;
+  background: transparent;
+  color: #fff;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+.calendlyIco svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ---- Rechts: formulier ---- */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.field label {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-weight: 500;
+}
+.field input,
+.field textarea,
+.field select {
+  background: var(--off-white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-btn);
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  color: var(--ink);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(17, 17, 17, 0.4);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+  line-height: 1.55;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.selectWrap {
+  position: relative;
+}
+.selectWrap::after {
+  content: "";
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+.selectWrap select {
+  width: 100%;
+  appearance: none;
+  cursor: pointer;
+}
+
+.err {
+  color: var(--orange-deep);
+  font-size: 0.85rem;
+}
+
+.submit {
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--ink);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius-btn);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s var(--ease);
+}
+.submit:hover {
+  background: var(--orange);
+}
+
+@media (max-width: 860px) {
+  .card {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,158 @@
+.head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.headLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.05;
+  font-size: var(--fs-h2);
+  max-width: 18ch;
+}
+.headRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 1.75rem;
+  padding-top: 0.4rem;
+}
+.intro {
+  color: var(--muted);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  line-height: 1.6;
+}
+.dark .intro {
+  color: var(--on-dark-muted);
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.gridFour {
+  grid-template-columns: repeat(4, 1fr);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform 0.4s var(--ease), border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+.dark .card {
+  border-color: transparent;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px -34px rgba(0, 0, 0, 0.4);
+}
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.badge {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 10px;
+  background: var(--orange);
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  letter-spacing: var(--track-mono);
+}
+.cardTitle {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+  color: var(--ink);
+}
+.cardBody {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* Cosmos-variant: kaarten in dezelfde stijl als 'Onze resultaten in cijfers' */
+.cardResult {
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 19rem;
+  background: rgba(244, 243, 239, 0.05);
+  border: 1px solid rgba(244, 243, 239, 0.12);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 1.5rem),
+    calc(100% - 1.5rem) 100%,
+    0 100%
+  );
+}
+.cosmos .cardResult {
+  border-color: rgba(244, 243, 239, 0.12);
+}
+.cardResult:hover {
+  transform: translateY(-3px);
+  box-shadow: none;
+}
+.cosmos .cardResult:hover {
+  border-color: rgba(244, 243, 239, 0.28);
+}
+.resultNo {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.6rem);
+  color: var(--orange);
+}
+.cardResult .cardTitle {
+  color: var(--on-dark);
+}
+.cardResult .cardBody {
+  color: rgba(244, 243, 239, 0.7);
+}
+
+@media (max-width: 980px) {
+  .gridFour {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 860px) {
+  .head {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .headRight {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

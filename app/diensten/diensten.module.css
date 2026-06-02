@@ -1,0 +1,85 @@
+.sec {
+  padding-top: clamp(7rem, 5rem + 6vw, 10rem);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 46rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.title {
+  max-width: 14ch;
+}
+.body {
+  max-width: 50ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 2vw, 2rem);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  background: var(--off-white-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.3s var(--ease), transform 0.4s var(--ease),
+    background 0.3s var(--ease);
+}
+.card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-3px);
+}
+.cardTitle {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem);
+  line-height: 1.05;
+}
+.cardBody {
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  max-width: 36ch;
+  flex: 1;
+}
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.cardIco {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+}
+.cardIco svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.35s var(--ease);
+}
+.card:hover .cardIco svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

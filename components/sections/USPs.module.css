@@ -1,0 +1,139 @@
+.sec {
+  padding-block: 0;
+  position: relative;
+  overflow-x: clip;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-left: max(
+    var(--gutter),
+    calc((100vw - var(--maxw)) / 2 + var(--gutter))
+  );
+  padding-right: clamp(2rem, 4vw, 4rem);
+}
+.leftInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 30rem;
+}
+.title {
+  color: var(--on-dark);
+  font-size: var(--fs-h2);
+  max-width: 14ch;
+}
+.intro {
+  color: var(--on-dark-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+.progress {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.dot,
+.dotOn {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(244, 243, 239, 0.18);
+  transition: background 0.4s var(--ease);
+}
+.dotOn {
+  background: var(--orange);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+
+.itemOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 55%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+/* Titel links / body rechts op de foto, naast elkaar (image #62) */
+.itemContent {
+  position: absolute;
+  left: clamp(1.75rem, 3.5vw, 3rem);
+  right: clamp(1.75rem, 3.5vw, 3rem);
+  bottom: clamp(1.75rem, 5vh, 3.5rem);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: end;
+}
+.itemTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 0.9rem + 1.8vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.05;
+  max-width: 12ch;
+}
+.itemBody {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  line-height: 1.55;
+  text-align: right;
+  max-width: 32ch;
+  justify-self: end;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .left {
+    position: static;
+    height: auto;
+    padding: var(--section-y) var(--gutter) 2rem;
+  }
+  .item {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .itemContent {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .itemBody {
+    text-align: left;
+    justify-self: start;
+  }
+}

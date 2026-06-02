@@ -1,0 +1,86 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  max-width: 60ch;
+}
+.title {
+  max-width: 14ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 2vw, 2rem);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.cardYes {
+  background: var(--off-white-2);
+}
+.cardNo {
+  background: var(--ink);
+  color: var(--on-dark);
+  border-color: transparent;
+}
+
+.cardTitle {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: clamp(1.25rem, 1rem + 0.7vw, 1.55rem);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.list li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.cardNo .list li {
+  color: rgba(244, 243, 239, 0.85);
+}
+
+.tick {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  flex: none;
+  margin-top: 0.18rem;
+}
+.tick svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+.tickYes {
+  background: var(--orange);
+  color: #fff;
+}
+.tickNo {
+  background: rgba(244, 243, 239, 0.12);
+  color: rgba(244, 243, 239, 0.85);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

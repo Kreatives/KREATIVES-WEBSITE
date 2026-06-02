@@ -1,0 +1,118 @@
+.sec {
+  padding-top: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+  padding-bottom: clamp(4.5rem, 3rem + 5vw, 7rem);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.9rem;
+  max-width: 60ch;
+  margin: 0 auto clamp(1.5rem, 2.5vw, 2.25rem);
+}
+.title {
+  font-size: var(--fs-h2);
+  color: var(--on-dark);
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.3rem;
+}
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  color: var(--orange);
+}
+.stars svg {
+  width: 1rem;
+  height: 1rem;
+}
+.ratingLabel {
+  color: var(--on-dark-muted);
+  font-size: 0.9rem;
+}
+.ratingLabel strong {
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.track {
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding-right: clamp(1rem, 2vw, 1.5rem);
+}
+.trackReverse {
+  animation-direction: reverse;
+}
+.rowSecond {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.card {
+  flex: none;
+  width: clamp(20rem, 26vw, 26rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: clamp(2.5rem, 4vw, 3.25rem) clamp(1.5rem, 2.5vw, 2rem);
+  border-radius: var(--radius);
+  background: rgba(244, 243, 239, 0.08);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(244, 243, 239, 0.16);
+  box-shadow: inset 0 1px 0 rgba(244, 243, 239, 0.08);
+  position: relative;
+}
+.quoteMark {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--orange);
+  opacity: 0.7;
+}
+.quote {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--on-dark);
+}
+.author {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: auto;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  border: 1.5px solid rgba(244, 243, 239, 0.7);
+  flex: none;
+}
+.authorMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.2;
+}
+.name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--on-dark);
+}
+.company {
+  font-size: 0.85rem;
+  color: var(--on-dark-muted);
+}

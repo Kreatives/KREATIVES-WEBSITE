@@ -1,0 +1,130 @@
+.head {
+  padding-top: clamp(9rem, 7rem + 6vw, 12rem);
+  padding-bottom: clamp(3rem, 4vw, 4rem);
+}
+.headInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 56rem;
+}
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.02;
+  color: var(--on-dark);
+  font-size: clamp(2.6rem, 1.4rem + 4.6vw, 4.5rem);
+  max-width: 14ch;
+}
+.body {
+  color: rgba(244, 243, 239, 0.7);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.cardOffset {
+  margin-top: clamp(3rem, 8vw, 8rem);
+}
+
+.card {
+  min-width: 0;
+}
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--on-dark);
+  text-decoration: none;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+.media :global(img) {
+  transition: transform 0.7s var(--ease);
+}
+.link:hover .media :global(img) {
+  transform: scale(1.04);
+}
+
+.see {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.see svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+.link:hover .see {
+  opacity: 1;
+  transform: none;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.name {
+  font-size: clamp(1.4rem, 1rem + 1vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+}
+.line {
+  color: rgba(244, 243, 239, 0.7);
+  font-size: 1rem;
+  max-width: 38ch;
+}
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+.tag {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-dark);
+  color: rgba(244, 243, 239, 0.7);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .cardOffset {
+    margin-top: 0;
+  }
+}

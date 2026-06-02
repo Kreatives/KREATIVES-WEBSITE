@@ -1,0 +1,292 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--off-white);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: clamp(0.6rem, 1vw, 0.9rem) var(--gutter);
+  color: inherit;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+}
+.logoMark {
+  height: clamp(0.95rem, 0.85rem + 0.4vw, 1.2rem);
+  width: auto;
+  color: var(--ink);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.2vw, 2.2rem);
+  margin-left: auto;
+  font-size: 0.95rem;
+}
+.links > a,
+.subTrigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0;
+  color: inherit;
+  opacity: 0.78;
+  transition: opacity 0.25s var(--ease);
+}
+.links > a::after,
+.subTrigger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease);
+}
+.links > a:hover,
+.hasSub:hover .subTrigger {
+  opacity: 1;
+}
+.links > a:hover::after,
+.hasSub:hover .subTrigger::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- Desktop dropdown ---------- */
+.hasSub {
+  position: relative;
+}
+.chev {
+  width: 0.7rem;
+  height: 0.7rem;
+  transition: transform 0.3s var(--ease);
+}
+.hasSub:hover .chev {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease),
+    visibility 0.25s;
+}
+.dropdown::before {
+  /* hover-brug zodat de muis de gap kan oversteken */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.6rem;
+  height: 0.6rem;
+}
+.hasSub:hover .dropdown,
+.hasSub:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+.dropdown a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  color: var(--ink);
+  opacity: 0.78;
+  transition: background 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+.dropdown a:hover {
+  opacity: 1;
+  background: var(--off-white-2);
+}
+
+.cta :global(.btn-label) {
+  min-height: 2.35rem;
+  padding-inline: 1rem;
+  font-size: 0.9rem;
+}
+.cta :global(.btn-ico) {
+  width: 2.35rem;
+}
+
+.burger {
+  display: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: var(--ink);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-left: auto;
+}
+.burger span {
+  display: block;
+  width: 16px;
+  height: 1.6px;
+  background: var(--on-dark);
+  transition: transform 0.35s var(--ease);
+}
+.burger span.burgerOpen:first-child {
+  transform: translateY(3.3px) rotate(45deg);
+}
+.burger span.burgerOpen:last-child {
+  transform: translateY(-3.3px) rotate(-45deg);
+}
+
+/* ---------- Mobiel overlay ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--ink);
+  color: var(--on-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7rem var(--gutter) 3rem;
+  clip-path: circle(0% at calc(100% - 3rem) 3rem);
+  transition: clip-path 0.7s var(--ease);
+  pointer-events: none;
+}
+.overlayOpen {
+  clip-path: circle(150% at calc(100% - 3rem) 3rem);
+  pointer-events: auto;
+}
+
+.overlayNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.overlayGroup {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.overlayItem {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: clamp(2.1rem, 10vw, 3.3rem);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  color: var(--on-dark);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.overlayGroup .overlayItem {
+  opacity: 1;
+  transform: none;
+}
+.overlayGroup .chev {
+  width: 1.1rem;
+  height: 1.1rem;
+  align-self: center;
+  color: var(--orange);
+}
+.overlayGroup[aria-expanded] {
+  /* noop */
+}
+.overlayItem[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+.overlayOpen .overlayNav a.overlayItem,
+.overlayOpen .overlayGroup {
+  opacity: 1;
+  transform: none;
+}
+.overlayIndex {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: -0.03em;
+  color: var(--orange);
+}
+
+.overlaySub {
+  display: grid;
+  grid-template-rows: 0fr;
+  padding-left: 2.6rem;
+  transition: grid-template-rows 0.4s var(--ease);
+}
+.overlaySub > * {
+  overflow: hidden;
+}
+.overlaySubOpen {
+  grid-template-rows: 1fr;
+}
+.overlaySub a {
+  display: block;
+  padding: 0.35rem 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--on-dark-muted);
+}
+.overlaySub a:first-child {
+  padding-top: 0.6rem;
+}
+
+.overlayFoot {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.overlayFoot a {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .links,
+  .cta {
+    display: none;
+  }
+  .burger {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .overlayItem,
+  .overlayGroup,
+  .overlaySub {
+    transition: none;
+  }
+}

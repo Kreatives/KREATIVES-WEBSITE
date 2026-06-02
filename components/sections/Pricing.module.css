@@ -1,0 +1,136 @@
+.sec {
+  padding-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  padding-bottom: clamp(5rem, 4rem + 4vw, 8rem);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+.title {
+  font-size: var(--fs-h2);
+  max-width: 16ch;
+}
+.titleMuted {
+  color: var(--muted);
+}
+.body {
+  max-width: 42ch;
+  padding-bottom: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .head {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 2vw, 2rem);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.75rem, 2.5vw, 2.5rem);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.cardFeatured {
+  background: var(--ink);
+  color: var(--on-dark);
+  border-color: transparent;
+}
+.cardPlain {
+  background: var(--off-white-2);
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.cardTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cardName {
+  font-size: clamp(1.25rem, 1rem + 0.7vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+}
+.cardTag {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: -0.03em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+}
+.cardBody {
+  color: var(--on-dark-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+.cardPlain .cardBody {
+  color: var(--muted);
+}
+
+.divide {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+.cardPlain .divide {
+  background: var(--line);
+}
+
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  flex: 1;
+}
+.features li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.tick {
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  flex: none;
+  color: var(--orange);
+}
+.tick svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.cardCta {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

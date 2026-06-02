@@ -1,0 +1,202 @@
+.hero {
+  padding-top: clamp(8rem, 7rem + 5vw, 11rem);
+  padding-bottom: clamp(4rem, 6vw, 6rem);
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: rgba(244, 243, 239, 0.65);
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  transition: color 0.25s var(--ease);
+}
+.back:hover {
+  color: var(--on-dark);
+}
+
+.heroMeta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.pill {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 243, 239, 0.18);
+  font-size: 0.85rem;
+  color: rgba(244, 243, 239, 0.78);
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.02;
+  font-size: clamp(2.8rem, 1.4rem + 5vw, 5rem);
+  color: var(--on-dark);
+  max-width: 18ch;
+  margin-bottom: 1.25rem;
+}
+.excerpt {
+  color: rgba(244, 243, 239, 0.78);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  line-height: 1.5;
+  max-width: 56ch;
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.heroMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--ink-soft);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Intro-blok onder de hero-foto, ÍN de donkere sectie */
+.introGrid {
+  display: grid;
+  grid-template-columns: 0.45fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+.facts dl {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.facts dt {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: rgba(244, 243, 239, 0.55);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.2rem;
+}
+.facts dd {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--on-dark);
+}
+.introBody {
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.35rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: rgba(244, 243, 239, 0.88);
+  max-width: 46ch;
+}
+
+/* Body-secties: image bovenin (gecentreerd), 2 koloms tekst eronder */
+.body {
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+.block:last-child {
+  margin-bottom: 0;
+}
+
+.blockMedia {
+  position: relative;
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--off-white-2);
+}
+
+.blockText {
+  max-width: 60rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.blockHeading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: clamp(1.35rem, 1.05rem + 1vw, 1.7rem);
+  line-height: 1.15;
+}
+.blockBody {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* Verder lezen */
+.relatedHead {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.relatedTitle {
+  color: var(--on-dark);
+}
+
+.relatedGrid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 2vw, 2rem);
+}
+.relatedLink {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: var(--on-dark);
+  text-decoration: none;
+}
+.relatedMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+.relatedMedia :global(img) {
+  transition: transform 0.6s var(--ease);
+}
+.relatedLink:hover .relatedMedia :global(img) {
+  transform: scale(1.04);
+}
+.relatedMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.relatedName {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.relatedType {
+  color: rgba(244, 243, 239, 0.65);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 860px) {
+  .introGrid,
+  .blockText,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+  .blockMedia {
+    aspect-ratio: 16 / 11;
+  }
+}

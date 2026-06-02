@@ -1,0 +1,29 @@
+.statement {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-statement);
+  line-height: 1.22;
+  letter-spacing: var(--track-tight);
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+/* Label hangt inline aan het begin van de heading. De heading-tekst stroomt
+   erna door en breekt onder zichzelf af zoals image #70. */
+.label {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  vertical-align: baseline;
+  margin-right: 1rem;
+  position: relative;
+  /* Iets omhoog zodat het optisch met de eerste regel van de heading aansluit */
+  top: -0.55em;
+}
+
+.word {
+  display: inline;
+  transition: opacity 0.15s linear;
+}

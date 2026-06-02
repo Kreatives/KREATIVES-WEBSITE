@@ -1,0 +1,113 @@
+.sec {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- Compositie: kop boven het centrale beeld ---------- */
+.stage {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1;
+  font-size: clamp(2.4rem, 1.2rem + 5vw, 4.75rem);
+  margin: 0 auto clamp(1rem, 2.5vw, 2rem);
+}
+.titleLead {
+  display: block;
+}
+.title :global(.accent) {
+  display: inline-block;
+  font-size: 1.16em;
+  line-height: 1;
+}
+
+.mainMedia {
+  position: relative;
+  z-index: 2;
+  width: min(40rem, 90%);
+  aspect-ratio: 16 / 11;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--off-white-2);
+}
+
+/* Zijbeelden: recht (geen rotatie), geen schaduw, tegen de randen */
+.floatLeft,
+.floatRight {
+  position: absolute;
+  z-index: 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--off-white-2);
+}
+.floatLeft {
+  width: clamp(6rem, 12vw, 10rem);
+  aspect-ratio: 4 / 3;
+  top: clamp(3rem, 9vw, 7rem);
+  left: clamp(1rem, 3vw, 3.5rem);
+}
+.floatRight {
+  width: clamp(6.5rem, 13vw, 11rem);
+  aspect-ratio: 3 / 4;
+  top: clamp(9rem, 22vw, 15rem);
+  right: clamp(1rem, 3vw, 3.5rem);
+}
+
+/* ---------- Centrale tekst onder de compositie ---------- */
+.copy {
+  max-width: 52rem;
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.subheading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: var(--fs-statement);
+  line-height: 1.14;
+  max-width: 28ch;
+  margin-inline: auto;
+}
+.p {
+  color: var(--muted);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  max-width: 60ch;
+  margin-inline: auto;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 860px) {
+  .floatLeft,
+  .floatRight {
+    display: none;
+  }
+  .mainMedia {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+  .actions :global(.btn) {
+    flex: 1 1 auto;
+    justify-content: space-between;
+  }
+}

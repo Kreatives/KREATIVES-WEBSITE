@@ -1,0 +1,162 @@
+.sec {
+  position: relative;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  max-width: 60ch;
+}
+.title {
+  font-size: var(--fs-h2);
+}
+
+.list {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  border-bottom: 1px solid var(--line);
+}
+
+.trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 2.4rem;
+  align-items: center;
+  gap: 1.5rem;
+  padding-block: clamp(1.5rem, 2.5vw, 2.4rem);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: padding-left 0.4s var(--ease);
+}
+.trigger:hover {
+  padding-left: 0.5rem;
+}
+
+.no {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: -0.03em;
+  color: var(--orange);
+}
+
+.name {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 0.9rem + 2vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  color: var(--ink);
+  line-height: 1.05;
+  transition: color 0.3s var(--ease);
+}
+.rowOpen .name {
+  color: var(--orange);
+}
+
+/* + → × toggle */
+.toggle {
+  position: relative;
+  width: 1.4rem;
+  height: 1.4rem;
+  justify-self: end;
+}
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1.6px;
+  background: var(--ink);
+  transition: transform 0.35s var(--ease), background 0.3s var(--ease);
+}
+.barV {
+  transform: rotate(90deg);
+}
+.rowOpen .bar:not(.barV) {
+  transform: rotate(45deg);
+  background: var(--orange);
+}
+.rowOpen .barV {
+  transform: rotate(-45deg);
+  background: var(--orange);
+}
+
+/* Click-to-open panel met uitleg.
+   `min-height: 0` op de grid-item is cruciaal zodat de panel volledig
+   inklapt naar 0 wanneer dicht (anders blijft de tekst zichtbaar). */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease);
+  overflow: hidden;
+}
+.panelOpen {
+  grid-template-rows: 1fr;
+}
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: calc(3.5rem + 1.5rem);
+  padding-right: 4rem;
+  max-width: 60ch;
+}
+.desc {
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--muted);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+/* Cursor-volgende afbeelding */
+.follow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 280px;
+  margin: -140px 0 0 -140px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+  scale: 0.85;
+  transition: opacity 0.3s var(--ease), scale 0.3s var(--ease);
+  box-shadow: 0 30px 70px -25px rgba(0, 0, 0, 0.45);
+}
+.followOn {
+  opacity: 1;
+  scale: 1;
+}
+.followImg {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+@media (max-width: 760px) {
+  .trigger {
+    grid-template-columns: 2.25rem 1fr 1.6rem;
+    gap: 1rem;
+    padding-block: 1.5rem;
+  }
+  .panelInner {
+    padding-left: calc(2.25rem + 1rem);
+    padding-right: 0;
+  }
+  .follow {
+    display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .follow {
+    display: none;
+  }
+}

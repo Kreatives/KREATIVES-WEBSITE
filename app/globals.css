@@ -1,0 +1,489 @@
+/* ============================================================
+   KREATIVES — design system
+   Afgeleid uit de inspiratie-analyse (Fase 1/4 webdesign skill):
+   rustige premium typografie, bescheiden kopschaal, veel witruimte,
+   off-white basis, #1A1A1A donker, #FD6D17 alleen als accent.
+   ============================================================ */
+
+:root {
+  /* Kleuren */
+  --off-white: #f4f3ef;
+  --off-white-2: #eceae3;
+  --ink: #111111;
+  --ink-soft: #1f1f1f;
+  --orange: #fd6d17;
+  --orange-deep: #e85f0c;
+
+  --text: var(--ink);
+  --muted: rgba(17, 17, 17, 0.58);
+  --line: rgba(17, 17, 17, 0.14);
+  --line-strong: rgba(17, 17, 17, 0.28);
+
+  /* Op donkere achtergrond */
+  --on-dark: #f4f3ef;
+  --on-dark-muted: rgba(244, 243, 239, 0.62);
+  --line-dark: rgba(244, 243, 239, 0.16);
+
+  /* Typografie */
+  --font-sans: "articulat-cf", "Helvetica Neue", Arial, sans-serif;
+  /* --font-serif / --font-mono geleverd door next/font (variabelen op <html>) */
+
+  --track-tight: -0.04em; /* Articulat koppen */
+  --track-body: -0.01em;
+  --track-mono: 0.1em; /* DM Mono labels ~10% */
+
+  /* Type-schaal — ÉÉN bron van waarheid voor de hele site.
+     h1/hero → --fs-hero, sectiekop → --fs-h2, gecentreerde statement → --fs-statement,
+     kaart/subkop → --fs-h3, intro → --fs-lead, body → --fs-body. */
+  --fs-hero: clamp(2.5rem, 1.4rem + 4.4vw, 3.85rem);
+  --fs-h2: clamp(2.05rem, 1.3rem + 2.7vw, 3.3rem);
+  --fs-statement: clamp(1.6rem, 1rem + 2.5vw, 2.7rem);
+  --fs-h3: clamp(1.3rem, 1.05rem + 0.95vw, 1.7rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.18vw, 1.125rem);
+  --fs-lead: clamp(1.12rem, 1.02rem + 0.4vw, 1.3rem);
+  --fs-eyebrow: 0.8rem;
+
+  /* Ritme */
+  --section-y: clamp(6rem, 4rem + 7vw, 9.5rem);
+  --gutter: clamp(1.25rem, 0.5rem + 2vw, 3rem);
+  --maxw: 86rem;
+  --radius: 4px;
+  --radius-lg: 4px;
+  --radius-btn: 4px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Lenis is actief: laat Lenis de scroll regelen, niet de browser */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--off-white);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  letter-spacing: var(--track-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--orange);
+  color: #fff;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--dark {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+
+.section--alt {
+  background: var(--off-white-2);
+}
+
+/* Sterrenveld + subtiele oranje nebula-glow als achtergrond.
+   Toegepast door 'cosmos-bg' op een (relatief gepositioneerde) sectie. */
+.cosmos-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Wrapper-variant: maakt alle direct-child donkere secties transparant
+   zodat de cosmos doorloopt zonder zichtbare naad tussen secties. */
+.cosmos-wrap {
+  background: var(--ink);
+}
+.cosmos-wrap > .section--dark {
+  background: transparent;
+}
+.cosmos-bg::before,
+.cosmos-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.cosmos-bg::before {
+  /* Twee zachte gloed-vlekken voor diepte */
+  background:
+    radial-gradient(
+      60% 50% at 18% 30%,
+      rgba(253, 109, 23, 0.12) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 45% at 85% 75%,
+      rgba(120, 90, 200, 0.08) 0%,
+      transparent 70%
+    );
+}
+.cosmos-bg::after {
+  /* Sterren — meerdere radial-gradients op vaste posities */
+  background-image:
+    radial-gradient(1px 1px at 8% 12%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(1px 1px at 17% 38%, rgba(255, 255, 255, 0.65), transparent 60%),
+    radial-gradient(1.5px 1.5px at 26% 22%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(1px 1px at 34% 64%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 42% 18%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(2px 2px at 49% 48%, rgba(255, 255, 255, 0.95), transparent 60%),
+    radial-gradient(1px 1px at 57% 9%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 63% 76%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 72% 31%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(1px 1px at 78% 58%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 85% 16%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(2px 2px at 92% 44%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(1px 1px at 11% 72%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1px 1px at 22% 88%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1.5px 1.5px at 38% 90%, rgba(255, 255, 255, 0.8), transparent 60%),
+    radial-gradient(1px 1px at 52% 82%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 68% 92%, rgba(255, 255, 255, 0.65), transparent 60%),
+    radial-gradient(1px 1px at 88% 84%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1px 1px at 3% 50%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 97% 28%, rgba(255, 255, 255, 0.5), transparent 60%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
+/* ---------- Typografie-helpers ---------- */
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+.section--dark .eyebrow {
+  color: var(--on-dark-muted);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.h-hero {
+  font-size: var(--fs-hero);
+}
+.h2 {
+  font-size: var(--fs-h2);
+}
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+}
+
+/* Instrument Serif italic accent — optisch ~1.16x groter zodat de
+   x-hoogte matcht met Articulat (font rendert van nature kleiner). */
+.accent {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 1.16em;
+  line-height: 1;
+}
+.accent--orange {
+  color: var(--orange);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.muted {
+  color: var(--muted);
+}
+.section--dark .muted {
+  color: var(--on-dark-muted);
+}
+
+.measure {
+  max-width: 46ch;
+}
+.measure-wide {
+  max-width: 60ch;
+}
+
+/* ---------- Knoppen ---------- */
+
+/* Knopstijl (image #28): solide rechthoek, label links, hairline-divider,
+   pijl rechts. Geen losse contrasterende tile. */
+.btn {
+  display: inline-flex;
+  align-items: stretch;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-btn);
+  overflow: hidden;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.btn-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  white-space: nowrap;
+  line-height: 1;
+  min-height: 2.6rem;
+  font-size: 0.95rem;
+}
+
+.btn-ico {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  align-self: stretch;
+  flex: none;
+}
+.btn:hover .btn-ico svg {
+  transform: translate(2px, -2px);
+}
+.btn-ico svg {
+  transition: transform 0.35s var(--ease);
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: #fff;
+}
+.btn-primary .btn-ico {
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+}
+.btn-primary:hover {
+  background: var(--orange-deep);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+.btn-dark .btn-ico {
+  border-left: 1px solid rgba(244, 243, 239, 0.28);
+}
+.btn-dark:hover {
+  background: var(--ink-soft);
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--ink);
+}
+.btn-white .btn-ico {
+  border-left: 1px solid rgba(17, 17, 17, 0.18);
+}
+.btn-white:hover {
+  background: var(--off-white-2);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.btn-ghost .btn-label {
+  padding-right: 1.4rem;
+}
+.section--dark .btn-ghost {
+  color: var(--on-dark);
+  border-color: rgba(244, 243, 239, 0.3);
+}
+.btn-ghost:hover {
+  border-color: var(--ink);
+}
+
+/* ---------- Glass ---------- */
+
+.glass {
+  background: rgba(244, 243, 239, 0.7);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.glass--dark {
+  background: rgba(26, 26, 26, 0.5);
+  border: 1px solid rgba(244, 243, 239, 0.14);
+}
+
+/* ---------- Contrast-overlays (Fase 5 webdesign skill) ---------- */
+/* Verplicht achter elke tekst die over een foto valt. */
+
+.media {
+  position: relative;
+  overflow: hidden;
+}
+.media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media__overlay-dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+.media__caption {
+  position: absolute;
+  left: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 1;
+  color: #fff;
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+  display: flex;
+  flex: none;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+  padding-right: clamp(2.5rem, 6vw, 6rem);
+  animation: marquee var(--marquee-dur, 38s) linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Reveal (GSAP zet .is-in) ---------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  will-change: transform, opacity;
+}
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+.section--dark .divider {
+  background: var(--line-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee__track {
+    animation: none;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  * {
+    transition: none !important;
+  }
+}

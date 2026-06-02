@@ -1,0 +1,145 @@
+.footer {
+  background: var(--ink);
+  color: var(--on-dark);
+  padding-block: clamp(4rem, 3rem + 4vw, 6rem) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: clamp(2rem, 3vw, 4rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+  padding-inline: clamp(0rem, 2.5vw, 3rem);
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.brand {
+  height: 1.35rem;
+  width: auto;
+  color: var(--on-dark);
+}
+.tagline {
+  color: var(--on-dark-muted);
+  max-width: 32ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.colTitle {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  color: var(--on-dark-muted);
+  margin-bottom: 1.1rem;
+}
+
+.col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.col a {
+  color: var(--on-dark);
+  font-size: 0.98rem;
+  transition: color 0.25s var(--ease);
+}
+.col a:hover {
+  color: var(--orange);
+}
+
+.contactCol {
+  display: flex;
+  flex-direction: column;
+}
+.contactMail {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--on-dark);
+  margin-bottom: 0.75rem;
+  word-break: break-all;
+}
+.contactMail:hover {
+  color: var(--orange);
+}
+.contactSub {
+  color: var(--on-dark-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.base {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-block: 1.75rem;
+  padding-inline: clamp(0rem, 2.5vw, 3rem);
+  border-top: 1px solid var(--line-dark);
+  font-size: 0.85rem;
+  color: var(--on-dark-muted);
+}
+.legal {
+  display: flex;
+  gap: 1.5rem;
+}
+.legal a {
+  color: inherit;
+  transition: color 0.2s var(--ease);
+}
+.legal a:hover {
+  color: var(--on-dark);
+}
+
+/* Groot wordmark, half afgesneden onderaan (image #59) */
+.wordmarkWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: none;
+  margin-top: -0.5rem;
+}
+.wordmark {
+  width: min(122rem, 116%);
+  height: auto;
+  flex: none;
+  color: var(--on-dark);
+  opacity: 0.16;
+  transform: translateY(14%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgba(0, 0, 0, 0.4) 62%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    rgba(0, 0, 0, 0.4) 62%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 1100px) {
+  .top {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .brandCol {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,113 @@
+.head {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.05;
+  font-size: var(--fs-h2);
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+}
+.card {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  background: var(--ink);
+  color: var(--on-dark);
+  border-radius: 14px;
+}
+.photo {
+  position: relative;
+  flex: none;
+  align-self: stretch;
+  width: clamp(6rem, 11vw, 9rem);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.initials {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem);
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+.quote {
+  color: var(--on-dark);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+
+.foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.name {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 1.02rem;
+}
+.role {
+  color: var(--on-dark-muted);
+  font-size: 0.85rem;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  min-height: 3rem;
+  padding-inline: 1.25rem;
+  background: #fff;
+  color: var(--ink);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  font-size: 1rem;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 460px) {
+  .card {
+    flex-direction: column;
+  }
+  .photo {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+  .foot {
+    flex-wrap: wrap;
+  }
+}
