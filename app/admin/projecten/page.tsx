@@ -34,7 +34,12 @@ export default async function AdminProjecten() {
                 )}
               </div>
               <div className={styles.listMain}>
-                <div className={styles.listTitle}>{p.name}</div>
+                <div className={styles.listTitle}>
+                  {p.name}
+                  {p.featured && (
+                    <span className={styles.listTag}> · op homepage</span>
+                  )}
+                </div>
                 <div className={styles.listSub}>
                   {p.type} · /{p.slug}
                 </div>

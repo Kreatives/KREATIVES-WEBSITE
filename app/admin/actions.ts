@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { projecten as staticProjects } from "@/lib/projecten";
 import { reviewsPage, faqHome } from "@/lib/site";
-import type { CmsProjectSection } from "@/lib/cms";
+import { HOMEPAGE_PROJECT_LIMIT, type CmsProjectSection } from "@/lib/cms";
 
 function revalidateProjects() {
   revalidatePath("/projecten");
@@ -97,10 +97,27 @@ export type ProjectInput = {
   image: string;
   tags: string[];
   sections: CmsProjectSection[];
+  featured: boolean;
 };
 
 export async function saveProject(input: ProjectInput) {
   const supabase = await createClient();
+
+  // Limiet op het aantal projecten op de homepage.
+  if (input.featured) {
+    const { data: others } = await supabase
+      .from("projects")
+      .select("id")
+      .eq("featured", true);
+    const count = (others ?? []).filter((o) => o.id !== input.id).length;
+    if (count >= HOMEPAGE_PROJECT_LIMIT) {
+      return {
+        ok: false,
+        error: `Er is maar plek voor ${HOMEPAGE_PROJECT_LIMIT} projecten op de homepage. Haal er eerst één van de homepage af.`,
+      };
+    }
+  }
+
   const row = {
     slug: input.slug,
     name: input.name,
@@ -112,6 +129,7 @@ export async function saveProject(input: ProjectInput) {
     image: input.image,
     tags: input.tags,
     sections: input.sections,
+    featured: input.featured,
   };
   const { error } = input.id
     ? await supabase.from("projects").update(row).eq("id", input.id)
@@ -119,6 +137,7 @@ export async function saveProject(input: ProjectInput) {
   if (error) return { ok: false, error: error.message };
   revalidateProjects();
   revalidatePath(`/projecten/${input.slug}`);
+  revalidatePath("/");
   return { ok: true };
 }
 

@@ -22,7 +22,11 @@ export type CmsProject = {
   tags: string[];
   sections: CmsProjectSection[];
   position: number;
+  featured: boolean;
 };
+
+/** Maximaal aantal projecten dat op de homepage past. */
+export const HOMEPAGE_PROJECT_LIMIT = 4;
 
 export type CmsReview = {
   id: string;
@@ -126,12 +130,29 @@ export async function getProjects(): Promise<CmsProject[]> {
     tags: p.tags,
     sections: p.sections,
     position: i,
+    featured: i < HOMEPAGE_PROJECT_LIMIT,
   }));
 }
 
 export async function getProjectBySlug(slug: string): Promise<CmsProject | null> {
   const all = await getProjects();
   return all.find((p) => p.slug === slug) ?? null;
+}
+
+/** Projecten voor de homepage: de gemarkeerde, of anders de eerste paar. */
+export async function getFeaturedProjects(
+  limit = HOMEPAGE_PROJECT_LIMIT
+): Promise<CmsProject[]> {
+  const all = await getProjects();
+  const featured = all.filter((p) => p.featured);
+  const list = featured.length ? featured : all;
+  return list.slice(0, limit);
+}
+
+/** Aantal projecten dat nu op de homepage staat (optioneel één uitgesloten). */
+export async function featuredProjectCount(excludeId?: string): Promise<number> {
+  const rows = await dbProjects();
+  return rows.filter((p) => p.featured && p.id !== excludeId).length;
 }
 
 export async function getReviews(): Promise<CmsReview[]> {

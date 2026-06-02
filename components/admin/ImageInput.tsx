@@ -52,8 +52,8 @@ export default function ImageInput({
         {uploading && <span className={styles.hint}>Bezig met uploaden…</span>}
         {error && <span className={styles.error}>{error}</span>}
         <input
-          type="url"
-          placeholder="of plak een afbeeldings-URL"
+          type="text"
+          placeholder="of plak een afbeeldings-URL of pad"
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />

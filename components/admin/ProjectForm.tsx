@@ -18,8 +18,17 @@ function slugify(s: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-export default function ProjectForm({ project }: { project?: CmsProject }) {
+export default function ProjectForm({
+  project,
+  featuredCount = 0,
+  limit = 4,
+}: {
+  project?: CmsProject;
+  featuredCount?: number;
+  limit?: number;
+}) {
   const router = useRouter();
+  const [featured, setFeatured] = useState(project?.featured ?? false);
   const [name, setName] = useState(project?.name ?? "");
   const [slug, setSlug] = useState(project?.slug ?? "");
   const [type, setType] = useState(project?.type ?? "");
@@ -59,6 +68,7 @@ export default function ProjectForm({ project }: { project?: CmsProject }) {
       excerpt: excerpt.trim(),
       intro: intro.trim(),
       image: image.trim(),
+      featured,
       tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
       sections: sections
         .filter((s) => s.body.trim() || s.heading.trim())
@@ -82,6 +92,34 @@ export default function ProjectForm({ project }: { project?: CmsProject }) {
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
+      <div className={styles.sectionCard}>
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            fontWeight: 500,
+            cursor: !featured && featuredCount >= limit ? "default" : "pointer",
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={featured}
+            disabled={!featured && featuredCount >= limit}
+            onChange={(e) => setFeatured(e.target.checked)}
+            style={{ width: "auto" }}
+          />
+          Tonen op de homepage
+        </label>
+        <span className={styles.hint}>
+          {featuredCount + (featured ? 1 : 0)} van {limit} homepage-plekken
+          gebruikt.
+          {!featured && featuredCount >= limit
+            ? " De homepage zit vol — haal eerst een ander project van de homepage af."
+            : ""}
+        </span>
+      </div>
+
       <div className={styles.row}>
         <div className={styles.field}>
           <label>Projectnaam</label>

@@ -10,3 +10,6 @@
 next-env.d.ts
 .claude
 .vercel
+
+# Lokaal DB-setupscript (bevat wachtwoord)
+/scripts/setup-db.mjs

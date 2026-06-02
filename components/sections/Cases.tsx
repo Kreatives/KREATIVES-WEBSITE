@@ -1,14 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cases } from "@/lib/site";
-import { projecten, type Project } from "@/lib/projecten";
 import { Arrow } from "@/components/icons";
 import styles from "./Cases.module.css";
 
-export default function Cases() {
-  // Bron is nu de centrale projecten-store, zodat de homepage en
-  // /projecten dezelfde set tonen en altijd doorlinken naar de juiste slug.
-  const items = projecten;
+export type CaseItem = {
+  slug: string;
+  name: string;
+  excerpt: string;
+  image: string;
+  tags: string[];
+};
+
+export default function Cases({ items }: { items: CaseItem[] }) {
   const left = items.filter((_, i) => i % 2 === 0);
   const right = items.filter((_, i) => i % 2 === 1);
 
@@ -42,7 +46,7 @@ export default function Cases() {
   );
 }
 
-function Card({ c }: { c: Project }) {
+function Card({ c }: { c: CaseItem }) {
   return (
     <li className={styles.card} data-reveal>
       <Link href={`/projecten/${c.slug}`} className={styles.link}>
