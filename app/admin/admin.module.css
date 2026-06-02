@@ -148,6 +148,131 @@
   max-width: 48rem;
 }
 
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.newBtn {
+  padding: 0.7rem 1.25rem;
+  background: var(--ink);
+  color: var(--on-dark);
+  border-radius: var(--radius-btn);
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.newBtn:hover {
+  background: var(--ink-soft);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  max-width: 60rem;
+}
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.listThumb {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--off-white-2);
+  flex: none;
+}
+.listThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.listAvatar {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex: none;
+}
+.listMain {
+  flex: 1;
+  min-width: 0;
+}
+.listTitle {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 1.02rem;
+}
+.listSub {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 0.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 40rem;
+}
+.listTag {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.listActions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: none;
+}
+.editLink {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+.editLink:hover {
+  border-color: var(--ink);
+}
+.empty {
+  padding: 2rem 0;
+  color: var(--muted);
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.mediaItem {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--off-white-2);
+  border: 1px solid var(--line);
+}
+.mediaItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media (max-width: 760px) {
   .shell {
     grid-template-columns: 1fr;

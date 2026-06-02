@@ -1,30 +1,37 @@
 import Link from "next/link";
+import { contentCounts } from "@/lib/cms";
+import SeedButton from "@/components/admin/SeedButton";
 import styles from "./admin.module.css";
 
-const sections = [
-  {
-    href: "/admin/projecten",
-    title: "Projecten",
-    body: "Voeg projecten toe met de uitdaging, teksten en foto's.",
-  },
-  {
-    href: "/admin/reviews",
-    title: "Reviews",
-    body: "Beheer klantreviews: naam, titel, tekst en profielfoto.",
-  },
-  {
-    href: "/admin/faq",
-    title: "Veelgestelde vragen",
-    body: "Voeg vragen en antwoorden toe, ingedeeld op onderwerp.",
-  },
-  {
-    href: "/admin/media",
-    title: "Afbeeldingen",
-    body: "Bekijk alle foto's en vervang ze.",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function AdminHome() {
+export default async function AdminHome() {
+  const counts = await contentCounts();
+  const empty = counts.projects + counts.reviews + counts.faqs === 0;
+
+  const sections = [
+    {
+      href: "/admin/projecten",
+      title: "Projecten",
+      body: `${counts.projects} project${counts.projects === 1 ? "" : "en"}`,
+    },
+    {
+      href: "/admin/reviews",
+      title: "Reviews",
+      body: `${counts.reviews} review${counts.reviews === 1 ? "" : "s"}`,
+    },
+    {
+      href: "/admin/faq",
+      title: "Veelgestelde vragen",
+      body: `${counts.faqs} vraag${counts.faqs === 1 ? "" : "/vragen"}`,
+    },
+    {
+      href: "/admin/media",
+      title: "Afbeeldingen",
+      body: "Foto's bekijken en uploaden",
+    },
+  ];
+
   return (
     <div>
       <div className={styles.head}>
@@ -34,6 +41,17 @@ export default function AdminHome() {
           beginnen.
         </p>
       </div>
+
+      {empty && (
+        <div className={styles.notice} style={{ marginBottom: "2rem" }}>
+          <p style={{ marginBottom: "1rem" }}>
+            De database is nog leeg. Klik hieronder om de inhoud die nu op de
+            website staat (projecten, reviews en vragen) eenmalig te importeren.
+            Daarna kun je alles aanpassen en verwijderen.
+          </p>
+          <SeedButton />
+        </div>
+      )}
 
       <div className={styles.cards}>
         {sections.map((s) => (

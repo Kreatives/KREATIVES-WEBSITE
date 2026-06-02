@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import FaqHome from "@/components/sections/FaqHome";
+import { getFaqs } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Veelgestelde vragen",
@@ -15,11 +16,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FaqPage() {
+export const dynamic = "force-dynamic";
+
+export default async function FaqPage() {
+  const faqs = await getFaqs();
+  const items = faqs.map((f) => ({
+    category: f.category,
+    question: f.question,
+    answer: f.answer,
+  }));
   return (
     <>
       <RevealInit />
-      <FaqHome />
+      <FaqHome items={items} />
     </>
   );
 }

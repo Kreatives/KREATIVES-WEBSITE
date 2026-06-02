@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import { reviewsPage } from "@/lib/site";
+import { getReviews, initialsOf } from "@/lib/cms";
 import styles from "./reviews.module.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ReviewsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ReviewsPage() {
+  const reviews = await getReviews();
+
   return (
     <>
       <RevealInit />
@@ -37,23 +42,36 @@ export default function ReviewsPage() {
           </div>
 
           <div className={styles.masonry}>
-            {reviewsPage.items.map((r) => (
-              <article key={r.author} className={styles.card} data-reveal>
+            {reviews.map((r) => (
+              <article key={r.id} className={styles.card} data-reveal>
                 <h2 className={styles.cardTitle}>{r.title}</h2>
                 <p className={styles.quote}>{r.quote}</p>
                 <div className={styles.foot}>
                   <div className={styles.author}>
-                    <span
-                      className={styles.avatar}
-                      style={{ background: r.color }}
-                      aria-hidden
-                    >
-                      {r.initials}
-                    </span>
+                    {r.photo ? (
+                      <span
+                        className={styles.avatar}
+                        style={{
+                          backgroundImage: `url(${r.photo})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                        aria-hidden
+                      />
+                    ) : (
+                      <span
+                        className={styles.avatar}
+                        style={{ background: r.color }}
+                        aria-hidden
+                      >
+                        {initialsOf(r.author)}
+                      </span>
+                    )}
                     <div className={styles.authorMeta}>
                       <span className={styles.name}>{r.author}</span>
                       <span className={styles.role}>
-                        {r.role}, {r.company}
+                        {r.role}
+                        {r.company ? `, ${r.company}` : ""}
                       </span>
                     </div>
                   </div>

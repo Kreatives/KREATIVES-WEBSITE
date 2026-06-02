@@ -4,13 +4,17 @@ import { useState } from "react";
 import { faqHome } from "@/lib/site";
 import styles from "./FaqHome.module.css";
 
-export default function FaqHome() {
+export type FaqItem = { category: string; question: string; answer: string };
+
+export default function FaqHome({ items }: { items: FaqItem[] }) {
   const [active, setActive] = useState("Alle");
-  const filters = ["Alle", ...faqHome.categories];
-  const items =
-    active === "Alle"
-      ? faqHome.items
-      : faqHome.items.filter((i) => i.category === active);
+
+  const categories = Array.from(
+    new Set(items.map((i) => i.category).filter(Boolean))
+  );
+  const filters = ["Alle", ...categories];
+  const shown =
+    active === "Alle" ? items : items.filter((i) => i.category === active);
 
   return (
     <section className="section" id="faq">
@@ -39,14 +43,16 @@ export default function FaqHome() {
         </div>
 
         <div className={styles.list}>
-          {items.map((item) => (
-            <details key={item.q} className={styles.item}>
+          {shown.map((item, i) => (
+            <details key={`${item.question}-${i}`} className={styles.item}>
               <summary className={styles.summary}>
-                <span className={styles.q}>{item.q}</span>
-                <span className={styles.tag}>{item.category}</span>
+                <span className={styles.q}>{item.question}</span>
+                {item.category && (
+                  <span className={styles.tag}>{item.category}</span>
+                )}
                 <span className={styles.mark} aria-hidden />
               </summary>
-              <p className={styles.answer}>{item.a}</p>
+              <p className={styles.answer}>{item.answer}</p>
             </details>
           ))}
         </div>

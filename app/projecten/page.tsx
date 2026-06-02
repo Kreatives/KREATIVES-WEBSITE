@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import { Arrow } from "@/components/icons";
-import { projecten } from "@/lib/projecten";
+import { getProjects } from "@/lib/cms";
 import styles from "./projecten.module.css";
 
 export const metadata: Metadata = {
@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projecten" },
 };
 
-export default function ProjectenIndexPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ProjectenIndexPage() {
+  const projecten = await getProjects();
   return (
     <>
       <RevealInit />

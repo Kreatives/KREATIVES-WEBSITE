@@ -3,16 +3,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
-import {
-  getProject,
-  getAllProjectSlugs,
-  getRelatedProjects,
-} from "@/lib/projecten";
+import { getProjectBySlug, getProjects } from "@/lib/cms";
 import styles from "./project.module.css";
 
-export function generateStaticParams() {
-  return getAllProjectSlugs().map((slug) => ({ slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -20,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return { title: "Project niet gevonden" };
   return {
     title: project.name,
@@ -41,9 +35,11 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
-  const related = getRelatedProjects(slug);
+  const related = (await getProjects())
+    .filter((p) => p.slug !== slug)
+    .slice(0, 2);
 
   return (
     <>
