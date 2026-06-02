@@ -18,6 +18,7 @@ const navItems = [
   { label: "Veelgestelde vragen", href: "/admin/faq" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Afbeeldingen", href: "/admin/media" },
+  { label: "Instellingen", href: "/admin/instellingen" },
 ];
 
 export default async function AdminLayout({

@@ -1,13 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { comingSoon } from "@/lib/site";
 import { Arrow } from "@/components/icons";
+import { unlockPreview } from "@/lib/gate";
 import Logo from "@/components/Logo";
 import styles from "./ComingSoon.module.css";
 
 export default function ComingSoon() {
+  const router = useRouter();
+  const [showGate, setShowGate] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [checking, setChecking] = useState(false);
+
   // Voorkom scrollen zodat de screen het hele scherm vult (nav/footer eronder).
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -16,6 +24,19 @@ export default function ComingSoon() {
       document.body.style.overflow = prev;
     };
   }, []);
+
+  async function onUnlock(e: React.FormEvent) {
+    e.preventDefault();
+    setChecking(true);
+    setError(null);
+    const res = await unlockPreview(password);
+    if (!res.ok) {
+      setError(res.error ?? "Onjuist wachtwoord.");
+      setChecking(false);
+      return;
+    }
+    router.refresh();
+  }
 
   return (
     <section className={styles.screen}>
@@ -66,6 +87,35 @@ export default function ComingSoon() {
             );
           })}
         </div>
+
+        {showGate ? (
+          <form className={styles.gate} onSubmit={onUnlock}>
+            <input
+              type="password"
+              className={styles.gateInput}
+              placeholder="Wachtwoord"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoFocus
+            />
+            <button
+              type="submit"
+              className={styles.gateBtn}
+              disabled={checking}
+            >
+              {checking ? "…" : "Toegang"}
+            </button>
+            {error && <span className={styles.gateError}>{error}</span>}
+          </form>
+        ) : (
+          <button
+            type="button"
+            className={styles.gateToggle}
+            onClick={() => setShowGate(true)}
+          >
+            Toegang met wachtwoord
+          </button>
+        )}
 
         <span className={styles.footnote}>
           © {new Date().getFullYear()} KREATIVES

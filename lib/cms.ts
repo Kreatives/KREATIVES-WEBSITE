@@ -294,6 +294,17 @@ export async function getFaqs(): Promise<CmsFaq[]> {
   }));
 }
 
+/** Huidige preview-wachtwoord (alleen leesbaar voor ingelogde beheerders). */
+export async function getPreviewPassword(): Promise<string> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("settings")
+    .select("value")
+    .eq("key", "preview_password")
+    .single();
+  return data?.value ?? "";
+}
+
 export function initialsOf(name: string): string {
   return name
     .split(/\s+/)

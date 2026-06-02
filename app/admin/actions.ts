@@ -325,3 +325,15 @@ export async function deletePost(id: string) {
   revalidatePath("/admin/blog");
   return { ok: true };
 }
+
+/* ---------- Instellingen ---------- */
+
+export async function setPreviewPassword(value: string) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("settings")
+    .upsert({ key: "preview_password", value }, { onConflict: "key" });
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin/instellingen");
+  return { ok: true };
+}

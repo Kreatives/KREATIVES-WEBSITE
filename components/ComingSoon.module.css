@@ -172,6 +172,74 @@
   transform: translate(2px, -2px);
 }
 
+.gateToggle {
+  margin-top: 1.25rem;
+  background: transparent;
+  border: 0;
+  color: rgba(244, 243, 239, 0.55);
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color 0.25s var(--ease);
+}
+.gateToggle:hover {
+  color: var(--on-dark);
+}
+.gate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  width: 100%;
+  max-width: 22rem;
+}
+.gateInput {
+  flex: 1;
+  min-width: 0;
+  padding: 0.7rem 0.95rem;
+  border-radius: 10px;
+  border: 1px solid rgba(244, 243, 239, 0.25);
+  background: rgba(244, 243, 239, 0.08);
+  color: var(--on-dark);
+  font-size: 0.95rem;
+  outline: none;
+}
+.gateInput::placeholder {
+  color: rgba(244, 243, 239, 0.5);
+}
+.gateInput:focus {
+  border-color: var(--orange);
+}
+.gateBtn {
+  flex: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  border: 0;
+  background: var(--orange);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.25s var(--ease);
+}
+.gateBtn:hover {
+  background: var(--orange-deep);
+}
+.gateBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.gateError {
+  width: 100%;
+  text-align: center;
+  color: #ffb4a2;
+  font-size: 0.82rem;
+}
+
 .footnote {
   margin-top: 1rem;
   font-size: 0.78rem;
