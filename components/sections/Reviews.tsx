@@ -2,9 +2,17 @@ import { reviews } from "@/lib/site";
 import { Star } from "@/components/icons";
 import styles from "./Reviews.module.css";
 
-export default function Reviews() {
+export type ReviewItem = {
+  quote: string;
+  author: string;
+  company: string;
+  initials: string;
+  color: string;
+};
+
+export default function Reviews({ items: source }: { items: ReviewItem[] }) {
   // Dupliceren voor naadloze marquee
-  const items = [...reviews.items, ...reviews.items];
+  const items = [...source, ...source];
 
   return (
     <section className={`section section--dark ${styles.sec}`} id="reviews">
@@ -41,7 +49,7 @@ export default function Reviews() {
             <article
               key={i}
               className={styles.card}
-              aria-hidden={i >= reviews.items.length}
+              aria-hidden={i >= source.length}
             >
               <span className={styles.quoteMark} aria-hidden>
                 &ldquo;
@@ -65,18 +73,13 @@ export default function Reviews() {
         </div>
       </div>
 
-      {/* Tweede marquee in tegenovergestelde richting */}
       <div className={`marquee ${styles.rowSecond}`}>
         <div
           className={`marquee__track ${styles.track} ${styles.trackReverse}`}
           style={{ "--marquee-dur": "60s" } as React.CSSProperties}
         >
           {items.map((r, i) => (
-            <article
-              key={`r-${i}`}
-              className={styles.card}
-              aria-hidden={true}
-            >
+            <article key={`r-${i}`} className={styles.card} aria-hidden={true}>
               <span className={styles.quoteMark} aria-hidden>
                 &ldquo;
               </span>

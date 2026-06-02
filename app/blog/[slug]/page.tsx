@@ -3,17 +3,11 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
-import {
-  getPost,
-  getAllPostSlugs,
-  getSortedPosts,
-  formatDate,
-} from "@/lib/blog";
+import { formatDate } from "@/lib/blog";
+import { getPostBySlug, getPosts } from "@/lib/cms";
 import styles from "./post.module.css";
 
-export function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -21,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Artikel niet gevonden" };
   return {
     title: post.title,
@@ -44,10 +38,12 @@ export default async function PostDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const others = getSortedPosts()
+  const others = (await getPosts())
+    .slice()
+    .sort((a, b) => (a.date > b.date ? -1 : 1))
     .filter((p) => p.slug !== slug)
     .slice(0, 3);
 

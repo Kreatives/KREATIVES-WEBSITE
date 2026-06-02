@@ -41,7 +41,12 @@ export default async function AdminReviews() {
                 </span>
               )}
               <div className={styles.listMain}>
-                <div className={styles.listTitle}>{r.title || r.author}</div>
+                <div className={styles.listTitle}>
+                  {r.title || r.author}
+                  {r.featured && (
+                    <span className={styles.listTag}> · op homepage</span>
+                  )}
+                </div>
                 <div className={styles.listSub}>
                   {r.author}
                   {r.company ? ` · ${r.company}` : ""}

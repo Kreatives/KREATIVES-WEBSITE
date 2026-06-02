@@ -1,13 +1,17 @@
 import ReviewForm from "@/components/admin/ReviewForm";
+import { featuredReviewCount, HOMEPAGE_REVIEW_LIMIT } from "@/lib/cms";
 import styles from "../../admin.module.css";
 
-export default function NewReviewPage() {
+export const dynamic = "force-dynamic";
+
+export default async function NewReviewPage() {
+  const featuredCount = await featuredReviewCount();
   return (
     <div>
       <div className={styles.head}>
         <h1 className={styles.title}>Nieuwe review</h1>
       </div>
-      <ReviewForm />
+      <ReviewForm featuredCount={featuredCount} limit={HOMEPAGE_REVIEW_LIMIT} />
     </div>
   );
 }

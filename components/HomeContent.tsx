@@ -8,7 +8,7 @@ import Cases from "@/components/sections/Cases";
 import Reviews from "@/components/sections/Reviews";
 import OverMij from "@/components/sections/OverMij";
 import Pricing from "@/components/sections/Pricing";
-import { getFeaturedProjects } from "@/lib/cms";
+import { getFeaturedProjects, getFeaturedReviews, initialsOf } from "@/lib/cms";
 
 /**
  * De volledige KREATIVES-homepage. Tijdelijk vervangen door de
@@ -16,13 +16,25 @@ import { getFeaturedProjects } from "@/lib/cms";
  * app/page.tsx <HomeContent /> te renderen i.p.v. <ComingSoon />.
  */
 export default async function HomeContent() {
-  const featured = await getFeaturedProjects();
-  const cases = featured.map((p) => ({
+  const [featuredProjects, featuredReviews] = await Promise.all([
+    getFeaturedProjects(),
+    getFeaturedReviews(),
+  ]);
+
+  const cases = featuredProjects.map((p) => ({
     slug: p.slug,
     name: p.name,
     excerpt: p.excerpt,
     image: p.image,
     tags: p.tags,
+  }));
+
+  const reviewItems = featuredReviews.map((r) => ({
+    quote: r.quote,
+    author: r.author,
+    company: r.company,
+    initials: initialsOf(r.author),
+    color: r.color,
   }));
 
   return (
@@ -35,7 +47,7 @@ export default async function HomeContent() {
       <Werkwijze />
       <div className="cosmos-bg cosmos-wrap">
         <Cases items={cases} />
-        <Reviews />
+        <Reviews items={reviewItems} />
       </div>
       <OverMij />
       <Pricing />

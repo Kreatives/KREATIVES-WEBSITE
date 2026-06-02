@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { projecten as staticProjects } from "@/lib/projecten";
+import { posts as staticPosts } from "@/lib/blog";
 import { reviewsPage, faqHome } from "@/lib/site";
 
 export type CmsProjectSection = {
@@ -38,7 +39,11 @@ export type CmsReview = {
   photo: string | null;
   color: string;
   position: number;
+  featured: boolean;
 };
+
+/** Maximaal aantal reviews dat op de homepage past. */
+export const HOMEPAGE_REVIEW_LIMIT = 6;
 
 export type CmsFaq = {
   id: string;
@@ -47,6 +52,27 @@ export type CmsFaq = {
   answer: string;
   position: number;
 };
+
+export type CmsPost = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readingMinutes: number;
+  image: string;
+  body: string[];
+  tags: string[];
+  position: number;
+};
+
+export function splitParagraphs(text: string | null | undefined): string[] {
+  if (!text) return [];
+  return text
+    .split(/\n{2,}/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
 
 /* ---------- Raw DB-fetchers (voor het dashboard) ---------- */
 
@@ -100,15 +126,17 @@ export async function dbFaq(id: string): Promise<CmsFaq | null> {
 
 export async function contentCounts() {
   const supabase = await createClient();
-  const [p, r, f] = await Promise.all([
+  const [p, r, f, b] = await Promise.all([
     supabase.from("projects").select("*", { count: "exact", head: true }),
     supabase.from("reviews").select("*", { count: "exact", head: true }),
     supabase.from("faqs").select("*", { count: "exact", head: true }),
+    supabase.from("posts").select("*", { count: "exact", head: true }),
   ]);
   return {
     projects: p.count ?? 0,
     reviews: r.count ?? 0,
     faqs: f.count ?? 0,
+    posts: b.count ?? 0,
   };
 }
 
@@ -168,7 +196,90 @@ export async function getReviews(): Promise<CmsReview[]> {
     photo: null,
     color: r.color,
     position: i,
+    featured: i < HOMEPAGE_REVIEW_LIMIT,
   }));
+}
+
+/** Reviews voor de homepage: de gemarkeerde, of anders de eerste paar. */
+export async function getFeaturedReviews(
+  limit = HOMEPAGE_REVIEW_LIMIT
+): Promise<CmsReview[]> {
+  const all = await getReviews();
+  const featured = all.filter((r) => r.featured);
+  const list = featured.length ? featured : all;
+  return list.slice(0, limit);
+}
+
+export async function featuredReviewCount(excludeId?: string): Promise<number> {
+  const rows = await dbReviews();
+  return rows.filter((r) => r.featured && r.id !== excludeId).length;
+}
+
+/* ---------- Blog ---------- */
+
+export async function dbPosts(): Promise<CmsPost[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("posts")
+    .select("*")
+    .order("date", { ascending: false })
+    .order("created_at", { ascending: false });
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt ?? "",
+    date: row.date ?? "",
+    readingMinutes: row.reading_minutes ?? 4,
+    image: row.image ?? "",
+    body: splitParagraphs(row.body),
+    tags: row.tags ?? [],
+    position: row.position ?? 0,
+  }));
+}
+
+export async function dbPost(id: string): Promise<CmsPost | null> {
+  const supabase = await createClient();
+  const { data: row } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (!row) return null;
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt ?? "",
+    date: row.date ?? "",
+    readingMinutes: row.reading_minutes ?? 4,
+    image: row.image ?? "",
+    body: splitParagraphs(row.body),
+    tags: row.tags ?? [],
+    position: row.position ?? 0,
+  };
+}
+
+export async function getPosts(): Promise<CmsPost[]> {
+  const rows = await dbPosts();
+  if (rows.length) return rows;
+  return staticPosts.map((p, i) => ({
+    id: p.slug,
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    date: p.date,
+    readingMinutes: p.readingMinutes,
+    image: p.image,
+    body: p.body,
+    tags: p.tags,
+    position: i,
+  }));
+}
+
+export async function getPostBySlug(slug: string): Promise<CmsPost | null> {
+  const all = await getPosts();
+  return all.find((p) => p.slug === slug) ?? null;
 }
 
 export async function getFaqs(): Promise<CmsFaq[]> {

@@ -7,8 +7,17 @@ import { saveReview } from "@/app/admin/actions";
 import type { CmsReview } from "@/lib/cms";
 import styles from "./forms.module.css";
 
-export default function ReviewForm({ review }: { review?: CmsReview }) {
+export default function ReviewForm({
+  review,
+  featuredCount = 0,
+  limit = 6,
+}: {
+  review?: CmsReview;
+  featuredCount?: number;
+  limit?: number;
+}) {
   const router = useRouter();
+  const [featured, setFeatured] = useState(review?.featured ?? false);
   const [author, setAuthor] = useState(review?.author ?? "");
   const [role, setRole] = useState(review?.role ?? "");
   const [company, setCompany] = useState(review?.company ?? "");
@@ -25,6 +34,7 @@ export default function ReviewForm({ review }: { review?: CmsReview }) {
     setError(null);
     const res = await saveReview({
       id: review?.id,
+      featured,
       author: author.trim(),
       role: role.trim(),
       company: company.trim(),
@@ -44,6 +54,34 @@ export default function ReviewForm({ review }: { review?: CmsReview }) {
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
+      <div className={styles.sectionCard}>
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            fontWeight: 500,
+            cursor: !featured && featuredCount >= limit ? "default" : "pointer",
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={featured}
+            disabled={!featured && featuredCount >= limit}
+            onChange={(e) => setFeatured(e.target.checked)}
+            style={{ width: "auto" }}
+          />
+          Tonen op de homepage
+        </label>
+        <span className={styles.hint}>
+          {featuredCount + (featured ? 1 : 0)} van {limit} homepage-plekken
+          gebruikt.
+          {!featured && featuredCount >= limit
+            ? " De homepage zit vol — haal eerst een andere review van de homepage af."
+            : ""}
+        </span>
+      </div>
+
       <div className={styles.field}>
         <label>Titel van de review</label>
         <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Nu sturen we klanten er juist naartoe" required />

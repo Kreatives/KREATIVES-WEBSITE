@@ -7,7 +7,8 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminHome() {
   const counts = await contentCounts();
-  const empty = counts.projects + counts.reviews + counts.faqs === 0;
+  const empty =
+    counts.projects + counts.reviews + counts.faqs + counts.posts === 0;
 
   const sections = [
     {
@@ -24,6 +25,11 @@ export default async function AdminHome() {
       href: "/admin/faq",
       title: "Veelgestelde vragen",
       body: `${counts.faqs} vraag${counts.faqs === 1 ? "" : "/vragen"}`,
+    },
+    {
+      href: "/admin/blog",
+      title: "Blog",
+      body: `${counts.posts} artikel${counts.posts === 1 ? "" : "en"}`,
     },
     {
       href: "/admin/media",
