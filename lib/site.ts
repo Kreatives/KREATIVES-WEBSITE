@@ -5,7 +5,7 @@
 export const site = {
   name: "KREATIVES",
   domain: "https://rkcreatives.nl",
-  email: "info@rkcreatives.nl",
+  email: "info@kreatives.nl",
   description:
     "KREATIVES bouwt maatwerk websites voor klinieken, merken en ondernemers die er online net zo sterk uit willen zien als ze offline al zijn.",
 };
@@ -1161,8 +1161,13 @@ export const comingSoon = {
   links: [
     {
       label: "Bel ons",
-      sub: "Direct telefonisch contact",
-      href: "tel:+31600000000",
+      sub: "+31 6 13 06 62 50",
+      href: "tel:+31613066250",
+    },
+    {
+      label: "WhatsApp",
+      sub: "Stuur ons een berichtje",
+      href: "https://wa.me/31613066250",
     },
     {
       label: "Mail ons",

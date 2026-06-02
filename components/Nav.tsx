@@ -143,7 +143,7 @@ export default function Nav() {
         </nav>
         <div className={styles.overlayFoot}>
           <span className="eyebrow">Direct contact</span>
-          <a href="mailto:info@rkcreatives.nl">info@rkcreatives.nl</a>
+          <a href="mailto:info@kreatives.nl">info@kreatives.nl</a>
         </div>
       </div>
     </header>
