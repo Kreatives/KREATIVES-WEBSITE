@@ -109,6 +109,13 @@ export async function seedDatabase() {
   return { ok: true };
 }
 
+/** Vult ontbrekende inhoud aan én ververst de hele site (cache leegmaken). */
+export async function refreshContent() {
+  const res = await seedDatabase();
+  revalidatePath("/", "layout");
+  return res;
+}
+
 /* ---------- Projecten ---------- */
 
 export type ProjectInput = {

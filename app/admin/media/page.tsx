@@ -7,6 +7,24 @@ import styles from "../admin.module.css";
 
 type MediaFile = { name: string; url: string };
 
+// Bestaande beelden die al in de website zitten (map /public).
+const PUBLIC_IMAGES = [
+  "/placeholder.png",
+  "/projects/1.webp",
+  "/projects/2.webp",
+  "/projects/3.webp",
+  "/projects/4.webp",
+  "/projects/5.webp",
+  "/projects/6.webp",
+  "/projects/7.webp",
+  "/logos/1.png",
+  "/logos/2.png",
+  "/logos/3.png",
+  "/logos/4.png",
+  "/logos/5.png",
+  "/logos/6.png",
+];
+
 export default function AdminMedia() {
   const [files, setFiles] = useState<MediaFile[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -84,6 +102,15 @@ export default function AdminMedia() {
         />
       </label>
 
+      <h2
+        style={{
+          fontWeight: 600,
+          fontSize: "1.1rem",
+          margin: "2rem 0 0.75rem",
+        }}
+      >
+        Geüploade foto&apos;s
+      </h2>
       {loading ? (
         <p className={styles.empty}>Laden…</p>
       ) : files.length === 0 ? (
@@ -124,6 +151,33 @@ export default function AdminMedia() {
           ))}
         </div>
       )}
+
+      <h2
+        style={{
+          fontWeight: 600,
+          fontSize: "1.1rem",
+          margin: "2.5rem 0 0.5rem",
+        }}
+      >
+        Bestaande foto&apos;s op de site
+      </h2>
+      <p className={styles.lead} style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>
+        Foto&apos;s die al in de website zitten. Klik om het pad te kopiëren en
+        ergens in te plakken.
+      </p>
+      <div className={styles.mediaGrid}>
+        {PUBLIC_IMAGES.map((src) => (
+          <div key={src} className={styles.mediaItem}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt=""
+              onClick={() => copy(src)}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

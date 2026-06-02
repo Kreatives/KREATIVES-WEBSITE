@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { contentCounts } from "@/lib/cms";
 import SeedButton from "@/components/admin/SeedButton";
+import RefreshButton from "@/components/admin/RefreshButton";
 import styles from "./admin.module.css";
 
 export const dynamic = "force-dynamic";
@@ -40,13 +41,22 @@ export default async function AdminHome() {
 
   return (
     <div>
-      <div className={styles.head}>
-        <h1 className={styles.title}>Welkom terug</h1>
-        <p className={styles.lead}>
-          Beheer hier de inhoud van je website. Kies een onderdeel om te
-          beginnen.
-        </p>
+      <div className={styles.topbar}>
+        <div className={styles.head} style={{ marginBottom: 0 }}>
+          <h1 className={styles.title}>Welkom terug</h1>
+          <p className={styles.lead}>
+            Beheer hier de inhoud van je website. Kies een onderdeel om te
+            beginnen.
+          </p>
+        </div>
+        <RefreshButton />
       </div>
+
+      <p className={styles.lead} style={{ marginTop: "-1rem", marginBottom: "2rem", maxWidth: "52ch", fontSize: "0.92rem", color: "var(--muted)" }}>
+        Zie je iets niet (goed) staan op de site? Klik op
+        &ldquo;Inhoud ophalen &amp; verversen&rdquo; — dat haalt ontbrekende
+        inhoud op en ververst de site.
+      </p>
 
       {empty && (
         <div className={styles.notice} style={{ marginBottom: "2rem" }}>
