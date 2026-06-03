@@ -41,13 +41,13 @@ export const nav: NavItem[] = [
 
 export const hero = {
   // Headline volgt Ricky's eigen formulering. Instrument Serif italic op
-  // "waar je trots op bent." (kleur erft van de witte tekst op de foto).
-  titleLead: "Eindelijk een website",
-  titleAccent: "waar je trots op bent.",
+  // het tweede deel (kleur erft van de witte tekst op de foto).
+  titleLead: "Jouw merk is sterker dan",
+  titleAccent: "je website laat zien.",
   body:
-    "Wij ontwerpen maatwerk websites voor ondernemers die hun online uitstraling in lijn willen brengen met de rest van hun bedrijf.",
+    "Wij bouwen maatwerk websites voor ondernemers die er online even goed uit willen zien als ze offline al zijn.",
   primary: { label: "Gratis offerte", href: "/contact" },
-  secondary: { label: "Bekijk ons werk", href: "#cases" },
+  secondary: { label: "Bekijk ons werk", href: "/projecten" },
   // Social-proof widget
   socialProof: {
     avatars: [
@@ -72,51 +72,44 @@ export const probleem = {
   eyebrow: "Herkenbaar?",
   // Eén statement dat woord-voor-woord oplicht tijdens scrollen (GSAP).
   statement:
-    "Je site is van een paar jaar terug en sluit niet meer aan bij wat je nu doet. Je deelt je kaartje uit en hoopt eigenlijk dat ze hem niet meteen openen, terwijl je concurrent er online scherper uit ziet dan jij.",
+    "Je site staat er nog, maar hij klopt niet meer. Je bent gegroeid, je aanbod is verschoven, je prijzen zijn omhoog gegaan, de website niet. Ondertussen ziet je concurrent er online strakker uit dan jij, terwijl jij weet dat jij het betere werk levert.",
 };
 
 export const usps = {
-  eyebrow: "Waarom samenwerken",
-  titleLead: "Waarom samenwerken",
-  titleAccent: "met ons?",
+  eyebrow: "Waarom ons",
+  titleLead: "Waarom ondernemers voor",
+  titleAccent: "ons kiezen.",
   intro:
-    "Je werkt rechtstreeks met de mensen die je site bouwen, met een aanpak die vooraf duidelijk is en een resultaat dat klopt met je merk.",
+    "Je werkt rechtstreeks met de mensen die je site bouwen. Geen doorgeefluik, geen sjabloon dat wordt aangepast. Een aanpak die vooraf duidelijk is, en een eindresultaat dat bij je merk past.",
   items: [
     {
       no: "01",
-      title: "Een vaste aanpak",
+      title: "Vaste aanpak",
       body:
-        "Je weet vooraf wat er gebeurt, wanneer het gebeurt, en wat het kost. Geen verrassingen halverwege het traject.",
+        "Vooraf weet je wat er wanneer gebeurt en wat het kost. We starten niet zonder dat alles op papier staat.",
       image: "/brand/brand-1.webp",
     },
     {
       no: "02",
-      title: "Alles op maat",
+      title: "Volledig op maat",
       body:
-        "We werken niet met thema's of sjablonen. Elke site bouwen we vanaf nul rond jouw merk, zodat je hem nergens anders terugziet.",
+        "We werken niet met thema's of kant-en-klare blokken. Elke site wordt gebouwd rond jouw merk, zodat hij er nergens anders uitziet.",
       image: "/brand/brand-2.webp",
     },
     {
       no: "03",
       title: "Twee revisierondes",
       body:
-        "We scherpen het ontwerp aan tot het echt klopt, zonder dat de prijs onderweg verandert.",
+        "Je krijgt de ruimte om het design aan te scherpen totdat het echt klopt. De prijs verandert daardoor niet.",
       image: "/brand/brand-3.webp",
-    },
-    {
-      no: "04",
-      title: "Snel en vindbaar",
-      body:
-        "Elke site laadt snel en staat technisch goed, zodat je gevonden wordt door de mensen die naar je zoeken.",
-      image: "/brand/brand-1.webp",
     },
   ],
 };
 
 export const werkwijze = {
-  eyebrow: "Onze aanpak",
-  titleLead: "Zo zorgen wij dat jij tevreden bent over het",
-  titleAccent: "eindresultaat",
+  eyebrow: "Aanpak",
+  titleLead: "Zo werken we, van eerste gesprek tot",
+  titleAccent: "live site.",
   steps: [
     {
       no: "01",
@@ -503,10 +496,10 @@ export const faqHome = {
 
 export const over = {
   eyebrow: "Over ons",
-  titleLead: "Maatwerk dat tussen te duur en te generiek",
-  titleAccent: "in zit",
+  titleLead: "Gebouwd door de mensen",
+  titleAccent: "met wie je belt.",
   body:
-    "KREATIVES is opgezet vanuit één idee: de meeste ondernemers verdienen een betere site dan ze hebben, en krijgen die niet omdat het of te duur is of te generiek. Wij bouwen maatwerk dat daar precies tussenin zit, met een directe lijn naar de mensen die het bouwen.",
+    "KREATIVES is opgezet vanuit één idee: de meeste ondernemers verdienen een betere site dan ze hebben. We houden het klein zodat je altijd weet wie er aan je site zit, en waarom we iets doen zoals we het doen.",
   cta: { label: "Lees meer over ons", href: "/over-ons" },
   // Tot de uitgesneden portretfoto er is gebruiken we de placeholder.
   portrait: "/brand/brand-2.webp" as string | null,
@@ -517,7 +510,9 @@ export const pricing = {
   titleLead: "Transparante prijzen,",
   titleAccent: "geen verrassingen",
   body:
-    "Vooraf duidelijk wat je krijgt en wat het kost. Eén vaste prijs, twee revisierondes inbegrepen, en de site staat live binnen vier weken.",
+    "Vooraf duidelijk wat je krijgt en wat het kost. Eén vaste prijs, twee revisierondes inbegrepen, live binnen vier weken.",
+  // Urgentie-regel; {maand} wordt in de component ingevuld.
+  pulse: "4 plekken beschikbaar in",
   plans: [
     {
       name: "Maatwerk website",
@@ -557,6 +552,15 @@ export const pricing = {
       cta: { label: "Plan een gesprek", href: "/contact" },
     },
   ],
+};
+
+// Sluit-CTA onderaan de homepage (vervangt het formulier daar).
+export const closingCta = {
+  titleLead: "Klaar om je site",
+  titleAccent: "kloppend te maken?",
+  body:
+    "Plan een vrijblijvend gesprek. We kijken samen wat er nodig is en wat het kost.",
+  cta: { label: "Plan een gesprek", href: "/contact" },
 };
 
 // ============================================================
