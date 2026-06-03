@@ -191,8 +191,11 @@
   color: var(--on-dark);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 7rem var(--gutter) 3rem;
+  justify-content: flex-start;
+  padding: 6rem var(--gutter) 3rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   clip-path: circle(0% at calc(100% - 3rem) 3rem);
   transition: clip-path 0.7s var(--ease);
   pointer-events: none;
@@ -200,6 +203,24 @@
 .overlayOpen {
   clip-path: circle(150% at calc(100% - 3rem) 3rem);
   pointer-events: auto;
+}
+.overlayClose {
+  position: fixed;
+  top: 1.4rem;
+  right: var(--gutter);
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 243, 239, 0.25);
+  background: rgba(244, 243, 239, 0.06);
+  color: var(--on-dark);
+  display: grid;
+  place-items: center;
+}
+.overlayClose svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .overlayNav {
@@ -232,16 +253,32 @@
   opacity: 1;
   transform: none;
 }
-.overlayGroup .chev {
+.overlayRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.overlayRow .overlayItem {
+  width: auto;
+}
+.overlayToggle {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 243, 239, 0.18);
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+.overlayToggle .chev {
   width: 1.1rem;
   height: 1.1rem;
-  align-self: center;
   color: var(--orange);
+  transition: transform 0.3s var(--ease);
 }
-.overlayGroup[aria-expanded] {
-  /* noop */
-}
-.overlayItem[aria-expanded="true"] .chev {
+.overlayToggle[aria-expanded="true"] .chev {
   transform: rotate(180deg);
 }
 .overlayOpen .overlayNav a.overlayItem,
@@ -259,7 +296,6 @@
 .overlaySub {
   display: grid;
   grid-template-rows: 0fr;
-  padding-left: 2.6rem;
   transition: grid-template-rows 0.4s var(--ease);
 }
 .overlaySub > * {
@@ -268,6 +304,11 @@
 .overlaySubOpen {
   grid-template-rows: 1fr;
 }
+.overlaySubInner {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2.6rem;
+}
 .overlaySub a {
   display: block;
   padding: 0.35rem 0;
@@ -275,7 +316,7 @@
   font-weight: 500;
   color: var(--on-dark-muted);
 }
-.overlaySub a:first-child {
+.overlaySubInner a:first-child {
   padding-top: 0.6rem;
 }
 

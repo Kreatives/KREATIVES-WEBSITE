@@ -114,42 +114,78 @@ export default function Nav() {
         className={`${styles.overlay} ${open ? styles.overlayOpen : ""}`}
         aria-hidden={!open}
       >
+        <button
+          type="button"
+          className={styles.overlayClose}
+          aria-label="Sluit menu"
+          onClick={() => setOpen(false)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M6 6l12 12M18 6 6 18"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+
         <nav className={styles.overlayNav}>
           {nav.map((n, i) => {
             const delay = { transitionDelay: `${0.05 + i * 0.05}s` };
+            const index = (
+              <span className={styles.overlayIndex}>
+                ({String(i + 1).padStart(2, "0")})
+              </span>
+            );
             if (n.children) {
               const isOpen = openSub === n.label;
               return (
                 <div key={n.label} className={styles.overlayGroup} style={delay}>
-                  <button
-                    type="button"
-                    className={styles.overlayItem}
-                    aria-expanded={isOpen}
-                    onClick={() =>
-                      setOpenSub((v) => (v === n.label ? null : n.label))
-                    }
-                  >
-                    <span className={styles.overlayIndex}>
-                      ({String(i + 1).padStart(2, "0")})
-                    </span>
-                    {n.label}
-                    <Chevron />
-                  </button>
+                  <div className={styles.overlayRow}>
+                    {n.href ? (
+                      <a
+                        href={n.href}
+                        className={styles.overlayItem}
+                        onClick={() => setOpen(false)}
+                      >
+                        {index}
+                        {n.label}
+                      </a>
+                    ) : (
+                      <span className={styles.overlayItem}>
+                        {index}
+                        {n.label}
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      className={styles.overlayToggle}
+                      aria-expanded={isOpen}
+                      aria-label={`Toon ${n.label}`}
+                      onClick={() =>
+                        setOpenSub((v) => (v === n.label ? null : n.label))
+                      }
+                    >
+                      <Chevron />
+                    </button>
+                  </div>
                   <div
                     className={`${styles.overlaySub} ${
                       isOpen ? styles.overlaySubOpen : ""
                     }`}
                   >
-                    {n.href && (
-                      <a href={n.href} onClick={() => setOpen(false)}>
-                        {n.label} overzicht
-                      </a>
-                    )}
-                    {n.children.map((c) => (
-                      <a key={c.href} href={c.href} onClick={() => setOpen(false)}>
-                        {c.label}
-                      </a>
-                    ))}
+                    <div className={styles.overlaySubInner}>
+                      {n.children.map((c) => (
+                        <a
+                          key={c.href}
+                          href={c.href}
+                          onClick={() => setOpen(false)}
+                        >
+                          {c.label}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );
@@ -162,9 +198,7 @@ export default function Nav() {
                 onClick={() => setOpen(false)}
                 style={delay}
               >
-                <span className={styles.overlayIndex}>
-                  ({String(i + 1).padStart(2, "0")})
-                </span>
+                {index}
                 {n.label}
               </a>
             );
@@ -173,6 +207,7 @@ export default function Nav() {
         <div className={styles.overlayFoot}>
           <span className="eyebrow">Direct contact</span>
           <a href="mailto:info@kreatives.nl">info@kreatives.nl</a>
+          <a href="tel:+31613066250">+31 6 13 06 62 50</a>
         </div>
       </div>
     </header>
