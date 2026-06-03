@@ -14,6 +14,7 @@ export type CmsProject = {
   id: string;
   slug: string;
   name: string;
+  headline: string;
   type: string;
   year: string;
   client: string;
@@ -181,6 +182,7 @@ export async function getProjects(): Promise<CmsProject[]> {
     id: p.slug,
     slug: p.slug,
     name: p.name,
+    headline: p.headline,
     type: p.type,
     year: p.year,
     client: p.client,

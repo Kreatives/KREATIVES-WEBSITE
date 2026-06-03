@@ -51,6 +51,7 @@ export async function seedDatabase() {
         position: i,
         slug: x.slug,
         name: x.name,
+        headline: x.headline,
         type: x.type,
         year: x.year,
         client: x.client,
@@ -132,6 +133,7 @@ export type ProjectInput = {
   id?: string;
   slug: string;
   name: string;
+  headline: string;
   type: string;
   year: string;
   client: string;
@@ -164,6 +166,7 @@ export async function saveProject(input: ProjectInput) {
   const row = {
     slug: input.slug,
     name: input.name,
+    headline: input.headline,
     type: input.type,
     year: input.year,
     client: input.client,

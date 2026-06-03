@@ -11,7 +11,8 @@ export type ProjectSection = {
 
 export type Project = {
   slug: string;
-  name: string;
+  name: string; // bedrijfsnaam (klein boven de titel)
+  headline: string; // grote, beschrijvende titel op de detailpagina
   type: string;
   excerpt: string;
   intro: string;
@@ -28,6 +29,8 @@ export const projecten: Project[] = [
   {
     slug: "globalhair-institute",
     name: "Global Hair Institute",
+    headline:
+      "Van verouderd naar premium: de digitale identiteit van Global Hair Institute vernieuwd",
     type: "Webdesign",
     excerpt:
       "Een premium digitale ervaring voor een internationale haartransplantatiekliniek.",
@@ -65,6 +68,8 @@ export const projecten: Project[] = [
   {
     slug: "burgers-frites",
     name: "Burgers&Frites Rotterdam",
+    headline:
+      "Hoe wij Burgers&Frites hun webdesign vertaalden naar 200% meer conversie",
     type: "Webdesign",
     excerpt:
       "Een conversiegerichte site voor het best beoordeelde bezorgrestaurant van Nederland.",
@@ -102,6 +107,7 @@ export const projecten: Project[] = [
   {
     slug: "sabreen-mia",
     name: "Sabreen MIA",
+    headline: "Uitverkocht in de eerste week na lancering",
     type: "Webshop",
     excerpt:
       "Van verkopen via Instagram-DM's naar een luxe webshop die zichzelf in een week terugverdiende.",
@@ -139,6 +145,7 @@ export const projecten: Project[] = [
   {
     slug: "swims-official",
     name: "Swimss Official",
+    headline: "20.000 volgers in het eerste jaar na lancering",
     type: "Webshop",
     excerpt:
       "Een premium e-commerce ervaring met een Mix and Match-configurator voor luxe badmode.",
@@ -176,6 +183,8 @@ export const projecten: Project[] = [
   {
     slug: "van-niets-naar-iets",
     name: "Van Niets Naar Iets Podcast",
+    headline:
+      "Hoe “Van Niets Naar Iets Podcast” een frisse, moderne branding kreeg",
     type: "Branding",
     excerpt:
       "Een eigentijdse merkidentiteit voor dé nummer één podcast voor multiculturele ondernemers.",
@@ -213,6 +222,8 @@ export const projecten: Project[] = [
   {
     slug: "the-goody-foody",
     name: "TheGoodyFoody",
+    headline:
+      "Hoe wij TheGoodyFoody een gezicht gaven dat net zo lekker is als hun maaltijden",
     type: "Branding",
     excerpt:
       "Een verpakkingsontwerp dat het verhaal van verse, gezonde maaltijden eindelijk vertelt.",
@@ -250,6 +261,7 @@ export const projecten: Project[] = [
   {
     slug: "mazar-skin-clinic",
     name: "Mazar Skin Clinic",
+    headline: "120%+ conversie en volgeboekt binnen 3 weken na hun rebranding",
     type: "Webdesign",
     excerpt:
       "120%+ conversie en volgeboekt binnen drie weken na de rebranding.",

@@ -69,7 +69,8 @@ export default async function ProjectenIndexPage() {
                       </span>
                     </div>
                     <div className={styles.meta}>
-                      <h2 className={styles.name}>{p.name}</h2>
+                      <span className={styles.client}>{p.name}</span>
+                      <h2 className={styles.name}>{p.headline || p.name}</h2>
                       <p className={styles.line}>{p.excerpt}</p>
                       <ul className={styles.tags}>
                         {p.tags.map((t) => (

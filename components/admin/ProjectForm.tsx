@@ -30,6 +30,7 @@ export default function ProjectForm({
   const router = useRouter();
   const [featured, setFeatured] = useState(project?.featured ?? false);
   const [name, setName] = useState(project?.name ?? "");
+  const [headline, setHeadline] = useState(project?.headline ?? "");
   const [slug, setSlug] = useState(project?.slug ?? "");
   const [type, setType] = useState(project?.type ?? "");
   const [year, setYear] = useState(project?.year ?? "");
@@ -62,6 +63,7 @@ export default function ProjectForm({
       id: project?.id,
       slug: (slug.trim() || slugify(name)).trim(),
       name: name.trim(),
+      headline: headline.trim(),
       type: type.trim(),
       year: year.trim(),
       client: client.trim(),
@@ -122,7 +124,7 @@ export default function ProjectForm({
 
       <div className={styles.row}>
         <div className={styles.field}>
-          <label>Projectnaam</label>
+          <label>Bedrijfsnaam (klein boven de titel)</label>
           <input value={name} onChange={(e) => setName(e.target.value)} required />
         </div>
         <div className={styles.field}>
@@ -133,6 +135,15 @@ export default function ProjectForm({
             placeholder={slugify(name) || "bijv. smokey-joes"}
           />
         </div>
+      </div>
+
+      <div className={styles.field}>
+        <label>Titel (grote, beschrijvende kop op de case-pagina)</label>
+        <input
+          value={headline}
+          onChange={(e) => setHeadline(e.target.value)}
+          placeholder="Hoe wij … naar meer conversie brachten"
+        />
       </div>
 
       <div className={styles.row}>

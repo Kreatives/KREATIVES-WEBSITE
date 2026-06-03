@@ -58,8 +58,11 @@ export default async function ProjectDetailPage({
               <span className={styles.pill}>{project.year}</span>
             </div>
 
-            <h1 className={styles.title} data-reveal>
+            <span className={styles.client} data-reveal>
               {project.name}
+            </span>
+            <h1 className={styles.title} data-reveal>
+              {project.headline || project.name}
             </h1>
             <p className={styles.excerpt} data-reveal>
               {project.excerpt}
