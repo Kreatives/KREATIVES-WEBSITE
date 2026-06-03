@@ -6,7 +6,7 @@ type ClosingData = {
   accent?: string;
   body: string;
   cta: { label: string; href: string };
-  micro: string;
+  micro?: string;
 };
 
 export default function ClosingCta({ data }: { data: ClosingData }) {
@@ -38,9 +38,11 @@ export default function ClosingCta({ data }: { data: ClosingData }) {
               {data.cta.label}
             </Button>
           </div>
-          <p className={styles.micro} data-reveal>
-            {data.micro}
-          </p>
+          {data.micro && (
+            <p className={styles.micro} data-reveal>
+              {data.micro}
+            </p>
+          )}
         </div>
       </div>
     </section>

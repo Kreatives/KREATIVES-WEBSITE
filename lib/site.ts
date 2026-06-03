@@ -757,10 +757,10 @@ export const footer = {
 
 export const overOnsHero = {
   eyebrow: "Over ons",
-  titleLead: "Maatwerk websites die werken",
-  titleAccent: "voor wie ze gebruikt.",
+  titleLead: "Klein bureau,",
+  titleAccent: "serieus werk.",
   body:
-    "KREATIVES is opgezet omdat de meeste ondernemers vastzitten tussen twee uitersten: templates die je nergens vrolijk van wordt en agencies waar je 25.000 voor een homepage betaalt. Daar zit een gat, en daar bouwen wij in.",
+    "KREATIVES is opgericht omdat de meeste ondernemers een betere website verdienen dan ze hebben. We houden het klein, werken met een vast team en pakken een beperkt aantal projecten aan, zodat elke site de aandacht krijgt die hij verdient.",
   background: "/brand/brand-1.webp",
 };
 
@@ -770,8 +770,8 @@ export const overOnsVerhaal = {
   titleAccent: "een goede ergernis.",
   subheading: "Sites die er verzorgd uitzien, zonder het prijskaartje van een groot bureau.",
   paragraphs: [
-    "Te veel sites in Nederland zien er nog steeds uit alsof ze in 2018 zijn opgeleverd. De ondernemers erachter zijn doorgegroeid, maar de site staat al jaren stil. Niet omdat de ambitie ontbreekt, maar omdat goede webdesigners vaak onbetaalbaar zijn of een wachtrij van drie maanden hebben.",
-    "KREATIVES is opgezet om dat te veranderen. We bouwen maatwerk websites die snel laden en technisch op orde staan, voor een prijs die past bij wat een ondernemer redelijk kan investeren.",
+    "Ik zag te veel ondernemers rondlopen met een site die niet meer paste bij wat ze inmiddels deden. Niet omdat ze er niet in wilden investeren, maar omdat de opties niet klopten: te duur, te generiek, of een wachtrij van drie maanden.",
+    "KREATIVES is daar direct op gebouwd. Maatwerk websites die snel laden en technisch op orde staan, voor een prijs die past bij wat een serieuze ondernemer redelijk kan investeren.",
   ],
   primaryCta: { label: "Plan een gesprek", href: "/contact" },
   cta: { label: "Bekijk ons werk", href: "/#cases" },
@@ -785,7 +785,7 @@ export const overOnsVerhaal = {
 export const overOnsKernwaarden = {
   eyebrow: "Kernwaarden",
   intro:
-    "Vier dingen die je altijd terugziet in hoe we werken. Geen poster aan de muur, maar afspraken die we per project waar willen maken.",
+    "Vier dingen die je altijd terugziet in hoe we werken.",
   items: [
     {
       title: "Maatwerk",
@@ -812,10 +812,10 @@ export const overOnsKernwaarden = {
 
 export const overOnsTeam = {
   eyebrow: "Wie we zijn",
-  titleLead: "Een klein team",
-  titleAccent: "met één focus.",
+  titleLead: "Wie er aan je site",
+  titleAccent: "zit.",
   body:
-    "KREATIVES is gebouwd op de gedachte dat goed werk niet groot opgeschaald hoeft te worden om waardevol te zijn. We pakken een beperkt aantal projecten tegelijk aan, zodat iedere site de aandacht krijgt die hij verdient. Dat scheelt onze klanten tijd en levert sterkere websites op.",
+    "KREATIVES is een klein team. We pakken een beperkt aantal projecten tegelijk aan, zodat je altijd weet wie er aan jouw site werkt en waarom we iets doen zoals we het doen. Geen wachtrij, geen doorgeefluik.",
   portrait: "/brand/brand-2.webp",
 };
 
@@ -845,8 +845,8 @@ export const overOnsVoorWie = {
 };
 
 export const overOnsResultaten = {
-  eyebrow: "In cijfers",
-  titleLead: "Onze resultaten in",
+  eyebrow: "Resultaten",
+  titleLead: "In",
   titleAccent: "cijfers.",
   items: [
     {
@@ -883,10 +883,10 @@ export const overOnsResultaten = {
 export const webdesignFunnel = {
   hero: {
     eyebrow: "Webdesign",
-    titleLead: "Een website die er goed uitziet",
-    titleAccent: "én aanvragen oplevert.",
+    titleLead: "Een site die er",
+    titleAccent: "weer bij past.",
     body:
-      "Redesigns en landingspagina's voor ondernemers die meer willen dan een nette site. Gebouwd op uitstraling én op conversie.",
+      "Voor ondernemers die gegroeid zijn, maar waarvan de website dat nog niet laat zien. We bouwen hem opnieuw, of beter, of allebei.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
     background: "/projects/2.webp",
   },
@@ -906,7 +906,7 @@ export const webdesignFunnel = {
         tag: "Redesign",
         title: "Een site die weer klopt met je bedrijf",
         body:
-          "Voor wie een bestaande site heeft die niet meer past bij waar het bedrijf nu staat. We herontwerpen de uitstraling, scherpen de structuur aan en zorgen dat de site weer voor je werkt.",
+          "Je site ziet er misschien nog prima uit van buiten, maar hij werkt niet meer mee. De structuur klopt niet, de uitstraling is achtergebleven, of bezoekers klikken weg zonder iets te doen. We herontwerpen hem volledig, zodat hij weer past bij waar je nu staat.",
         points: [
           "Volledig nieuw ontwerp rond je merk",
           "Heldere structuur en betere vindbaarheid",
@@ -918,7 +918,7 @@ export const webdesignFunnel = {
         tag: "Landingspagina",
         title: "Eén pagina die één ding doet: converteren",
         body:
-          "Voor een campagne, dienst of product dat een eigen pagina verdient. Eén heldere boodschap, één duidelijke actie, gebouwd om bezoekers om te zetten in aanvragen.",
+          "Je lanceert iets nieuws, je start een campagne, of je hebt een dienst die een eigen plek verdient. Een landingspagina heeft één boodschap en één doel: de bezoeker zet de stap. We bouwen hem zo dat hij dat ook doet.",
         points: [
           "Eén scherpe boodschap zonder afleiding",
           "Opgebouwd rond een meetbare conversie",
@@ -929,9 +929,9 @@ export const webdesignFunnel = {
     ],
   },
   portfolio: {
-    eyebrow: "Geselecteerd werk",
-    titleLead: "Liever laten zien dan",
-    titleAccent: "vertellen.",
+    eyebrow: "Liever laten zien dan vertellen",
+    titleLead: "Werk dat voor zichzelf",
+    titleAccent: "spreekt.",
     cta: { label: "Bekijk alle projecten", href: "/projecten" },
     items: [
       { name: "Smokey Joe's", type: "Redesign", branche: "Horeca", image: "/projects/1.webp" },
@@ -943,32 +943,30 @@ export const webdesignFunnel = {
   usps: {
     eyebrow: "Waarom KREATIVES",
     titleLead: "Wat je bij ons",
-    titleAccent: "anders merkt",
-    intro:
-      "Rustig, concreet en gebouwd op resultaat. Dit is wat je bij ons anders merkt dan bij een doorsnee bureau.",
+    titleAccent: "anders merkt.",
     cta: { label: "Plan een gesprek", href: "/contact" },
     items: [
       {
-        title: "Gebouwd op conversie",
+        title: "We ontwerpen op wat de site moet doen",
         body:
-          "We ontwerpen niet alleen op looks, maar op wat de pagina moet opleveren: aanvragen, niet alleen complimenten.",
+          "Niet alleen op hoe hij eruitziet. We kijken vooraf wat de pagina moet opleveren en bouwen daar het ontwerp omheen.",
       },
       {
         title: "Eén vast aanspreekpunt",
         body:
-          "Je werkt rechtstreeks met de mensen die je site bouwen. Geen account-laag, geen telefoonspel.",
+          "Je werkt rechtstreeks met de mensen die je site bouwen. Geen accountlaag, geen doorgeefluik.",
       },
       {
-        title: "Maatwerk, geen template",
+        title: "Volledig op maat, makkelijk te beheren",
         body:
-          "Een site die past bij jouw merk en die je makkelijk zelf beheert, zonder dat je vastzit aan een logge standaardtemplate.",
+          "Een site die past bij jouw merk en die je daarna zelf in de hand hebt, zonder dat je afhankelijk blijft van ons voor elke kleine aanpassing.",
       },
     ],
   },
   socialProof: {
-    eyebrow: "Wat klanten zeggen",
-    title: "In hun eigen woorden",
-    accent: "woorden",
+    eyebrow: "Reviews",
+    title: "Wat klanten zeggen.",
+    accent: "zeggen.",
     items: [
       {
         quote:
@@ -1013,12 +1011,11 @@ export const webdesignFunnel = {
     ],
   },
   closing: {
-    title: "Klaar om je site weer voor je te laten werken?",
-    accent: "voor je",
+    title: "Klaar om je site weer kloppend te maken?",
+    accent: "kloppend te maken?",
     body:
-      "Eén gesprek is genoeg om te kijken of het past. We denken alvast mee, ook als je nog twijfelt.",
+      "Eén gesprek is genoeg om te zien wat er nodig is. Geen offerte, geen verplichtingen.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
-    micro: "Geen offerte, geen verplichtingen. Gewoon kijken of het klikt.",
   },
 };
 
@@ -1029,16 +1026,16 @@ export const webdesignFunnel = {
 export const aiFunnel = {
   hero: {
     eyebrow: "Diensten — AI",
-    titleLead: "AI maakt ons sneller,",
-    titleAccent: "niet onnadenkender.",
+    titleLead: "Wat vroeger duur was,",
+    titleAccent: "is dat nu niet meer.",
     body:
-      "We zetten AI in als werktool binnen een doordacht proces. Dat betekent voor jou: snellere oplevering, slimmere mogelijkheden en lagere kosten op onderdelen waar dat kan.",
+      "We zetten AI in als werktool binnen een doordacht proces. Dat betekent voor jou: snellere oplevering, betere beelden en mogelijkheden die eerder alleen voor grote budgetten waren weggelegd.",
     background: "/projects/7.webp",
   },
   welNiet: {
-    eyebrow: "Eerlijk over AI",
-    title: "Wat AI bij ons wel en niet is",
-    accent: "wel en niet",
+    eyebrow: "AI in de praktijk",
+    title: "Eerlijk over hoe we het gebruiken.",
+    accent: "gebruiken.",
     wel: {
       title: "Wat het wel is",
       items: [
@@ -1052,18 +1049,18 @@ export const aiFunnel = {
       title: "Wat het niet is",
       items: [
         "Een prompt intypen en de output opsturen",
-        "Generieke beelden die overal opduiken",
-        "Een shortcut op kwaliteit of aandacht",
+        "Stockbeelden die je overal terugziet",
+        "Een reden om minder aandacht aan jouw project te besteden",
         "Een vervanger van het ontwerpwerk zelf",
       ],
     },
   },
   toepassingen: {
     eyebrow: "Wat je eraan hebt",
-    titleLead: "Concrete toepassingen voor",
-    titleAccent: "jouw bedrijf",
+    titleLead: "Wat je er concreet",
+    titleAccent: "aan hebt.",
     intro:
-      "Vier manieren waarop we AI direct laten werken voor jouw merk, je site en je klanten. Geen losse experimenten, maar tools die we verweven in je website en je dagelijkse processen, zodat je er meteen iets aan hebt.",
+      "Vier manieren waarop we AI verweven in je site en processen, zodat je er direct iets aan hebt.",
     items: [
       {
         title: "AI-visuals",
@@ -1076,14 +1073,14 @@ export const aiFunnel = {
           "Een chatbot, calculator of tool op je site die 24/7 voor je werkt. Minder telefoontjes, meer gekwalificeerde aanvragen.",
       },
       {
-        title: "Snelheid",
+        title: "Snellere oplevering",
         body:
-          "Wat vroeger twee weken duurde, duurt nu korter. Niet omdat er minder werk in zit, maar omdat de repeterende stappen geautomatiseerd zijn.",
+          "Repeterende stappen zijn geautomatiseerd. Dat betekent dat je project korter duurt zonder dat er minder werk in zit.",
       },
       {
-        title: "Copy & content",
+        title: "Teksten in jouw stem",
         body:
-          "Teksten als startpunt, niet als eindproduct. Wij schrijven mee in jouw tone of voice, AI versnelt het proces.",
+          "We schrijven mee in jouw tone of voice. AI versnelt het proces, wij bewaken of het ook echt klinkt zoals jij.",
       },
     ],
   },
@@ -1104,12 +1101,11 @@ export const aiFunnel = {
     accent: "hoe het wordt toegepast",
   },
   closing: {
-    title: "Benieuwd wat AI voor jouw website kan betekenen?",
+    title: "Benieuwd wat dit voor jouw website betekent?",
     accent: "jouw website",
     body:
-      "We laten je in een kort gesprek concreet zien wat er mogelijk is voor jouw merk en budget.",
+      "In een kort gesprek laten we je zien wat er concreet mogelijk is voor jouw merk en budget. Geen verplichtingen.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
-    micro: "Geen verplichtingen, gewoon een goed gesprek.",
   },
 };
 
@@ -1123,7 +1119,7 @@ export const werkwijzePage = {
     titleLead: "Van brief naar live,",
     titleAccent: "zonder verrassingen.",
     body:
-      "Een heldere lijn voor ondernemers die controle willen en geen tijd hebben voor verrassing-rekeningen of eindeloze ping-pong.",
+      "We leggen vooraf vast wat er wanneer gebeurt en wat het kost. Geen verrassing-rekeningen, geen weken zonder update, geen resultaat dat “niet helemaal” klopt.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
     background: "/projects/5.webp",
   },
@@ -1140,8 +1136,8 @@ export const werkwijzePage = {
   },
   steps: {
     eyebrow: "De aanpak",
-    titleLead: "Vijf stappen naar een site",
-    titleAccent: "waar je achter staat.",
+    titleLead: "Zo ziet het traject",
+    titleAccent: "eruit.",
     items: [
       {
         no: "01",
@@ -1161,7 +1157,7 @@ export const werkwijzePage = {
       {
         no: "04",
         title: "Bouw & verfijning",
-        body: "We bouwen de site in een live-omgeving, met de revisierondes inbegrepen. Snel, schaalbaar en technisch op orde.",
+        body: "We bouwen de site in een live-omgeving zodat je ziet hoe hij er echt uitziet. De twee revisierondes zitten in deze fase.",
       },
       {
         no: "05",
@@ -1172,8 +1168,8 @@ export const werkwijzePage = {
   },
   verwachten: {
     eyebrow: "Wat je kunt verwachten",
-    titleLead: "Concrete beloftes,",
-    titleAccent: "geen superlatieven.",
+    titleLead: "Wat bij elk traject",
+    titleAccent: "vaststaat.",
     body:
       "Vier dingen die bij elk traject vaststaan, zodat je nooit voor verrassingen komt te staan.",
     stats: [
@@ -1185,8 +1181,8 @@ export const werkwijzePage = {
   },
   socialProof: {
     eyebrow: "Wat klanten zeggen",
-    title: "Hoe het is om met ons te werken",
-    accent: "te werken",
+    title: "Wat klanten zeggen.",
+    accent: "zeggen.",
     items: [
       {
         quote:
@@ -1231,21 +1227,20 @@ export const werkwijzePage = {
     ],
   },
   closing: {
-    title: "Het enige wat jij hoeft te doen is dit gesprek aanvragen.",
-    accent: "dit gesprek",
+    title: "Ziet dit eruit als wat je zoekt?",
+    accent: "wat je zoekt?",
     body:
-      "Wij regelen de rest van het traject. Jij houdt de controle, zonder verrassingen.",
+      "Plan een gesprek. We kijken samen of het past en leggen direct vast wat er nodig is. Geen verplichtingen.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
-    micro: "Geen verplichtingen, geen offerte-regen. Gewoon een goed gesprek.",
   },
 };
 
 export const overOnsCta = {
   pill: "Jouw nieuwe site",
-  titleLead: "Start jouw",
-  titleAccent: "project.",
+  titleLead: "Klinkt dit als",
+  titleAccent: "wat je zoekt?",
   body:
-    "Sluit aan bij de ondernemers die hun online uitstraling wel kloppend hebben. Plan een vrijblijvend kennismakingsgesprek en bekijk samen wat er nodig is.",
+    "Plan een gesprek. We kijken samen of het past en wat er nodig is. Geen offerte, geen verplichtingen.",
   calendly: "https://calendly.com/info-jtw/gratis-adviesgesprek-v2",
   calendlyLabel: "Plan een gesprek",
   subjects: ["Maatwerk website", "Maatwerk webshop", "Redesign", "Iets anders"],
