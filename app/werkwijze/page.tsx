@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import FunnelHero from "@/components/funnel/FunnelHero";
+import Statement from "@/components/funnel/Statement";
 import Steps from "@/components/funnel/Steps";
 import StatsBlock from "@/components/funnel/StatsBlock";
 import FounderWords from "@/components/funnel/FounderWords";
@@ -35,6 +36,7 @@ export default async function WerkwijzePage() {
     <>
       <RevealInit />
       <FunnelHero data={werkwijzePage.hero} />
+      <Statement data={werkwijzePage.statement} />
       <Steps data={werkwijzePage.steps} />
       <StatsBlock data={werkwijzePage.verwachten} />
       <FounderWords data={socialProof} />
