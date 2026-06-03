@@ -247,6 +247,7 @@ export type Review = {
   initials: string;
   color: string;
   logo?: string;
+  photo?: string;
 };
 
 export const reviewsPage = {
@@ -257,93 +258,186 @@ export const reviewsPage = {
     "Een greep uit de reacties van ondernemers en merken waar we mee werkten. Ongefilterd en in hun eigen woorden.",
   items: [
     {
-      title: "Nu sturen we klanten er juist naartoe",
+      title: "CTR van 1% naar 6%",
       quote:
-        "We hadden jarenlang een site waar we ons eigenlijk voor schaamden. Nu sturen we klanten er juist actief naartoe, omdat het klopt met hoe we werken.",
-      author: "Lardy Verheijden",
-      role: "Eigenaar",
-      company: "Smokey Joe's",
-      initials: "LV",
+        "Sinds de lancering van onze nieuwe website is onze online zichtbaarheid flink verbeterd. Waar onze CTR eerst rond de 1% lag, is die nu gestegen naar maar liefst 6%! Dit komt volledig door de fantastische nieuwe website: visueel sterk én technisch goed in elkaar. De gebruiksvriendelijkheid, snelheid en structuur zorgen ervoor dat bezoekers langer blijven en sneller doorklikken. Ik ben enorm tevreden en raad dit team aan iedereen aan!",
+      author: "Isslam Younes",
+      role: "Local Guide",
+      company: "",
+      initials: "IY",
       color: "#FD6D17",
     },
     {
-      title: "Vooraf precies duidelijk wat het kostte",
+      title: "Snel leveren, minder revisies",
       quote:
-        "Vooraf wisten we precies wat er ging gebeuren en wat het kostte. Twee revisierondes waren genoeg om het echt scherp te krijgen, zonder meerwerk achteraf.",
-      author: "Jeroen de Wit",
-      role: "Eigenaar",
-      company: "Pure Panelen",
-      initials: "JW",
-      color: "#1A1A1A",
-    },
-    {
-      title: "Sneller gevonden dan voorheen",
-      quote:
-        "De site laadt snel en we worden beter gevonden dan voorheen. Het verschil met onze oude site is voor onze klanten meteen zichtbaar.",
-      author: "Robin Meijer",
-      role: "Marketing",
-      company: "Future Cards",
-      initials: "RM",
-      color: "#5b3b1f",
-    },
-    {
-      title: "Geen ruis, geen meerwerk-discussies",
-      quote:
-        "Geen ruis, geen meerwerk-discussies. Het ontwerp klopte na de tweede ronde en sindsdien krijgen we vaker complimenten over hoe de site eruitziet.",
-      author: "Kim Smeets",
-      role: "Oprichter",
-      company: "Negentigtien",
-      initials: "KS",
-      color: "#9aa3a8",
-    },
-    {
-      title: "Begrepen ons na één gesprek",
-      quote:
-        "Ze begrepen wat we wilden uitstralen na één gesprek. Dat scheelde een hoop heen-en-weer en het resultaat staat als een huis.",
-      author: "Mark van Dijk",
-      role: "Directeur",
-      company: "Kroftman",
-      initials: "MD",
-      color: "#FD6D17",
-    },
-    {
-      title: "Eindelijk een site die werkt",
-      quote:
-        "De landingspagina voor onze campagne leverde direct meer aanvragen op. Eindelijk een pagina die echt iets doet in plaats van alleen mooi staan.",
-      author: "Sanne Bakker",
-      role: "Marketing",
-      company: "Brightwork",
+        "We werken inmiddels bijna een jaar met Ricky samen en zijn erg blij met de samenwerking! Hij reageert snel, met zijn ontwerpen kunnen wij sneller leveren, en het aantal revisies per klant is gedaald. We zetten deze samenwerking graag voort!",
+      author: "Studio BIC",
+      role: "Klant",
+      company: "Studio BIC",
       initials: "SB",
       color: "#1A1A1A",
     },
     {
-      title: "Rechtstreeks contact, geen tussenlaag",
+      title: "Ricky 100% aanrader",
       quote:
-        "Je werkt rechtstreeks met de mensen die je site bouwen. Dat merk je in het tempo en in hoe goed ze meedenken over de inhoud.",
-      author: "Tom Bos",
-      role: "Eigenaar",
-      company: "Studio Noord",
-      initials: "TB",
+        "Ricky heeft een website gemaakt voor onze Mazar Skin Clinic en we zijn er ontzettend blij mee. Het begon met een gesprek waarin Ricky goed luisterde naar onze wensen en waardevol advies gaf, met een prachtige website als resultaat. Kortom: Ricky is niet alleen een vakkundige websitebouwer, maar ook een prettige partij om mee te communiceren. Het resultaat werd bovendien snel opgeleverd. Ik raad Ricky 100% aan!",
+      author: "S. R.",
+      role: "Klant",
+      company: "Mazar Skin Clinic",
+      initials: "SR",
       color: "#5b3b1f",
     },
     {
-      title: "Binnen vier weken live",
+      title: "Pas af als alles perfect was",
       quote:
-        "Van eerste gesprek tot livegang zaten we precies op de planning die we vooraf afspraken. Binnen vier weken stond alles online.",
-      author: "Eva Visser",
-      role: "Oprichter",
-      company: "Helloday",
-      initials: "EV",
+        "Ik heb Ricky meerdere keren verschillende projecten toevertrouwd. Hij denkt ontzettend goed mee met mijn wensen, en het project was pas af als alles perfect was. Top service, zeer professioneel en nauwkeurig; ik raad hem zeker aan! Nogmaals bedankt voor alles 🙌",
+      author: "Zeinab H.",
+      role: "Klant",
+      company: "",
+      initials: "ZH",
       color: "#9aa3a8",
     },
     {
-      title: "Onze uitstraling klopt weer",
+      title: "Hoogwaardig en onderscheidend",
       quote:
-        "Offline waren we al jaren doorgegroeid, online liepen we achter. Nu past de site weer bij waar we als bedrijf staan.",
-      author: "Pieter Willemsen",
-      role: "Directeur",
-      company: "Vakwerk B.V.",
-      initials: "PW",
+        "Hoogwaardig, conversiegericht en onderscheidend. Superblij met de website die RKCreatives voor me heeft gebouwd! Naast de site was ook de service top. Je input wordt gewaardeerd en waar nodig goed aangevuld!",
+      author: "Stap Voor Stap Onderwijs",
+      role: "Klant",
+      company: "Stap Voor Stap Onderwijs",
+      initials: "SO",
+      color: "#1A1A1A",
+    },
+    {
+      title: "Alles luisterde naar mijn wensen",
+      quote:
+        "De communicatie was professioneel en helder, waardoor het hele proces soepel verliep. Er werd goed geluisterd naar mijn wensen en ideeën, zodat het eindresultaat precies werd wat ik voor ogen had.",
+      author: "Sarmen Jallal",
+      role: "Klant",
+      company: "",
+      initials: "SJ",
+      color: "#FD6D17",
+    },
+    {
+      title: "Fantastische site, nieuw concept",
+      quote:
+        "Super blij met Ricky! Hij heeft een fantastische website voor me gemaakt. Echt een topper. Het was best een uitdaging met een compleet nieuw concept, maar ondanks dat heeft hij toch een geweldige website neergezet! Ga zo door!",
+      author: "Pogosian",
+      role: "Klant",
+      company: "",
+      initials: "PO",
+      color: "#5b3b1f",
+    },
+    {
+      title: "Goede, snelle service",
+      quote:
+        "Ricky heeft de website voor ons bedrijf gebouwd. We zijn tevreden en raden RK Creatives aan iedereen aan. Goede en snelle service voor een redelijke prijs, en Ricky is erg vriendelijk.",
+      author: "R. Meijboom",
+      role: "Klant",
+      company: "",
+      initials: "RM",
+      color: "#9aa3a8",
+    },
+    {
+      title: "Website, logo én drukwerk",
+      quote:
+        "Ik heb meerdere keren gebruikgemaakt van RKCreatives. Ze hebben mijn website, logo en drukwerk ontworpen. Ik ben erg tevreden met hun uitstekende en snelle service. Echt proactief en professioneel. Een aanrader!",
+      author: "Maya Zen",
+      role: "Klant",
+      company: "",
+      initials: "MZ",
+      color: "#1A1A1A",
+      photo: "/team/mayazen.webp",
+    },
+    {
+      title: "Het mooiste logo dat ik me kon wensen",
+      quote:
+        "Ik heb een fantastische ervaring gehad met Ricky. Hij is enorm vaardig in zijn werk. Hij ontwierp het mooiste logo voor mijn bedrijf dat ik me had kunnen wensen!",
+      author: "Sharda Marwa",
+      role: "Klant",
+      company: "",
+      initials: "SM",
+      color: "#FD6D17",
+    },
+    {
+      title: "Snel klaar, met extra's",
+      quote:
+        "RKCreatives leverde fantastische service! De website was heel snel klaar en precies zoals ik het wilde. Ze voegden ook nog wat extra's toe waardoor de website nog strakker werd. Een echte aanrader!",
+      author: "Labran Hamidu",
+      role: "Klant",
+      company: "",
+      initials: "LH",
+      color: "#5b3b1f",
+    },
+    {
+      title: "Precies zoals ik wilde",
+      quote:
+        "Ik ben zo blij met de website! Hij is precies geworden zoals ik wilde, en dat is te danken aan Rick. Hij heeft er zoveel tijd en energie in gestoken. Dank je wel daarvoor.",
+      author: "Lemmies Skin",
+      role: "Klant",
+      company: "Lemmies Skin",
+      initials: "LS",
+      color: "#9aa3a8",
+    },
+    {
+      title: "Duidelijk en makkelijk te vinden",
+      quote:
+        "Ik ben zo blij met mijn website!! Hij ziet er prachtig uit en alles is duidelijk en makkelijk te vinden voor onze klanten. Bedankt!!!",
+      author: "S.",
+      role: "Klant",
+      company: "",
+      initials: "S",
+      color: "#1A1A1A",
+    },
+    {
+      title: "Blij met mijn professionele site",
+      quote:
+        "Uitstekende service, en ontzettend blij met mijn nieuwe professionele website. Bedankt RK Creatives!",
+      author: "Wobaboba",
+      role: "Klant",
+      company: "",
+      initials: "WB",
+      color: "#FD6D17",
+    },
+    {
+      title: "Komt afspraken uitstekend na",
+      quote:
+        "Sterke communicatie, komt afspraken uitstekend na, oplossingsgericht, deskundig en met oog voor kwaliteit. Bedankt voor deze samenwerking!",
+      author: "Ekkie Pets",
+      role: "Klant",
+      company: "Ekkie Pets",
+      initials: "EP",
+      color: "#5b3b1f",
+    },
+    {
+      title: "Snel werken, hoge kwaliteit",
+      quote:
+        "Zeer prettige samenwerking met Ricky; hij werkt snel en bovenal is de kwaliteit erg goed. Een aanrader voor iedereen die zijn website serieus neemt en zich zakelijk wil onderscheiden van andere websites!",
+      author: "Safa Doestzada",
+      role: "Klant",
+      company: "",
+      initials: "SD",
+      color: "#9aa3a8",
+      photo: "/team/safa.webp",
+    },
+    {
+      title: "Reageert altijd, top communicatie",
+      quote:
+        "Ik ben supertevreden met RKCreatives. Hij heeft een prachtige website voor me gebouwd en we hebben goede communicatie. Reageert altijd! 22thelabel to the moon 🚀",
+      author: "Dilan",
+      role: "Klant",
+      company: "22thelabel",
+      initials: "DI",
+      color: "#1A1A1A",
+      photo: "/team/dylan.webp",
+    },
+    {
+      title: "Strak en professioneel",
+      quote:
+        "Ik ben supertevreden met het eindresultaat. De communicatie was erg prettig en er werd goed geluisterd naar mijn wensen. Het ziet er strak en professioneel uit, precies wat ik voor ogen had. Liefs, Ohmybeauty",
+      author: "Savo Hamad",
+      role: "Klant",
+      company: "Ohmybeauty",
+      initials: "SH",
       color: "#FD6D17",
     },
   ] as Review[],

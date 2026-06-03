@@ -301,6 +301,32 @@ export async function deleteFaq(id: string) {
   return { ok: true };
 }
 
+/* ---------- Contactformulier-inzendingen ---------- */
+
+export async function markSubmissionRead(id: string, read: boolean) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("contact_submissions")
+    .update({ read })
+    .eq("id", id);
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin/inzendingen");
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
+export async function deleteSubmission(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("contact_submissions")
+    .delete()
+    .eq("id", id);
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin/inzendingen");
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
 /* ---------- Blog ---------- */
 
 export type PostInput = {

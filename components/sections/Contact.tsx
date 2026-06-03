@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contact } from "@/lib/site";
+import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/Button";
 import styles from "./Contact.module.css";
 
@@ -11,10 +12,13 @@ export default function Contact() {
   const [type, setType] = useState(contact.projectTypes[0]);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const f = new FormData(form);
     const naam = String(f.get("naam") || "").trim();
     const email = String(f.get("email") || "").trim();
     const bedrijf = String(f.get("bedrijf") || "").trim();
@@ -30,12 +34,23 @@ export default function Contact() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    const body = encodeURIComponent(
-      `Naam: ${naam}\nBedrijfsnaam: ${bedrijf}\nWebsite: ${website}\nType: ${type}\n\n${bericht}`
-    );
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
-      "Nieuwe aanvraag via rkcreatives.nl"
-    )}&body=${body}`;
+    setSending(true);
+    setServerError(null);
+    const res = await submitContact({
+      name: naam,
+      email,
+      company: bedrijf,
+      website,
+      subject: type,
+      message: bericht,
+      source: "Contactpagina",
+    });
+    setSending(false);
+    if (!res.ok) {
+      setServerError(res.error ?? "Er ging iets mis. Probeer het opnieuw.");
+      return;
+    }
+    form.reset();
     setSent(true);
   }
 
@@ -165,10 +180,20 @@ export default function Contact() {
           </div>
 
           <div className={styles.cardFoot}>
-            <Button type="submit" variant="dark">
-              {sent ? "Bedankt, tot snel" : "Verstuur bericht"}
+            <Button type="submit" variant="dark" disabled={sending || sent}>
+              {sent
+                ? "Bedankt, tot snel"
+                : sending
+                ? "Versturen…"
+                : "Verstuur bericht"}
             </Button>
-            <p className={styles.privacy}>{contact.privacy}</p>
+            <p className={styles.privacy}>
+              {serverError ? (
+                <span className={styles.err}>{serverError}</span>
+              ) : (
+                contact.privacy
+              )}
+            </p>
           </div>
         </form>
       </div>

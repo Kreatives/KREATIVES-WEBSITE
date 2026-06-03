@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 const navItems = [
   { label: "Overzicht", href: "/admin" },
+  { label: "E-mail inzendingen", href: "/admin/inzendingen" },
   { label: "Projecten", href: "/admin/projecten" },
   { label: "Reviews", href: "/admin/reviews" },
   { label: "Veelgestelde vragen", href: "/admin/faq" },

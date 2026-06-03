@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { overOnsCta, contact } from "@/lib/site";
+import { submitContact } from "@/app/actions/contact";
 import { Arrow } from "@/components/icons";
 import styles from "./StartProject.module.css";
 
@@ -11,12 +12,15 @@ export default function StartProject() {
   const [subject, setSubject] = useState(overOnsCta.subjects[0]);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const maand = new Date().toLocaleString("nl-NL", { month: "long" });
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const f = new FormData(form);
     const naam = String(f.get("naam") || "").trim();
     const email = String(f.get("email") || "").trim();
     const bedrijf = String(f.get("bedrijf") || "").trim();
@@ -32,12 +36,23 @@ export default function StartProject() {
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    const body = encodeURIComponent(
-      `Naam: ${naam}\nBedrijfsnaam: ${bedrijf}\nWebsite: ${website}\nOnderwerp: ${subject}\n\n${bericht}`
-    );
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
-      "Nieuwe aanvraag via /over-ons"
-    )}&body=${body}`;
+    setSending(true);
+    setServerError(null);
+    const res = await submitContact({
+      name: naam,
+      email,
+      company: bedrijf,
+      website,
+      subject,
+      message: bericht,
+      source: "Over ons — start project",
+    });
+    setSending(false);
+    if (!res.ok) {
+      setServerError(res.error ?? "Er ging iets mis. Probeer het opnieuw.");
+      return;
+    }
+    form.reset();
     setSent(true);
   }
 
@@ -178,9 +193,14 @@ export default function StartProject() {
               )}
             </div>
 
-            <button type="submit" className={styles.submit}>
-              {sent ? "Bedankt, tot snel" : "Verstuur"}
+            <button
+              type="submit"
+              className={styles.submit}
+              disabled={sending || sent}
+            >
+              {sent ? "Bedankt, tot snel" : sending ? "Versturen…" : "Verstuur"}
             </button>
+            {serverError && <span className={styles.err}>{serverError}</span>}
           </form>
         </div>
       </div>

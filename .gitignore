@@ -14,3 +14,4 @@ next-env.d.ts
 # Lokale DB-scripts (bevatten wachtwoord)
 /scripts/setup-db.mjs
 /scripts/seed-projects.mjs
+/scripts/seed-extra.mjs

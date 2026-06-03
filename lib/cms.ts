@@ -86,6 +86,19 @@ export type CmsFaq = {
   position: number;
 };
 
+export type CmsSubmission = {
+  id: string;
+  createdAt: string;
+  name: string;
+  email: string;
+  company: string;
+  website: string;
+  subject: string;
+  message: string;
+  source: string;
+  read: boolean;
+};
+
 export type CmsPost = {
   id: string;
   slug: string;
@@ -155,6 +168,52 @@ export async function dbFaq(id: string): Promise<CmsFaq | null> {
   const supabase = await createClient();
   const { data } = await supabase.from("faqs").select("*").eq("id", id).single();
   return (data as CmsFaq | null) ?? null;
+}
+
+/* ---------- Contactformulier-inzendingen ---------- */
+
+function toSubmission(row: {
+  id: string;
+  created_at: string;
+  name: string | null;
+  email: string | null;
+  company: string | null;
+  website: string | null;
+  subject: string | null;
+  message: string | null;
+  source: string | null;
+  read: boolean | null;
+}): CmsSubmission {
+  return {
+    id: row.id,
+    createdAt: row.created_at,
+    name: row.name ?? "",
+    email: row.email ?? "",
+    company: row.company ?? "",
+    website: row.website ?? "",
+    subject: row.subject ?? "",
+    message: row.message ?? "",
+    source: row.source ?? "",
+    read: !!row.read,
+  };
+}
+
+export async function dbSubmissions(): Promise<CmsSubmission[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("contact_submissions")
+    .select("*")
+    .order("created_at", { ascending: false });
+  return (data ?? []).map(toSubmission);
+}
+
+export async function unreadSubmissionCount(): Promise<number> {
+  const supabase = await createClient();
+  const { count } = await supabase
+    .from("contact_submissions")
+    .select("*", { count: "exact", head: true })
+    .eq("read", false);
+  return count ?? 0;
 }
 
 export async function contentCounts() {
@@ -227,11 +286,11 @@ export async function getReviews(): Promise<CmsReview[]> {
     company: r.company,
     title: r.title,
     quote: r.quote,
-    photo: null,
+    photo: r.photo ?? null,
     color: r.color,
     position: i,
     featured: i < HOMEPAGE_REVIEW_LIMIT,
-    quoteFeatured: false,
+    quoteFeatured: i < QUOTE_REVIEW_LIMIT,
   }));
 }
 

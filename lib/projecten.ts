@@ -27,45 +27,6 @@ export type Project = {
 
 export const projecten: Project[] = [
   {
-    slug: "globalhair-institute",
-    name: "Global Hair Institute",
-    headline:
-      "Van verouderd naar premium: de digitale identiteit van Global Hair Institute vernieuwd",
-    type: "Webdesign",
-    excerpt:
-      "Een premium digitale ervaring voor een internationale haartransplantatiekliniek.",
-    intro:
-      "Global Hair Institute is een haartransplantatiekliniek met locaties in Nederland en Turkije. Naarmate het bedrijf groeide, paste de online uitstraling niet meer bij de schaal, kwaliteit en premium positionering van de kliniek.",
-    image: "/projects/globalhair-institute.webp",
-    tags: ["Webdesign", "Branding", "Zorg"],
-    client: "Global Hair Institute",
-    year: "2026",
-    sections: [
-      {
-        heading: "De uitdaging",
-        body:
-          "De oude site liet niet zien waar de kliniek inmiddels stond. Het ontwerp miste visuele samenhang, een moderne hiërarchie en de premium uitstraling die hoort bij een behandeling waarbij vertrouwen en kwaliteit centraal staan.",
-        bodyExtra:
-          "Juist het wow-effect dat een bezoeker bij een haartransplantatie verwacht, ontbrak volledig. De drempel om een afspraak te maken was daardoor hoger dan nodig.",
-      },
-      {
-        heading: "De aanpak",
-        body:
-          "In plaats van een simpele redesign hebben we een eigen digitaal concept neergezet. Een maatwerk website met een app-achtige interface, volledig mobile-first opgebouwd.",
-        bodyExtra:
-          "De geïntegreerde boekingsflow is doorgetrokken in de huisstijl, zodat een afspraak maken net zo verzorgd aanvoelt als de behandeling zelf, zonder onnodige stappen.",
-      },
-      {
-        heading: "Het resultaat",
-        body:
-          "De nieuwe ervaring laat de schaal en kwaliteit van Global Hair Institute veel beter zien en geeft direct een sterkere eerste indruk.",
-        bodyExtra:
-          "De combinatie van high-end visuals en mobile-first gebruiksgemak ondersteunt nu de internationale ambities en reputatie van de kliniek.",
-      },
-    ],
-    related: ["mazar-skin-clinic", "burgers-frites"],
-  },
-  {
     slug: "burgers-frites",
     name: "Burgers&Frites Rotterdam",
     headline:
@@ -102,7 +63,7 @@ export const projecten: Project[] = [
           "Na livegang ging de conversie van de franchise-pagina met meer dan 500% omhoog. Online en offline vertellen nu hetzelfde verhaal.",
       },
     ],
-    related: ["globalhair-institute", "swims-official"],
+    related: ["mazar-skin-clinic", "swims-official"],
   },
   {
     slug: "sabreen-mia",
@@ -217,7 +178,7 @@ export const projecten: Project[] = [
           "De reacties van luisteraars waren positief en de merkperceptie ging merkbaar omhoog.",
       },
     ],
-    related: ["the-goody-foody", "globalhair-institute"],
+    related: ["the-goody-foody", "sabreen-mia"],
   },
   {
     slug: "the-goody-foody",
@@ -294,7 +255,7 @@ export const projecten: Project[] = [
           "De kliniek straalt online nu dezelfde kwaliteit uit als in de praktijk, en trekt structureel meer afspraken aan.",
       },
     ],
-    related: ["globalhair-institute", "burgers-frites"],
+    related: ["burgers-frites", "swims-official"],
   },
 ];
 
