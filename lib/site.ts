@@ -511,8 +511,6 @@ export const pricing = {
   titleAccent: "geen verrassingen",
   body:
     "Vooraf duidelijk wat je krijgt en wat het kost. Eén vaste prijs, twee revisierondes inbegrepen, live binnen vier weken.",
-  // Urgentie-regel; {maand} wordt in de component ingevuld.
-  pulse: "4 plekken beschikbaar in",
   plans: [
     {
       name: "Maatwerk website",
@@ -556,6 +554,8 @@ export const pricing = {
 
 // Sluit-CTA onderaan de homepage (vervangt het formulier daar).
 export const closingCta = {
+  // Urgentie-regel boven de titel; {maand} wordt in de component ingevuld.
+  pulse: "4 plekken beschikbaar in",
   titleLead: "Klaar om je site",
   titleAccent: "kloppend te maken?",
   body:

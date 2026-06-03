@@ -19,7 +19,6 @@ function Check() {
 }
 
 export default function Pricing() {
-  const maand = new Date().toLocaleString("nl-NL", { month: "long" });
   return (
     <section className={`section ${styles.sec}`} id="prijzen">
       <div className="container">
@@ -31,12 +30,6 @@ export default function Pricing() {
           <p className={`lead muted ${styles.body}`} data-reveal>
             {pricing.body}
           </p>
-          {pricing.pulse && (
-            <span className={styles.pulse} data-reveal>
-              <span className={styles.pulseDot} aria-hidden />
-              {pricing.pulse} {maand}.
-            </span>
-          )}
         </div>
 
         <div className={styles.grid}>
