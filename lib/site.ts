@@ -116,28 +116,28 @@ export const werkwijze = {
       title: "Strategiegesprek",
       body:
         "We beginnen met een gesprek over je merk, je doelgroep en wat de site concreet moet opleveren.",
-      image: "/projects/5.webp",
+      image: "/brand/work-1.webp",
     },
     {
       no: "02",
       title: "Design",
       body:
         "Je krijgt een ontwerp op maat, met twee revisierondes om alles aan te scherpen tot het klopt.",
-      image: "/projects/2.webp",
+      image: "/brand/work-3.webp",
     },
     {
       no: "03",
       title: "Development",
       body:
         "We bouwen de site snel, schaalbaar en technisch op orde, gericht op goede vindbaarheid.",
-      image: "/projects/7.webp",
+      image: "/brand/work-4.webp",
     },
     {
       no: "04",
       title: "Livegang",
       body:
         "De site gaat live en je kunt daarna zelf je teksten en projecten blijven aanpassen.",
-      image: "/projects/3.webp",
+      image: "/brand/work-5.webp",
     },
   ],
 };
@@ -501,8 +501,7 @@ export const over = {
   body:
     "KREATIVES is opgezet vanuit één idee: de meeste ondernemers verdienen een betere site dan ze hebben. We houden het klein zodat je altijd weet wie er aan je site zit, en waarom we iets doen zoals we het doen.",
   cta: { label: "Lees meer over ons", href: "/over-ons" },
-  // Tot de uitgesneden portretfoto er is gebruiken we de placeholder.
-  portrait: "/brand/brand-2.webp" as string | null,
+  portrait: "/brand/work-2.webp" as string | null,
 };
 
 export const pricing = {
@@ -776,9 +775,9 @@ export const overOnsVerhaal = {
   primaryCta: { label: "Plan een gesprek", href: "/contact" },
   cta: { label: "Bekijk ons werk", href: "/#cases" },
   media: {
-    main: "/projects/5.webp",
-    left: "/projects/2.webp",
-    right: "/projects/4.webp",
+    main: "/brand/work-3.webp",
+    left: "/brand/work-1.webp",
+    right: "/brand/work-4.webp",
   },
 };
 
@@ -816,7 +815,7 @@ export const overOnsTeam = {
   titleAccent: "zit.",
   body:
     "KREATIVES is een klein team. We pakken een beperkt aantal projecten tegelijk aan, zodat je altijd weet wie er aan jouw site werkt en waarom we iets doen zoals we het doen. Geen wachtrij, geen doorgeefluik.",
-  portrait: "/brand/brand-2.webp",
+  portrait: "/brand/work-2.webp",
 };
 
 export const overOnsVoorWie = {
@@ -888,7 +887,7 @@ export const webdesignFunnel = {
     body:
       "Voor ondernemers die gegroeid zijn, maar waarvan de website dat nog niet laat zien. We bouwen hem opnieuw, of beter, of allebei.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
-    background: "/projects/2.webp",
+    background: "/brand/work-3.webp",
   },
   herkenning: {
     eyebrow: "Voor wie dit is",
@@ -1030,7 +1029,7 @@ export const aiFunnel = {
     titleAccent: "is dat nu niet meer.",
     body:
       "We zetten AI in als werktool binnen een doordacht proces. Dat betekent voor jou: snellere oplevering, betere beelden en mogelijkheden die eerder alleen voor grote budgetten waren weggelegd.",
-    background: "/projects/7.webp",
+    background: "/brand/work-4.webp",
   },
   welNiet: {
     eyebrow: "AI in de praktijk",
@@ -1121,7 +1120,7 @@ export const werkwijzePage = {
     body:
       "We leggen vooraf vast wat er wanneer gebeurt en wat het kost. Geen verrassing-rekeningen, geen weken zonder update, geen resultaat dat “niet helemaal” klopt.",
     cta: { label: "Plan een gratis kennismaking", href: "/contact" },
-    background: "/projects/5.webp",
+    background: "/brand/work-5.webp",
   },
   statement: {
     heading:
@@ -1132,7 +1131,7 @@ export const werkwijzePage = {
       "Dat hoort er niet bij. Wij maken het traject voorspelbaar, met vaste momenten en revisierondes inbegrepen.",
     ],
     cta: { label: "Leer ons kennen", href: "/over-ons" },
-    image: "/projects/2.webp",
+    image: "/brand/work-1.webp",
   },
   steps: {
     eyebrow: "De aanpak",
