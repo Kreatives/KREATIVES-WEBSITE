@@ -11,13 +11,20 @@ export default function ReviewForm({
   review,
   featuredCount = 0,
   limit = 6,
+  quoteCount = 0,
+  quoteLimit = 4,
 }: {
   review?: CmsReview;
   featuredCount?: number;
   limit?: number;
+  quoteCount?: number;
+  quoteLimit?: number;
 }) {
   const router = useRouter();
   const [featured, setFeatured] = useState(review?.featured ?? false);
+  const [quoteFeatured, setQuoteFeatured] = useState(
+    review?.quoteFeatured ?? false
+  );
   const [author, setAuthor] = useState(review?.author ?? "");
   const [role, setRole] = useState(review?.role ?? "");
   const [company, setCompany] = useState(review?.company ?? "");
@@ -35,6 +42,7 @@ export default function ReviewForm({
     const res = await saveReview({
       id: review?.id,
       featured,
+      quoteFeatured,
       author: author.trim(),
       role: role.trim(),
       company: company.trim(),
@@ -55,6 +63,8 @@ export default function ReviewForm({
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.sectionCard}>
+        <span className={styles.sectionLabel}>Waar verschijnt deze review?</span>
+
         <label
           style={{
             display: "flex",
@@ -71,14 +81,46 @@ export default function ReviewForm({
             onChange={(e) => setFeatured(e.target.checked)}
             style={{ width: "auto" }}
           />
-          Tonen op de homepage
+          Homepage (de reviews-carrousel)
         </label>
-        <span className={styles.hint}>
-          {featuredCount + (featured ? 1 : 0)} van {limit} homepage-plekken
-          gebruikt.
+        <span className={styles.hint} style={{ marginTop: "-0.4rem" }}>
+          {featuredCount + (featured ? 1 : 0)} van {limit} plekken gebruikt.
           {!featured && featuredCount >= limit
-            ? " De homepage zit vol — haal eerst een andere review van de homepage af."
+            ? " Vol — haal eerst een andere review weg."
             : ""}
+        </span>
+
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            fontWeight: 500,
+            marginTop: "0.5rem",
+            cursor:
+              !quoteFeatured && quoteCount >= quoteLimit ? "default" : "pointer",
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={quoteFeatured}
+            disabled={!quoteFeatured && quoteCount >= quoteLimit}
+            onChange={(e) => setQuoteFeatured(e.target.checked)}
+            style={{ width: "auto" }}
+          />
+          &ldquo;In hun eigen woorden&rdquo; (horizontale kaarten op de
+          diensten- en werkwijze-pagina)
+        </label>
+        <span className={styles.hint} style={{ marginTop: "-0.4rem" }}>
+          {quoteCount + (quoteFeatured ? 1 : 0)} van {quoteLimit} plekken
+          gebruikt.
+          {!quoteFeatured && quoteCount >= quoteLimit
+            ? " Vol — haal eerst een andere review weg."
+            : ""}
+        </span>
+
+        <span className={styles.hint}>
+          Alle reviews staan sowieso op de aparte reviews-pagina.
         </span>
       </div>
 

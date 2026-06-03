@@ -8,6 +8,7 @@ import FounderWords from "@/components/funnel/FounderWords";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { webdesignFunnel } from "@/lib/site";
+import { getQuoteReviewItems } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Webdesign",
@@ -22,7 +23,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WebdesignPage() {
+export const dynamic = "force-dynamic";
+
+export default async function WebdesignPage() {
+  const quoteItems = await getQuoteReviewItems();
+  const socialProof =
+    quoteItems.length > 0
+      ? { ...webdesignFunnel.socialProof, items: quoteItems }
+      : webdesignFunnel.socialProof;
+
   return (
     <>
       <RevealInit />
@@ -30,7 +39,7 @@ export default function WebdesignPage() {
       <TwoTracks data={webdesignFunnel.tracks} />
       <PortfolioStrip data={webdesignFunnel.portfolio} />
       <IconCards data={webdesignFunnel.usps} variant="dark" />
-      <FounderWords data={webdesignFunnel.socialProof} />
+      <FounderWords data={socialProof} />
       <FaqList data={webdesignFunnel.faq} />
       <ClosingCta data={webdesignFunnel.closing} />
     </>

@@ -8,6 +8,7 @@ import FounderWords from "@/components/funnel/FounderWords";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { werkwijzePage } from "@/lib/site";
+import { getQuoteReviewItems } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Werkwijze",
@@ -22,7 +23,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WerkwijzePage() {
+export const dynamic = "force-dynamic";
+
+export default async function WerkwijzePage() {
+  const quoteItems = await getQuoteReviewItems();
+  const socialProof =
+    quoteItems.length > 0
+      ? { ...werkwijzePage.socialProof, items: quoteItems }
+      : werkwijzePage.socialProof;
+
   return (
     <>
       <RevealInit />
@@ -30,7 +39,7 @@ export default function WerkwijzePage() {
       <Statement data={werkwijzePage.statement} />
       <Steps data={werkwijzePage.steps} />
       <StatsBlock data={werkwijzePage.verwachten} />
-      <FounderWords data={werkwijzePage.socialProof} />
+      <FounderWords data={socialProof} />
       <FaqList data={werkwijzePage.faq} />
       <ClosingCta data={werkwijzePage.closing} />
     </>

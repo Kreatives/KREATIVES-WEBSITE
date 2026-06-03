@@ -8,8 +8,17 @@ import { reviewsPage, faqHome } from "@/lib/site";
 import {
   HOMEPAGE_PROJECT_LIMIT,
   HOMEPAGE_REVIEW_LIMIT,
+  QUOTE_REVIEW_LIMIT,
   type CmsProjectSection,
 } from "@/lib/cms";
+
+function revalidateReviews() {
+  revalidatePath("/reviews");
+  revalidatePath("/admin/reviews");
+  revalidatePath("/");
+  revalidatePath("/diensten/webdesign");
+  revalidatePath("/werkwijze");
+}
 
 function revalidateProjects() {
   revalidatePath("/projecten");
@@ -66,6 +75,7 @@ export async function seedDatabase() {
         quote: x.quote,
         color: x.color,
         featured: i < HOMEPAGE_REVIEW_LIMIT,
+        quote_featured: i < QUOTE_REVIEW_LIMIT,
       }))
     );
     if (error) errors.push(`reviews: ${error.message}`);
@@ -194,6 +204,7 @@ export type ReviewInput = {
   photo: string | null;
   color: string;
   featured: boolean;
+  quoteFeatured: boolean;
 };
 
 export async function saveReview(input: ReviewInput) {
@@ -212,6 +223,19 @@ export async function saveReview(input: ReviewInput) {
       };
     }
   }
+  if (input.quoteFeatured) {
+    const { data: others } = await supabase
+      .from("reviews")
+      .select("id")
+      .eq("quote_featured", true);
+    const count = (others ?? []).filter((o) => o.id !== input.id).length;
+    if (count >= QUOTE_REVIEW_LIMIT) {
+      return {
+        ok: false,
+        error: `Er is maar plek voor ${QUOTE_REVIEW_LIMIT} reviews bij "In hun eigen woorden". Haal er eerst één weg.`,
+      };
+    }
+  }
 
   const row = {
     author: input.author,
@@ -222,14 +246,13 @@ export async function saveReview(input: ReviewInput) {
     photo: input.photo,
     color: input.color,
     featured: input.featured,
+    quote_featured: input.quoteFeatured,
   };
   const { error } = input.id
     ? await supabase.from("reviews").update(row).eq("id", input.id)
     : await supabase.from("reviews").insert(row);
   if (error) return { ok: false, error: error.message };
-  revalidatePath("/reviews");
-  revalidatePath("/admin/reviews");
-  revalidatePath("/");
+  revalidateReviews();
   return { ok: true };
 }
 
@@ -237,8 +260,7 @@ export async function deleteReview(id: string) {
   const supabase = await createClient();
   const { error } = await supabase.from("reviews").delete().eq("id", id);
   if (error) return { ok: false, error: error.message };
-  revalidatePath("/reviews");
-  revalidatePath("/admin/reviews");
+  revalidateReviews();
   return { ok: true };
 }
 

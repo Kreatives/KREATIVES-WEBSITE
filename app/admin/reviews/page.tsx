@@ -44,7 +44,13 @@ export default async function AdminReviews() {
                 <div className={styles.listTitle}>
                   {r.title || r.author}
                   {r.featured && (
-                    <span className={styles.listTag}> · op homepage</span>
+                    <span className={styles.listTag}> · homepage</span>
+                  )}
+                  {r.quoteFeatured && (
+                    <span className={styles.listTag}>
+                      {" "}
+                      · in hun eigen woorden
+                    </span>
                   )}
                 </div>
                 <div className={styles.listSub}>

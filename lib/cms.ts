@@ -40,10 +40,42 @@ export type CmsReview = {
   color: string;
   position: number;
   featured: boolean;
+  quoteFeatured: boolean;
 };
 
 /** Maximaal aantal reviews dat op de homepage past. */
 export const HOMEPAGE_REVIEW_LIMIT = 6;
+
+/** Maximaal aantal reviews in de "In hun eigen woorden"-kaarten. */
+export const QUOTE_REVIEW_LIMIT = 4;
+
+function toReview(row: {
+  id: string;
+  author: string;
+  role: string | null;
+  company: string | null;
+  title: string | null;
+  quote: string;
+  photo: string | null;
+  color: string | null;
+  position: number | null;
+  featured: boolean | null;
+  quote_featured: boolean | null;
+}): CmsReview {
+  return {
+    id: row.id,
+    author: row.author,
+    role: row.role ?? "",
+    company: row.company ?? "",
+    title: row.title ?? "",
+    quote: row.quote,
+    photo: row.photo ?? null,
+    color: row.color ?? "#FD6D17",
+    position: row.position ?? 0,
+    featured: !!row.featured,
+    quoteFeatured: !!row.quote_featured,
+  };
+}
 
 export type CmsFaq = {
   id: string;
@@ -99,13 +131,13 @@ export async function dbReviews(): Promise<CmsReview[]> {
     .select("*")
     .order("position", { ascending: true })
     .order("created_at", { ascending: true });
-  return (data as CmsReview[] | null) ?? [];
+  return (data ?? []).map(toReview);
 }
 
 export async function dbReview(id: string): Promise<CmsReview | null> {
   const supabase = await createClient();
   const { data } = await supabase.from("reviews").select("*").eq("id", id).single();
-  return (data as CmsReview | null) ?? null;
+  return data ? toReview(data) : null;
 }
 
 export async function dbFaqs(): Promise<CmsFaq[]> {
@@ -197,6 +229,7 @@ export async function getReviews(): Promise<CmsReview[]> {
     color: r.color,
     position: i,
     featured: i < HOMEPAGE_REVIEW_LIMIT,
+    quoteFeatured: false,
   }));
 }
 
@@ -213,6 +246,33 @@ export async function getFeaturedReviews(
 export async function featuredReviewCount(excludeId?: string): Promise<number> {
   const rows = await dbReviews();
   return rows.filter((r) => r.featured && r.id !== excludeId).length;
+}
+
+/** Reviews voor de "In hun eigen woorden"-kaarten (alleen de gemarkeerde). */
+export async function getQuoteReviews(
+  limit = QUOTE_REVIEW_LIMIT
+): Promise<CmsReview[]> {
+  const rows = await dbReviews();
+  return rows.filter((r) => r.quoteFeatured).slice(0, limit);
+}
+
+export async function quoteReviewCount(excludeId?: string): Promise<number> {
+  const rows = await dbReviews();
+  return rows.filter((r) => r.quoteFeatured && r.id !== excludeId).length;
+}
+
+/** Quote-reviews in de vorm die de "In hun eigen woorden"-kaarten gebruiken. */
+export async function getQuoteReviewItems(limit = QUOTE_REVIEW_LIMIT) {
+  const reviews = await getQuoteReviews(limit);
+  return reviews.map((r) => ({
+    quote: r.quote,
+    author: r.author,
+    role: r.role,
+    company: r.company,
+    initials: initialsOf(r.author),
+    color: r.color,
+    photo: r.photo ?? undefined,
+  }));
 }
 
 /* ---------- Blog ---------- */
