@@ -1,10 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { nav, hero } from "@/lib/site";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 import styles from "./Nav.module.css";
+
+// Pagina's met een donkere hero bovenaan: daar mag de header transparant
+// (met witte tekst) zijn zolang je nog niet gescrold hebt.
+const DARK_HERO_PREFIXES = [
+  "/diensten/webdesign",
+  "/diensten/ai",
+  "/werkwijze",
+  "/over-ons",
+  "/blog",
+  "/projecten",
+  "/contact",
+];
 
 function Chevron() {
   return (
@@ -23,13 +36,29 @@ function Chevron() {
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const darkHero =
+    pathname === "/" ||
+    DARK_HERO_PREFIXES.some((p) => pathname.startsWith(p));
+  const transparent = darkHero && !scrolled && !open;
+
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${transparent ? styles.transparent : ""}`}
+    >
       <div className={styles.bar}>
         <a href="/" className={styles.logo} aria-label="KREATIVES home">
           <Logo className={styles.logoMark} />

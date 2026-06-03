@@ -1,10 +1,28 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: var(--off-white);
   color: var(--ink);
   border-bottom: 1px solid var(--line);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+
+/* Transparant over een donkere hero (witte tekst), tot je scrollt. */
+.transparent {
+  background: transparent;
+  border-bottom-color: transparent;
+  color: var(--on-dark);
+}
+.transparent .logoMark {
+  color: var(--on-dark);
+}
+.transparent .links > a,
+.transparent .subTrigger {
+  color: var(--on-dark);
 }
 
 .bar {

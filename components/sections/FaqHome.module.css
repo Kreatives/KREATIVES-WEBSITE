@@ -37,6 +37,11 @@
   border-color: var(--ink);
   color: var(--on-dark);
 }
+.chipOn:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-dark);
+}
 
 .list {
   display: flex;

@@ -17,13 +17,16 @@
 .brandCol {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 1.1rem;
 }
 .brand {
-  height: 1.2rem;
+  display: block;
+  height: 1.3rem;
   width: auto;
   color: var(--on-dark);
-  margin-top: 0.3rem;
+  align-self: flex-start;
+  margin: 0 0 0.1rem;
 }
 .tagline {
   color: var(--on-dark-muted);

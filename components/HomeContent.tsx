@@ -8,6 +8,7 @@ import Cases from "@/components/sections/Cases";
 import Reviews from "@/components/sections/Reviews";
 import OverMij from "@/components/sections/OverMij";
 import Pricing from "@/components/sections/Pricing";
+import StartProject from "@/components/sections/over/StartProject";
 import { getFeaturedProjects, getFeaturedReviews, initialsOf } from "@/lib/cms";
 
 /**
@@ -51,6 +52,7 @@ export default async function HomeContent() {
       </div>
       <OverMij />
       <Pricing />
+      <StartProject />
     </>
   );
 }

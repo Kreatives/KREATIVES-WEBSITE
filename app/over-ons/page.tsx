@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import HeroOver from "@/components/sections/over/HeroOver";
+import LogoMarquee from "@/components/sections/LogoMarquee";
 import Verhaal from "@/components/sections/over/Verhaal";
 import Kernwaarden from "@/components/sections/over/Kernwaarden";
 import OverOnsTeam from "@/components/sections/over/OverOnsTeam";
@@ -26,6 +27,7 @@ export default function OverOnsPage() {
     <>
       <RevealInit />
       <HeroOver />
+      <LogoMarquee label="Vertrouwd door 95+ bedrijven" />
       <Verhaal />
       <Kernwaarden />
       <OverOnsTeam />

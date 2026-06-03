@@ -607,9 +607,21 @@ export const footer = {
   tagline:
     "Maatwerk websites voor ondernemers die hun online uitstraling in lijn willen brengen met hun bedrijf.",
   social: [
-    { label: "LinkedIn", href: "#", icon: "linkedin" as const },
-    { label: "TikTok", href: "#", icon: "tiktok" as const },
-    { label: "Instagram", href: "#", icon: "instagram" as const },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/ricky-kai/",
+      icon: "linkedin" as const,
+    },
+    {
+      label: "TikTok",
+      href: "https://www.tiktok.com/@ricksooo",
+      icon: "tiktok" as const,
+    },
+    {
+      label: "Instagram",
+      href: "https://instagram.com/ricky.webdesign",
+      icon: "instagram" as const,
+    },
   ],
   columns: [
     {

@@ -49,6 +49,15 @@ export default function Pricing() {
                 <p className={styles.cardBody}>{p.body}</p>
               </div>
 
+              <div className={styles.cardCta}>
+                <Button
+                  href={p.cta.href}
+                  variant={p.featured ? "primary" : "dark"}
+                >
+                  {p.cta.label}
+                </Button>
+              </div>
+
               <div className={styles.divide} aria-hidden />
 
               <ul className={styles.features}>
@@ -61,15 +70,6 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-
-              <div className={styles.cardCta}>
-                <Button
-                  href={p.cta.href}
-                  variant={p.featured ? "primary" : "dark"}
-                >
-                  {p.cta.label}
-                </Button>
-              </div>
             </article>
           ))}
         </div>

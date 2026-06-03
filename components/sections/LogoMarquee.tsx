@@ -1,12 +1,12 @@
 import { marquee } from "@/lib/site";
 import styles from "./LogoMarquee.module.css";
 
-export default function LogoMarquee() {
+export default function LogoMarquee({ label }: { label?: string }) {
   const logos = [...marquee.logos, ...marquee.logos];
   return (
     <section className={styles.wrap} aria-label="Klanten">
       <div className="container">
-        <p className={`eyebrow ${styles.label}`}>{marquee.label}</p>
+        <p className={`eyebrow ${styles.label}`}>{label ?? marquee.label}</p>
       </div>
       <div className="marquee">
         <div
