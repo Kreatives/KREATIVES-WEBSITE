@@ -82,10 +82,9 @@ export default function FounderWords({
             )}
           </h2>
         </div>
-      </div>
 
-      <ul className={styles.track} ref={trackRef} onScroll={update}>
-        {data.items.map((t) => (
+        <ul className={styles.track} ref={trackRef} onScroll={update}>
+          {data.items.map((t) => (
           <li key={t.author} className={styles.card} data-card data-reveal>
             <div className={styles.photo} style={{ background: t.color }}>
               {t.photo ? (
@@ -133,9 +132,8 @@ export default function FounderWords({
             </div>
           </li>
         ))}
-      </ul>
+        </ul>
 
-      <div className="container">
         <div className={styles.controls}>
           <div className={styles.arrows}>
             <button

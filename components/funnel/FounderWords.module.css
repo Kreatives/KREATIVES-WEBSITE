@@ -12,7 +12,8 @@
   font-size: var(--fs-h2);
 }
 
-/* Horizontale carrousel: links uitgelijnd met de container, rechts uitstekend */
+/* Horizontale carrousel: links uitgelijnd met de container (titel),
+   rechts uitstekend tot de schermrand. */
 .track {
   list-style: none;
   display: flex;
@@ -20,10 +21,7 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  padding-left: max(
-    var(--gutter),
-    calc((100vw - var(--maxw)) / 2 + var(--gutter))
-  );
+  margin-right: calc(50% - 50vw);
   padding-right: var(--gutter);
   padding-block: 0.5rem;
   margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
