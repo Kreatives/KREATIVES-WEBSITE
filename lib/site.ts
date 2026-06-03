@@ -59,7 +59,7 @@ export const hero = {
     rating: "5/5",
     label: "op Google",
   },
-  background: "/brand/brand-3.webp",
+  background: "/brand/home-hero.webp",
 };
 
 export const marquee = {
@@ -101,7 +101,7 @@ export const usps = {
       title: "Twee revisierondes",
       body:
         "Je krijgt de ruimte om het design aan te scherpen totdat het echt klopt. De prijs verandert daardoor niet.",
-      image: "/brand/brand-3.webp",
+      image: "/brand/work-2.webp",
     },
   ],
 };
@@ -501,7 +501,7 @@ export const over = {
   body:
     "KREATIVES is opgezet vanuit één idee: de meeste ondernemers verdienen een betere site dan ze hebben. We houden het klein zodat je altijd weet wie er aan je site zit, en waarom we iets doen zoals we het doen.",
   cta: { label: "Lees meer over ons", href: "/over-ons" },
-  portrait: "/brand/work-2.webp" as string | null,
+  portrait: "/brand/brand-1.webp" as string | null,
 };
 
 export const pricing = {
@@ -775,7 +775,7 @@ export const overOnsVerhaal = {
   primaryCta: { label: "Plan een gesprek", href: "/contact" },
   cta: { label: "Bekijk ons werk", href: "/#cases" },
   media: {
-    main: "/brand/work-3.webp",
+    main: "/brand/over-verhaal.webp",
     left: "/brand/work-1.webp",
     right: "/brand/work-4.webp",
   },
@@ -1029,7 +1029,7 @@ export const aiFunnel = {
     titleAccent: "is dat nu niet meer.",
     body:
       "We zetten AI in als werktool binnen een doordacht proces. Dat betekent voor jou: snellere oplevering, betere beelden en mogelijkheden die eerder alleen voor grote budgetten waren weggelegd.",
-    background: "/brand/work-4.webp",
+    background: "/brand/brand-3.webp",
   },
   welNiet: {
     eyebrow: "AI in de praktijk",
