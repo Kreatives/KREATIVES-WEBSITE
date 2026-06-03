@@ -28,9 +28,17 @@ export default function Hero() {
                 <span
                   key={i}
                   className={styles.avatar}
-                  style={{ background: a.color }}
+                  style={
+                    a.photo
+                      ? {
+                          backgroundImage: `url(${a.photo})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : { background: a.color }
+                  }
                 >
-                  {a.initials}
+                  {!a.photo && a.initials}
                 </span>
               ))}
             </div>

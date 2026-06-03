@@ -32,7 +32,7 @@ export default function BookCallButton() {
     >
       <div className={styles.avatar} aria-hidden>
         <Image
-          src="/placeholder.png"
+          src="/team/dylan.webp"
           alt=""
           fill
           sizes="56px"

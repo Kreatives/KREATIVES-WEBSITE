@@ -68,9 +68,17 @@ export default function StartProject() {
                 <span
                   key={i}
                   className={styles.avatar}
-                  style={{ background: m.color }}
+                  style={
+                    m.photo
+                      ? {
+                          backgroundImage: `url(${m.photo})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : { background: m.color }
+                  }
                 >
-                  {m.initials}
+                  {!m.photo && m.initials}
                 </span>
               ))}
             </div>

@@ -51,15 +51,15 @@ export const hero = {
   // Social-proof widget
   socialProof: {
     avatars: [
-      { initials: "LV", color: "#FD6D17" },
-      { initials: "JD", color: "#1A1A1A" },
-      { initials: "RM", color: "#9aa3a8" },
-      { initials: "KS", color: "#5b3b1f" },
+      { initials: "DL", color: "#FD6D17", photo: "/team/dylan.webp" },
+      { initials: "SF", color: "#1A1A1A", photo: "/team/safa.webp" },
+      { initials: "YS", color: "#9aa3a8", photo: "/team/youssef.webp" },
+      { initials: "AN", color: "#5b3b1f", photo: "/team/angela.webp" },
     ],
     rating: "5/5",
     label: "op Google",
   },
-  background: "/placeholder.png",
+  background: "/brand/brand-3.webp",
 };
 
 export const marquee = {
@@ -87,28 +87,28 @@ export const usps = {
       title: "Een vaste aanpak",
       body:
         "Je weet vooraf wat er gebeurt, wanneer het gebeurt, en wat het kost. Geen verrassingen halverwege het traject.",
-      image: "/placeholder.png",
+      image: "/brand/brand-1.webp",
     },
     {
       no: "02",
       title: "Alles op maat",
       body:
         "We werken niet met thema's of sjablonen. Elke site bouwen we vanaf nul rond jouw merk, zodat je hem nergens anders terugziet.",
-      image: "/placeholder.png",
+      image: "/brand/brand-2.webp",
     },
     {
       no: "03",
       title: "Twee revisierondes",
       body:
         "We scherpen het ontwerp aan tot het echt klopt, zonder dat de prijs onderweg verandert.",
-      image: "/placeholder.png",
+      image: "/brand/brand-3.webp",
     },
     {
       no: "04",
       title: "Snel en vindbaar",
       body:
         "Elke site laadt snel en staat technisch goed, zodat je gevonden wordt door de mensen die naar je zoeken.",
-      image: "/placeholder.png",
+      image: "/brand/brand-1.webp",
     },
   ],
 };
@@ -415,7 +415,7 @@ export const over = {
     "KREATIVES is opgezet vanuit één idee: de meeste ondernemers verdienen een betere site dan ze hebben, en krijgen die niet omdat het of te duur is of te generiek. Wij bouwen maatwerk dat daar precies tussenin zit, met een directe lijn naar de mensen die het bouwen.",
   cta: { label: "Lees meer over ons", href: "/over-ons" },
   // Tot de uitgesneden portretfoto er is gebruiken we de placeholder.
-  portrait: "/placeholder.png" as string | null,
+  portrait: "/brand/brand-2.webp" as string | null,
 };
 
 export const pricing = {
@@ -586,18 +586,15 @@ export const contact = {
     "Maatwerk webshop",
     "Iets anders",
   ],
-  // Avatar-rij bovenaan (placeholders met initialen tot er echte teamfoto's zijn)
+  // Avatar-rij bovenaan: echte teamfoto's (initialen + kleur als fallback)
   team: [
-    { initials: "RK", color: "#FD6D17" },
-    { initials: "LV", color: "#1A1A1A" },
-    { initials: "JW", color: "#5b3b1f" },
-    { initials: "RM", color: "#9aa3a8" },
-    { initials: "KS", color: "#FD6D17" },
-    { initials: "MD", color: "#1A1A1A" },
-    { initials: "TB", color: "#5b3b1f" },
-    { initials: "AS", color: "#9aa3a8" },
-    { initials: "EV", color: "#FD6D17" },
-    { initials: "PW", color: "#1A1A1A" },
+    { initials: "DL", color: "#1A1A1A", photo: "/team/dylan.webp" },
+    { initials: "SA", color: "#FD6D17", photo: "/team/safa.webp" },
+    { initials: "YO", color: "#5b3b1f", photo: "/team/youssef.webp" },
+    { initials: "AN", color: "#9aa3a8", photo: "/team/angela.webp" },
+    { initials: "MZ", color: "#FD6D17", photo: "/team/mayazen.webp" },
+    { initials: "SF", color: "#1A1A1A", photo: "/team/stefan.webp" },
+    { initials: "GB", color: "#5b3b1f", photo: "/team/galbin.webp" },
   ],
   privacy:
     "Door op verzenden te klikken ga je akkoord met onze privacyverklaring.",
@@ -666,7 +663,7 @@ export const overOnsHero = {
   titleAccent: "voor wie ze gebruikt.",
   body:
     "KREATIVES is opgezet omdat de meeste ondernemers vastzitten tussen twee uitersten: templates die je nergens vrolijk van wordt en agencies waar je 25.000 voor een homepage betaalt. Daar zit een gat, en daar bouwen wij in.",
-  background: "/placeholder.png",
+  background: "/brand/brand-1.webp",
 };
 
 export const overOnsVerhaal = {
@@ -721,7 +718,7 @@ export const overOnsTeam = {
   titleAccent: "met één focus.",
   body:
     "KREATIVES is gebouwd op de gedachte dat goed werk niet groot opgeschaald hoeft te worden om waardevol te zijn. We pakken een beperkt aantal projecten tegelijk aan, zodat iedere site de aandacht krijgt die hij verdient. Dat scheelt onze klanten tijd en levert sterkere websites op.",
-  portrait: "/placeholder.png",
+  portrait: "/brand/brand-2.webp",
 };
 
 export const overOnsVoorWie = {
