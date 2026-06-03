@@ -26,156 +26,263 @@ export type Project = {
 
 export const projecten: Project[] = [
   {
-    slug: "smokey-joes",
-    name: "Smokey Joe's",
-    type: "Horeca",
-    excerpt: "Maatwerk site voor een groeiend horecaconcept.",
+    slug: "globalhair-institute",
+    name: "Global Hair Institute",
+    type: "Webdesign",
+    excerpt:
+      "Een premium digitale ervaring voor een internationale haartransplantatiekliniek.",
     intro:
-      "Smokey Joe's groeide in twee jaar van één locatie naar een groeiend concept met afhaal en bezorging. De oude site liep daar in alles op achter, met trage laadtijden en een navigatie die niet meer klopte met het aanbod.",
-    image: "/projects/1.webp",
-    tags: ["Horeca", "Maatwerk", "Branding"],
-    client: "Smokey Joe's",
-    year: "2025",
+      "Global Hair Institute is een haartransplantatiekliniek met locaties in Nederland en Turkije. Naarmate het bedrijf groeide, paste de online uitstraling niet meer bij de schaal, kwaliteit en premium positionering van de kliniek.",
+    image: "/projects/globalhair-institute.webp",
+    tags: ["Webdesign", "Branding", "Zorg"],
+    client: "Global Hair Institute",
+    year: "2026",
     sections: [
       {
         heading: "De uitdaging",
         body:
-          "Een site die zowel de in-store ervaring als de bezorg- en afhaalflow moest dragen, zonder dat het ten koste ging van de speelse merkpersoonlijkheid die Smokey Joe's offline al had opgebouwd.",
+          "De oude site liet niet zien waar de kliniek inmiddels stond. Het ontwerp miste visuele samenhang, een moderne hiërarchie en de premium uitstraling die hoort bij een behandeling waarbij vertrouwen en kwaliteit centraal staan.",
         bodyExtra:
-          "Daarbovenop kwam de wens om de menukaart vanuit één plek te beheren, zodat een wijziging in de keuken direct zichtbaar is in de bestelflow én op het bord boven de toonbank.",
-        image: "/projects/1.webp",
+          "Juist het wow-effect dat een bezoeker bij een haartransplantatie verwacht, ontbrak volledig. De drempel om een afspraak te maken was daardoor hoger dan nodig.",
       },
       {
         heading: "De aanpak",
         body:
-          "We hebben de menu-structuur opnieuw opgebouwd rond hoe gasten daadwerkelijk bestellen, met grote productfoto's en een prominente bestelflow op iedere pagina. De huisstijl is doorgetrokken naar de hele site, met de oranje accenten als rode draad.",
+          "In plaats van een simpele redesign hebben we een eigen digitaal concept neergezet. Een maatwerk website met een app-achtige interface, volledig mobile-first opgebouwd.",
         bodyExtra:
-          "Voor het beheer is er een eenvoudige back-office gebouwd waarin het team in seconden producten kan toevoegen, prijzen kan aanpassen of items op pauze kan zetten. Geen omwegen via developers meer.",
-        image: "/projects/2.webp",
+          "De geïntegreerde boekingsflow is doorgetrokken in de huisstijl, zodat een afspraak maken net zo verzorgd aanvoelt als de behandeling zelf, zonder onnodige stappen.",
       },
       {
         heading: "Het resultaat",
         body:
-          "De site laadt nu binnen één seconde, het aantal online bestellingen is verdubbeld in de eerste twee maanden na livegang, en gasten vinden de actuele menukaart sneller terug.",
+          "De nieuwe ervaring laat de schaal en kwaliteit van Global Hair Institute veel beter zien en geeft direct een sterkere eerste indruk.",
         bodyExtra:
-          "De binnendienst rapporteert dat het aantal telefonische bestelvragen met de helft is afgenomen. De informatie op de site is voor gasten kennelijk duidelijk genoeg om zelfstandig te bestellen.",
+          "De combinatie van high-end visuals en mobile-first gebruiksgemak ondersteunt nu de internationale ambities en reputatie van de kliniek.",
       },
     ],
-    related: ["pure-panelen", "future-cards"],
+    related: ["mazar-skin-clinic", "burgers-frites"],
   },
   {
-    slug: "pure-panelen",
-    name: "Pure Panelen",
-    type: "Groothandel",
-    excerpt: "Productcatalogus en offerteflow voor een groothandel.",
+    slug: "burgers-frites",
+    name: "Burgers&Frites Rotterdam",
+    type: "Webdesign",
+    excerpt:
+      "Een conversiegerichte site voor het best beoordeelde bezorgrestaurant van Nederland.",
     intro:
-      "Pure Panelen levert akoestische panelen en wandafwerking aan zakelijke klanten door heel Nederland. De vraag was om de catalogus toegankelijker te maken zonder de zakelijke offerteflow te verstoren.",
-    image: "/projects/2.webp",
-    tags: ["Groothandel", "B2B", "Catalogus"],
-    client: "Pure Panelen B.V.",
-    year: "2024",
+      "Burgers&Frites is een uitgesproken Rotterdamse zaak met een eigen smoel en bezorging van hoge kwaliteit. Ondanks de titel van best beoordeelde bezorgrestaurant van Nederland liep de online uitstraling daar in alles op achter.",
+    image: "/projects/burgers-frites.webp",
+    tags: ["Webdesign", "Horeca", "Conversie"],
+    client: "Burgers&Frites Rotterdam",
+    year: "2026",
     sections: [
       {
         heading: "De uitdaging",
         body:
-          "De oude site was opgezet als een platte productlijst zonder filters of categorie-overzichten. Klanten haakten af voordat ze bij de offerteknop kwamen.",
+          "De zaak zelf straalde karakter en kwaliteit uit, maar de website deed vermoeden dat het om een heel ander bedrijf ging. De wens was om de in-store ervaring en de site weer op één lijn te krijgen.",
         bodyExtra:
-          "Daarbij ontbrak het inzicht in welke producten goed verkochten. Het zakelijke marketingteam had geen handvat om de catalogus richting de juiste doelgroepen te sturen.",
-        image: "/projects/2.webp",
+          "Tegelijk moest de site investeerders aantrekken voor het franchise-concept, en dus ook zakelijk overtuigen, niet alleen culinair.",
       },
       {
         heading: "De aanpak",
         body:
-          "We hebben de catalogus opnieuw opgebouwd met categorieën, filters op materiaal en geluidsabsorptie, en een offerteflow die per product begint en bij meer producten samen wordt afgerond.",
+          "We zijn langsgegaan om de sfeer van het merk in het echt te voelen. De branding is funky en vrolijk gehouden, maar strak genoeg om serieus genomen te worden door investeerders.",
         bodyExtra:
-          "De binnendienst heeft een dashboard gekregen waarin offertes binnenkomen, kunnen worden toegekend en opgevolgd. Geen losse mailtjes meer die tussen wal en schip vallen.",
-        image: "/projects/5.webp",
+          "Door onderzoek te doen naar franchise-pagina's van concurrenten konden we conversie vooropstellen in plaats van puur op ontwerp te leunen.",
       },
       {
         heading: "Het resultaat",
         body:
-          "Het aantal ingediende offertes is met 60% gestegen, en de gemiddelde tijd op productpagina's is bijna verdubbeld. De binnendienst kan offertes nu ook direct vanuit de site afhandelen.",
+          "De nieuwe site vertegenwoordigt het merk eindelijk zoals het hoort, en sluit naadloos aan op de ervaring in de zaak.",
         bodyExtra:
-          "De doorlooptijd van offerte-aanvraag tot eerste reactie is gedaald van drie werkdagen naar dezelfde dag. Voor klanten een merkbaar verschil in de relatie.",
+          "Na livegang ging de conversie van de franchise-pagina met meer dan 500% omhoog. Online en offline vertellen nu hetzelfde verhaal.",
       },
     ],
-    related: ["smokey-joes", "negentigtien"],
+    related: ["globalhair-institute", "swims-official"],
   },
   {
-    slug: "future-cards",
-    name: "Future Cards",
-    type: "E-commerce",
-    excerpt: "Configurator voor volledig gepersonaliseerde kaarten.",
+    slug: "sabreen-mia",
+    name: "Sabreen MIA",
+    type: "Webshop",
+    excerpt:
+      "Van verkopen via Instagram-DM's naar een luxe webshop die zichzelf in een week terugverdiende.",
     intro:
-      "Future Cards levert luxe gepersonaliseerde betaalpassen. De doelgroep wil zelf ontwerpen, maar het oude proces zat vol formulieren en e-mail-uitwisselingen voordat er iets concreets op tafel lag.",
-    image: "/projects/3.webp",
-    tags: ["E-commerce", "Configurator"],
-    client: "Future Cards",
-    year: "2024",
+      "Sabreen MIA is een stijlvol modemerk uit Amsterdam Osdorp met duizenden volgers en een sterke community. Verkopen ging volledig via Instagram-DM's, terwijl het merk toe was aan een webshop die net zo luxe aanvoelt als de stukken zelf.",
+    image: "/projects/sabreen-mia.webp",
+    tags: ["Webshop", "E-commerce", "Fashion"],
+    client: "Sabreen MIA",
+    year: "2026",
     sections: [
       {
         heading: "De uitdaging",
         body:
-          "Klanten een configurator geven waarin ze hun kaart live kunnen ontwerpen, terwijl het bestelproces robuust blijft en geschikt is voor zowel particulieren als zakelijke aanvragen.",
+          "Verkopen via DM's was intensief en niet schaalbaar. Er was behoefte aan een webshop die aansluit op de bestaande branding, met een luxe uitstraling en heldere navigatie.",
         bodyExtra:
-          "De configurator moest snel werken op mobiele apparaten en aansluiten op het bestaande productiesysteem dat de kaarten daadwerkelijk graveert en levert.",
-        image: "/projects/3.webp",
+          "Daarbij moest het ontwerp conversiegericht en mobiel-first zijn, en tegelijk makkelijk te beheren voor het merk zelf.",
       },
       {
         heading: "De aanpak",
         body:
-          "We hebben een live preview-configurator gebouwd waarmee je je naam, logo en kleur direct op een 3D-kaart ziet veranderen. De rest van de site sluit aan op die ervaring, met dezelfde rust en focus op het product.",
+          "We zijn naar de fysieke winkel gegaan om de sfeer en merkidentiteit te voelen, en hebben die vertaald naar een digitaal concept. Veel witruimte en typografie die het merk ademt.",
         bodyExtra:
-          "Voor zakelijke aanvragen is een aparte flow gemaakt waarin batches kunnen worden besteld met variabele klantgegevens, direct gekoppeld aan een offerte-systeem.",
-        image: "/projects/6.webp",
+          "Alles is maatwerk gebouwd, zonder templates, met een soepele launch zodat het merk vanaf dag één zelfstandig kon verkopen.",
       },
       {
         heading: "Het resultaat",
         body:
-          "Bestellingen worden nu in één doorlopend proces afgerond, zonder dat de support-inbox vol komt te zitten met design-vragen. De conversie van bezoek naar bestelling is bijna verdubbeld.",
+          "De volledige investering was binnen één week terugverdiend. Klanten en volgers reageerden enthousiast op de nieuwe ervaring.",
         bodyExtra:
-          "Future Cards kan nu opschalen zonder dat het team groter hoeft te worden. Iedere bestelling die binnenkomt is meteen productie-klaar.",
+          "De verkoopstructuur is overzichtelijker, het vertrouwen groter, en de webshop voelt net zo luxe als de winkel zelf.",
       },
     ],
-    related: ["smokey-joes", "negentigtien"],
+    related: ["swims-official", "the-goody-foody"],
   },
   {
-    slug: "negentigtien",
-    name: "Negentigtien",
-    type: "Merk",
-    excerpt: "Merkwebsite met een uitgesproken eigen stijl.",
+    slug: "swims-official",
+    name: "Swimss Official",
+    type: "Webshop",
+    excerpt:
+      "Een premium e-commerce ervaring met een Mix and Match-configurator voor luxe badmode.",
     intro:
-      "Negentigtien is een merk dat opvalt door zijn directe toon en uitgesproken visuele taal. De site moest daar volledig op aansluiten, zonder de aandacht weg te trekken van de boodschap.",
-    image: "/projects/4.webp",
-    tags: ["Merk", "Editorial"],
-    client: "Negentigtien",
-    year: "2024",
+      "Swimss Official richt zich op veeleisende klanten die zoeken naar stijlvolle én functionele badmode. Ze wilden een platform dat hun unieke concept en premium branding perfect zou vertegenwoordigen, met een innovatieve aanpak binnen e-commerce.",
+    image: "/projects/swims-official.webp",
+    tags: ["Webdesign", "E-commerce", "Branding"],
+    client: "Swimss Official",
+    year: "2026",
     sections: [
       {
         heading: "De uitdaging",
         body:
-          "Een merksite die net zo aanwezig is als de campagnes op straat, maar tegelijk leesbaar en gestructureerd voor potentiële klanten.",
+          "Een visuele stijl die luxe en exclusiviteit uitstraalt, terwijl de Mix and Match-functie om badmode te combineren intuïtief moest blijven werken.",
         bodyExtra:
-          "Daarbij was er een tweede vraag: de site moest het redactionele werk van Negentigtien dragen, met ruimte voor lange artikelen en interviews naast de zakelijke informatie.",
-        image: "/projects/4.webp",
+          "Daarbij moest de site conversiegericht zijn en complexe technische onderdelen naadloos integreren, zonder de ervaring te verstoren.",
       },
       {
         heading: "De aanpak",
         body:
-          "We hebben de site editorial opgezet met grote typografische statements en ruime fotografie, gecombineerd met een rustige onderlaag aan informatie en case studies. De huisstijl is doorgetrokken tot in de microcopy.",
+          "Maatwerk webdesign dat intuïtieve navigatie en visuele aantrekkingskracht in balans brengt, met een eigen merkidentiteit als basis.",
         bodyExtra:
-          "Voor de redactie is een eenvoudige flow opgezet waarin artikelen, beeld en interviews vanaf één plek worden beheerd, met previews die direct laten zien hoe het op de site oogt.",
-        image: "/projects/7.webp",
+          "De e-commerce is geoptimaliseerd met een soepele checkout en een gebruiksvriendelijke Mix and Match-plugin die het combineren tot een spel maakt.",
       },
       {
         heading: "Het resultaat",
         body:
-          "De site wordt regelmatig genoemd in de pers en op vakblogs, en de aanvragen voor samenwerkingen zijn sinds livegang met ruim 80% toegenomen.",
+          "De eerste collectie was binnen een week volledig uitverkocht, zonder advertentiekosten. Bezoekers roemden de bruikbaarheid en het intuïtieve gebruik.",
         bodyExtra:
-          "Het team van Negentigtien noemt de site inmiddels hun belangrijkste verkoopkanaal voor nieuwe partnerships, vóór social en evenementen.",
+          "De nieuwe branding positioneerde Swimss als herkenbaar merk binnen de premium-niche, goed voor 20.000 volgers in het eerste jaar na lancering.",
       },
     ],
-    related: ["smokey-joes", "future-cards"],
+    related: ["sabreen-mia", "burgers-frites"],
+  },
+  {
+    slug: "van-niets-naar-iets",
+    name: "Van Niets Naar Iets Podcast",
+    type: "Branding",
+    excerpt:
+      "Een eigentijdse merkidentiteit voor dé nummer één podcast voor multiculturele ondernemers.",
+    intro:
+      "Van Niets Naar Iets is dé nummer één podcast voor multiculturele ondernemers, met meer dan 3 miljoen views. De visuele identiteit liep achter op die professionele status en de verwachtingen van het publiek.",
+    image: "/projects/van-niets-naar-iets.webp",
+    tags: ["Branding", "Logo", "Podcast"],
+    client: "Van Niets Naar Iets Podcast",
+    year: "2026",
+    sections: [
+      {
+        heading: "De uitdaging",
+        body:
+          "Ondanks de sterke positie in de markt ondermijnde de verouderde uitstraling de geloofwaardigheid. Het doel was een eigentijdse branding die de groei en invloed van de podcast weerspiegelt.",
+        bodyExtra:
+          "De identiteit moest professioneel ogen, maar tegelijk toegankelijk blijven voor een breed, ondernemend publiek.",
+      },
+      {
+        heading: "De aanpak",
+        body:
+          "We hebben een grondige merkanalyse en doelgroeponderzoek gedaan en op basis daarvan een nieuw logo ontwikkeld dat professionaliteit en toegankelijkheid combineert.",
+        bodyExtra:
+          "Daarbovenop kwamen eigen Instagram-iconen die de social-media presence versterken, met elk element afgestemd op de kernwaarden van de podcast.",
+      },
+      {
+        heading: "Het resultaat",
+        body:
+          "Een modern, herkenbaar logo en een set social-iconen die consistentie en professionaliteit uitstralen over alle kanalen.",
+        bodyExtra:
+          "De reacties van luisteraars waren positief en de merkperceptie ging merkbaar omhoog.",
+      },
+    ],
+    related: ["the-goody-foody", "globalhair-institute"],
+  },
+  {
+    slug: "the-goody-foody",
+    name: "TheGoodyFoody",
+    type: "Branding",
+    excerpt:
+      "Een verpakkingsontwerp dat het verhaal van verse, gezonde maaltijden eindelijk vertelt.",
+    intro:
+      "TheGoodyFoody is het merk van Opa Norma: verse, gezonde maaltijden voor mensen die goed willen eten zonder er veel tijd aan kwijt te zijn. Het product was sterk, maar de verpakking vertelde dat verhaal nog niet.",
+    image: "/projects/the-goody-foody.webp",
+    tags: ["Branding", "Verpakking", "Webdesign"],
+    client: "TheGoodyFoody",
+    year: "2026",
+    sections: [
+      {
+        heading: "De uitdaging",
+        body:
+          "Op kantoor bij Opa Norma zagen we een sterk merkfundament, maar een verpakking die achterliep. De sleeves voelden vlak aan en lieten niet zien wat erin zat.",
+        bodyExtra:
+          "TheGoodyFoody groeide hard online met een groeiende community, terwijl de oude sleeves niet onderscheidend genoeg waren voor het merk dat ze inmiddels waren.",
+      },
+      {
+        heading: "De aanpak",
+        body:
+          "We zijn uitgegaan van de kern van het merk: zelfgemaakt, eerlijk, energiek en recht voor zijn raap. Het logo is subtiel opgewaardeerd en de voedingsinformatie beter zichtbaar gemaakt.",
+        bodyExtra:
+          "Elke maaltijd kreeg een eigen kleuraccent en een ingrediënten-illustratie, zodat er een familie ontstaat die samenhangt én ieder gerecht zijn eigen karakter houdt.",
+      },
+      {
+        heading: "Het resultaat",
+        body:
+          "De nieuwe sleeves brengen het merk tot leven, met heldere communicatie en een professionele uitstraling.",
+        bodyExtra:
+          "Na de launch groeide de merkherkenning flink. Klanten delen hun maaltijden op social media en de verpakking is onderdeel geworden van de merkidentiteit.",
+      },
+    ],
+    related: ["sabreen-mia", "van-niets-naar-iets"],
+  },
+  {
+    slug: "mazar-skin-clinic",
+    name: "Mazar Skin Clinic",
+    type: "Webdesign",
+    excerpt:
+      "120%+ conversie en volgeboekt binnen drie weken na de rebranding.",
+    intro:
+      "Mazar Skin Clinic is een huidkliniek die toe was aan een uitstraling die past bij de kwaliteit van de behandelingen. De oude site bracht de premium ervaring niet over en liet kansen op nieuwe afspraken liggen.",
+    image: "/projects/mazar-skin-clinic.webp",
+    tags: ["Webdesign", "CRO", "Zorg"],
+    client: "Mazar Skin Clinic",
+    year: "2026",
+    sections: [
+      {
+        heading: "De uitdaging",
+        body:
+          "De kliniek wilde een site die net zo verzorgd en betrouwbaar oogt als de behandelkamer, met een boekingsflow die bezoekers moeiteloos naar een afspraak leidt.",
+        bodyExtra:
+          "De bestaande site miste hiërarchie en focus, waardoor bezoekers afhaakten voordat ze een afspraak inplanden.",
+      },
+      {
+        heading: "De aanpak",
+        body:
+          "We hebben de huisstijl doorgetrokken naar een rustige, premium website met een heldere structuur en een conversiegerichte opbouw per pagina.",
+        bodyExtra:
+          "De afspraakflow staat centraal en is op elke pagina binnen handbereik, zodat de stap van interesse naar boeking zo klein mogelijk is.",
+      },
+      {
+        heading: "Het resultaat",
+        body:
+          "Na de rebranding steeg de conversie met meer dan 120% en zat de agenda binnen drie weken vol.",
+        bodyExtra:
+          "De kliniek straalt online nu dezelfde kwaliteit uit als in de praktijk, en trekt structureel meer afspraken aan.",
+      },
+    ],
+    related: ["globalhair-institute", "burgers-frites"],
   },
 ];
 

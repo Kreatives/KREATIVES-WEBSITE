@@ -11,5 +11,6 @@ next-env.d.ts
 .claude
 .vercel
 
-# Lokaal DB-setupscript (bevat wachtwoord)
+# Lokale DB-scripts (bevatten wachtwoord)
 /scripts/setup-db.mjs
+/scripts/seed-projects.mjs
