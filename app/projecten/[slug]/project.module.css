@@ -50,11 +50,15 @@
 .heroMedia {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--ink-soft);
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.heroImg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Intro-blok onder de hero-foto, ÍN de donkere sectie */
@@ -107,10 +111,14 @@
   width: 100%;
   max-width: 60rem;
   margin-inline: auto;
-  aspect-ratio: 16 / 9;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--off-white-2);
+}
+.blockImg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .blockText {
@@ -196,8 +204,5 @@
   .blockCols,
   .relatedGrid {
     grid-template-columns: 1fr;
-  }
-  .blockMedia {
-    aspect-ratio: 16 / 11;
   }
 }

@@ -66,13 +66,13 @@ export default async function ProjectDetailPage({
             </p>
 
             <div className={styles.heroMedia}>
-              <Image
+              {/* Volledige mockup, op natuurlijke verhouding (niet bijgesneden). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={project.image}
                 alt={project.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 80vw"
-                style={{ objectFit: "cover" }}
+                className={styles.heroImg}
+                loading="eager"
               />
             </div>
 
@@ -111,12 +111,12 @@ export default async function ProjectDetailPage({
               <div key={i} className={styles.block}>
                 {s.image && (
                   <div className={styles.blockMedia} data-reveal>
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={s.image}
                       alt=""
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 70vw"
-                      style={{ objectFit: "cover" }}
+                      className={styles.blockImg}
+                      loading="lazy"
                     />
                   </div>
                 )}
