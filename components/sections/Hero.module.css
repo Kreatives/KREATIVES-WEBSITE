@@ -73,8 +73,13 @@
 .proofMeta {
   display: inline-flex;
   flex-direction: column;
-  gap: 1px;
-  line-height: 1;
+  gap: 3px;
+  line-height: 1.1;
+}
+.proofTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 .stars {
   display: inline-flex;
@@ -85,12 +90,16 @@
   width: 0.85rem;
   height: 0.85rem;
 }
-.proofLabel {
-  font-size: 0.78rem;
+.proofRating {
+  font-size: 0.8rem;
   color: var(--on-dark);
 }
-.proofLabel strong {
+.proofRating strong {
   font-weight: 600;
+}
+.proofLabel {
+  font-size: 0.78rem;
+  color: var(--on-dark-muted, rgba(244, 243, 239, 0.75));
 }
 
 .title {

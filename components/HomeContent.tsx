@@ -1,5 +1,6 @@
 import RevealInit from "@/components/RevealInit";
 import Hero from "@/components/sections/Hero";
+import LogoMarquee from "@/components/sections/LogoMarquee";
 import Probleem from "@/components/sections/Probleem";
 import USPs from "@/components/sections/USPs";
 import Werkwijze from "@/components/sections/Werkwijze";
@@ -22,6 +23,9 @@ export default function HomeContent() {
     <>
       <RevealInit />
       <Hero />
+      <div className="mobile-only">
+        <LogoMarquee label="Vertrouwd door 95+ bedrijven" />
+      </div>
       <Probleem />
       <USPs />
       <Werkwijze />

@@ -472,6 +472,16 @@ h3 {
   background: var(--line-dark);
 }
 
+/* Zichtbaarheids-utilities */
+.mobile-only {
+  display: none;
+}
+@media (max-width: 860px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

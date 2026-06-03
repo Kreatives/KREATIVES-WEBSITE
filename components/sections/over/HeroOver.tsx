@@ -10,7 +10,7 @@ export default function HeroOver() {
           src={overOnsHero.background}
           alt=""
           fill
-          priority
+          quality={90}          priority
           sizes="100vw"
           style={{ objectFit: "cover" }}
         />

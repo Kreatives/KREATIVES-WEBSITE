@@ -11,7 +11,7 @@ export default function OverOnsTeam() {
             src={overOnsTeam.portrait}
             alt=""
             fill
-            sizes="(max-width: 860px) 100vw, 45vw"
+            quality={90}            sizes="(max-width: 860px) 100vw, 45vw"
             style={{ objectFit: "cover" }}
           />
         </div>

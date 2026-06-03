@@ -14,8 +14,9 @@ export default function Hero() {
           alt=""
           fill
           priority
+          quality={90}
           sizes="100vw"
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", objectPosition: hero.backgroundPosition }}
         />
         <div className={styles.overlay} />
       </div>
@@ -43,14 +44,19 @@ export default function Hero() {
               ))}
             </div>
             <div className={styles.proofMeta}>
-              <span className={styles.stars} aria-hidden>
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} />
-                ))}
+              <span className={styles.proofTop}>
+                <span className={styles.stars} aria-hidden>
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} />
+                  ))}
+                </span>
+                <span className={styles.proofRating}>
+                  <strong>{hero.socialProof.rating}</strong>{" "}
+                  {hero.socialProof.label}
+                </span>
               </span>
               <span className={styles.proofLabel}>
-                <strong>{hero.socialProof.rating}</strong>{" "}
-                {hero.socialProof.label}
+                {hero.socialProof.trust}
               </span>
             </div>
           </div>

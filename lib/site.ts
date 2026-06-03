@@ -58,8 +58,11 @@ export const hero = {
     ],
     rating: "5/5",
     label: "op Google",
+    trust: "Vertrouwd door 95+ ondernemers",
   },
   background: "/brand/home-hero.webp",
+  // Iets naar links croppen zodat de presentator in beeld blijft.
+  backgroundPosition: "30% center",
 };
 
 export const marquee = {

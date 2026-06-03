@@ -19,7 +19,7 @@ export default function FunnelHero({ data }: { data: HeroData }) {
           src={data.background}
           alt=""
           fill
-          priority
+          quality={90}          priority
           sizes="100vw"
           style={{ objectFit: "cover" }}
         />

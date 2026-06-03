@@ -11,7 +11,7 @@ export default function Verhaal() {
           src={overOnsVerhaal.media.left}
           alt=""
           fill
-          sizes="200px"
+          quality={90}          sizes="200px"
           style={{ objectFit: "cover" }}
         />
       </span>
@@ -20,7 +20,7 @@ export default function Verhaal() {
           src={overOnsVerhaal.media.right}
           alt=""
           fill
-          sizes="220px"
+          quality={90}          sizes="220px"
           style={{ objectFit: "cover" }}
         />
       </span>
@@ -39,7 +39,7 @@ export default function Verhaal() {
               src={overOnsVerhaal.media.main}
               alt=""
               fill
-              sizes="(max-width: 720px) 92vw, 640px"
+              quality={90}              sizes="(max-width: 720px) 92vw, 640px"
               style={{ objectFit: "cover" }}
             />
           </div>

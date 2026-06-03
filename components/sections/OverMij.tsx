@@ -14,7 +14,7 @@ export default function OverMij() {
                 src={over.portrait}
                 alt="Ricky van KREATIVES"
                 fill
-                sizes="(max-width: 880px) 80vw, 30vw"
+                quality={90}                sizes="(max-width: 880px) 80vw, 30vw"
                 style={{ objectFit: "cover", objectPosition: "top center" }}
               />
             ) : (

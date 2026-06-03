@@ -2,8 +2,8 @@
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: var(--fs-statement);
-  line-height: 1.22;
-  letter-spacing: var(--track-tight);
+  line-height: 1.34;
+  letter-spacing: -0.005em;
   max-width: 42rem;
   margin-inline: auto;
 }

@@ -69,7 +69,7 @@ export default function USPs() {
                 src={u.image}
                 alt=""
                 fill
-                sizes="50vw"
+                quality={90}                sizes="50vw"
                 style={{ objectFit: "cover" }}
               />
               <div className={styles.itemOverlay} />
