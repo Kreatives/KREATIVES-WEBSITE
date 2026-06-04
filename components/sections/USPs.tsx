@@ -3,112 +3,92 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usps } from "@/lib/site";
+import UspsMobile from "./UspsMobile";
 import styles from "./USPs.module.css";
 
 export default function USPs() {
   const [active, setActive] = useState(0);
-  const driverRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            setActive(Number((e.target as HTMLElement).dataset.idx));
+            const idx = Number((e.target as HTMLElement).dataset.idx);
+            setActive(idx);
           }
         });
       },
-      { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
     );
-    driverRefs.current.forEach((el) => el && io.observe(el));
+    itemRefs.current.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
   }, []);
 
   return (
-    <section className={`section--dark ${styles.sec}`} id="waarom">
-      <div className="container">
-        <div className={styles.head}>
-          <h2 className={`h2 ${styles.title}`}>
-            {usps.titleLead}{" "}
-            <span className="accent accent--orange">{usps.titleAccent}</span>
-          </h2>
-          <p className={styles.intro}>{usps.intro}</p>
-        </div>
-      </div>
-
-      {/* Vastgezet beeld dat per scroll-stap van rechts mee-swipet. */}
-      <div
-        className={styles.stage}
-        style={{ height: `${usps.items.length * 100}vh` }}
-      >
-        <div className={styles.sticky}>
-          <div className={styles.slider}>
-            <div
-              className={styles.track}
-              style={{ transform: `translateX(-${active * 100}%)` }}
-            >
-              {usps.items.map((u) => (
-                <div key={u.no} className={styles.frame}>
-                  <Image
-                    src={u.image}
-                    alt=""
-                    fill
-                    quality={90}
-                    sizes="100vw"
-                    style={{ objectFit: "cover" }}
+    <>
+      {/* Desktop: originele twee-koloms layout (sticky tekst links, beeld rechts) */}
+      <section className={`section--dark ${styles.sec}`} id="waarom">
+        <div className={styles.grid}>
+          <aside className={styles.left}>
+            <div className={styles.leftInner}>
+              <h2 className={`h2 ${styles.title}`}>
+                {usps.titleLead}
+                <br />
+                <span className="accent accent--orange">
+                  {usps.titleAccent}
+                </span>
+              </h2>
+              <p className={styles.intro}>{usps.intro}</p>
+              <div
+                className={styles.progress}
+                role="progressbar"
+                aria-valuenow={active + 1}
+                aria-valuemin={1}
+                aria-valuemax={usps.items.length}
+              >
+                {usps.items.map((_, i) => (
+                  <span
+                    key={i}
+                    className={i <= active ? styles.dotOn : styles.dot}
                   />
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.scrim} aria-hidden />
-
-            <div className={styles.foreground}>
-              <div className={styles.fgInner}>
-                <div className={styles.progress} aria-hidden>
-                  {usps.items.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`${styles.bar} ${
-                        i <= active ? styles.barOn : ""
-                      }`}
-                    />
-                  ))}
-                </div>
-                <div className={styles.copyStack}>
-                  {usps.items.map((u, i) => (
-                    <div
-                      key={u.no}
-                      className={`${styles.copy} ${
-                        active === i ? styles.copyOn : ""
-                      }`}
-                      aria-hidden={active !== i}
-                    >
-                      <div className={styles.copyHead}>
-                        <span className={styles.stepNo}>{u.no}</span>
-                        <h3 className={styles.itemTitle}>{u.title}</h3>
-                      </div>
-                      <p className={styles.itemBody}>{u.body}</p>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
+          </aside>
+
+          <div className={styles.right}>
+            {usps.items.map((u, i) => (
+              <div
+                key={u.no}
+                data-idx={i}
+                ref={(el) => {
+                  itemRefs.current[i] = el;
+                }}
+                className={styles.item}
+              >
+                <Image
+                  src={u.image}
+                  alt=""
+                  fill
+                  quality={90}
+                  sizes="50vw"
+                  style={{ objectFit: "cover" }}
+                />
+                <div className={styles.itemOverlay} />
+                <div className={styles.itemContent}>
+                  <h3 className={styles.itemTitle}>{u.title}</h3>
+                  <p className={styles.itemBody}>{u.body}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {usps.items.map((_, i) => (
-          <div
-            key={i}
-            className={styles.driver}
-            data-idx={i}
-            style={{ top: `${i * 100}vh` }}
-            ref={(el) => {
-              driverRefs.current[i] = el;
-            }}
-          />
-        ))}
-      </div>
-    </section>
+      {/* Mobiel: contained kaart die per scroll-stap mee-swipet */}
+      <UspsMobile />
+    </>
   );
 }

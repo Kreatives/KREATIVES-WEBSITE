@@ -4,137 +4,101 @@
   overflow-x: clip;
 }
 
-/* Kop boven het vastgezette beeld */
-.head {
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-left: max(
+    var(--gutter),
+    calc((100vw - var(--maxw)) / 2 + var(--gutter))
+  );
+  padding-right: clamp(2rem, 4vw, 4rem);
+}
+.leftInner {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.1rem;
-  max-width: 56ch;
-  margin: 0 auto;
-  padding-block: clamp(4rem, 8vw, 7rem) clamp(2.5rem, 5vw, 4rem);
+  gap: 1.5rem;
+  max-width: 30rem;
 }
 .title {
   color: var(--on-dark);
-  max-width: 18ch;
+  font-size: var(--fs-h2);
+  max-width: 14ch;
 }
 .intro {
   color: var(--on-dark-muted);
   font-size: 1rem;
   line-height: 1.65;
-  max-width: 48ch;
-}
-
-/* Stage: hoog genoeg om per stap één schermhoogte te scrollen */
-.stage {
-  position: relative;
-}
-.sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* Horizontale rij beelden die mee-swipet */
-.track {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.7s var(--ease);
-}
-.frame {
-  position: relative;
-  flex: 0 0 100%;
-  height: 100%;
-  background: var(--ink-soft);
-}
-
-.scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.88) 100%
-  );
-}
-
-/* Vaste voorgrond (schuift niet mee): tekst + voortgang */
-.foreground {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: flex-end;
-}
-.fgInner {
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding: 0 var(--gutter) clamp(2.5rem, 7vh, 5rem);
+  max-width: 42ch;
 }
 
 .progress {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+  margin-top: 0.5rem;
 }
-.bar {
-  width: clamp(28px, 8vw, 48px);
+.dot,
+.dotOn {
+  width: 32px;
   height: 3px;
   border-radius: 2px;
-  background: rgba(244, 243, 239, 0.2);
+  background: rgba(244, 243, 239, 0.18);
   transition: background 0.4s var(--ease);
 }
-.barOn {
+.dotOn {
   background: var(--orange);
 }
 
-/* Tekstblokken stapelen en crossfaden terwijl het beeld swipet */
-.copyStack {
-  display: grid;
+.right {
+  display: flex;
+  flex-direction: column;
 }
-.copy {
-  grid-area: 1 / 1;
+
+.item {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+
+.itemOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 55%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+/* Titel links / body rechts op de foto, naast elkaar */
+.itemContent {
+  position: absolute;
+  left: clamp(1.75rem, 3.5vw, 3rem);
+  right: clamp(1.75rem, 3.5vw, 3rem);
+  bottom: clamp(1.75rem, 5vh, 3.5rem);
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   gap: clamp(1rem, 3vw, 2.5rem);
   align-items: end;
-  opacity: 0;
-  transition: opacity 0.5s var(--ease);
-  pointer-events: none;
-}
-.copyOn {
-  opacity: 1;
-  pointer-events: auto;
-}
-.copyHead {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.stepNo {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: var(--orange);
 }
 .itemTitle {
   font-family: var(--font-sans);
-  font-size: clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem);
+  font-size: clamp(1.5rem, 0.9rem + 1.8vw, 2.4rem);
   font-weight: 500;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -144,46 +108,16 @@
 }
 .itemBody {
   color: rgba(255, 255, 255, 0.92);
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.55;
   text-align: right;
-  max-width: 34ch;
+  max-width: 32ch;
   justify-self: end;
-  align-self: end;
 }
 
-/* Onzichtbare scroll-drivers die de actieve stap bepalen */
-.driver {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  pointer-events: none;
-}
-
-/* Mobiel: contained kaart (geen fullscreen), beeld swipet van rechts */
+/* Mobiel: deze desktop-layout verbergen; UspsMobile neemt het over. */
 @media (max-width: 720px) {
-  .sticky {
-    padding-inline: var(--gutter);
-  }
-  .slider {
-    height: min(72vh, 34rem);
-    border-radius: 18px;
-    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
-  }
-  .fgInner {
-    padding: 0 clamp(1.25rem, 5vw, 1.75rem) clamp(1.5rem, 4vh, 2.25rem);
-  }
-  .copy {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-  }
-  .itemTitle {
-    max-width: 16ch;
-  }
-  .itemBody {
-    text-align: left;
-    justify-self: start;
-    font-size: 0.98rem;
+  .sec {
+    display: none;
   }
 }

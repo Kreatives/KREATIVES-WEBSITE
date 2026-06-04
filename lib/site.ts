@@ -46,7 +46,7 @@ export const hero = {
   titleAccent: "je website laat zien.",
   body:
     "Wij bouwen maatwerk websites voor ondernemers die er online even goed uit willen zien als ze offline al zijn.",
-  primary: { label: "Gratis offerte", href: "/contact" },
+  primary: { label: "Gratis re-design", href: "/contact" },
   secondary: { label: "Bekijk ons werk", href: "/projecten" },
   // Social-proof widget
   socialProof: {

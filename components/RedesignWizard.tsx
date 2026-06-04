@@ -224,23 +224,20 @@ export default function RedesignWizard() {
               <span className="accent accent--orange">volledig gratis.</span>
             </h2>
             <p className={styles.introBody}>
-              Geen verkooppraatje, geen verplichtingen. Je krijgt een verse kijk
-              op het belangrijkste stuk van je site, zodat je precies ziet waar
-              je nu tegenaan loopt en wat er beter kan.
+              Je hero-sectie is het eerste wat bezoekers zien. Wij ontwerpen die
+              opnieuw, zodat je met eigen ogen ziet hoe het sterker kan. Je zit
+              nergens aan vast, en het kost je niets.
             </p>
             <button
               type="button"
               className={styles.primary}
               onClick={advance}
             >
-              <span>Start je gratis redesign</span>
+              <span>Start je gratis re-design</span>
               <span className={styles.primaryIco} aria-hidden>
                 <Arrow />
               </span>
             </button>
-            <span className={styles.micro}>
-              Druk op <kbd>Enter</kbd> om te beginnen
-            </span>
           </div>
         )}
 
