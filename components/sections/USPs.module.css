@@ -4,101 +4,116 @@
   overflow-x: clip;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  align-items: start;
-}
-
-.left {
-  position: sticky;
-  top: 0;
-  align-self: start;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  padding-left: max(
-    var(--gutter),
-    calc((100vw - var(--maxw)) / 2 + var(--gutter))
-  );
-  padding-right: clamp(2rem, 4vw, 4rem);
-}
-.leftInner {
+/* Kop boven het vastgezette beeld */
+.head {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 30rem;
+  align-items: center;
+  text-align: center;
+  gap: 1.1rem;
+  max-width: 56ch;
+  margin: 0 auto;
+  padding-block: clamp(4rem, 8vw, 7rem) clamp(2.5rem, 5vw, 4rem);
 }
 .title {
   color: var(--on-dark);
-  font-size: var(--fs-h2);
-  max-width: 14ch;
+  max-width: 18ch;
 }
 .intro {
   color: var(--on-dark-muted);
   font-size: 1rem;
   line-height: 1.65;
-  max-width: 42ch;
+  max-width: 48ch;
+}
+
+/* Stage: hoog genoeg om per stap één schermhoogte te scrollen */
+.stage {
+  position: relative;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s var(--ease);
+}
+.frameOn {
+  opacity: 1;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-bottom: clamp(2.5rem, 7vh, 5rem);
 }
 
 .progress {
   display: flex;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
 }
-.dot,
-.dotOn {
-  width: 32px;
+.bar {
+  width: clamp(28px, 8vw, 48px);
   height: 3px;
   border-radius: 2px;
-  background: rgba(244, 243, 239, 0.18);
+  background: rgba(244, 243, 239, 0.2);
   transition: background 0.4s var(--ease);
 }
-.dotOn {
+.barOn {
   background: var(--orange);
 }
 
-.right {
-  display: flex;
-  flex-direction: column;
+/* Tekstblokken stapelen op elkaar en crossfaden */
+.copyStack {
+  display: grid;
 }
-
-.item {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--ink-soft);
-}
-
-.itemOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.4) 55%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-}
-
-/* Titel links / body rechts op de foto, naast elkaar (image #62) */
-.itemContent {
-  position: absolute;
-  left: clamp(1.75rem, 3.5vw, 3rem);
-  right: clamp(1.75rem, 3.5vw, 3rem);
-  bottom: clamp(1.75rem, 5vh, 3.5rem);
-  z-index: 2;
+.copy {
+  grid-area: 1 / 1;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   gap: clamp(1rem, 3vw, 2.5rem);
   align-items: end;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  pointer-events: none;
+}
+.copyOn {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.stepNo {
+  grid-column: 1;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--orange);
+  align-self: start;
 }
 .itemTitle {
+  grid-column: 1;
   font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 0.9rem + 1.8vw, 2.4rem);
+  font-size: clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem);
   font-weight: 500;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -107,33 +122,40 @@
   max-width: 12ch;
 }
 .itemBody {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.55;
   text-align: right;
-  max-width: 32ch;
+  max-width: 34ch;
   justify-self: end;
+  align-self: end;
 }
 
-@media (max-width: 860px) {
-  .grid {
+/* Onzichtbare scroll-drivers die de actieve stap bepalen */
+.driver {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .copy {
     grid-template-columns: 1fr;
   }
-  .left {
-    position: static;
-    height: auto;
-    padding: var(--section-y) var(--gutter) 2rem;
-  }
-  .item {
-    height: auto;
-    aspect-ratio: 4 / 3;
-  }
-  .itemContent {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+  .itemTitle {
+    grid-column: 1;
+    max-width: 14ch;
   }
   .itemBody {
+    grid-column: 1;
+    grid-row: auto;
     text-align: left;
     justify-self: start;
+    margin-top: 0.75rem;
+    font-size: 1rem;
   }
 }
