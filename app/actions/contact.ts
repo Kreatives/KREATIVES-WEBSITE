@@ -1,7 +1,11 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { sendContactMail, mailerConfigured } from "@/lib/mailer";
+import {
+  sendContactMail,
+  sendConfirmationMail,
+  mailerConfigured,
+} from "@/lib/mailer";
 
 export type ContactInput = {
   name: string;
@@ -43,15 +47,21 @@ export async function submitContact(input: ContactInput) {
     .from("contact_submissions")
     .insert(row);
 
-  // 2) Doorsturen naar de inbox via SMTP.
+  // 2) Doorsturen naar de inbox + bevestiging naar de aanvrager via SMTP.
   let emailed = false;
-  try {
-    if (mailerConfigured()) {
+  if (mailerConfigured()) {
+    try {
       await sendContactMail(row);
       emailed = true;
+    } catch {
+      emailed = false;
     }
-  } catch {
-    emailed = false;
+    // Bevestigingsmail mag falen zonder de inzending te laten klappen.
+    try {
+      await sendConfirmationMail(row);
+    } catch {
+      /* stil falen */
+    }
   }
 
   // Alleen falen als zowel opslaan als mailen mislukte.
