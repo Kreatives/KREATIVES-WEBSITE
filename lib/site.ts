@@ -4,10 +4,10 @@
 
 export const site = {
   name: "KREATIVES",
-  domain: "https://rkcreatives.nl",
+  domain: "https://www.kreatives.nl",
   email: "info@kreatives.nl",
   description:
-    "KREATIVES bouwt maatwerk websites voor klinieken, merken en ondernemers die er online net zo sterk uit willen zien als ze offline al zijn.",
+    "100+ websites gebouwd voor Nederlandse ondernemers. Van webdesign tot branding | KREATIVES zet jouw merk op de kaart. Vraag een gratis strategiegesprek aan.",
 };
 
 export type NavChild = { label: string; href: string };

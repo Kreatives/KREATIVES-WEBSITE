@@ -12,8 +12,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: "KREATIVES — Maatwerk webdesign voor ambitieuze ondernemers",
-    template: "%s — KREATIVES",
+    default: "Webdesign & Branding voor MKB | Nederland",
+    template: "%s | KREATIVES",
   },
   description: site.description,
   keywords: [
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     url: site.domain,
     siteName: site.name,
-    title: "KREATIVES — Maatwerk webdesign voor ambitieuze ondernemers",
+    title: "Webdesign & Branding voor MKB | Nederland",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "KREATIVES — Maatwerk webdesign",
+    title: "Webdesign & Branding voor MKB | Nederland",
     description: site.description,
   },
   robots: { index: true, follow: true },
