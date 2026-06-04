@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import BookCallButton from "@/components/BookCallButton";
+import RedesignWizard from "@/components/RedesignWizard";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -92,6 +93,7 @@ export default async function RootLayout({
             <main>{children}</main>
             <Footer />
             <BookCallButton />
+            <RedesignWizard />
           </SmoothScroll>
         )}
       </body>

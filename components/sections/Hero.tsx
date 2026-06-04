@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { hero, marquee } from "@/lib/site";
 import { Star } from "@/components/icons";
-import Button from "@/components/Button";
+import RedesignTrigger from "@/components/RedesignTrigger";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -72,9 +72,9 @@ export default function Hero() {
           </p>
 
           <div className={styles.actions} data-reveal>
-            <Button href={hero.primary.href} variant="primary">
+            <RedesignTrigger variant="primary">
               {hero.primary.label}
-            </Button>
+            </RedesignTrigger>
             <a href={hero.secondary.href} className={styles.secondaryLink}>
               {hero.secondary.label}
             </a>
