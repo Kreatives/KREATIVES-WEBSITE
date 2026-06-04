@@ -34,23 +34,36 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 }
 
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Horizontale rij beelden die mee-swipet */
+.track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s var(--ease);
+}
 .frame {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+  background: var(--ink-soft);
+}
+
+.scrim {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transition: opacity 0.7s var(--ease);
-}
-.frameOn {
-  opacity: 1;
-}
-.overlay {
-  position: absolute;
-  inset: 0;
+  z-index: 1;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.15) 0%,
@@ -59,11 +72,19 @@
   );
 }
 
-.content {
-  position: relative;
+/* Vaste voorgrond (schuift niet mee): tekst + voortgang */
+.foreground {
+  position: absolute;
+  inset: 0;
   z-index: 2;
+  display: flex;
+  align-items: flex-end;
+}
+.fgInner {
   width: 100%;
-  padding-bottom: clamp(2.5rem, 7vh, 5rem);
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 0 var(--gutter) clamp(2.5rem, 7vh, 5rem);
 }
 
 .progress {
@@ -82,7 +103,7 @@
   background: var(--orange);
 }
 
-/* Tekstblokken stapelen op elkaar en crossfaden */
+/* Tekstblokken stapelen en crossfaden terwijl het beeld swipet */
 .copyStack {
   display: grid;
 }
@@ -93,25 +114,25 @@
   gap: clamp(1rem, 3vw, 2.5rem);
   align-items: end;
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transition: opacity 0.5s var(--ease);
   pointer-events: none;
 }
 .copyOn {
   opacity: 1;
-  transform: none;
   pointer-events: auto;
 }
+.copyHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 .stepNo {
-  grid-column: 1;
   font-family: var(--font-sans);
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   color: var(--orange);
-  align-self: start;
 }
 .itemTitle {
-  grid-column: 1;
   font-family: var(--font-sans);
   font-size: clamp(1.6rem, 0.9rem + 2.2vw, 2.6rem);
   font-weight: 500;
@@ -122,8 +143,6 @@
   max-width: 12ch;
 }
 .itemBody {
-  grid-column: 2;
-  grid-row: 1 / span 2;
   color: rgba(255, 255, 255, 0.92);
   font-size: 1.05rem;
   line-height: 1.55;
@@ -142,20 +161,29 @@
   pointer-events: none;
 }
 
+/* Mobiel: contained kaart (geen fullscreen), beeld swipet van rechts */
 @media (max-width: 720px) {
+  .sticky {
+    padding-inline: var(--gutter);
+  }
+  .slider {
+    height: min(72vh, 34rem);
+    border-radius: 18px;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+  }
+  .fgInner {
+    padding: 0 clamp(1.25rem, 5vw, 1.75rem) clamp(1.5rem, 4vh, 2.25rem);
+  }
   .copy {
     grid-template-columns: 1fr;
+    gap: 0.6rem;
   }
   .itemTitle {
-    grid-column: 1;
-    max-width: 14ch;
+    max-width: 16ch;
   }
   .itemBody {
-    grid-column: 1;
-    grid-row: auto;
     text-align: left;
     justify-self: start;
-    margin-top: 0.75rem;
-    font-size: 1rem;
+    font-size: 0.98rem;
   }
 }

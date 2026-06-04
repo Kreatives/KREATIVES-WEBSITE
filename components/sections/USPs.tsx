@@ -36,56 +36,62 @@ export default function USPs() {
         </div>
       </div>
 
-      {/* Vastgezet beeldframe dat wisselt terwijl je scrollt. */}
+      {/* Vastgezet beeld dat per scroll-stap van rechts mee-swipet. */}
       <div
         className={styles.stage}
         style={{ height: `${usps.items.length * 100}vh` }}
       >
         <div className={styles.sticky}>
-          {usps.items.map((u, i) => (
+          <div className={styles.slider}>
             <div
-              key={u.no}
-              className={`${styles.frame} ${active === i ? styles.frameOn : ""}`}
-              aria-hidden={active !== i}
+              className={styles.track}
+              style={{ transform: `translateX(-${active * 100}%)` }}
             >
-              <Image
-                src={u.image}
-                alt=""
-                fill
-                quality={90}
-                sizes="100vw"
-                style={{ objectFit: "cover" }}
-              />
-              <div className={styles.overlay} />
-            </div>
-          ))}
-
-          <div className="container">
-            <div className={styles.content}>
-              <div className={styles.progress} aria-hidden>
-                {usps.items.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`${styles.bar} ${
-                      i <= active ? styles.barOn : ""
-                    }`}
+              {usps.items.map((u) => (
+                <div key={u.no} className={styles.frame}>
+                  <Image
+                    src={u.image}
+                    alt=""
+                    fill
+                    quality={90}
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
                   />
-                ))}
-              </div>
-              <div className={styles.copyStack}>
-                {usps.items.map((u, i) => (
-                  <div
-                    key={u.no}
-                    className={`${styles.copy} ${
-                      active === i ? styles.copyOn : ""
-                    }`}
-                    aria-hidden={active !== i}
-                  >
-                    <span className={styles.stepNo}>{u.no}</span>
-                    <h3 className={styles.itemTitle}>{u.title}</h3>
-                    <p className={styles.itemBody}>{u.body}</p>
-                  </div>
-                ))}
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.scrim} aria-hidden />
+
+            <div className={styles.foreground}>
+              <div className={styles.fgInner}>
+                <div className={styles.progress} aria-hidden>
+                  {usps.items.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`${styles.bar} ${
+                        i <= active ? styles.barOn : ""
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className={styles.copyStack}>
+                  {usps.items.map((u, i) => (
+                    <div
+                      key={u.no}
+                      className={`${styles.copy} ${
+                        active === i ? styles.copyOn : ""
+                      }`}
+                      aria-hidden={active !== i}
+                    >
+                      <div className={styles.copyHead}>
+                        <span className={styles.stepNo}>{u.no}</span>
+                        <h3 className={styles.itemTitle}>{u.title}</h3>
+                      </div>
+                      <p className={styles.itemBody}>{u.body}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
