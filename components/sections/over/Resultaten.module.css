@@ -12,15 +12,29 @@
   max-width: 18ch;
 }
 
-.grid {
+/* Horizontale carrousel: links uitgelijnd met de titel, rechts uitstekend
+   zodat er net 1.2 kaart in beeld is (zoals de review-kaarten). */
+.track {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1rem, 1.5vw, 1.5rem);
-  align-items: stretch;
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  margin-right: calc(50% - 50vw);
+  padding-right: var(--gutter);
+  padding-block: 0.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
+  scroll-snap-align: start;
+  flex: none;
+  width: clamp(15rem, 80vw, 23rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,7 +43,7 @@
   border-radius: var(--radius);
   background: rgba(244, 243, 239, 0.05);
   border: 1px solid rgba(244, 243, 239, 0.12);
-  min-height: 22rem;
+  min-height: 20rem;
   clip-path: polygon(
     0 0,
     100% 0,
@@ -37,6 +51,37 @@
     calc(100% - 1.5rem) 100%,
     0 100%
   );
+}
+
+.arrows {
+  display: flex;
+  gap: 0.6rem;
+}
+.arrow {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 243, 239, 0.25);
+  background: transparent;
+  display: grid;
+  place-items: center;
+  color: var(--on-dark);
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+.arrow svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.arrow:hover:not(:disabled) {
+  background: var(--on-dark);
+  color: var(--ink);
+  border-color: var(--on-dark);
+}
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 .no {
@@ -65,15 +110,4 @@
   color: rgba(244, 243, 239, 0.7);
   font-size: 0.95rem;
   line-height: 1.55;
-}
-
-@media (max-width: 980px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 560px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
 }
