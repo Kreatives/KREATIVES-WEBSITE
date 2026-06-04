@@ -40,8 +40,7 @@ const FIELDS: Field[] = [
     question: "Je telefoonnummer?",
     placeholder: "+31 6 12 34 56 78",
     type: "tel",
-    optional: true,
-    help: "Optioneel, handig als we je even willen bellen.",
+    help: "Zo kunnen we je even bellen als dat handiger is.",
   },
   {
     key: "website",
@@ -106,6 +105,8 @@ export default function RedesignWizard() {
     if (!v) return "Vul dit veld nog even in.";
     if (field.type === "email" && !EMAIL_RE.test(v))
       return "Vul een geldig e-mailadres in.";
+    if (field.type === "tel" && v.replace(/\D/g, "").length < 6)
+      return "Vul een geldig telefoonnummer in.";
     if (field.type === "textarea" && v.length < 8)
       return "Vertel net iets meer, dan kunnen we beter helpen.";
     if (field.key === "name" && v.length < 2) return "Vul je naam in.";
