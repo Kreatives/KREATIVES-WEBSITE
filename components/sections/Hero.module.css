@@ -187,10 +187,8 @@
   .actions :global(.btn) {
     flex: 1 1 auto;
   }
+  /* Op mobiel verbergen: de marquee onder de hero toont dit al. */
   .logos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .logos > .logoCell:nth-child(n + 4) {
     display: none;
   }
 }

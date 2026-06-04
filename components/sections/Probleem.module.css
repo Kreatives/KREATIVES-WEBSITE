@@ -2,9 +2,9 @@
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: var(--fs-statement);
-  line-height: 1.34;
-  letter-spacing: -0.005em;
-  max-width: 42rem;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  max-width: 54rem;
   margin-inline: auto;
 }
 

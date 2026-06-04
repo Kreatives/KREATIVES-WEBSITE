@@ -2,12 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { submitContact } from "@/app/actions/contact";
-import { Arrow } from "@/components/icons";
+import Button from "@/components/Button";
 import styles from "./RedesignWizard.module.css";
 
 const CALENDLY_URL = "https://calendly.com/info-jtw/gratis-adviesgesprek-v2";
 const WHATSAPP_URL = "https://wa.me/31613066250";
-const SITE_URL = "https://www.kreatives.nl";
 
 type FieldType = "text" | "email" | "tel" | "url" | "textarea";
 type Field = {
@@ -228,16 +227,9 @@ export default function RedesignWizard() {
               opnieuw, zodat je met eigen ogen ziet hoe het sterker kan. Je zit
               nergens aan vast, en het kost je niets.
             </p>
-            <button
-              type="button"
-              className={styles.primary}
-              onClick={advance}
-            >
-              <span>Start je gratis re-design</span>
-              <span className={styles.primaryIco} aria-hidden>
-                <Arrow />
-              </span>
-            </button>
+            <Button variant="primary" onClick={advance}>
+              Start je gratis re-design
+            </Button>
           </div>
         )}
 
@@ -298,23 +290,13 @@ export default function RedesignWizard() {
             {error && <span className={styles.error}>{error}</span>}
 
             <div className={styles.nav}>
-              <button
-                type="button"
-                className={styles.primary}
-                onClick={advance}
-                disabled={sending}
-              >
-                <span>
-                  {idx === total - 1
-                    ? sending
-                      ? "Versturen…"
-                      : "Versturen"
-                    : "Volgende"}
-                </span>
-                <span className={styles.primaryIco} aria-hidden>
-                  <Arrow />
-                </span>
-              </button>
+              <Button variant="primary" onClick={advance} disabled={sending}>
+                {idx === total - 1
+                  ? sending
+                    ? "Versturen…"
+                    : "Versturen"
+                  : "Volgende"}
+              </Button>
               <button type="button" className={styles.ghost} onClick={back}>
                 Terug
               </button>
@@ -345,28 +327,25 @@ export default function RedesignWizard() {
               of stuur ons een berichtje.
             </p>
             <div className={styles.doneActions}>
-              <a
-                className={styles.primary}
+              <Button
+                variant="primary"
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Plan direct een gesprek</span>
-                <span className={styles.primaryIco} aria-hidden>
-                  <Arrow />
-                </span>
-              </a>
-              <a
-                className={styles.secondary}
+                Plan direct een gesprek
+              </Button>
+              <Button
+                variant="white"
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Stuur een WhatsApp
-              </a>
-              <a className={styles.ghost} href={SITE_URL} onClick={close}>
+              </Button>
+              <button type="button" className={styles.ghost} onClick={close}>
                 Terug naar de website
-              </a>
+              </button>
             </div>
           </div>
         )}

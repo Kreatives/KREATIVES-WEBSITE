@@ -116,11 +116,11 @@ export default function BookCallButton() {
       >
         <span className={styles.avatar} aria-hidden>
           <Image
-            src="/team/dylan.webp"
+            src="/team/ricky.webp"
             alt=""
             fill
             sizes="56px"
-            style={{ objectFit: "cover", objectPosition: "top center" }}
+            style={{ objectFit: "cover", objectPosition: "center" }}
           />
         </span>
         <span className={styles.text}>

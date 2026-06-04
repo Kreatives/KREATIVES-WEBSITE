@@ -4,6 +4,7 @@ import { useState } from "react";
 import { contact } from "@/lib/site";
 import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/Button";
+import SocialProof from "@/components/SocialProof";
 import styles from "./Contact.module.css";
 
 type Errors = Partial<Record<"naam" | "email" | "bericht", string>>;
@@ -58,25 +59,7 @@ export default function Contact() {
     <section className={`section--dark cosmos-bg ${styles.sec}`} id="contact">
       <div className="container">
         <div className={styles.head}>
-          <div className={styles.team} aria-hidden>
-            {contact.team.map((m, i) => (
-              <span
-                key={i}
-                className={styles.avatar}
-                style={
-                  m.photo
-                    ? {
-                        backgroundImage: `url(${m.photo})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }
-                    : { background: m.color }
-                }
-              >
-                {!m.photo && m.initials}
-              </span>
-            ))}
-          </div>
+          <SocialProof />
 
           <h2 className={`h2 ${styles.title}`} data-reveal>
             {contact.titleLead}

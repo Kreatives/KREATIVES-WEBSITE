@@ -71,8 +71,8 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.name}. Alle rechten voorbehouden.
           </span>
           <div className={styles.legal}>
-            <a href="#">Privacy</a>
-            <a href="#">Algemene voorwaarden</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/voorwaarden">Algemene voorwaarden</a>
           </div>
         </div>
       </div>

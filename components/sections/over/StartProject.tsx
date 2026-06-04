@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { overOnsCta, contact } from "@/lib/site";
+import { overOnsCta } from "@/lib/site";
 import { submitContact } from "@/app/actions/contact";
 import { Arrow } from "@/components/icons";
+import SocialProof from "@/components/SocialProof";
 import styles from "./StartProject.module.css";
 
 type Errors = Partial<Record<"naam" | "email" | "bericht", string>>;
@@ -78,25 +79,7 @@ export default function StartProject() {
 
             <p className={styles.body}>{overOnsCta.body}</p>
 
-            <div className={styles.team} aria-hidden>
-              {contact.team.map((m, i) => (
-                <span
-                  key={i}
-                  className={styles.avatar}
-                  style={
-                    m.photo
-                      ? {
-                          backgroundImage: `url(${m.photo})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }
-                      : { background: m.color }
-                  }
-                >
-                  {!m.photo && m.initials}
-                </span>
-              ))}
-            </div>
+            <SocialProof align="left" />
 
             <a
               href={overOnsCta.calendly}
