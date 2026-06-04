@@ -8,12 +8,16 @@ import styles from "./SocialProof.module.css";
  */
 export default function SocialProof({
   align = "center",
+  tone = "dark",
 }: {
   align?: "center" | "left";
+  tone?: "dark" | "light";
 }) {
   return (
     <div
-      className={`${styles.proof} ${align === "left" ? styles.left : ""}`}
+      className={`${styles.proof} ${align === "left" ? styles.left : ""} ${
+        tone === "light" ? styles.toneLight : ""
+      }`}
       data-reveal
     >
       <div className={styles.avatars} aria-hidden>

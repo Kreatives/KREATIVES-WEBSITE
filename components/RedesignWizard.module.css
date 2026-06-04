@@ -312,19 +312,9 @@
 }
 
 @media (max-width: 560px) {
-  .nav,
   .doneActions {
     flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-  .primary,
-  .secondary {
-    justify-content: center;
-  }
-  .ghost {
-    text-align: center;
-    padding: 0.6rem;
+    align-items: flex-start;
   }
 }
 

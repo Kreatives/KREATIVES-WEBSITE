@@ -243,4 +243,8 @@
   .row {
     grid-template-columns: 1fr;
   }
+  /* Op mobiel verbergen: het formulier ernaast volstaat, anders dubbel. */
+  .calendly {
+    display: none;
+  }
 }

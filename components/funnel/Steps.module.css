@@ -70,4 +70,45 @@
   .head {
     position: static;
   }
+
+  /* Stapelkaarten: elke stap plakt onder de vorige terwijl je scrollt. */
+  .list {
+    display: block;
+    padding-bottom: 30vh;
+  }
+  .step {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.5rem 1.4rem;
+    box-shadow: 0 24px 50px -32px rgba(0, 0, 0, 0.45);
+  }
+  .step + .step {
+    margin-top: 1.25rem;
+  }
+  .step:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .step:nth-child(1) {
+    top: 5rem;
+  }
+  .step:nth-child(2) {
+    top: 7.8rem;
+  }
+  .step:nth-child(3) {
+    top: 10.6rem;
+  }
+  .step:nth-child(4) {
+    top: 13.4rem;
+  }
+  .step:nth-child(5) {
+    top: 16.2rem;
+  }
+  .no {
+    padding-top: 0;
+  }
 }

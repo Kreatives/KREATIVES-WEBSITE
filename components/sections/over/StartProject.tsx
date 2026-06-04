@@ -79,7 +79,7 @@ export default function StartProject() {
 
             <p className={styles.body}>{overOnsCta.body}</p>
 
-            <SocialProof align="left" />
+            <SocialProof align="left" tone="light" />
 
             <a
               href={overOnsCta.calendly}

@@ -21,8 +21,17 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  margin-right: calc(50% - 50vw);
-  padding-right: var(--gutter);
+  /* Volle breedte: kaarten lopen aan beide kanten netjes uit beeld i.p.v.
+     hard afgesneden te worden aan de containerrand. */
+  margin-inline: calc(50% - 50vw);
+  padding-inline: max(
+    var(--gutter),
+    calc((100vw - var(--maxw)) / 2 + var(--gutter))
+  );
+  scroll-padding-inline-start: max(
+    var(--gutter),
+    calc((100vw - var(--maxw)) / 2 + var(--gutter))
+  );
   padding-block: 0.5rem;
   margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
   scrollbar-width: none;

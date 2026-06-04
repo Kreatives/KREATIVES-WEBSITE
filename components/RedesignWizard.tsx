@@ -235,9 +235,7 @@ export default function RedesignWizard() {
 
         {stage === "fields" && (
           <div className={styles.step} key={field.key}>
-            <span className={styles.stepLabel}>
-              {String(idx + 1).padStart(2, "0")} — {field.label}
-            </span>
+            <span className={styles.stepLabel}>{field.label}</span>
             <label className={styles.question} htmlFor={`f-${field.key}`}>
               {field.question}
               {field.optional && (

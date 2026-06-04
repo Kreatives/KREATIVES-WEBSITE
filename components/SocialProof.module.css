@@ -63,3 +63,14 @@
   font-size: 0.8rem;
   color: var(--on-dark-muted, rgba(244, 243, 239, 0.7));
 }
+
+/* Lichte achtergrond: donkere tekst (bijv. start-project kaart) */
+.toneLight .avatar {
+  border-color: rgba(17, 17, 17, 0.15);
+}
+.toneLight .rating {
+  color: var(--ink);
+}
+.toneLight .trust {
+  color: var(--muted);
+}

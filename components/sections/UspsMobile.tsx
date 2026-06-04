@@ -5,30 +5,53 @@ import Image from "next/image";
 import { usps } from "@/lib/site";
 import styles from "./UspsMobile.module.css";
 
+function Chevron({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path
+        d={dir === "left" ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5"}
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /**
- * Mobiele variant van de "Waarom ons"-sectie: een contained kaart waarvan
- * het beeld per scroll-stap van rechts mee-swipet. Alleen zichtbaar op
- * mobiel (zie .sec in UspsMobile.module.css); op desktop toont USPs.tsx de
- * originele twee-koloms layout.
+ * Mobiele variant van "Waarom ons": een eenvoudige carrousel met pijlen
+ * eronder (overzichtelijker dan een scroll-effect). Alleen zichtbaar op
+ * mobiel; desktop gebruikt de twee-koloms USPs.
  */
 export default function UspsMobile() {
-  const [active, setActive] = useState(0);
-  const driverRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const trackRef = useRef<HTMLUListElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  function update() {
+    const el = trackRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+  }
 
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setActive(Number((e.target as HTMLElement).dataset.idx));
-          }
-        });
-      },
-      { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
-    );
-    driverRefs.current.forEach((el) => el && io.observe(el));
-    return () => io.disconnect();
+    update();
+    const el = trackRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
+
+  function scrollByCard(dir: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-card]");
+    const amount = card ? card.offsetWidth + 16 : 320;
+    el.scrollBy({ left: dir * amount, behavior: "smooth" });
+  }
 
   return (
     <section className={`section--dark ${styles.sec}`}>
@@ -40,79 +63,48 @@ export default function UspsMobile() {
           </h2>
           <p className={styles.intro}>{usps.intro}</p>
         </div>
-      </div>
 
-      <div
-        className={styles.stage}
-        style={{ height: `${usps.items.length * 100}vh` }}
-      >
-        <div className={styles.sticky}>
-          <div className={styles.slider}>
-            <div
-              className={styles.track}
-              style={{ transform: `translateX(-${active * 100}%)` }}
-            >
-              {usps.items.map((u) => (
-                <div key={u.no} className={styles.frame}>
-                  <Image
-                    src={u.image}
-                    alt=""
-                    fill
-                    quality={90}
-                    sizes="100vw"
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.scrim} aria-hidden />
-
-            <div className={styles.foreground}>
-              <div className={styles.fgInner}>
-                <div className={styles.progress} aria-hidden>
-                  {usps.items.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`${styles.bar} ${
-                        i <= active ? styles.barOn : ""
-                      }`}
-                    />
-                  ))}
-                </div>
-                <div className={styles.copyStack}>
-                  {usps.items.map((u, i) => (
-                    <div
-                      key={u.no}
-                      className={`${styles.copy} ${
-                        active === i ? styles.copyOn : ""
-                      }`}
-                      aria-hidden={active !== i}
-                    >
-                      <div className={styles.copyHead}>
-                        <span className={styles.stepNo}>{u.no}</span>
-                        <h3 className={styles.itemTitle}>{u.title}</h3>
-                      </div>
-                      <p className={styles.itemBody}>{u.body}</p>
-                    </div>
-                  ))}
-                </div>
+        <ul className={styles.track} ref={trackRef} onScroll={update}>
+          {usps.items.map((u) => (
+            <li key={u.no} className={styles.card} data-card>
+              <Image
+                src={u.image}
+                alt=""
+                fill
+                quality={90}
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
+              />
+              <div className={styles.scrim} aria-hidden />
+              <div className={styles.content}>
+                <span className={styles.no}>{u.no}</span>
+                <h3 className={styles.cardTitle}>{u.title}</h3>
+                <p className={styles.cardBody}>{u.body}</p>
               </div>
-            </div>
-          </div>
-        </div>
+            </li>
+          ))}
+        </ul>
 
-        {usps.items.map((_, i) => (
-          <div
-            key={i}
-            className={styles.driver}
-            data-idx={i}
-            style={{ top: `${i * 100}vh` }}
-            ref={(el) => {
-              driverRefs.current[i] = el;
-            }}
-          />
-        ))}
+        <div className={styles.arrows}>
+          <button
+            type="button"
+            className={styles.arrow}
+            onClick={() => scrollByCard(-1)}
+            disabled={atStart}
+            aria-label="Vorige"
+          >
+            <Chevron dir="left" />
+          </button>
+          <button
+            type="button"
+            className={styles.arrow}
+            onClick={() => scrollByCard(1)}
+            disabled={atEnd}
+            aria-label="Volgende"
+          >
+            <Chevron dir="right" />
+          </button>
+        </div>
       </div>
     </section>
   );

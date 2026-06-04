@@ -582,7 +582,7 @@ export type Dienst = {
 export const diensten: Dienst[] = [
   {
     slug: "webdesign",
-    eyebrow: "Diensten — Webdesign",
+    eyebrow: "Webdesign",
     titleLead: "Maatwerk webdesign dat",
     titleAccent: "blijft hangen.",
     body:
@@ -616,7 +616,7 @@ export const diensten: Dienst[] = [
   },
   {
     slug: "ai",
-    eyebrow: "Diensten — AI",
+    eyebrow: "AI",
     titleLead: "AI die echt werk uit",
     titleAccent: "handen neemt.",
     body:
@@ -765,7 +765,7 @@ export const overOnsHero = {
 };
 
 export const overOnsVerhaal = {
-  badge: "01 — Ons verhaal",
+  badge: "Ons verhaal",
   titleLead: "Begonnen vanuit",
   titleAccent: "een goede ergernis.",
   subheading: "Sites die er verzorgd uitzien, zonder het prijskaartje van een groot bureau.",
@@ -1025,7 +1025,7 @@ export const webdesignFunnel = {
 
 export const aiFunnel = {
   hero: {
-    eyebrow: "Diensten — AI",
+    eyebrow: "AI",
     titleLead: "Wat vroeger duur was,",
     titleAccent: "is dat nu niet meer.",
     body:
