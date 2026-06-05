@@ -92,7 +92,7 @@ export default function FounderWords({
                   src={t.photo}
                   alt={t.author}
                   fill
-                  sizes="160px"
+                  sizes="(max-width: 560px) 86vw, 220px"
                   style={{ objectFit: "cover" }}
                 />
               ) : (

@@ -35,6 +35,7 @@ export default async function HomeContent() {
     company: r.company,
     initials: initialsOf(r.author),
     color: r.color,
+    photo: r.photo,
   }));
 
   return (

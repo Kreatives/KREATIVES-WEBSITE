@@ -43,7 +43,7 @@
 .card {
   scroll-snap-align: start;
   flex: none;
-  width: clamp(19rem, 84vw, 33rem);
+  width: clamp(20rem, 90vw, 40rem);
   display: flex;
   align-items: stretch;
   gap: clamp(1.25rem, 2vw, 1.75rem);
@@ -56,9 +56,10 @@
 .photo {
   position: relative;
   flex: none;
-  align-self: stretch;
-  width: clamp(5rem, 9vw, 7rem);
-  border-radius: 8px;
+  align-self: center;
+  width: clamp(8.5rem, 26vw, 12.5rem);
+  aspect-ratio: 2 / 3;
+  border-radius: 10px;
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -175,10 +176,11 @@
 @media (max-width: 560px) {
   .card {
     flex-direction: column;
-    width: clamp(16rem, 86vw, 22rem);
+    width: clamp(17rem, 86vw, 26rem);
   }
   .photo {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 4;
+    max-height: 55vh;
   }
 }

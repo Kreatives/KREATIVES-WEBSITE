@@ -8,7 +8,29 @@ export type ReviewItem = {
   company: string;
   initials: string;
   color: string;
+  photo?: string | null;
 };
+
+function Avatar({ r, className }: { r: ReviewItem; className: string }) {
+  if (r.photo) {
+    return (
+      <span
+        className={className}
+        style={{
+          backgroundImage: `url(${r.photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        aria-hidden
+      />
+    );
+  }
+  return (
+    <span className={className} style={{ background: r.color }} aria-hidden>
+      {r.initials}
+    </span>
+  );
+}
 
 export default function Reviews({ items: source }: { items: ReviewItem[] }) {
   // Dupliceren voor naadloze marquee
@@ -56,13 +78,7 @@ export default function Reviews({ items: source }: { items: ReviewItem[] }) {
               </span>
               <p className={styles.quote}>{r.quote}</p>
               <div className={styles.author}>
-                <span
-                  className={styles.avatar}
-                  style={{ background: r.color }}
-                  aria-hidden
-                >
-                  {r.initials}
-                </span>
+                <Avatar r={r} className={styles.avatar} />
                 <div className={styles.authorMeta}>
                   <span className={styles.name}>{r.author}</span>
                   <span className={styles.company}>{r.company}</span>
@@ -85,13 +101,7 @@ export default function Reviews({ items: source }: { items: ReviewItem[] }) {
               </span>
               <p className={styles.quote}>{r.quote}</p>
               <div className={styles.author}>
-                <span
-                  className={styles.avatar}
-                  style={{ background: r.color }}
-                  aria-hidden
-                >
-                  {r.initials}
-                </span>
+                <Avatar r={r} className={styles.avatar} />
                 <div className={styles.authorMeta}>
                   <span className={styles.name}>{r.author}</span>
                   <span className={styles.company}>{r.company}</span>
