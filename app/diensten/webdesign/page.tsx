@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import FunnelHero from "@/components/funnel/FunnelHero";
-import IntroSplit from "@/components/funnel/IntroSplit";
+import Recognition from "@/components/funnel/Recognition";
 import TwoTracks from "@/components/funnel/TwoTracks";
 import PortfolioStrip from "@/components/funnel/PortfolioStrip";
 import IconCards from "@/components/funnel/IconCards";
@@ -37,7 +37,7 @@ export default async function WebdesignPage() {
     <>
       <RevealInit />
       <FunnelHero data={webdesignFunnel.hero} />
-      <IntroSplit data={webdesignFunnel.herkenning} />
+      <Recognition data={webdesignFunnel.herkenning} />
       <TwoTracks data={webdesignFunnel.tracks} />
       <PortfolioStrip data={webdesignFunnel.portfolio} />
       <IconCards data={webdesignFunnel.usps} variant="dark" />

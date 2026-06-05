@@ -17,7 +17,7 @@ export default function ProjectMarquee() {
           {items.map((n, i) => (
             <a
               key={i}
-              href="#cases"
+              href="/projecten"
               className={styles.card}
               aria-hidden={i >= projects.length}
             >

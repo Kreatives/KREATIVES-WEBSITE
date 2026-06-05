@@ -7,7 +7,7 @@ type IconCardsData = {
   titleAccent: string;
   intro?: string;
   cta?: { label: string; href: string };
-  items: { title: string; body: string }[];
+  items: { title: string; body: string; icon?: string }[];
 };
 
 export default function IconCards({
@@ -57,12 +57,19 @@ export default function IconCards({
               className={`${styles.card} ${variant === "cosmos" ? styles.cardResult : ""}`}
               data-reveal
             >
-              <span
-                className={variant === "cosmos" ? styles.resultNo : styles.badge}
-                aria-hidden
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
+              {item.icon ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={item.icon} alt="" className={styles.icon} />
+              ) : (
+                <span
+                  className={
+                    variant === "cosmos" ? styles.resultNo : styles.badge
+                  }
+                  aria-hidden
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              )}
               <div className={styles.cardMeta}>
                 <h3 className={styles.cardTitle}>{item.title}</h3>
                 <p className={styles.cardBody}>{item.body}</p>

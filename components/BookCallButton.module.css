@@ -160,13 +160,16 @@
 
 /* ---------- Mobiel ---------- */
 @media (max-width: 520px) {
-  .text {
+  /* Tekst blijft zichtbaar; alleen de subregel weg om compact te blijven. */
+  .sub {
     display: none;
   }
-  /* Symmetrische ronde knop: avatar + plus, gelijke ruimte rondom. */
+  .title {
+    font-size: 0.92rem;
+  }
   .button {
-    padding: 0.4rem;
-    gap: 0.5rem;
+    gap: 0.55rem;
+    padding: 0.35rem 0.5rem 0.35rem 0.35rem;
   }
 }
 

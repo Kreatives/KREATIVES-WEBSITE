@@ -774,7 +774,7 @@ export const overOnsVerhaal = {
     "KREATIVES is daar direct op gebouwd. Maatwerk websites die snel laden en technisch op orde staan, voor een prijs die past bij wat een serieuze ondernemer redelijk kan investeren.",
   ],
   primaryCta: { label: "Plan een gesprek", href: "/contact" },
-  cta: { label: "Bekijk ons werk", href: "/#cases" },
+  cta: { label: "Bekijk ons werk", href: "/projecten" },
   media: {
     main: "/brand/over-verhaal.webp",
     left: "/brand/work-1.webp",
@@ -893,9 +893,8 @@ export const webdesignFunnel = {
   herkenning: {
     eyebrow: "Voor wie dit is",
     title:
-      "Een site die je zelf liever niet meer doorstuurt. Of een landingspagina die kliks krijgt, maar geen aanvragen.",
-    body:
-      "Als één van die twee herkenbaar is, zit je hier goed. We pakken allebei aan.",
+      "Je hebt een website die je zelf liever niet meer doorstuurt. Of een landingspagina die wel kliks krijgt, maar geen aanvragen. Als één van die twee herkenbaar is, zit je hier goed.",
+    accent: "geen aanvragen",
   },
   tracks: {
     eyebrow: "Hoe wij jou kunnen helpen",
@@ -950,16 +949,19 @@ export const webdesignFunnel = {
         title: "We ontwerpen op wat de site moet doen",
         body:
           "Niet alleen op hoe hij eruitziet. We kijken vooraf wat de pagina moet opleveren en bouwen daar het ontwerp omheen.",
+        icon: "/icons/goals.svg",
       },
       {
         title: "Eén vast aanspreekpunt",
         body:
           "Je werkt rechtstreeks met de mensen die je site bouwen. Geen accountlaag, geen doorgeefluik.",
+        icon: "/icons/contact.svg",
       },
       {
         title: "Volledig op maat, makkelijk te beheren",
         body:
           "Een site die past bij jouw merk en die je daarna zelf in de hand hebt, zonder dat je afhankelijk blijft van ons voor elke kleine aanpassing.",
+        icon: "/icons/custom.svg",
       },
     ],
   },
