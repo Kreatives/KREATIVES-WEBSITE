@@ -52,9 +52,6 @@ export default async function AdminReviews() {
                       · in hun eigen woorden
                     </span>
                   )}
-                  {r.bigFeatured && (
-                    <span className={styles.listTag}> · grote review</span>
-                  )}
                 </div>
                 <div className={styles.listSub}>
                   {r.author}

@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { dbReviews, initialsOf } from "@/lib/cms";
-import { deleteReview } from "@/app/admin/actions";
+import { dbBigReviews, initialsOf } from "@/lib/cms";
+import { deleteBigReview } from "@/app/admin/actions";
 import DeleteButton from "@/components/admin/DeleteButton";
 import styles from "../admin.module.css";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminGroteReviews() {
-  const reviews = (await dbReviews()).filter((r) => r.bigFeatured);
+  const reviews = await dbBigReviews();
 
   return (
     <div>
@@ -15,8 +15,9 @@ export default async function AdminGroteReviews() {
         <div className={styles.head} style={{ marginBottom: 0 }}>
           <h1 className={styles.title}>Grote reviews</h1>
           <p className={styles.lead}>
-            De reviews met een grote 2:3 foto, in de foto-carrousel op de
-            diensten- en werkwijze-pagina&apos;s.
+            Losse reviews met een grote 2:3 foto, in de foto-carrousel op de
+            diensten- en werkwijze-pagina&apos;s. Staan los van de gewone
+            reviews.
           </p>
         </div>
         <Link href="/admin/grote-reviews/new" className={styles.newBtn}>
@@ -26,8 +27,7 @@ export default async function AdminGroteReviews() {
 
       {reviews.length === 0 ? (
         <p className={styles.empty}>
-          Nog geen grote reviews. Voeg er één toe, of zet een bestaande review
-          op &ldquo;grote review&rdquo; in de gewone reviews-lijst.
+          Nog geen grote reviews. Voeg er één toe.
         </p>
       ) : (
         <div className={styles.list}>
@@ -65,7 +65,7 @@ export default async function AdminGroteReviews() {
                 >
                   Bewerken
                 </Link>
-                <DeleteButton action={deleteReview} id={r.id} />
+                <DeleteButton action={deleteBigReview} id={r.id} />
               </div>
             </div>
           ))}

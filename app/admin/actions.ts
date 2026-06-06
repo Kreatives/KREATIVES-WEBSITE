@@ -16,8 +16,13 @@ import {
 function revalidateReviews() {
   revalidatePath("/reviews");
   revalidatePath("/admin/reviews");
-  revalidatePath("/admin/grote-reviews");
   revalidatePath("/");
+  revalidatePath("/diensten/webdesign");
+  revalidatePath("/werkwijze");
+}
+
+function revalidateBigReviews() {
+  revalidatePath("/admin/grote-reviews");
   revalidatePath("/diensten/webdesign");
   revalidatePath("/werkwijze");
 }
@@ -80,7 +85,6 @@ export async function seedDatabase() {
         color: x.color,
         featured: i < HOMEPAGE_REVIEW_LIMIT,
         quote_featured: i < QUOTE_REVIEW_LIMIT,
-        big_featured: !!x.photo,
       }))
     );
     if (error) errors.push(`reviews: ${error.message}`);
@@ -209,29 +213,14 @@ export type ReviewInput = {
   title: string;
   quote: string;
   photo: string | null;
-  logo: string | null;
   color: string;
   featured: boolean;
   quoteFeatured: boolean;
-  bigFeatured: boolean;
 };
 
 export async function saveReview(input: ReviewInput) {
   const supabase = await createClient();
 
-  if (input.bigFeatured) {
-    const { data: others } = await supabase
-      .from("reviews")
-      .select("id")
-      .eq("big_featured", true);
-    const count = (others ?? []).filter((o) => o.id !== input.id).length;
-    if (count >= BIG_REVIEW_LIMIT) {
-      return {
-        ok: false,
-        error: `Er is plek voor ${BIG_REVIEW_LIMIT} grote reviews. Haal er eerst één weg.`,
-      };
-    }
-  }
   if (input.featured) {
     const { data: others } = await supabase
       .from("reviews")
@@ -266,11 +255,9 @@ export async function saveReview(input: ReviewInput) {
     title: input.title,
     quote: input.quote,
     photo: input.photo,
-    logo: input.logo,
     color: input.color,
     featured: input.featured,
     quote_featured: input.quoteFeatured,
-    big_featured: input.bigFeatured,
   };
   const { error } = input.id
     ? await supabase.from("reviews").update(row).eq("id", input.id)
@@ -285,6 +272,61 @@ export async function deleteReview(id: string) {
   const { error } = await supabase.from("reviews").delete().eq("id", id);
   if (error) return { ok: false, error: error.message };
   revalidateReviews();
+  return { ok: true };
+}
+
+/* ---------- Grote reviews (volledig losse tabel) ---------- */
+
+export type BigReviewInput = {
+  id?: string;
+  author: string;
+  role: string;
+  company: string;
+  title: string;
+  quote: string;
+  photo: string | null;
+  logo: string | null;
+  color: string;
+};
+
+export async function saveBigReview(input: BigReviewInput) {
+  const supabase = await createClient();
+
+  if (!input.id) {
+    const { count } = await supabase
+      .from("big_reviews")
+      .select("*", { count: "exact", head: true });
+    if ((count ?? 0) >= BIG_REVIEW_LIMIT) {
+      return {
+        ok: false,
+        error: `Er is plek voor ${BIG_REVIEW_LIMIT} grote reviews. Haal er eerst één weg.`,
+      };
+    }
+  }
+
+  const row = {
+    author: input.author,
+    role: input.role,
+    company: input.company,
+    title: input.title,
+    quote: input.quote,
+    photo: input.photo,
+    logo: input.logo,
+    color: input.color,
+  };
+  const { error } = input.id
+    ? await supabase.from("big_reviews").update(row).eq("id", input.id)
+    : await supabase.from("big_reviews").insert(row);
+  if (error) return { ok: false, error: error.message };
+  revalidateBigReviews();
+  return { ok: true };
+}
+
+export async function deleteBigReview(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("big_reviews").delete().eq("id", id);
+  if (error) return { ok: false, error: error.message };
+  revalidateBigReviews();
   return { ok: true };
 }
 
