@@ -740,6 +740,7 @@ export const footer = {
         { label: "Maatwerk website", href: "/#prijzen" },
         { label: "Maatwerk webshop", href: "/#prijzen" },
         { label: "Redesign", href: "/contact" },
+        { label: "Gratis blauwdruk", href: "/blauwdruk" },
       ],
     },
   ],

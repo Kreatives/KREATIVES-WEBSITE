@@ -1,0 +1,435 @@
+/* ---------- Hero ---------- */
+.hero {
+  padding-top: clamp(7rem, 5rem + 8vw, 11rem);
+  padding-bottom: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  text-align: center;
+}
+.heroInner {
+  max-width: 52rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.1rem, 2vw, 1.6rem);
+}
+.heroTitle {
+  font-size: var(--fs-hero);
+}
+.heroSub {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 40ch;
+}
+.micro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--orange);
+  flex: none;
+}
+
+/* ---------- Generieke sectiekop ---------- */
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+  max-width: 46rem;
+}
+.headCenter {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+.kop {
+  font-size: var(--fs-h2);
+}
+.intro {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--muted);
+}
+.section--dark .intro,
+.darkIntro {
+  color: var(--on-dark-muted);
+}
+
+/* ---------- Herkenning ---------- */
+.recoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.9rem, 1.8vw, 1.25rem);
+}
+.recoItem {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+.closer {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  max-width: 52ch;
+}
+.closer strong {
+  font-weight: 600;
+}
+
+/* ---------- Wat je krijgt ---------- */
+.getGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+.getItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 2.6vw, 2rem);
+  border-radius: 12px;
+  background: var(--off-white-2);
+  border: 1px solid var(--line);
+}
+.getNum {
+  font-family: var(--font-mono), "DM Mono", monospace;
+  font-size: 0.85rem;
+  letter-spacing: var(--track-mono);
+  color: var(--orange);
+}
+.getTitle {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.2;
+}
+.getBody {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- Voor wie ---------- */
+.whoGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.whoBody {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--muted);
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--orange);
+}
+
+/* ---------- Zo werkt het ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
+  counter-reset: step;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.stepNum {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--on-dark);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
+}
+.stepTitle {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.2;
+}
+.stepBody {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- Social proof (donker) ---------- */
+.proofGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+.proofCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 2.6vw, 2rem);
+  border-radius: 12px;
+  background: rgba(244, 243, 239, 0.06);
+  border: 1px solid var(--line-dark);
+}
+.proofQuote {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--on-dark);
+}
+.proofAuthor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+.proofAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-size: cover;
+  background-position: center;
+  flex: none;
+  border: 1.5px solid rgba(244, 243, 239, 0.5);
+}
+.proofName {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--on-dark);
+}
+.proofRole {
+  font-size: 0.85rem;
+  color: var(--on-dark-muted);
+}
+.stat {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  text-align: center;
+  font-size: var(--fs-lead);
+  color: var(--on-dark);
+}
+.stat strong {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* ---------- Over KREATIVES ---------- */
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.aboutPhoto {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--off-white-2);
+}
+.aboutText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.aboutBody {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- Finale CTA + formulier (donker) ---------- */
+.formSec {
+  padding-block: var(--section-y);
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.formCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 6rem;
+}
+.formTitle {
+  font-size: var(--fs-h2);
+  color: var(--on-dark);
+}
+.formSub {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--on-dark-muted);
+  max-width: 38ch;
+}
+
+.formCard {
+  background: var(--off-white);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.6);
+}
+.formCardLabel {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.input,
+.select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color 0.2s var(--ease);
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+.submitRow {
+  margin-top: 0.4rem;
+}
+.submitRow :global(.btn) {
+  width: 100%;
+}
+.submitRow :global(.btn-label) {
+  flex: 1;
+  justify-content: center;
+}
+.micro2 {
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+}
+.error {
+  font-size: 0.9rem;
+  color: #c0392b;
+}
+
+/* ---------- Bedankt-staat ---------- */
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 3rem) 0;
+}
+.check {
+  width: 3.5rem;
+  height: 3.5rem;
+  color: var(--orange);
+}
+.doneTitle {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+}
+.doneBody {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 34ch;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .whoGrid,
+  .aboutGrid,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .formCopy {
+    position: static;
+  }
+  .steps,
+  .proofGrid {
+    grid-template-columns: 1fr;
+  }
+  .getGrid {
+    grid-template-columns: 1fr;
+  }
+  .aboutPhoto {
+    max-width: 22rem;
+  }
+}
+@media (max-width: 560px) {
+  .recoGrid {
+    grid-template-columns: 1fr;
+  }
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
