@@ -109,23 +109,19 @@ export default function FounderWords({
                   <span className={styles.name}>{t.author}</span>
                   {t.role && <span className={styles.role}>{t.role}</span>}
                 </div>
-                {(t.logo || t.company) && (
+                {t.logo && (
                   <span className={styles.logo}>
-                    {t.logo ? (
-                      <Image
-                        src={t.logo}
-                        alt={t.company || t.author}
-                        width={140}
-                        height={44}
-                        style={{
-                          objectFit: "contain",
-                          height: "1.9rem",
-                          width: "auto",
-                        }}
-                      />
-                    ) : (
-                      t.company
-                    )}
+                    <Image
+                      src={t.logo}
+                      alt={t.company || t.author}
+                      width={140}
+                      height={44}
+                      style={{
+                        objectFit: "contain",
+                        height: "2rem",
+                        width: "auto",
+                      }}
+                    />
                   </span>
                 )}
               </div>

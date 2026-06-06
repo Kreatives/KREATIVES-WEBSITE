@@ -56,9 +56,8 @@
 .photo {
   position: relative;
   flex: none;
-  align-self: flex-start;
-  width: clamp(8rem, 18vw, 11rem);
-  aspect-ratio: 2 / 3;
+  align-self: stretch;
+  width: clamp(9rem, 22vw, 13rem);
   border-radius: 10px;
   overflow: hidden;
   display: grid;
@@ -76,8 +75,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: clamp(1.5rem, 3vw, 2.25rem);
+  justify-content: flex-start;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 .quote {
   color: var(--text);
@@ -108,16 +107,6 @@
   display: inline-flex;
   align-items: center;
   flex: none;
-  min-height: 2.6rem;
-  padding-inline: 1rem;
-  background: var(--off-white-2);
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  letter-spacing: var(--track-tight);
-  font-size: 0.92rem;
 }
 
 /* Pijl-navigatie + 'alle reviews' */
