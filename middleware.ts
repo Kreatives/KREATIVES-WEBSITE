@@ -47,22 +47,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Preview-poort: de hele publieke site is afgeschermd met een site-wachtwoord.
-  // Uitgezonderd: de homepage (toont de screen + wachtwoordveld), /admin, /login
-  // en bestanden. Ingelogde beheerders en wie het wachtwoord heeft, mogen door.
-  const hasPreview =
-    request.cookies.get("preview_access")?.value === "1" || !!user;
-  const gateExempt =
-    path === "/" ||
-    path.startsWith("/admin") ||
-    path.startsWith("/login") ||
-    path.startsWith("/api") ||
-    path.includes(".");
-  if (!gateExempt && !hasPreview) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/";
-    return NextResponse.redirect(url);
-  }
+  // Site is live: geen preview-wachtwoordpoort meer. De publieke pagina's
+  // zijn vrij toegankelijk; alleen /admin blijft beveiligd (hierboven).
 
   return response;
 }

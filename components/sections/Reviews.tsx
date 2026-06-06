@@ -32,9 +32,32 @@ function Avatar({ r, className }: { r: ReviewItem; className: string }) {
   );
 }
 
+function Card({ r, hidden }: { r: ReviewItem; hidden: boolean }) {
+  return (
+    <article className={styles.card} aria-hidden={hidden}>
+      <span className={styles.quoteMark} aria-hidden>
+        &ldquo;
+      </span>
+      <p className={styles.quote}>{r.quote}</p>
+      <div className={styles.author}>
+        <Avatar r={r} className={styles.avatar} />
+        <div className={styles.authorMeta}>
+          <span className={styles.name}>{r.author}</span>
+          <span className={styles.company}>{r.company}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function Reviews({ items: source }: { items: ReviewItem[] }) {
-  // Dupliceren voor naadloze marquee
-  const items = [...source, ...source];
+  // Verdeel de reviews over twee rijen zodat ze niet allemaal hetzelfde tonen.
+  const mid = Math.ceil(source.length / 2);
+  const rowA = source.slice(0, mid);
+  const rowB = source.slice(mid).length ? source.slice(mid) : source.slice(0, mid);
+  // Per rij dupliceren voor een naadloze marquee.
+  const trackA = [...rowA, ...rowA];
+  const trackB = [...rowB, ...rowB];
 
   return (
     <section className={`section section--dark ${styles.sec}`} id="reviews">
@@ -67,24 +90,8 @@ export default function Reviews({ items: source }: { items: ReviewItem[] }) {
           className={`marquee__track ${styles.track}`}
           style={{ "--marquee-dur": "60s" } as React.CSSProperties}
         >
-          {items.map((r, i) => (
-            <article
-              key={i}
-              className={styles.card}
-              aria-hidden={i >= source.length}
-            >
-              <span className={styles.quoteMark} aria-hidden>
-                &ldquo;
-              </span>
-              <p className={styles.quote}>{r.quote}</p>
-              <div className={styles.author}>
-                <Avatar r={r} className={styles.avatar} />
-                <div className={styles.authorMeta}>
-                  <span className={styles.name}>{r.author}</span>
-                  <span className={styles.company}>{r.company}</span>
-                </div>
-              </div>
-            </article>
+          {trackA.map((r, i) => (
+            <Card key={`a-${i}`} r={r} hidden={i >= rowA.length} />
           ))}
         </div>
       </div>
@@ -94,20 +101,8 @@ export default function Reviews({ items: source }: { items: ReviewItem[] }) {
           className={`marquee__track ${styles.track} ${styles.trackReverse}`}
           style={{ "--marquee-dur": "60s" } as React.CSSProperties}
         >
-          {items.map((r, i) => (
-            <article key={`r-${i}`} className={styles.card} aria-hidden={true}>
-              <span className={styles.quoteMark} aria-hidden>
-                &ldquo;
-              </span>
-              <p className={styles.quote}>{r.quote}</p>
-              <div className={styles.author}>
-                <Avatar r={r} className={styles.avatar} />
-                <div className={styles.authorMeta}>
-                  <span className={styles.name}>{r.author}</span>
-                  <span className={styles.company}>{r.company}</span>
-                </div>
-              </div>
-            </article>
+          {trackB.map((r, i) => (
+            <Card key={`b-${i}`} r={r} hidden />
           ))}
         </div>
       </div>

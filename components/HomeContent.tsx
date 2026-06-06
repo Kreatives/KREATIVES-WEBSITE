@@ -9,16 +9,16 @@ import Reviews from "@/components/sections/Reviews";
 import OverMij from "@/components/sections/OverMij";
 import Pricing from "@/components/sections/Pricing";
 import ClosingCta from "@/components/sections/ClosingCta";
-import { getFeaturedProjects, getFeaturedReviews, initialsOf } from "@/lib/cms";
+import { getFeaturedProjects, getReviews, initialsOf } from "@/lib/cms";
 
 /**
  * De KREATIVES-homepage. Hero → Probleem → Waarom ons → Aanpak →
  * Cases (CMS) → Reviews (CMS, 2 rijen marquee) → Over ons → Prijzen → Sluit-CTA.
  */
 export default async function HomeContent() {
-  const [featuredProjects, featuredReviews] = await Promise.all([
+  const [featuredProjects, allReviews] = await Promise.all([
     getFeaturedProjects(),
-    getFeaturedReviews(),
+    getReviews(),
   ]);
 
   const cases = featuredProjects.slice(0, 2).map((p) => ({
@@ -29,7 +29,7 @@ export default async function HomeContent() {
     tags: p.tags,
   }));
 
-  const reviewItems = featuredReviews.map((r) => ({
+  const reviewItems = allReviews.map((r) => ({
     quote: r.quote,
     author: r.author,
     company: r.company,
