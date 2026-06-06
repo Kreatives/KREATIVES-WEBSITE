@@ -310,9 +310,17 @@
   padding: clamp(1.5rem, 3vw, 2.5rem);
   box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.6);
 }
+.formCardTitle {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.15;
+  color: var(--ink);
+}
 .formCardLabel {
   font-size: 0.9rem;
   color: var(--muted);
+  margin-top: 0.4rem;
   margin-bottom: 1.5rem;
 }
 .form {
@@ -343,12 +351,23 @@
   border-radius: 8px;
   background: #fff;
   font-size: 1rem;
+  color: var(--ink);
   transition: border-color 0.2s var(--ease);
+}
+.input::placeholder {
+  color: var(--muted);
 }
 .input:focus,
 .select:focus {
   outline: none;
   border-color: var(--orange);
+}
+/* Toon de placeholder-optie leesbaar (grijs) zolang er niets gekozen is. */
+.selectEmpty {
+  color: var(--muted);
+}
+.select option {
+  color: var(--ink);
 }
 .select {
   appearance: none;

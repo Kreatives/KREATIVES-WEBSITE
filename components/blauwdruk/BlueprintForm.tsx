@@ -96,6 +96,7 @@ export default function BlueprintForm() {
 
   return (
     <div className={styles.formCard}>
+      <h3 className={styles.formCardTitle}>Vraag je gratis blauwdruk aan</h3>
       <p className={styles.formCardLabel}>Vul het in — het duurt twee minuten.</p>
       <form className={styles.form} onSubmit={onSubmit} noValidate>
         <div className={styles.row}>
@@ -134,7 +135,7 @@ export default function BlueprintForm() {
           </label>
           <select
             id="bp-branche"
-            className={styles.select}
+            className={`${styles.select} ${branche ? "" : styles.selectEmpty}`}
             value={branche}
             onChange={(e) => setBranche(e.target.value)}
           >
@@ -168,7 +169,7 @@ export default function BlueprintForm() {
           </label>
           <select
             id="bp-uitstraling"
-            className={styles.select}
+            className={`${styles.select} ${uitstraling ? "" : styles.selectEmpty}`}
             value={uitstraling}
             onChange={(e) => setUitstraling(e.target.value)}
           >

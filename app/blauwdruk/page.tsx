@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/Button";
+import Reviews from "@/components/sections/Reviews";
 import BlueprintForm from "@/components/blauwdruk/BlueprintForm";
 import { getReviews, initialsOf } from "@/lib/cms";
 import styles from "@/components/blauwdruk/Blueprint.module.css";
@@ -71,7 +72,14 @@ const STAPPEN = [
 ];
 
 export default async function BlauwdrukPage() {
-  const reviews = (await getReviews()).slice(0, 3);
+  const reviewItems = (await getReviews()).map((r) => ({
+    quote: r.quote,
+    author: r.author,
+    company: r.company,
+    initials: initialsOf(r.author),
+    color: r.color,
+    photo: r.photo,
+  }));
 
   return (
     <main>
@@ -196,48 +204,10 @@ export default async function BlauwdrukPage() {
         </div>
       </section>
 
-      {/* 06 — Social proof */}
-      <section className="section section--dark cosmos-bg">
-        <div className="container">
-          <div className={`${styles.head} ${styles.headCenter}`}>
-            <span className="eyebrow">Wat ondernemers zeggen</span>
-            <h2 className={styles.kop} style={{ color: "var(--on-dark)" }}>
-              Ondernemers die ons{" "}
-              <span className="accent accent--orange">aanraden.</span>
-            </h2>
-          </div>
-          <div className={styles.proofGrid}>
-            {reviews.map((r) => (
-              <article key={r.id} className={styles.proofCard}>
-                <p className={styles.proofQuote}>&ldquo;{r.quote}&rdquo;</p>
-                <div className={styles.proofAuthor}>
-                  <span
-                    className={styles.proofAvatar}
-                    style={
-                      r.photo
-                        ? { backgroundImage: `url(${r.photo})` }
-                        : { background: r.color }
-                    }
-                    aria-hidden
-                  >
-                    {!r.photo && initialsOf(r.author)}
-                  </span>
-                  <span>
-                    <span className={styles.proofName}>{r.author}</span>
-                    {r.company && (
-                      <span className={styles.proofRole}> · {r.company}</span>
-                    )}
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-          <p className={styles.stat}>
-            <strong>100+</strong> websites gebouwd voor ondernemers door heel
-            Nederland.
-          </p>
-        </div>
-      </section>
+      {/* 06 — Social proof: dezelfde review-marquee als op de homepage */}
+      <div className="cosmos-bg cosmos-wrap">
+        <Reviews items={reviewItems} />
+      </div>
 
       {/* 07 — Over KREATIVES */}
       <section className="section">
