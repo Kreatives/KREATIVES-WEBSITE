@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/Button";
+import RevealInit from "@/components/RevealInit";
 import Reviews from "@/components/sections/Reviews";
 import BlueprintForm from "@/components/blauwdruk/BlueprintForm";
 import { getReviews, initialsOf } from "@/lib/cms";
@@ -83,6 +84,7 @@ export default async function BlauwdrukPage() {
 
   return (
     <main>
+      <RevealInit />
       {/* 01 — Hero */}
       <section className={styles.hero}>
         <div className="container">
