@@ -42,6 +42,7 @@ export type CmsReview = {
   position: number;
   featured: boolean;
   quoteFeatured: boolean;
+  bigFeatured: boolean;
 };
 
 /** Maximaal aantal reviews dat op de homepage past. */
@@ -49,6 +50,9 @@ export const HOMEPAGE_REVIEW_LIMIT = 6;
 
 /** Maximaal aantal reviews in de "In hun eigen woorden"-kaarten. */
 export const QUOTE_REVIEW_LIMIT = 4;
+
+/** Maximaal aantal "grote reviews" (foto-carrousel). */
+export const BIG_REVIEW_LIMIT = 12;
 
 function toReview(row: {
   id: string;
@@ -62,6 +66,7 @@ function toReview(row: {
   position: number | null;
   featured: boolean | null;
   quote_featured: boolean | null;
+  big_featured?: boolean | null;
 }): CmsReview {
   return {
     id: row.id,
@@ -75,6 +80,7 @@ function toReview(row: {
     position: row.position ?? 0,
     featured: !!row.featured,
     quoteFeatured: !!row.quote_featured,
+    bigFeatured: !!row.big_featured,
   };
 }
 
@@ -291,6 +297,7 @@ export async function getReviews(): Promise<CmsReview[]> {
     position: i,
     featured: i < HOMEPAGE_REVIEW_LIMIT,
     quoteFeatured: i < QUOTE_REVIEW_LIMIT,
+    bigFeatured: !!r.photo,
   }));
 }
 
@@ -325,6 +332,36 @@ export async function quoteReviewCount(excludeId?: string): Promise<number> {
 /** Quote-reviews in de vorm die de "In hun eigen woorden"-kaarten gebruiken. */
 export async function getQuoteReviewItems(limit = QUOTE_REVIEW_LIMIT) {
   const reviews = await getQuoteReviews(limit);
+  return reviews.map((r) => ({
+    quote: r.quote,
+    author: r.author,
+    role: r.role,
+    company: r.company,
+    initials: initialsOf(r.author),
+    color: r.color,
+    photo: r.photo ?? undefined,
+  }));
+}
+
+/* ---------- Grote reviews (eigen foto-carrousel) ---------- */
+
+export async function getBigReviews(): Promise<CmsReview[]> {
+  const rows = await dbReviews();
+  const big = rows.filter((r) => r.bigFeatured);
+  if (big.length) return big.slice(0, BIG_REVIEW_LIMIT);
+  // Fallback: reviews mét foto, anders de eerste paar.
+  const withPhoto = rows.filter((r) => r.photo);
+  return (withPhoto.length ? withPhoto : rows).slice(0, BIG_REVIEW_LIMIT);
+}
+
+export async function bigReviewCount(excludeId?: string): Promise<number> {
+  const rows = await dbReviews();
+  return rows.filter((r) => r.bigFeatured && r.id !== excludeId).length;
+}
+
+/** Grote reviews in de vorm die de foto-carrousel gebruikt. */
+export async function getBigReviewItems() {
+  const reviews = await getBigReviews();
   return reviews.map((r) => ({
     quote: r.quote,
     author: r.author,

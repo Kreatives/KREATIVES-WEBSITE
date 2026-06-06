@@ -11,7 +11,7 @@ import styles from "../../admin.module.css";
 
 export const dynamic = "force-dynamic";
 
-export default async function NewReviewPage() {
+export default async function NewGroteReviewPage() {
   const [featuredCount, quoteCount, bigCount] = await Promise.all([
     featuredReviewCount(),
     quoteReviewCount(),
@@ -20,7 +20,7 @@ export default async function NewReviewPage() {
   return (
     <div>
       <div className={styles.head}>
-        <h1 className={styles.title}>Nieuwe review</h1>
+        <h1 className={styles.title}>Nieuwe grote review</h1>
       </div>
       <ReviewForm
         featuredCount={featuredCount}
@@ -29,6 +29,8 @@ export default async function NewReviewPage() {
         quoteLimit={QUOTE_REVIEW_LIMIT}
         bigCount={bigCount}
         bigLimit={BIG_REVIEW_LIMIT}
+        defaultBig
+        backHref="/admin/grote-reviews"
       />
     </div>
   );

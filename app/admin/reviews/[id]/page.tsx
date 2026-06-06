@@ -3,8 +3,10 @@ import {
   dbReview,
   featuredReviewCount,
   quoteReviewCount,
+  bigReviewCount,
   HOMEPAGE_REVIEW_LIMIT,
   QUOTE_REVIEW_LIMIT,
+  BIG_REVIEW_LIMIT,
 } from "@/lib/cms";
 import ReviewForm from "@/components/admin/ReviewForm";
 import styles from "../../admin.module.css";
@@ -19,9 +21,10 @@ export default async function EditReviewPage({
   const { id } = await params;
   const review = await dbReview(id);
   if (!review) notFound();
-  const [featuredCount, quoteCount] = await Promise.all([
+  const [featuredCount, quoteCount, bigCount] = await Promise.all([
     featuredReviewCount(id),
     quoteReviewCount(id),
+    bigReviewCount(id),
   ]);
 
   return (
@@ -35,6 +38,8 @@ export default async function EditReviewPage({
         limit={HOMEPAGE_REVIEW_LIMIT}
         quoteCount={quoteCount}
         quoteLimit={QUOTE_REVIEW_LIMIT}
+        bigCount={bigCount}
+        bigLimit={BIG_REVIEW_LIMIT}
       />
     </div>
   );

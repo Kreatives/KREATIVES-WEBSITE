@@ -9,12 +9,14 @@ import {
   HOMEPAGE_PROJECT_LIMIT,
   HOMEPAGE_REVIEW_LIMIT,
   QUOTE_REVIEW_LIMIT,
+  BIG_REVIEW_LIMIT,
   type CmsProjectSection,
 } from "@/lib/cms";
 
 function revalidateReviews() {
   revalidatePath("/reviews");
   revalidatePath("/admin/reviews");
+  revalidatePath("/admin/grote-reviews");
   revalidatePath("/");
   revalidatePath("/diensten/webdesign");
   revalidatePath("/werkwijze");
@@ -74,9 +76,11 @@ export async function seedDatabase() {
         company: x.company,
         title: x.title,
         quote: x.quote,
+        photo: x.photo ?? null,
         color: x.color,
         featured: i < HOMEPAGE_REVIEW_LIMIT,
         quote_featured: i < QUOTE_REVIEW_LIMIT,
+        big_featured: !!x.photo,
       }))
     );
     if (error) errors.push(`reviews: ${error.message}`);
@@ -208,11 +212,25 @@ export type ReviewInput = {
   color: string;
   featured: boolean;
   quoteFeatured: boolean;
+  bigFeatured: boolean;
 };
 
 export async function saveReview(input: ReviewInput) {
   const supabase = await createClient();
 
+  if (input.bigFeatured) {
+    const { data: others } = await supabase
+      .from("reviews")
+      .select("id")
+      .eq("big_featured", true);
+    const count = (others ?? []).filter((o) => o.id !== input.id).length;
+    if (count >= BIG_REVIEW_LIMIT) {
+      return {
+        ok: false,
+        error: `Er is plek voor ${BIG_REVIEW_LIMIT} grote reviews. Haal er eerst één weg.`,
+      };
+    }
+  }
   if (input.featured) {
     const { data: others } = await supabase
       .from("reviews")
@@ -250,6 +268,7 @@ export async function saveReview(input: ReviewInput) {
     color: input.color,
     featured: input.featured,
     quote_featured: input.quoteFeatured,
+    big_featured: input.bigFeatured,
   };
   const { error } = input.id
     ? await supabase.from("reviews").update(row).eq("id", input.id)

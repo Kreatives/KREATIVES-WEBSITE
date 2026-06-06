@@ -16,6 +16,7 @@ const navItems = [
   { label: "E-mail inzendingen", href: "/admin/inzendingen" },
   { label: "Projecten", href: "/admin/projecten" },
   { label: "Reviews", href: "/admin/reviews" },
+  { label: "Grote reviews", href: "/admin/grote-reviews" },
   { label: "Veelgestelde vragen", href: "/admin/faq" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Afbeeldingen", href: "/admin/media" },

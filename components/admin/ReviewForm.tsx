@@ -13,17 +13,28 @@ export default function ReviewForm({
   limit = 6,
   quoteCount = 0,
   quoteLimit = 4,
+  bigCount = 0,
+  bigLimit = 12,
+  defaultBig = false,
+  backHref = "/admin/reviews",
 }: {
   review?: CmsReview;
   featuredCount?: number;
   limit?: number;
   quoteCount?: number;
   quoteLimit?: number;
+  bigCount?: number;
+  bigLimit?: number;
+  defaultBig?: boolean;
+  backHref?: string;
 }) {
   const router = useRouter();
   const [featured, setFeatured] = useState(review?.featured ?? false);
   const [quoteFeatured, setQuoteFeatured] = useState(
     review?.quoteFeatured ?? false
+  );
+  const [bigFeatured, setBigFeatured] = useState(
+    review?.bigFeatured ?? defaultBig
   );
   const [author, setAuthor] = useState(review?.author ?? "");
   const [role, setRole] = useState(review?.role ?? "");
@@ -43,6 +54,7 @@ export default function ReviewForm({
       id: review?.id,
       featured,
       quoteFeatured,
+      bigFeatured,
       author: author.trim(),
       role: role.trim(),
       company: company.trim(),
@@ -56,7 +68,7 @@ export default function ReviewForm({
       setSaving(false);
       return;
     }
-    router.push("/admin/reviews");
+    router.push(backHref);
     router.refresh();
   }
 
@@ -119,6 +131,33 @@ export default function ReviewForm({
             : ""}
         </span>
 
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            fontWeight: 500,
+            marginTop: "0.5rem",
+            cursor: !bigFeatured && bigCount >= bigLimit ? "default" : "pointer",
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={bigFeatured}
+            disabled={!bigFeatured && bigCount >= bigLimit}
+            onChange={(e) => setBigFeatured(e.target.checked)}
+            style={{ width: "auto" }}
+          />
+          Grote review (foto-carrousel met grote 2:3 foto)
+        </label>
+        <span className={styles.hint} style={{ marginTop: "-0.4rem" }}>
+          {bigCount + (bigFeatured ? 1 : 0)} van {bigLimit} plekken gebruikt.
+          Tip: gebruik hier een verticale foto (2:3).
+          {!bigFeatured && bigCount >= bigLimit
+            ? " Vol — haal eerst een andere review weg."
+            : ""}
+        </span>
+
         <span className={styles.hint}>
           Alle reviews staan sowieso op de aparte reviews-pagina.
         </span>
@@ -163,7 +202,7 @@ export default function ReviewForm({
         <button type="submit" className={styles.btnPrimary} disabled={saving}>
           {saving ? "Bezig…" : "Opslaan"}
         </button>
-        <a href="/admin/reviews" className={styles.btnGhost}>
+        <a href={backHref} className={styles.btnGhost}>
           Annuleren
         </a>
       </div>

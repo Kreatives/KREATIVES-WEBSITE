@@ -8,7 +8,7 @@ import FounderWords from "@/components/funnel/FounderWords";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { werkwijzePage } from "@/lib/site";
-import { getQuoteReviewItems } from "@/lib/cms";
+import { getBigReviewItems } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Werkwijze",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function WerkwijzePage() {
-  const quoteItems = await getQuoteReviewItems();
+  const quoteItems = await getBigReviewItems();
   const socialProof =
     quoteItems.length > 0
       ? { ...werkwijzePage.socialProof, items: quoteItems }

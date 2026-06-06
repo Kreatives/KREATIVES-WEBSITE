@@ -6,23 +6,29 @@ import styles from "../admin.module.css";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminReviews() {
-  const reviews = await dbReviews();
+export default async function AdminGroteReviews() {
+  const reviews = (await dbReviews()).filter((r) => r.bigFeatured);
 
   return (
     <div>
       <div className={styles.topbar}>
         <div className={styles.head} style={{ marginBottom: 0 }}>
-          <h1 className={styles.title}>Reviews</h1>
-          <p className={styles.lead}>Voeg reviews toe, bewerk of verwijder ze.</p>
+          <h1 className={styles.title}>Grote reviews</h1>
+          <p className={styles.lead}>
+            De reviews met een grote 2:3 foto, in de foto-carrousel op de
+            diensten- en werkwijze-pagina&apos;s.
+          </p>
         </div>
-        <Link href="/admin/reviews/new" className={styles.newBtn}>
-          + Nieuwe review
+        <Link href="/admin/grote-reviews/new" className={styles.newBtn}>
+          + Nieuwe grote review
         </Link>
       </div>
 
       {reviews.length === 0 ? (
-        <p className={styles.empty}>Nog geen reviews.</p>
+        <p className={styles.empty}>
+          Nog geen grote reviews. Voeg er één toe, of zet een bestaande review
+          op &ldquo;grote review&rdquo; in de gewone reviews-lijst.
+        </p>
       ) : (
         <div className={styles.list}>
           {reviews.map((r) => (
@@ -43,17 +49,8 @@ export default async function AdminReviews() {
               <div className={styles.listMain}>
                 <div className={styles.listTitle}>
                   {r.title || r.author}
-                  {r.featured && (
-                    <span className={styles.listTag}> · homepage</span>
-                  )}
-                  {r.quoteFeatured && (
-                    <span className={styles.listTag}>
-                      {" "}
-                      · in hun eigen woorden
-                    </span>
-                  )}
-                  {r.bigFeatured && (
-                    <span className={styles.listTag}> · grote review</span>
+                  {!r.photo && (
+                    <span className={styles.listTag}> · geen foto</span>
                   )}
                 </div>
                 <div className={styles.listSub}>
@@ -62,7 +59,10 @@ export default async function AdminReviews() {
                 </div>
               </div>
               <div className={styles.listActions}>
-                <Link href={`/admin/reviews/${r.id}`} className={styles.editLink}>
+                <Link
+                  href={`/admin/grote-reviews/${r.id}`}
+                  className={styles.editLink}
+                >
                   Bewerken
                 </Link>
                 <DeleteButton action={deleteReview} id={r.id} />

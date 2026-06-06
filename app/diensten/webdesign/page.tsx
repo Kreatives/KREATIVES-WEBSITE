@@ -9,7 +9,7 @@ import FounderWords from "@/components/funnel/FounderWords";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { webdesignFunnel } from "@/lib/site";
-import { getQuoteReviewItems } from "@/lib/cms";
+import { getBigReviewItems } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Webdesign",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function WebdesignPage() {
-  const quoteItems = await getQuoteReviewItems();
+  const quoteItems = await getBigReviewItems();
   const socialProof =
     quoteItems.length > 0
       ? { ...webdesignFunnel.socialProof, items: quoteItems }
