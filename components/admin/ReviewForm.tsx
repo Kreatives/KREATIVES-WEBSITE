@@ -43,6 +43,7 @@ export default function ReviewForm({
   const [quote, setQuote] = useState(review?.quote ?? "");
   const [color, setColor] = useState(review?.color ?? "#FD6D17");
   const [photo, setPhoto] = useState(review?.photo ?? "");
+  const [logo, setLogo] = useState(review?.logo ?? "");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -61,6 +62,7 @@ export default function ReviewForm({
       title: title.trim(),
       quote: quote.trim(),
       photo: photo.trim() || null,
+      logo: logo.trim() || null,
       color: color.trim() || "#FD6D17",
     });
     if (!res.ok) {
@@ -169,7 +171,19 @@ export default function ReviewForm({
       </div>
       <div className={styles.field}>
         <label>Review (volledige tekst)</label>
-        <textarea value={quote} onChange={(e) => setQuote(e.target.value)} rows={4} required />
+        <textarea
+          value={quote}
+          onChange={(e) => setQuote(e.target.value)}
+          rows={4}
+          maxLength={bigFeatured ? 320 : undefined}
+          required
+        />
+        {bigFeatured && (
+          <span className={styles.hint}>
+            Houd het kort voor de grote-review card: max ~45 woorden (
+            {quote.trim() ? quote.trim().split(/\s+/).length : 0}/45).
+          </span>
+        )}
       </div>
       <div className={styles.row}>
         <div className={styles.field}>
@@ -192,8 +206,12 @@ export default function ReviewForm({
         </div>
       </div>
       <div className={styles.field}>
-        <label>Profielfoto (optioneel)</label>
+        <label>Profielfoto (optioneel — verticaal/2:3 voor grote reviews)</label>
         <ImageInput value={photo} onChange={setPhoto} />
+      </div>
+      <div className={styles.field}>
+        <label>Logo (optioneel — zwarte versie, voor de grote-review card)</label>
+        <ImageInput value={logo} onChange={setLogo} />
       </div>
 
       {error && <p className={styles.error}>{error}</p>}

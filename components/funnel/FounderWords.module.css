@@ -56,8 +56,8 @@
 .photo {
   position: relative;
   flex: none;
-  align-self: center;
-  width: clamp(8.5rem, 26vw, 12.5rem);
+  align-self: flex-start;
+  width: clamp(8rem, 18vw, 11rem);
   aspect-ratio: 2 / 3;
   border-radius: 10px;
   overflow: hidden;

@@ -209,6 +209,7 @@ export type ReviewInput = {
   title: string;
   quote: string;
   photo: string | null;
+  logo: string | null;
   color: string;
   featured: boolean;
   quoteFeatured: boolean;
@@ -265,6 +266,7 @@ export async function saveReview(input: ReviewInput) {
     title: input.title,
     quote: input.quote,
     photo: input.photo,
+    logo: input.logo,
     color: input.color,
     featured: input.featured,
     quote_featured: input.quoteFeatured,

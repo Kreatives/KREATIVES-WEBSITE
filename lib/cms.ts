@@ -38,6 +38,7 @@ export type CmsReview = {
   title: string;
   quote: string;
   photo: string | null;
+  logo: string | null;
   color: string;
   position: number;
   featured: boolean;
@@ -62,6 +63,7 @@ function toReview(row: {
   title: string | null;
   quote: string;
   photo: string | null;
+  logo?: string | null;
   color: string | null;
   position: number | null;
   featured: boolean | null;
@@ -76,6 +78,7 @@ function toReview(row: {
     title: row.title ?? "",
     quote: row.quote,
     photo: row.photo ?? null,
+    logo: row.logo ?? null,
     color: row.color ?? "#FD6D17",
     position: row.position ?? 0,
     featured: !!row.featured,
@@ -293,6 +296,7 @@ export async function getReviews(): Promise<CmsReview[]> {
     title: r.title,
     quote: r.quote,
     photo: r.photo ?? null,
+    logo: r.logo ?? null,
     color: r.color,
     position: i,
     featured: i < HOMEPAGE_REVIEW_LIMIT,
@@ -370,6 +374,7 @@ export async function getBigReviewItems() {
     initials: initialsOf(r.author),
     color: r.color,
     photo: r.photo ?? undefined,
+    logo: r.logo ?? undefined,
   }));
 }
 
