@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./BookCallButton.module.css";
 
-const CALENDLY_URL = "https://calendly.com/info-jtw/gratis-adviesgesprek-v2";
+const CALENDLY_URL = "https://calendly.com/info-jtw/blueprint-sessie";
 const WHATSAPP_URL = "https://wa.me/31613066250";
 const EMAIL = "info@kreatives.nl";
 

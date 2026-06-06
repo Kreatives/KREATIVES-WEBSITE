@@ -5,7 +5,7 @@ import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/Button";
 import styles from "./RedesignWizard.module.css";
 
-const CALENDLY_URL = "https://calendly.com/info-jtw/gratis-adviesgesprek-v2";
+const CALENDLY_URL = "https://calendly.com/info-jtw/blueprint-sessie";
 const WHATSAPP_URL = "https://wa.me/31613066250";
 
 type FieldType = "text" | "email" | "tel" | "url" | "textarea";

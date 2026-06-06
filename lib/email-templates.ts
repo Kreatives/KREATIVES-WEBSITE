@@ -7,7 +7,7 @@ const ORANGE = "#FD6D17";
 const MUTED = "#6b6960";
 
 export const CALENDLY_URL =
-  "https://calendly.com/info-jtw/gratis-adviesgesprek-v2";
+  "https://calendly.com/info-jtw/blueprint-sessie";
 export const WHATSAPP_URL = "https://wa.me/31613066250";
 export const SITE_URL = "https://www.kreatives.nl";
 

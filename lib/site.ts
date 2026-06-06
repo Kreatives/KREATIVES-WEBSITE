@@ -1244,7 +1244,7 @@ export const overOnsCta = {
   titleAccent: "wat je zoekt?",
   body:
     "Plan een gesprek. We kijken samen of het past en wat er nodig is. Geen offerte, geen verplichtingen.",
-  calendly: "https://calendly.com/info-jtw/gratis-adviesgesprek-v2",
+  calendly: "https://calendly.com/info-jtw/blueprint-sessie",
   calendlyLabel: "Plan een gesprek",
   subjects: ["Maatwerk website", "Maatwerk webshop", "Redesign", "Iets anders"],
   privacy:
