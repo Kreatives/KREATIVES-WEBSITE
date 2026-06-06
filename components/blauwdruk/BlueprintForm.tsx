@@ -29,6 +29,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export default function BlueprintForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
   const [branche, setBranche] = useState("");
   const [doel, setDoel] = useState("");
   const [uitstraling, setUitstraling] = useState("");
@@ -43,6 +45,9 @@ export default function BlueprintForm() {
     if (name.trim().length < 2) return setError("Vul je naam in.");
     if (!EMAIL_RE.test(email.trim()))
       return setError("Vul een geldig e-mailadres in.");
+    if (phone.replace(/\D/g, "").length < 6)
+      return setError("Vul een geldig telefoonnummer in.");
+    if (company.trim().length < 2) return setError("Vul je bedrijfsnaam in.");
     if (!branche) return setError("Kies je type bedrijf.");
     if (doel.trim().length < 3)
       return setError("Vertel kort wat bezoekers op je site moeten doen.");
@@ -52,9 +57,12 @@ export default function BlueprintForm() {
     const res = await submitContact({
       name: name.trim(),
       email: email.trim(),
+      company: company.trim(),
       subject: "Gratis blauwdruk",
       message:
         `Aanvraag gratis blauwdruk.\n\n` +
+        `Telefoon: ${phone.trim()}\n` +
+        `Bedrijf: ${company.trim()}\n` +
         `Type bedrijf / branche: ${branche}\n` +
         `Bezoekers moeten op de site: ${doel.trim()}\n` +
         `Gewenste uitstraling: ${uitstraling}`,
@@ -125,6 +133,37 @@ export default function BlueprintForm() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="je@bedrijf.nl"
               autoComplete="email"
+            />
+          </div>
+        </div>
+
+        <div className={styles.row}>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="bp-phone">
+              Telefoonnummer
+            </label>
+            <input
+              id="bp-phone"
+              className={styles.input}
+              type="tel"
+              inputMode="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+31 6 12 34 56 78"
+              autoComplete="tel"
+            />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="bp-company">
+              Bedrijf
+            </label>
+            <input
+              id="bp-company"
+              className={styles.input}
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              placeholder="Je bedrijfsnaam"
+              autoComplete="organization"
             />
           </div>
         </div>
