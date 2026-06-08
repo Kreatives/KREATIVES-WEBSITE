@@ -70,10 +70,28 @@ const jsonLd = {
     { "@type": "City", name: "Arnhem" },
     { "@type": "Country", name: "Nederland" },
   ],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "10:00",
+    closes: "17:00",
+  },
   knowsLanguage: "nl",
   serviceType: "Webdesign, website-ontwikkeling en branding",
   founder: { "@type": "Person", name: "Ricky" },
-  sameAs: footer.social.map((s) => s.href),
+  hasMap: "https://share.google/OLE4MAebPLwhoCjU5",
+  sameAs: [
+    ...footer.social.map((s) => s.href),
+    "https://share.google/OLE4MAebPLwhoCjU5",
+  ],
 };
 
 export default async function RootLayout({
