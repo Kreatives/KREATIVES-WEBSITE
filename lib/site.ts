@@ -7,7 +7,7 @@ export const site = {
   domain: "https://www.kreatives.nl",
   email: "info@kreatives.nl",
   description:
-    "100+ websites gebouwd voor Nederlandse ondernemers. Van webdesign tot branding | KREATIVES zet jouw merk op de kaart. Vraag een gratis strategiegesprek aan.",
+    "Webdesignbureau uit Arnhem dat 100+ websites bouwde voor ondernemers door heel Nederland. Van webdesign tot branding. Vraag een gratis strategiegesprek aan.",
 };
 
 export type NavChild = { label: string; href: string };

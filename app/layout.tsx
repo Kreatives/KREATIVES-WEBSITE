@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { instrumentSerif, dmMono, TYPEKIT_CSS } from "@/lib/fonts";
-import { site } from "@/lib/site";
+import { site, footer } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -12,16 +12,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: "Webdesign & Branding voor MKB | Nederland",
+    default: "Webdesign & Branding uit Arnhem | KREATIVES",
     template: "%s | KREATIVES",
   },
   description: site.description,
   keywords: [
+    "webdesign Arnhem",
+    "webdesignbureau Arnhem",
+    "website laten maken Arnhem",
     "webdesign",
     "maatwerk website",
+    "branding",
     "website laten maken",
-    "webdesign bureau",
-    "premium website",
   ],
   authors: [{ name: "KREATIVES" }],
   alternates: { canonical: "/" },
@@ -30,12 +32,12 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     url: site.domain,
     siteName: site.name,
-    title: "Webdesign & Branding voor MKB | Nederland",
+    title: "Webdesign & Branding uit Arnhem | KREATIVES",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Webdesign & Branding voor MKB | Nederland",
+    title: "Webdesign & Branding uit Arnhem | KREATIVES",
     description: site.description,
   },
   robots: { index: true, follow: true },
@@ -49,13 +51,29 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": `${site.domain}/#organization`,
   name: site.name,
+  alternateName: "KREATIVES Webdesign",
   description: site.description,
   url: site.domain,
   email: site.email,
-  areaServed: "NL",
+  telephone: "+31613066250",
+  image: `${site.domain}/opengraph-image.png`,
+  logo: `${site.domain}/opengraph-image.png`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Arnhem",
+    addressRegion: "Gelderland",
+    addressCountry: "NL",
+  },
+  areaServed: [
+    { "@type": "City", name: "Arnhem" },
+    { "@type": "Country", name: "Nederland" },
+  ],
   knowsLanguage: "nl",
-  serviceType: "Webdesign en website-ontwikkeling",
+  serviceType: "Webdesign, website-ontwikkeling en branding",
+  founder: { "@type": "Person", name: "Ricky" },
+  sameAs: footer.social.map((s) => s.href),
 };
 
 export default async function RootLayout({
