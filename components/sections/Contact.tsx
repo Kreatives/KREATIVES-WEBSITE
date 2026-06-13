@@ -25,6 +25,7 @@ export default function Contact() {
     const bedrijf = String(f.get("bedrijf") || "").trim();
     const website = String(f.get("website") || "").trim();
     const bericht = String(f.get("bericht") || "").trim();
+    const hp = String(f.get("hp") || "");
 
     const next: Errors = {};
     if (naam.length < 2) next.naam = "Vul je naam in.";
@@ -45,6 +46,7 @@ export default function Contact() {
       subject: type,
       message: bericht,
       source: "Contactpagina",
+      hp,
     });
     setSending(false);
     if (!res.ok) {
@@ -73,6 +75,15 @@ export default function Contact() {
         </div>
 
         <form className={styles.card} onSubmit={onSubmit} noValidate>
+          {/* Honeypot tegen bots — laat dit veld leeg. */}
+          <input
+            type="text"
+            name="hp"
+            className="hp-field"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <fieldset className={styles.radioGroup}>
             <legend className={styles.legend}>Hoe kunnen we helpen?</legend>
             <div className={styles.radios}>

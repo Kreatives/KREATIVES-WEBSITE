@@ -34,6 +34,7 @@ export default function BlueprintForm() {
   const [branche, setBranche] = useState("");
   const [doel, setDoel] = useState("");
   const [uitstraling, setUitstraling] = useState("");
+  const [hp, setHp] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
@@ -67,6 +68,7 @@ export default function BlueprintForm() {
         `Bezoekers moeten op de site: ${doel.trim()}\n` +
         `Gewenste uitstraling: ${uitstraling}`,
       source: "Gratis blauwdruk",
+      hp,
     });
     setSending(false);
     if (!res.ok) {
@@ -107,6 +109,17 @@ export default function BlueprintForm() {
       <h3 className={styles.formCardTitle}>Vraag je gratis blauwdruk aan</h3>
       <p className={styles.formCardLabel}>Vul het in — het duurt twee minuten.</p>
       <form className={styles.form} onSubmit={onSubmit} noValidate>
+        {/* Honeypot tegen bots — laat dit veld leeg. */}
+        <input
+          type="text"
+          name="hp"
+          className="hp-field"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+        />
         <div className={styles.row}>
           <div className={styles.field}>
             <label className={styles.label} htmlFor="bp-name">

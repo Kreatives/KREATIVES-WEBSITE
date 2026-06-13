@@ -65,6 +65,7 @@ export default function RedesignWizard() {
   const [stage, setStage] = useState<"intro" | "fields" | "done">("intro");
   const [idx, setIdx] = useState(0);
   const [values, setValues] = useState<Record<string, string>>({});
+  const [hp, setHp] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
@@ -142,6 +143,7 @@ export default function RedesignWizard() {
         values.problem ?? ""
       }\n\nTelefoon: ${values.phone || "—"}`,
       source: "Gratis redesign",
+      hp,
     });
     setSending(false);
     if (!res.ok) {
@@ -179,6 +181,17 @@ export default function RedesignWizard() {
       aria-modal="true"
       aria-label="Gratis redesign aanvragen"
     >
+      {/* Honeypot tegen bots — laat dit veld leeg. */}
+      <input
+        type="text"
+        name="hp"
+        className="hp-field"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={hp}
+        onChange={(e) => setHp(e.target.value)}
+      />
       <header className={styles.bar}>
         <span className={styles.brand}>KREATIVES</span>
         {stage === "fields" && (
