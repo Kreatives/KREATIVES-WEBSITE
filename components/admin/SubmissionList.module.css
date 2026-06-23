@@ -4,11 +4,56 @@
   gap: 0.75rem;
 }
 
+.spamBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid #f0c7c2;
+  border-radius: 12px;
+  background: #fdf3f1;
+  color: #8a2b22;
+  font-size: 0.9rem;
+}
+.spamClear {
+  flex: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: #b42318;
+  border: 1px solid #b42318;
+}
+.spamClear:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .row {
   border: 1px solid var(--line, #e6e4de);
   border-radius: 12px;
   background: #fff;
   overflow: hidden;
+}
+.spamRow {
+  border-color: #f0c7c2;
+  background: #fdf6f5;
+}
+
+.spamTag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #fbe3df;
+  color: #b42318;
+  white-space: nowrap;
 }
 .unread {
   border-color: #f4c9a8;

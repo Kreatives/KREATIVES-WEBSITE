@@ -2,7 +2,11 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { markSubmissionRead, deleteSubmission } from "@/app/admin/actions";
+import {
+  markSubmissionRead,
+  deleteSubmission,
+  deleteSpamSubmissions,
+} from "@/app/admin/actions";
 import type { CmsSubmission } from "@/lib/cms";
 import styles from "./SubmissionList.module.css";
 
@@ -21,12 +25,30 @@ function formatDate(iso: string): string {
 
 export default function SubmissionList({
   submissions,
+  spamIds = [],
 }: {
   submissions: CmsSubmission[];
+  spamIds?: string[];
 }) {
   const router = useRouter();
   const [open, setOpen] = useState<string | null>(null);
   const [pending, start] = useTransition();
+  const spam = new Set(spamIds);
+
+  function onDeleteSpam() {
+    if (
+      !confirm(
+        `${spam.size} bericht${
+          spam.size === 1 ? "" : "en"
+        } herkend als spam. Definitief verwijderen?`
+      )
+    )
+      return;
+    start(async () => {
+      await deleteSpamSubmissions();
+      router.refresh();
+    });
+  }
 
   function toggle(s: CmsSubmission) {
     const next = open === s.id ? null : s.id;
@@ -56,12 +78,31 @@ export default function SubmissionList({
 
   return (
     <div className={styles.list}>
+      {spam.size > 0 && (
+        <div className={styles.spamBar}>
+          <span>
+            {spam.size} bericht{spam.size === 1 ? "" : "en"} herkend als spam.
+          </span>
+          <button
+            type="button"
+            className={styles.spamClear}
+            onClick={onDeleteSpam}
+            disabled={pending}
+          >
+            Verwijder alle spam
+          </button>
+        </div>
+      )}
+
       {submissions.map((s) => {
         const isOpen = open === s.id;
+        const isSpamRow = spam.has(s.id);
         return (
           <div
             key={s.id}
-            className={`${styles.row} ${s.read ? "" : styles.unread}`}
+            className={`${styles.row} ${s.read ? "" : styles.unread} ${
+              isSpamRow ? styles.spamRow : ""
+            }`}
           >
             <button
               type="button"
@@ -78,6 +119,7 @@ export default function SubmissionList({
                 <span className={styles.preview}>{s.message}</span>
               </span>
               <span className={styles.meta}>
+                {isSpamRow && <span className={styles.spamTag}>Spam</span>}
                 {s.subject && <span className={styles.tag}>{s.subject}</span>}
                 <span className={styles.date}>{formatDate(s.createdAt)}</span>
               </span>

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { isSpam } from "@/lib/spam";
 import { projecten as staticProjects } from "@/lib/projecten";
 import { posts as staticPosts } from "@/lib/blog";
 import { reviewsPage, faqHome } from "@/lib/site";
@@ -388,6 +389,29 @@ export async function deleteSubmission(id: string) {
   revalidatePath("/admin/inzendingen");
   revalidatePath("/admin");
   return { ok: true };
+}
+
+/** Verwijdert in één keer alle inzendingen die als bot-spam herkend worden. */
+export async function deleteSpamSubmissions() {
+  const supabase = await createClient();
+  const { data, error: fetchError } = await supabase
+    .from("contact_submissions")
+    .select("id, name, email, company, website, message");
+  if (fetchError) return { ok: false, error: fetchError.message };
+
+  const spamIds = (data ?? [])
+    .filter((row) => isSpam(row))
+    .map((row) => row.id as string);
+  if (spamIds.length === 0) return { ok: true, deleted: 0 };
+
+  const { error } = await supabase
+    .from("contact_submissions")
+    .delete()
+    .in("id", spamIds);
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin/inzendingen");
+  revalidatePath("/admin");
+  return { ok: true, deleted: spamIds.length };
 }
 
 /* ---------- Blog ---------- */

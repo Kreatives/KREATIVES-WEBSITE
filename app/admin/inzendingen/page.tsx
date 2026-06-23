@@ -1,4 +1,5 @@
 import { dbSubmissions } from "@/lib/cms";
+import { isSpam } from "@/lib/spam";
 import SubmissionList from "@/components/admin/SubmissionList";
 import styles from "../admin.module.css";
 
@@ -7,6 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminInzendingen() {
   const submissions = await dbSubmissions();
   const unread = submissions.filter((s) => !s.read).length;
+  const spamIds = submissions.filter((s) => isSpam(s)).map((s) => s.id);
 
   return (
     <div>
@@ -26,7 +28,7 @@ export default async function AdminInzendingen() {
           het hier.
         </p>
       ) : (
-        <SubmissionList submissions={submissions} />
+        <SubmissionList submissions={submissions} spamIds={spamIds} />
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import {
   sendConfirmationMail,
   mailerConfigured,
 } from "@/lib/mailer";
+import { isSpam } from "@/lib/spam";
 
 export type ContactInput = {
   name: string;
@@ -51,6 +52,13 @@ export async function submitContact(input: ContactInput) {
   const name = (input.name ?? "").trim();
   const email = (input.email ?? "").trim();
   const message = (input.message ?? "").trim();
+  const company = (input.company ?? "").trim();
+  const website = (input.website ?? "").trim();
+
+  // 0b) Inhoudsfilter: bot-spam vult elk veld met willekeurige tekenreeksen
+  // ("NxEeUROLgDCT…"). Herkennen we dat patroon, doe dan alsof het lukte zonder
+  // op te slaan of te mailen — de bot leert dan niets en je inbox blijft schoon.
+  if (isSpam({ name, email, company, website, message })) return { ok: true };
 
   if (name.length < 2) return { ok: false, error: "Vul je naam in." };
   if (!EMAIL_RE.test(email))
@@ -74,8 +82,8 @@ export async function submitContact(input: ContactInput) {
   const row = {
     name,
     email,
-    company: (input.company ?? "").trim(),
-    website: (input.website ?? "").trim(),
+    company,
+    website,
     subject: (input.subject ?? "").trim() || "Aanvraag",
     message,
     source: (input.source ?? "").trim() || "website",
