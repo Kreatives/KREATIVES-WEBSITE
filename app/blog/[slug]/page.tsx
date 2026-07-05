@@ -3,9 +3,12 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
+import PostContent from "@/components/PostContent";
 import { formatDate } from "@/lib/blog";
 import { getPostBySlug, getPosts } from "@/lib/cms";
 import styles from "./post.module.css";
+
+const SITE_URL = "https://www.kreatives.nl";
 
 export const dynamic = "force-dynamic";
 
@@ -47,9 +50,37 @@ export default async function PostDetailPage({
     .filter((p) => p.slug !== slug)
     .slice(0, 3);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image ? `${SITE_URL}${post.image}` : undefined,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Organization", name: "KREATIVES", url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: "KREATIVES",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/KREATIVES%20LOGO.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${post.slug}`,
+    },
+    keywords: post.tags.join(", "),
+  };
+
   return (
     <>
       <RevealInit />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <article>
         <section className={`section--dark cosmos-bg ${styles.head}`}>
@@ -97,13 +128,7 @@ export default async function PostDetailPage({
 
         <section className={`section ${styles.bodySec}`}>
           <div className="container">
-            <div className={styles.bodyInner}>
-              {post.body.map((p, i) => (
-                <p key={i} className={styles.p} data-reveal>
-                  {p}
-                </p>
-              ))}
-            </div>
+            <PostContent blocks={post.body} />
           </div>
         </section>
 

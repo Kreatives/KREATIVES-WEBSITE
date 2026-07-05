@@ -1,0 +1,208 @@
+.body {
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+/* Vaste verticale ritmiek tussen blokken */
+.body > * {
+  margin-top: 1.4rem;
+}
+.body > *:first-child {
+  margin-top: 0;
+}
+
+.p {
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
+  line-height: 1.68;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.h2 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.12;
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+  margin-top: 3rem;
+  scroll-margin-top: 6rem;
+}
+.h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.2;
+  font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.4rem);
+  margin-top: 2.2rem;
+  scroll-margin-top: 6rem;
+}
+.h2 + .p,
+.h3 + .p {
+  margin-top: 0.9rem;
+}
+
+.ul,
+.ol {
+  padding-left: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.ul li,
+.ol li {
+  font-size: clamp(1.02rem, 1rem + 0.15vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--ink);
+  padding-left: 0.2rem;
+}
+.ul li::marker {
+  color: var(--accent, #fd6d17);
+}
+.ol li::marker {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent, #fd6d17);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color 0.2s var(--ease), text-decoration-color 0.2s var(--ease);
+}
+.link:hover {
+  color: var(--accent, #fd6d17);
+}
+
+.code {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9em;
+  background: var(--off-white-2, #eceae2);
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+}
+
+/* Tabel */
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  border-radius: var(--radius, 14px);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  vertical-align: top;
+  line-height: 1.45;
+}
+.table th {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: var(--off-white-2, #eceae2);
+}
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Citaat + TL;DR */
+.quote {
+  border-left: 3px solid rgba(26, 26, 26, 0.2);
+  padding: 0.2rem 0 0.2rem 1.25rem;
+  font-size: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.tldr {
+  border-left: 3px solid var(--accent, #fd6d17);
+  background: rgba(253, 109, 23, 0.06);
+  border-radius: 0 var(--radius, 14px) var(--radius, 14px) 0;
+  padding: 1.1rem 1.3rem;
+  font-size: clamp(1.02rem, 1rem + 0.2vw, 1.12rem);
+}
+
+/* Redactienotitie / E-E-A-T-placeholder */
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 1px dashed rgba(26, 26, 26, 0.28);
+  border-radius: var(--radius, 14px);
+  padding: 1rem 1.2rem;
+  background: rgba(26, 26, 26, 0.02);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--muted, #6b6b66);
+  font-style: italic;
+}
+.noteLabel {
+  align-self: flex-start;
+  font-family: var(--font-mono, monospace);
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent, #fd6d17);
+  border: 1px solid rgba(253, 109, 23, 0.4);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+
+/* Inhoudsopgave */
+.toc {
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  border-radius: var(--radius, 14px);
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 2.6rem;
+  background: var(--off-white-2, #eceae2);
+}
+.tocTitle {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted, #6b6b66);
+  margin-bottom: 0.9rem;
+}
+.tocList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  counter-reset: toc;
+}
+.tocList li {
+  counter-increment: toc;
+}
+.tocList li a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  transition: color 0.2s var(--ease);
+}
+.tocList li a::before {
+  content: counter(toc, decimal-leading-zero) ".";
+  color: var(--accent, #fd6d17);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+.tocSub {
+  padding-left: 1.6rem;
+}
+.tocSub a::before {
+  content: "";
+  margin-right: 0;
+}
+.tocList li a:hover {
+  color: var(--accent, #fd6d17);
+}

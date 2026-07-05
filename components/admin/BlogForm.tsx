@@ -112,8 +112,12 @@ export default function BlogForm({ post }: { post?: CmsPost }) {
           placeholder="Schrijf je artikel. Laat een lege regel tussen alinea's."
         />
         <span className={styles.hint}>
-          Tip: laat een lege regel tussen alinea&apos;s — elke alinea wordt apart
-          getoond.
+          Laat een lege regel tussen blokken. Opmaak met Markdown:
+          <code>## Kop</code>, <code>### Subkop</code>, <code>- lijst</code>,
+          genummerde lijst, <code>| tabel |</code>, <code>&gt; citaat</code>,
+          links <code>[tekst](/diensten/webdesign)</code>, <code>**vet**</code> en{" "}
+          <code>*cursief*</code>. Een redactienotitie plaats je met{" "}
+          <code>[[NOTE: ... ]]</code>.
         </span>
       </div>
 
