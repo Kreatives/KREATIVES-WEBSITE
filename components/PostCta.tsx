@@ -15,7 +15,6 @@ export default function PostCta() {
         />
       </div>
       <div className={styles.body}>
-        <span className={styles.eyebrow}>Zelf aan de slag?</span>
         <h3 className={styles.title}>Start je project</h3>
         <p className={styles.text}>
           Plan een vrijblijvende blueprint-sessie. We kijken samen wat jouw

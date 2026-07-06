@@ -18,12 +18,15 @@ export default function PostFaq({
       </h2>
       <div className={faq.list}>
         {items.map((item, i) => (
-          <details key={`${item.question}-${i}`} className={faq.item}>
+          <details
+            key={`${item.question}-${i}`}
+            className={`${faq.item} ${styles.item}`}
+          >
             <summary className={faq.summary}>
               <span className={faq.q}>{item.question}</span>
               <span className={faq.mark} aria-hidden />
             </summary>
-            <p className={faq.answer}>
+            <p className={`${faq.answer} ${styles.answer}`}>
               {parseInline(item.answer, `faq-${i}`)}
             </p>
           </details>

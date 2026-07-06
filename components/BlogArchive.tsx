@@ -19,14 +19,17 @@ export type ArchivePost = {
 export default function BlogArchive({ posts }: { posts: ArchivePost[] }) {
   const [active, setActive] = useState("Alle");
 
+  // Filter puur op het hoofdonderwerp van een artikel (de eerste tag). Zo
+  // krijg je alleen echte blog-categorieën, elk met minstens één artikel.
+  const categoryOf = (p: ArchivePost) => p.tags[0] ?? "";
   const categories = Array.from(
-    new Set(posts.flatMap((p) => p.tags))
+    new Set(posts.map(categoryOf).filter(Boolean))
   ).sort((a, b) => a.localeCompare(b, "nl"));
   const filters = ["Alle", ...categories];
   const shown =
     active === "Alle"
       ? posts
-      : posts.filter((p) => p.tags.includes(active));
+      : posts.filter((p) => categoryOf(p) === active);
 
   return (
     <>

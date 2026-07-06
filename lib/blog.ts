@@ -254,7 +254,7 @@ export const posts: Post[] = [
     date: "2026-03-20",
     readingMinutes: 4,
     image: "/projects/5.webp",
-    tags: ["Werkwijze", "Prijzen"],
+    tags: ["Prijzen", "Werkwijze"],
     body: [
       "Veel ondernemers willen vooraf weten wat een site precies kost, en daar is niets mis mee. Maar de eerlijke prijs hangt af van een aantal vragen die je pas in een strategiegesprek goed kunt beantwoorden.",
       "Hoe groot is je aanbod, hoeveel pagina's heb je nodig, en hoe diep moet de structuur worden. Werkt de site op zichzelf of hangt er een webshop, een boekingssysteem of een klant-omgeving aan. Welke koppelingen met andere systemen zijn nodig.",
@@ -270,7 +270,7 @@ export const posts: Post[] = [
     date: "2026-02-05",
     readingMinutes: 6,
     image: "/projects/4.webp",
-    tags: ["Strategie", "Redesign"],
+    tags: ["Redesign", "Strategie"],
     body: [
       "Een nieuwe site bouwen is een investering, en het is niet altijd nodig. Soms is een opfrisbeurt of een aantal aanpassingen genoeg. Maar deze drie signalen wijzen er bijna altijd op dat een complete herbouw de juiste keuze is.",
       "Het eerste signaal: de site klopt niet meer met wat je doet. Misschien ben je gestart met één product en lever je inmiddels vijf, of richt je je nu op een heel andere doelgroep dan vier jaar geleden. Een site die structureel om die verandering heen moet worden geplooid, raakt op een gegeven moment versleten.",

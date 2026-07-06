@@ -10,3 +10,23 @@
   margin-bottom: clamp(1.5rem, 3vw, 2.2rem);
   scroll-margin-top: 6rem;
 }
+
+/* Zachtere opening: het antwoord fade't en schuift rustig open. */
+.item[open] .answer {
+  animation: reveal 0.32s var(--ease, ease);
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .item[open] .answer {
+    animation: none;
+  }
+}
