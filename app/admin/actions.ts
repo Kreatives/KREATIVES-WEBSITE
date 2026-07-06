@@ -424,6 +424,7 @@ export type PostInput = {
   date: string;
   readingMinutes: number;
   image: string;
+  imageAlt?: string;
   body: string;
   tags: string[];
 };
@@ -478,9 +479,67 @@ export async function rejectPost(id: string) {
   return { ok: true };
 }
 
+// Genereert een AI-hoofdafbeelding op basis van het artikel (of een reeds
+// opgeslagen prompt), converteert naar .webp en zet het in de media-bucket.
+export async function generatePostImage(input: {
+  title: string;
+  body: string;
+  tags?: string[];
+  storedPrompt?: string;
+  slug?: string;
+}) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: "Niet ingelogd." };
+
+  const { higgsfieldConfigured, generateAndStore } = await import("@/lib/pipeline/image");
+  if (!higgsfieldConfigured()) {
+    return {
+      ok: false,
+      error: "Higgsfield-key ontbreekt. Voeg HF_CREDENTIALS (KEY_ID:KEY_SECRET) toe aan de env.",
+    };
+  }
+
+  try {
+    let prompt = input.storedPrompt?.trim();
+    let alt = "";
+    if (!prompt) {
+      const { makeImagePrompts } = await import("@/lib/pipeline/generate");
+      const img = await makeImagePrompts({
+        title: input.title,
+        category: input.tags ?? [],
+        summary: input.body.replace(/[#>*`|]/g, " ").slice(0, 600),
+      });
+      prompt = img.heroPrompt;
+      alt = img.heroAlt;
+    }
+    const slug =
+      (input.slug || input.title || "artikel")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60) || "artikel";
+
+    const url = await generateAndStore({
+      supabase,
+      prompt: prompt as string,
+      aspectRatio: "16:9",
+      slug,
+      kind: "hero",
+    });
+    return { ok: true, url, alt, prompt };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Onbekende fout" };
+  }
+}
+
 export async function savePost(input: PostInput) {
   const supabase = await createClient();
-  const row = {
+  const row: Record<string, unknown> = {
     slug: input.slug,
     title: input.title,
     excerpt: input.excerpt,
@@ -490,6 +549,10 @@ export async function savePost(input: PostInput) {
     body: input.body,
     tags: input.tags,
   };
+  if (input.imageAlt !== undefined) {
+    row.hero_alt = input.imageAlt;
+    row.thumbnail_alt = input.imageAlt;
+  }
   const { error } = input.id
     ? await supabase.from("posts").update(row).eq("id", input.id)
     : await supabase.from("posts").insert(row);

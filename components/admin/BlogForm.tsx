@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageInput from "./ImageInput";
-import { savePost } from "@/app/admin/actions";
+import { savePost, generatePostImage } from "@/app/admin/actions";
 import type { CmsPost } from "@/lib/cms";
 import styles from "./forms.module.css";
 
@@ -26,10 +26,42 @@ export default function BlogForm({ post }: { post?: CmsPost }) {
   );
   const [excerpt, setExcerpt] = useState(post?.excerpt ?? "");
   const [image, setImage] = useState(post?.image ?? "");
+  const [imageAlt, setImageAlt] = useState(post?.heroAlt ?? "");
   const [tags, setTags] = useState((post?.tags ?? []).join(", "));
   const [body, setBody] = useState((post?.body ?? []).join("\n\n"));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [genBusy, setGenBusy] = useState(false);
+  const [genMsg, setGenMsg] = useState<string | null>(null);
+
+  async function generateImage() {
+    if (!title.trim() && !body.trim()) {
+      setGenMsg("Vul eerst een titel of tekst in.");
+      return;
+    }
+    setGenBusy(true);
+    setGenMsg("Bezig… de AI maakt een foto op basis van dit artikel (~30-60s).");
+    try {
+      const res = await generatePostImage({
+        title: title.trim(),
+        body: body.trim(),
+        tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+        storedPrompt: post?.heroPrompt,
+        slug: slug.trim() || slugify(title),
+      });
+      if (res.ok && res.url) {
+        setImage(res.url);
+        if (res.alt) setImageAlt(res.alt);
+        setGenMsg("Foto gegenereerd en ingesteld als hoofdafbeelding. Vergeet niet op te slaan.");
+      } else {
+        setGenMsg(res.error ?? "Genereren mislukt.");
+      }
+    } catch (err) {
+      setGenMsg(err instanceof Error ? err.message : "Genereren mislukt.");
+    } finally {
+      setGenBusy(false);
+    }
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -43,6 +75,7 @@ export default function BlogForm({ post }: { post?: CmsPost }) {
       date: date.trim(),
       readingMinutes: parseInt(readingMinutes, 10) || 4,
       image: image.trim(),
+      imageAlt: imageAlt.trim(),
       body: body.trim(),
       tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
     });
@@ -101,6 +134,44 @@ export default function BlogForm({ post }: { post?: CmsPost }) {
       <div className={styles.field}>
         <label>Hoofdafbeelding</label>
         <ImageInput value={image} onChange={setImage} />
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.75rem", marginTop: "0.6rem" }}>
+          <button
+            type="button"
+            onClick={generateImage}
+            disabled={genBusy}
+            className={styles.btnPrimary}
+            style={{ opacity: genBusy ? 0.6 : 1 }}
+          >
+            {genBusy ? "Foto genereren…" : "✨ Genereer AI-foto"}
+          </button>
+          <span className={styles.hint} style={{ margin: 0 }}>
+            Maakt een .webp-foto (16:9) op basis van dit artikel, in de KREATIVES-stijl.
+          </span>
+        </div>
+        {genMsg && (
+          <p className={styles.hint} style={{ marginTop: "0.5rem" }}>
+            {genMsg}
+          </p>
+        )}
+        {image && (
+          <div style={{ marginTop: "0.75rem" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={image}
+              alt={imageAlt || "voorbeeld hoofdafbeelding"}
+              style={{ maxWidth: 320, width: "100%", borderRadius: 10, display: "block" }}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className={styles.field}>
+        <label>Alt-tekst hoofdafbeelding (SEO)</label>
+        <input
+          value={imageAlt}
+          onChange={(e) => setImageAlt(e.target.value)}
+          placeholder="Beschrijf de foto voor Google en screenreaders"
+        />
       </div>
 
       <div className={styles.field}>

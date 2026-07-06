@@ -152,7 +152,7 @@ export default async function PostDetailPage({
             <div className={styles.media}>
               <Image
                 src={post.image}
-                alt=""
+                alt={post.heroAlt || post.title}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 70vw"
