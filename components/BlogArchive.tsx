@@ -50,7 +50,7 @@ export default function BlogArchive({ posts }: { posts: ArchivePost[] }) {
 
       <ul className={styles.grid}>
         {shown.map((p) => (
-          <li key={p.slug} className={styles.card} data-reveal>
+          <li key={p.slug} className={styles.card}>
             <Link href={`/blog/${p.slug}`} className={styles.link}>
               <div className={styles.media}>
                 <Image

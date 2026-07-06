@@ -20,7 +20,7 @@ export default function PostCta() {
           Plan een vrijblijvende blueprint-sessie. We kijken samen wat jouw
           site echt nodig heeft.
         </p>
-        <Link href="/blauwdruk" className={styles.btn}>
+        <Link href="/contact" className={styles.btn}>
           Plan een gesprek
         </Link>
       </div>
