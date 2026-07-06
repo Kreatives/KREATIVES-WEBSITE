@@ -494,11 +494,11 @@ export async function generatePostImage(input: {
   } = await supabase.auth.getUser();
   if (!user) return { ok: false, error: "Niet ingelogd." };
 
-  const { higgsfieldConfigured, generateAndStore } = await import("@/lib/pipeline/image");
-  if (!higgsfieldConfigured()) {
+  const { magnificConfigured, generateAndStore } = await import("@/lib/pipeline/magnific");
+  if (!magnificConfigured()) {
     return {
       ok: false,
-      error: "Higgsfield-key ontbreekt. Voeg HF_CREDENTIALS (KEY_ID:KEY_SECRET) toe aan de env.",
+      error: "Magnific-key ontbreekt. Voeg MAGNIFIC_API_KEY toe aan de env.",
     };
   }
 
