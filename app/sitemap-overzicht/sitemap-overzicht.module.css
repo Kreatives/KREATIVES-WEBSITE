@@ -1,0 +1,130 @@
+.head {
+  padding-top: clamp(8rem, 7rem + 5vw, 11rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.04;
+  font-size: clamp(2.4rem, 1.4rem + 4vw, 4rem);
+  color: var(--on-dark);
+  margin: 1rem 0 1.25rem;
+}
+.lead {
+  color: rgba(244, 243, 239, 0.78);
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  line-height: 1.55;
+  max-width: 60ch;
+}
+.xml {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.group {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  background: var(--off-white-2);
+}
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.groupTitle {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.74rem;
+  letter-spacing: var(--track-mono, 0.1em);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.count {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.74rem;
+  color: var(--orange);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+.tree {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.node {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  text-decoration: none;
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+  transition: background 0.2s var(--ease);
+}
+.link:hover {
+  background: rgba(26, 26, 26, 0.05);
+}
+.label {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.path {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Kinderen: ingesprongen met een verbindingslijn links */
+.children {
+  list-style: none;
+  margin: 0.35rem 0 0.4rem 0.55rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.child .label {
+  font-weight: 400;
+  color: var(--muted);
+}
+.child .link:hover .label {
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .path {
+    display: none;
+  }
+}
