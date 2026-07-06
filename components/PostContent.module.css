@@ -1,6 +1,5 @@
 .body {
-  max-width: 40rem;
-  margin-inline: auto;
+  max-width: 44rem;
 }
 
 /* Vaste verticale ritmiek tussen blokken */
@@ -153,56 +152,4 @@
   border: 1px solid rgba(253, 109, 23, 0.4);
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
-}
-
-/* Inhoudsopgave */
-.toc {
-  border: 1px solid rgba(26, 26, 26, 0.12);
-  border-radius: var(--radius, 14px);
-  padding: 1.3rem 1.5rem;
-  margin-bottom: 2.6rem;
-  background: var(--off-white-2, #eceae2);
-}
-.tocTitle {
-  display: block;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted, #6b6b66);
-  margin-bottom: 0.9rem;
-}
-.tocList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  counter-reset: toc;
-}
-.tocList li {
-  counter-increment: toc;
-}
-.tocList li a {
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 0.98rem;
-  line-height: 1.4;
-  transition: color 0.2s var(--ease);
-}
-.tocList li a::before {
-  content: counter(toc, decimal-leading-zero) ".";
-  color: var(--accent, #fd6d17);
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
-  margin-right: 0.5rem;
-}
-.tocSub {
-  padding-left: 1.6rem;
-}
-.tocSub a::before {
-  content: "";
-  margin-right: 0;
-}
-.tocList li a:hover {
-  color: var(--accent, #fd6d17);
 }

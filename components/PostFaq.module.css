@@ -1,0 +1,12 @@
+.section {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+.title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: var(--track-tight);
+  line-height: 1.12;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.2rem);
+  scroll-margin-top: 6rem;
+}

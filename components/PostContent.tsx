@@ -12,6 +12,7 @@ import styles from "./PostContent.module.css";
  */
 
 export type Heading = { id: string; text: string; level: 2 | 3 };
+export type FaqPair = { question: string; answer: string };
 
 export function slugifyHeading(text: string): string {
   return text
@@ -22,7 +23,7 @@ export function slugifyHeading(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-function stripInline(s: string): string {
+export function stripInline(s: string): string {
   return s
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
@@ -44,10 +45,49 @@ export function extractHeadings(blocks: string[]): Heading[] {
   return out;
 }
 
+/*
+ * Splitst de body in het hoofdartikel en de FAQ-sectie. De FAQ begint bij een
+ * H2 die met "Veelgestelde vragen" begint; daaronder staan ### vraag + alinea
+ * antwoord. Blokken die ná de laatste vraag komen (bijv. de CTA-alinea)
+ * belanden in afterBlocks zodat ze onder de FAQ blijven staan.
+ */
+export function splitPostBlocks(blocks: string[]): {
+  mainBlocks: string[];
+  faqItems: FaqPair[];
+  afterBlocks: string[];
+} {
+  const faqIdx = blocks.findIndex((b) =>
+    /^##\s+veelgestelde vragen/i.test(b.trim())
+  );
+  if (faqIdx === -1) {
+    return { mainBlocks: blocks, faqItems: [], afterBlocks: [] };
+  }
+  const mainBlocks = blocks.slice(0, faqIdx);
+  const rest = blocks.slice(faqIdx + 1);
+  const faqItems: FaqPair[] = [];
+  const afterBlocks: string[] = [];
+  for (let i = 0; i < rest.length; i++) {
+    const b = rest[i].trim();
+    const h = b.match(/^###\s+(.*)$/);
+    if (h) {
+      const next = rest[i + 1];
+      let answer = "";
+      if (next && !/^#{2,3}\s/.test(next.trim())) {
+        answer = next.trim();
+        i++;
+      }
+      faqItems.push({ question: h[1].trim(), answer });
+    } else {
+      afterBlocks.push(rest[i]);
+    }
+  }
+  return { mainBlocks, faqItems, afterBlocks };
+}
+
 const INLINE =
   /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`/g;
 
-function parseInline(text: string, keyPrefix: string): ReactNode[] {
+export function parseInline(text: string, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
   let last = 0;
   let i = 0;
@@ -210,27 +250,5 @@ function renderBlock(block: string, idx: number): ReactNode {
 }
 
 export default function PostContent({ blocks }: { blocks: string[] }) {
-  const headings = extractHeadings(blocks);
-  const showToc = headings.length >= 3;
-
-  return (
-    <div className={styles.body}>
-      {showToc && (
-        <nav className={styles.toc} aria-label="Inhoudsopgave" data-reveal>
-          <span className={styles.tocTitle}>In dit artikel</span>
-          <ol className={styles.tocList}>
-            {headings.map((hd) => (
-              <li
-                key={hd.id}
-                className={hd.level === 3 ? styles.tocSub : undefined}
-              >
-                <a href={`#${hd.id}`}>{hd.text}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      )}
-      {blocks.map((b, i) => renderBlock(b, i))}
-    </div>
-  );
+  return <div className={styles.body}>{blocks.map((b, i) => renderBlock(b, i))}</div>;
 }

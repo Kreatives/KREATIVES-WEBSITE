@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
-import { formatDate } from "@/lib/blog";
+import BlogArchive from "@/components/BlogArchive";
 import { getPosts } from "@/lib/cms";
 import styles from "./blog.module.css";
 
@@ -45,37 +43,17 @@ export default async function BlogIndexPage() {
 
       <section className="section">
         <div className="container">
-          <ul className={styles.grid}>
-            {posts.map((p) => (
-              <li key={p.slug} className={styles.card} data-reveal>
-                <Link href={`/blog/${p.slug}`} className={styles.link}>
-                  <div className={styles.media}>
-                    <Image
-                      src={p.image}
-                      alt={p.title}
-                      fill
-                      sizes="(max-width: 760px) 100vw, 45vw"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
-                  <div className={styles.meta}>
-                    <span className={styles.metaLine}>
-                      {formatDate(p.date)} · {p.readingMinutes} min lezen
-                    </span>
-                    <h2 className={styles.cardTitle}>{p.title}</h2>
-                    <p className={styles.cardExcerpt}>{p.excerpt}</p>
-                    <ul className={styles.tags}>
-                      {p.tags.map((t) => (
-                        <li key={t} className={styles.tag}>
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <BlogArchive
+            posts={posts.map((p) => ({
+              slug: p.slug,
+              title: p.title,
+              excerpt: p.excerpt,
+              date: p.date,
+              readingMinutes: p.readingMinutes,
+              image: p.image,
+              tags: p.tags,
+            }))}
+          />
         </div>
       </section>
     </>

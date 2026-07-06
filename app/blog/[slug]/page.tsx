@@ -3,7 +3,14 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
-import PostContent from "@/components/PostContent";
+import PostContent, {
+  splitPostBlocks,
+  extractHeadings,
+  stripInline,
+} from "@/components/PostContent";
+import PostToc from "@/components/PostToc";
+import PostCta from "@/components/PostCta";
+import PostFaq from "@/components/PostFaq";
 import { formatDate } from "@/lib/blog";
 import { getPostBySlug, getPosts } from "@/lib/cms";
 import styles from "./post.module.css";
@@ -50,6 +57,13 @@ export default async function PostDetailPage({
     .filter((p) => p.slug !== slug)
     .slice(0, 3);
 
+  const { mainBlocks, faqItems, afterBlocks } = splitPostBlocks(post.body);
+  const FAQ_ID = "veelgestelde-vragen";
+  const headings = extractHeadings(mainBlocks);
+  const tocHeadings = faqItems.length
+    ? [...headings, { id: FAQ_ID, text: "Veelgestelde vragen", level: 2 as const }]
+    : headings;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -74,6 +88,22 @@ export default async function PostDetailPage({
     keywords: post.tags.join(", "),
   };
 
+  const faqJsonLd =
+    faqItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: stripInline(f.answer),
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
       <RevealInit />
@@ -81,6 +111,12 @@ export default async function PostDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article>
         <section className={`section--dark cosmos-bg ${styles.head}`}>
@@ -128,7 +164,17 @@ export default async function PostDetailPage({
 
         <section className={`section ${styles.bodySec}`}>
           <div className="container">
-            <PostContent blocks={post.body} />
+            <div className={styles.layout}>
+              <aside className={styles.sidebar}>
+                <PostToc headings={tocHeadings} />
+                <PostCta />
+              </aside>
+              <div className={styles.main}>
+                <PostContent blocks={mainBlocks} />
+                <PostFaq id={FAQ_ID} items={faqItems} />
+                {afterBlocks.length > 0 && <PostContent blocks={afterBlocks} />}
+              </div>
+            </div>
           </div>
         </section>
 
