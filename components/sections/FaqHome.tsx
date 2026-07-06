@@ -21,10 +21,10 @@ export default function FaqHome({ items }: { items: FaqItem[] }) {
       <div className="container">
         <div className={styles.head} data-reveal>
           <span className="eyebrow">{faqHome.eyebrow}</span>
-          <h2 className={`h2 ${styles.title}`}>
+          <h1 className={`h2 ${styles.title}`}>
             {faqHome.titleLead}{" "}
             <span className="accent accent--orange">{faqHome.titleAccent}</span>
-          </h2>
+          </h1>
         </div>
 
         <div className={styles.filters} role="tablist" aria-label="Filter vragen">

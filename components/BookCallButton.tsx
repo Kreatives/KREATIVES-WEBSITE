@@ -89,7 +89,7 @@ export default function BookCallButton() {
             key={o.label}
             href={o.href}
             target={o.external ? "_blank" : undefined}
-            rel={o.external ? "noopener noreferrer" : undefined}
+            rel={o.external ? "nofollow noopener noreferrer" : undefined}
             className={styles.option}
             role="menuitem"
             tabIndex={open ? 0 : -1}

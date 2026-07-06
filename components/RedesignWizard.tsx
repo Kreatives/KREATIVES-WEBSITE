@@ -343,7 +343,7 @@ export default function RedesignWizard() {
                 variant="primary"
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
               >
                 Plan direct een gesprek
               </Button>
@@ -351,7 +351,7 @@ export default function RedesignWizard() {
                 variant="white"
                 href={WHATSAPP_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
               >
                 Stuur een WhatsApp
               </Button>

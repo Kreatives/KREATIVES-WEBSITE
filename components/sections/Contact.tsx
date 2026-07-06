@@ -63,11 +63,11 @@ export default function Contact() {
         <div className={styles.head}>
           <SocialProof />
 
-          <h2 className={`h2 ${styles.title}`} data-reveal>
+          <h1 className={`h2 ${styles.title}`} data-reveal>
             {contact.titleLead}
             <br />
             <span className="accent accent--orange">{contact.titleAccent}</span>
-          </h2>
+          </h1>
 
           <p className={`${styles.intro}`} data-reveal>
             {contact.body}
