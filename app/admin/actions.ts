@@ -435,6 +435,49 @@ function revalidateBlog(slug: string) {
   revalidatePath("/admin/blog");
 }
 
+/* ---------- Geautomatiseerde blog-pipeline ---------- */
+
+// Handmatig een concept genereren ("Genereer nu"). Draait onder de sessie van de
+// ingelogde beheerder (RLS staat schrijven toe). force=true zodat testen kan
+// zonder op de daglimiet te wachten.
+export async function generateBlogDraft() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: "Niet ingelogd." };
+
+  const { runBlogPipeline } = await import("@/lib/pipeline/run");
+  const result = await runBlogPipeline(supabase, { force: true });
+  revalidatePath("/admin/blog");
+  return result;
+}
+
+export async function approvePost(id: string) {
+  const supabase = await createClient();
+  const today = new Date().toISOString().slice(0, 10);
+  const { data, error } = await supabase
+    .from("posts")
+    .update({ status: "published", date: today })
+    .eq("id", id)
+    .select("slug")
+    .single();
+  if (error) return { ok: false, error: error.message };
+  revalidateBlog(data?.slug ?? "");
+  return { ok: true };
+}
+
+export async function rejectPost(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("posts")
+    .update({ status: "rejected" })
+    .eq("id", id);
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin/blog");
+  return { ok: true };
+}
+
 export async function savePost(input: PostInput) {
   const supabase = await createClient();
   const row = {

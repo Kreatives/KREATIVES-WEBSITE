@@ -142,6 +142,8 @@ export type CmsSubmission = {
   read: boolean;
 };
 
+export type PostStatus = "published" | "pending_review" | "rejected";
+
 export type CmsPost = {
   id: string;
   slug: string;
@@ -153,7 +155,47 @@ export type CmsPost = {
   body: string[];
   tags: string[];
   position: number;
+  // Pipeline-velden (leeg voor handmatig gemaakte posts)
+  status: PostStatus;
+  targetKeyword?: string;
+  keywordRationale?: string;
+  thumbnailPrompt?: string;
+  heroPrompt?: string;
+  thumbnailUrl?: string;
+  heroUrl?: string;
+  thumbnailAlt?: string;
+  heroAlt?: string;
+  imageStatus?: string;
+  model?: string;
 };
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function mapPostRow(row: any): CmsPost {
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt ?? "",
+    date: row.date ?? "",
+    readingMinutes: row.reading_minutes ?? 4,
+    image: row.image ?? "",
+    body: splitParagraphs(row.body),
+    tags: row.tags ?? [],
+    position: row.position ?? 0,
+    status: (row.status ?? "published") as PostStatus,
+    targetKeyword: row.target_keyword ?? undefined,
+    keywordRationale: row.keyword_rationale ?? undefined,
+    thumbnailPrompt: row.thumbnail_prompt ?? undefined,
+    heroPrompt: row.hero_prompt ?? undefined,
+    thumbnailUrl: row.thumbnail_url ?? undefined,
+    heroUrl: row.hero_url ?? undefined,
+    thumbnailAlt: row.thumbnail_alt ?? undefined,
+    heroAlt: row.hero_alt ?? undefined,
+    imageStatus: row.image_status ?? undefined,
+    model: row.model ?? undefined,
+  };
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function splitParagraphs(text: string | null | undefined): string[] {
   if (!text) return [];
@@ -428,6 +470,7 @@ export async function getBigReviewItems() {
 
 /* ---------- Blog ---------- */
 
+/** Alle posts inclusief drafts — alleen voor het admin-dashboard. */
 export async function dbPosts(): Promise<CmsPost[]> {
   const supabase = await createClient();
   const { data } = await supabase
@@ -435,18 +478,7 @@ export async function dbPosts(): Promise<CmsPost[]> {
     .select("*")
     .order("date", { ascending: false })
     .order("created_at", { ascending: false });
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    excerpt: row.excerpt ?? "",
-    date: row.date ?? "",
-    readingMinutes: row.reading_minutes ?? 4,
-    image: row.image ?? "",
-    body: splitParagraphs(row.body),
-    tags: row.tags ?? [],
-    position: row.position ?? 0,
-  }));
+  return (data ?? []).map(mapPostRow);
 }
 
 export async function dbPost(id: string): Promise<CmsPost | null> {
@@ -457,22 +489,12 @@ export async function dbPost(id: string): Promise<CmsPost | null> {
     .eq("id", id)
     .single();
   if (!row) return null;
-  return {
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    excerpt: row.excerpt ?? "",
-    date: row.date ?? "",
-    readingMinutes: row.reading_minutes ?? 4,
-    image: row.image ?? "",
-    body: splitParagraphs(row.body),
-    tags: row.tags ?? [],
-    position: row.position ?? 0,
-  };
+  return mapPostRow(row);
 }
 
+/** Publieke posts — uitsluitend gepubliceerd, drafts lekken nooit naar de site. */
 export async function getPosts(): Promise<CmsPost[]> {
-  const rows = await dbPosts();
+  const rows = (await dbPosts()).filter((p) => p.status === "published");
   if (rows.length) return rows;
   return staticPosts.map((p, i) => ({
     id: p.slug,
@@ -485,6 +507,7 @@ export async function getPosts(): Promise<CmsPost[]> {
     body: p.body,
     tags: p.tags,
     position: i,
+    status: "published" as PostStatus,
   }));
 }
 
