@@ -160,15 +160,10 @@ function renderBlock(block: string, idx: number): ReactNode {
     );
   }
 
-  // Redactienotitie / E-E-A-T-placeholder: [[NOTE: ...]]
+  // Redactienotitie [[NOTE: ...]] is een interne plaatshouder en wordt nooit
+  // aan bezoekers getoond.
   if (block.startsWith("[[NOTE:") && block.endsWith("]]")) {
-    const text = block.slice("[[NOTE:".length, -2).trim();
-    return (
-      <aside key={key} className={styles.note} data-reveal>
-        <span className={styles.noteLabel}>Nog toe te voegen</span>
-        <span>{parseInline(text, key)}</span>
-      </aside>
-    );
+    return null;
   }
 
   // Tabel

@@ -187,8 +187,7 @@ export default function BlogForm({ post }: { post?: CmsPost }) {
           <code>## Kop</code>, <code>### Subkop</code>, <code>- lijst</code>,
           genummerde lijst, <code>| tabel |</code>, <code>&gt; citaat</code>,
           links <code>[tekst](/diensten/webdesign)</code>, <code>**vet**</code> en{" "}
-          <code>*cursief*</code>. Een redactienotitie plaats je met{" "}
-          <code>[[NOTE: ... ]]</code>.
+          <code>*cursief*</code>.
         </span>
       </div>
 
