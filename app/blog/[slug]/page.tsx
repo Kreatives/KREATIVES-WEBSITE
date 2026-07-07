@@ -17,6 +17,14 @@ import styles from "./post.module.css";
 
 const SITE_URL = "https://www.kreatives.nl";
 
+// Benoemde auteur voor E-E-A-T: AI-zoekmachines en Google waarderen een echte
+// persoon met profiel boven een anonieme organisatie.
+const AUTHOR = {
+  name: "Ricky Kai",
+  profile: "/over-ons",
+  linkedin: "https://www.linkedin.com/in/ricky-kai/",
+};
+
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
@@ -38,6 +46,7 @@ export async function generateMetadata({
       images: [post.image],
       type: "article",
       publishedTime: post.date,
+      authors: [AUTHOR.name],
     },
   };
 }
@@ -72,7 +81,12 @@ export default async function PostDetailPage({
     image: post.image ? `${SITE_URL}${post.image}` : undefined,
     datePublished: post.date,
     dateModified: post.date,
-    author: { "@type": "Organization", name: "KREATIVES", url: SITE_URL },
+    author: {
+      "@type": "Person",
+      name: AUTHOR.name,
+      url: `${SITE_URL}${AUTHOR.profile}`,
+      sameAs: [AUTHOR.linkedin],
+    },
     publisher: {
       "@type": "Organization",
       name: "KREATIVES",
@@ -129,6 +143,13 @@ export default async function PostDetailPage({
               <span>{formatDate(post.date)}</span>
               <span aria-hidden>·</span>
               <span>{post.readingMinutes} min lezen</span>
+              <span aria-hidden>·</span>
+              <span>
+                Door{" "}
+                <Link href={AUTHOR.profile} rel="author">
+                  {AUTHOR.name}
+                </Link>
+              </span>
             </div>
 
             <h1 className={styles.title} data-reveal>

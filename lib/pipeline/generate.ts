@@ -74,6 +74,7 @@ STRUCTUUR (het artikel is Markdown; volg exact deze conventies):
 
 SEO:
 - Zet het doelzoekwoord in de titel, in de eerste alinea, in minstens één H2 en in de meta-description. Natuurlijk, nooit stuffen.
+- De titel is MAXIMAAL 55 tekens. Er komt automatisch " | KREATIVES" achter, dus houd het kort en zet het zoekwoord vooraan. Geen dubbele punt met lange bijzin.
 - Lengte 900-1500 woorden, scanbaar.
 - Interne links als Markdown. Link naar 2-3 bestaande blogartikelen (gebruik ECHTE slugs uit de lijst, als /blog/<slug>) en naar minstens 1-2 money pages. Beschrijvende ankertekst.
 
@@ -144,6 +145,13 @@ Schrijf nu één volledig artikel dat "${input.keyword}" target. Vermijd overlap
   });
 
   const data = jsonFrom(res);
+  // Vangnet: de gerenderde <title> is `${title} | KREATIVES`. Houd de titel
+  // onder ~55 tekens zodat de volledige title-tag ≤ ~67 blijft (SEO-limiet).
+  if (typeof data.title === "string" && data.title.length > 55) {
+    console.warn(
+      `[blog-pipeline] Titel is ${data.title.length} tekens (>55): "${data.title}". Kort in via /admin.`
+    );
+  }
   return { ...data, usage: res.usage };
 }
 

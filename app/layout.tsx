@@ -86,7 +86,12 @@ const jsonLd = {
   },
   knowsLanguage: "nl",
   serviceType: "Webdesign, website-ontwikkeling en branding",
-  founder: { "@type": "Person", name: "Ricky" },
+  priceRange: "€€",
+  founder: {
+    "@type": "Person",
+    name: "Ricky Kai",
+    sameAs: "https://www.linkedin.com/in/ricky-kai/",
+  },
   hasMap: "https://share.google/OLE4MAebPLwhoCjU5",
   sameAs: [
     ...footer.social.map((s) => s.href),
