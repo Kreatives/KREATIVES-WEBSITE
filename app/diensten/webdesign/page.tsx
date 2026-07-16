@@ -33,9 +33,25 @@ export default async function WebdesignPage() {
       ? { ...webdesignFunnel.socialProof, items: quoteItems }
       : webdesignFunnel.socialProof;
 
+  // FAQPage-schema → rich results en betere zichtbaarheid in AI-antwoorden.
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: webdesignFunnel.faq.items.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <>
       <RevealInit />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       <FunnelHero data={webdesignFunnel.hero} />
       <Recognition data={webdesignFunnel.herkenning} />
       <TwoTracks data={webdesignFunnel.tracks} />

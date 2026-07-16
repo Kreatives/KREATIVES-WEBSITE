@@ -1,36 +1,67 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { projecten } from "@/lib/projecten";
-import { posts } from "@/lib/blog";
+import { posts as staticPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Elk uur verversen zodat nieuw gepubliceerde blogs vanzelf in de sitemap komen.
+export const revalidate = 3600;
+
+type Freq = "weekly" | "monthly" | "yearly";
+
+// Alle statische, publieke pagina's. Prioriteit weerspiegelt commerciële waarde.
+const STATIC_PAGES: { path: string; priority: number; changeFrequency: Freq }[] = [
+  { path: "", priority: 1, changeFrequency: "monthly" },
+  { path: "/diensten/webdesign", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/diensten/ai", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/diensten", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/werkwijze", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/projecten", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/blauwdruk", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/over-ons", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/reviews", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/sitemap-overzicht", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/voorwaarden", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+];
+
+// Gepubliceerde blogs uit de database (bron van waarheid). Valt terug op de
+// statische lijst als de DB even niet bereikbaar is, zodat de sitemap nooit leeg
+// raakt. Leest met de publieke anon-key; RLS staat alleen gepubliceerde rijen toe.
+async function livePosts(): Promise<{ slug: string; date: string }[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (url && key) {
+    try {
+      const res = await fetch(
+        `${url}/rest/v1/posts?select=slug,date&status=eq.published`,
+        {
+          headers: { apikey: key, Authorization: `Bearer ${key}` },
+          next: { revalidate: 3600 },
+        }
+      );
+      if (res.ok) {
+        const rows = (await res.json()) as { slug: string; date: string }[];
+        if (Array.isArray(rows) && rows.length) return rows;
+      }
+    } catch {
+      // Stil terugvallen op de statische lijst hieronder.
+    }
+  }
+  return staticPosts.map((p) => ({ slug: p.slug, date: p.date }));
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const base = [
-    {
-      url: site.domain,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 1,
-    },
-    {
-      url: `${site.domain}/over-ons`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${site.domain}/projecten`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${site.domain}/blog`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    },
-  ];
+
+  const base = STATIC_PAGES.map((p) => ({
+    url: `${site.domain}${p.path}`,
+    lastModified: now,
+    changeFrequency: p.changeFrequency,
+    priority: p.priority,
+  }));
 
   const projectUrls = projecten.map((p) => ({
     url: `${site.domain}/projecten/${p.slug}`,
@@ -39,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const postUrls = posts.map((p) => ({
+  const postUrls = (await livePosts()).map((p) => ({
     url: `${site.domain}/blog/${p.slug}`,
     lastModified: new Date(p.date),
     changeFrequency: "monthly" as const,

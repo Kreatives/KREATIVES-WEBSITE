@@ -32,9 +32,28 @@ export default async function WerkwijzePage() {
       ? { ...werkwijzePage.socialProof, items: quoteItems }
       : werkwijzePage.socialProof;
 
+  // HowTo-schema → maakt het vijf-stappen-traject geschikt voor rich results.
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Zo verloopt een webdesign-traject bij KREATIVES",
+    description:
+      "Een voorspelbaar webdesign-traject van brief naar live in vijf heldere stappen, met een vaste tijdlijn en revisierondes inbegrepen.",
+    step: werkwijzePage.steps.items.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.title,
+      text: s.body,
+    })),
+  };
+
   return (
     <>
       <RevealInit />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
       <FunnelHero data={werkwijzePage.hero} />
       <Statement data={werkwijzePage.statement} />
       <Steps data={werkwijzePage.steps} />
