@@ -33,6 +33,7 @@ const STATIC_PAGES: { path: string; priority: number; changeFrequency: Freq }[] 
 async function livePosts(): Promise<{ slug: string; date: string }[]> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  let dbRows: { slug: string; date: string }[] = [];
   if (url && key) {
     try {
       const res = await fetch(
@@ -44,13 +45,18 @@ async function livePosts(): Promise<{ slug: string; date: string }[]> {
       );
       if (res.ok) {
         const rows = (await res.json()) as { slug: string; date: string }[];
-        if (Array.isArray(rows) && rows.length) return rows;
+        if (Array.isArray(rows)) dbRows = rows;
       }
     } catch {
       // Stil terugvallen op de statische lijst hieronder.
     }
   }
-  return staticPosts.map((p) => ({ slug: p.slug, date: p.date }));
+  // Union: DB is leidend, statische posts die er niet in staan vullen we aan.
+  const known = new Set(dbRows.map((r) => r.slug));
+  const extra = staticPosts
+    .filter((p) => !known.has(p.slug))
+    .map((p) => ({ slug: p.slug, date: p.date }));
+  return [...dbRows, ...extra];
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

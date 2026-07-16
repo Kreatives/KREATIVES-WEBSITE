@@ -495,20 +495,27 @@ export async function dbPost(id: string): Promise<CmsPost | null> {
 /** Publieke posts — uitsluitend gepubliceerd, drafts lekken nooit naar de site. */
 export async function getPosts(): Promise<CmsPost[]> {
   const rows = (await dbPosts()).filter((p) => p.status === "published");
-  if (rows.length) return rows;
-  return staticPosts.map((p, i) => ({
-    id: p.slug,
-    slug: p.slug,
-    title: p.title,
-    excerpt: p.excerpt,
-    date: p.date,
-    readingMinutes: p.readingMinutes,
-    image: p.image,
-    body: p.body,
-    tags: p.tags,
-    position: i,
-    status: "published" as PostStatus,
-  }));
+  // Statische posts uit lib/blog.ts die (nog) niet in de DB staan, tonen we
+  // ook. Zo kunnen artikelen die in de code staan live gaan zonder dat we
+  // schrijfrechten op de database nodig hebben. DB blijft leidend: bestaat een
+  // slug al in de DB, dan wint die versie.
+  const known = new Set(rows.map((p) => p.slug));
+  const extra = staticPosts
+    .filter((p) => !known.has(p.slug))
+    .map((p, i) => ({
+      id: p.slug,
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      date: p.date,
+      readingMinutes: p.readingMinutes,
+      image: p.image,
+      body: p.body,
+      tags: p.tags,
+      position: rows.length + i,
+      status: "published" as PostStatus,
+    }));
+  return [...rows, ...extra];
 }
 
 export async function getPostBySlug(slug: string): Promise<CmsPost | null> {
