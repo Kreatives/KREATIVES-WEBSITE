@@ -14,6 +14,14 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Oude Engelstalige URL's bestaan niet meer; 301 naar de homepage zodat
+      // eventueel geindexeerde /en-pagina's hun autoriteit doorgeven i.p.v. 404'en.
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
