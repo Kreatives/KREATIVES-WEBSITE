@@ -36,11 +36,11 @@ const FIELDS: Field[] = [
   },
   {
     key: "phone",
-    label: "Telefoon",
-    question: "Je telefoonnummer?",
+    label: "WhatsApp",
+    question: "Je WhatsApp-nummer?",
     placeholder: "+31 6 12 34 56 78",
     type: "tel",
-    help: "Zo kunnen we je even bellen als dat handiger is.",
+    help: "Zo kunnen we je even appen als dat handiger is.",
   },
   {
     key: "website",
@@ -107,7 +107,7 @@ export default function RedesignWizard() {
     if (field.type === "email" && !EMAIL_RE.test(v))
       return "Vul een geldig e-mailadres in.";
     if (field.type === "tel" && v.replace(/\D/g, "").length < 6)
-      return "Vul een geldig telefoonnummer in.";
+      return "Vul een geldig WhatsApp-nummer in.";
     if (field.type === "textarea" && v.length < 8)
       return "Vertel net iets meer, dan kunnen we beter helpen.";
     if (field.key === "name" && v.length < 2) return "Vul je naam in.";
@@ -136,12 +136,13 @@ export default function RedesignWizard() {
     const res = await submitContact({
       name: values.name ?? "",
       email: values.email ?? "",
+      whatsapp: values.phone ?? "",
       website: values.website ?? "",
       company: "",
       subject: "Gratis redesign",
       message: `Aanvraag gratis hero-redesign.\n\nWaar loopt tegenaan:\n${
         values.problem ?? ""
-      }\n\nTelefoon: ${values.phone || "—"}`,
+      }`,
       source: "Gratis redesign",
       hp,
     });

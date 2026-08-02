@@ -14,6 +14,8 @@ export type ContactInput = {
   email: string;
   company?: string;
   website?: string;
+  /** WhatsApp-/telefoonnummer waarop we de aanvrager mogen bereiken. */
+  whatsapp?: string;
   subject: string;
   message: string;
   source: string;
@@ -54,6 +56,7 @@ export async function submitContact(input: ContactInput) {
   const message = (input.message ?? "").trim();
   const company = (input.company ?? "").trim();
   const website = (input.website ?? "").trim();
+  const whatsapp = (input.whatsapp ?? "").trim();
 
   // 0b) Inhoudsfilter: bot-spam vult elk veld met willekeurige tekenreeksen
   // ("NxEeUROLgDCT…"). Herkennen we dat patroon, doe dan alsof het lukte zonder
@@ -79,13 +82,17 @@ export async function submitContact(input: ContactInput) {
     };
   }
 
+  // Er is geen aparte WhatsApp-kolom in de database; we plakken het nummer
+  // onderaan het bericht zodat het zichtbaar is in de admin én in de mail.
+  const fullMessage = whatsapp ? `${message}\n\nWhatsApp: ${whatsapp}` : message;
+
   const row = {
     name,
     email,
     company,
     website,
     subject: (input.subject ?? "").trim() || "Aanvraag",
-    message,
+    message: fullMessage,
     source: (input.source ?? "").trim() || "website",
     read: false,
   };

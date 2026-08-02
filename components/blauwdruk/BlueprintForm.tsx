@@ -47,7 +47,7 @@ export default function BlueprintForm() {
     if (!EMAIL_RE.test(email.trim()))
       return setError("Vul een geldig e-mailadres in.");
     if (phone.replace(/\D/g, "").length < 6)
-      return setError("Vul een geldig telefoonnummer in.");
+      return setError("Vul een geldig WhatsApp-nummer in.");
     if (company.trim().length < 2) return setError("Vul je bedrijfsnaam in.");
     if (!branche) return setError("Kies je type bedrijf.");
     if (doel.trim().length < 3)
@@ -58,11 +58,11 @@ export default function BlueprintForm() {
     const res = await submitContact({
       name: name.trim(),
       email: email.trim(),
+      whatsapp: phone.trim(),
       company: company.trim(),
       subject: "Gratis blauwdruk",
       message:
         `Aanvraag gratis blauwdruk.\n\n` +
-        `Telefoon: ${phone.trim()}\n` +
         `Bedrijf: ${company.trim()}\n` +
         `Type bedrijf / branche: ${branche}\n` +
         `Bezoekers moeten op de site: ${doel.trim()}\n` +
@@ -153,7 +153,7 @@ export default function BlueprintForm() {
         <div className={styles.row}>
           <div className={styles.field}>
             <label className={styles.label} htmlFor="bp-phone">
-              Telefoonnummer
+              WhatsApp-nummer
             </label>
             <input
               id="bp-phone"

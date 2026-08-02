@@ -22,6 +22,7 @@ export default function Contact() {
     const f = new FormData(form);
     const naam = String(f.get("naam") || "").trim();
     const email = String(f.get("email") || "").trim();
+    const whatsapp = String(f.get("whatsapp") || "").trim();
     const bedrijf = String(f.get("bedrijf") || "").trim();
     const website = String(f.get("website") || "").trim();
     const bericht = String(f.get("bericht") || "").trim();
@@ -41,6 +42,7 @@ export default function Contact() {
     const res = await submitContact({
       name: naam,
       email,
+      whatsapp,
       company: bedrijf,
       website,
       subject: type,
@@ -148,16 +150,28 @@ export default function Contact() {
               />
             </div>
             <div className={styles.field}>
-              <label htmlFor="website">Link naar website</label>
+              <label htmlFor="whatsapp">WhatsApp-nummer</label>
               <input
-                id="website"
-                name="website"
-                type="url"
-                autoComplete="url"
-                inputMode="url"
-                placeholder="https://jouwsite.nl"
+                id="whatsapp"
+                name="whatsapp"
+                type="tel"
+                autoComplete="tel"
+                inputMode="tel"
+                placeholder="+31 6 12 34 56 78"
               />
             </div>
+          </div>
+
+          <div className={styles.field}>
+            <label htmlFor="website">Link naar website</label>
+            <input
+              id="website"
+              name="website"
+              type="url"
+              autoComplete="url"
+              inputMode="url"
+              placeholder="https://jouwsite.nl"
+            />
           </div>
 
           <div className={styles.field}>

@@ -24,6 +24,7 @@ export default function StartProject() {
     const f = new FormData(form);
     const naam = String(f.get("naam") || "").trim();
     const email = String(f.get("email") || "").trim();
+    const whatsapp = String(f.get("whatsapp") || "").trim();
     const bedrijf = String(f.get("bedrijf") || "").trim();
     const website = String(f.get("website") || "").trim();
     const bericht = String(f.get("bericht") || "").trim();
@@ -42,6 +43,7 @@ export default function StartProject() {
     const res = await submitContact({
       name: naam,
       email,
+      whatsapp,
       company: bedrijf,
       website,
       subject,
@@ -136,16 +138,28 @@ export default function StartProject() {
                 />
               </div>
               <div className={styles.field}>
-                <label htmlFor="sp-website">Link naar website</label>
+                <label htmlFor="sp-whatsapp">WhatsApp-nummer</label>
                 <input
-                  id="sp-website"
-                  name="website"
-                  type="url"
-                  autoComplete="url"
-                  inputMode="url"
-                  placeholder="https://jouwsite.nl"
+                  id="sp-whatsapp"
+                  name="whatsapp"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  placeholder="+31 6 12 34 56 78"
                 />
               </div>
+            </div>
+
+            <div className={styles.field}>
+              <label htmlFor="sp-website">Link naar website</label>
+              <input
+                id="sp-website"
+                name="website"
+                type="url"
+                autoComplete="url"
+                inputMode="url"
+                placeholder="https://jouwsite.nl"
+              />
             </div>
 
             <div className={styles.field}>
