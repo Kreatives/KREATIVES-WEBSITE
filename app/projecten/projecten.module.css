@@ -10,7 +10,7 @@
 }
 .title {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.02;
   color: var(--on-dark);
@@ -95,14 +95,14 @@
 }
 .client {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: -0.01em;
   color: var(--orange);
 }
 .name {
   font-size: clamp(1.4rem, 1rem + 1vw, 1.85rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.12;
   letter-spacing: var(--track-tight);
   text-wrap: balance;

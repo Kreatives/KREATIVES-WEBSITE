@@ -113,7 +113,7 @@ export default async function RootLayout({
       className={`${instrumentSerif.variable} ${dmMono.variable}`}
     >
       <head>
-        {/* Articulat CF — Adobe Typekit (kit brd6rwq) */}
+        {/* Forma DJR Deck — Adobe Typekit (kit jop8nvp) */}
         <link rel="stylesheet" href={TYPEKIT_CSS} />
         <link
           rel="preconnect"

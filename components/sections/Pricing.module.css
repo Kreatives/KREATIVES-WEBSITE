@@ -67,7 +67,7 @@
 }
 .cardName {
   font-size: clamp(1.25rem, 1rem + 0.7vw, 1.55rem);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
 }
 .cardTag {

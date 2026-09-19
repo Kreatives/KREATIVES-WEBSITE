@@ -65,7 +65,7 @@
 .q {
   flex: 1;
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
   line-height: 1.25;

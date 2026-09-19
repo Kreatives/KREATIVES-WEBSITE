@@ -31,7 +31,7 @@
 }
 .colTitle {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
 }

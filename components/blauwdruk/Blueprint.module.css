@@ -83,7 +83,7 @@
   max-width: 52ch;
 }
 .closer strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ---------- Wat je krijgt ---------- */
@@ -109,7 +109,7 @@
 }
 .getTitle {
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.2;
 }
@@ -175,13 +175,13 @@
   place-items: center;
   background: var(--ink);
   color: var(--on-dark);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.05rem;
   margin-bottom: 0.3rem;
 }
 .stepTitle {
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.2;
 }
@@ -225,14 +225,14 @@
   place-items: center;
   color: #fff;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   background-size: cover;
   background-position: center;
   flex: none;
   border: 1.5px solid rgba(244, 243, 239, 0.5);
 }
 .proofName {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   color: var(--on-dark);
 }
@@ -248,7 +248,7 @@
 }
 .stat strong {
   color: var(--orange);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ---------- Over KREATIVES ---------- */
@@ -312,7 +312,7 @@
 }
 .formCardTitle {
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.15;
   color: var(--ink);
@@ -413,7 +413,7 @@
 }
 .doneTitle {
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
 }
 .doneBody {

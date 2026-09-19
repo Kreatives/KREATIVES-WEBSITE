@@ -19,7 +19,7 @@ export const dmMono = DM_Mono({
   variable: "--font-mono",
 });
 
-// Articulat CF komt van Ricky's Adobe Typekit-kit (alleen weights 400 en 600).
-// Adobe Fonts kan niet via next/font; we laden de kit via een <link> in de
-// root layout en verwijzen hier alleen naar de variabele-waarde.
-export const TYPEKIT_CSS = "https://use.typekit.net/brd6rwq.css";
+// Forma DJR Deck komt van Ricky's Adobe Typekit-kit (weights 500 body / 700
+// headlines). Adobe Fonts kan niet via next/font; we laden de kit via een
+// <link> in de root layout en verwijzen hier alleen naar de variabele-waarde.
+export const TYPEKIT_CSS = "https://use.typekit.net/jop8nvp.css";

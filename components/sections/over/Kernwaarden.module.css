@@ -9,7 +9,7 @@
 }
 .intro {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--fs-statement);
   line-height: 1.25;
   letter-spacing: var(--track-tight);
@@ -39,7 +39,7 @@
 }
 .itemTitle {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   font-size: var(--fs-h3);
   line-height: 1.1;

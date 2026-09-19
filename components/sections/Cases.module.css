@@ -104,7 +104,7 @@
 }
 .name {
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   color: var(--on-dark);
 }

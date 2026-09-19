@@ -3,7 +3,7 @@
 }
 .title {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.12;
   font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);

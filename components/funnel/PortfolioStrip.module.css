@@ -18,7 +18,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   color: var(--ink);
   white-space: nowrap;
@@ -78,7 +78,7 @@
 }
 .name {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   font-size: var(--fs-h3);
 }

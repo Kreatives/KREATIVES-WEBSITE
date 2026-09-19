@@ -9,7 +9,7 @@
 }
 .statement {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.18;
   font-size: var(--fs-statement);

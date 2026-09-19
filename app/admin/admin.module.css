@@ -95,7 +95,7 @@
 }
 .title {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem);
   line-height: 1.1;
@@ -127,7 +127,7 @@
 }
 .cardTitle {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--track-tight);
   font-size: 1.2rem;
 }
@@ -162,7 +162,7 @@
   color: var(--on-dark);
   border-radius: var(--radius-btn);
   font-size: 0.92rem;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 }
 .newBtn:hover {
@@ -203,7 +203,7 @@
   height: 3rem;
   border-radius: 999px;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.85rem;
   flex: none;
 }
@@ -212,7 +212,7 @@
   min-width: 0;
 }
 .listTitle {
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
   font-size: 1.02rem;
 }

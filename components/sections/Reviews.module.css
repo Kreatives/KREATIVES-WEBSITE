@@ -37,7 +37,7 @@
   font-size: 0.9rem;
 }
 .ratingLabel strong {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--on-dark);
 }
 
@@ -112,7 +112,7 @@
   line-height: 1.2;
 }
 .name {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   color: var(--on-dark);
 }
