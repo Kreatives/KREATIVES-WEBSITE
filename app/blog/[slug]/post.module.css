@@ -23,6 +23,7 @@
 }
 
 .title {
+  text-transform: none;
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: var(--track-tight);

@@ -73,7 +73,7 @@
 .cardTag {
   font-family: var(--font-sans);
   font-size: 0.8rem;
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
   background: var(--orange);

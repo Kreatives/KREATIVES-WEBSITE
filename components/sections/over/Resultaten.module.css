@@ -94,7 +94,7 @@
 .no {
   font-family: var(--font-sans);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: normal;
   line-height: 1;
   font-size: clamp(2.6rem, 1.6rem + 3vw, 4rem);
   color: var(--orange);

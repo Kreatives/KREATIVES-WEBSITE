@@ -75,7 +75,7 @@
   position: absolute;
   top: 0.5rem;
   right: 1rem;
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-sans);
   font-size: 4rem;
   line-height: 1;
   color: var(--orange);

@@ -26,7 +26,7 @@
 .portraitPh span {
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   text-transform: uppercase;
   color: rgba(26, 26, 26, 0.65);
 }

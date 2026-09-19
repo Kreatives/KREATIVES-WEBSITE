@@ -42,7 +42,7 @@
 .no {
   font-family: var(--font-sans);
   font-size: 0.9rem;
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   color: var(--orange);
 }
 
@@ -51,6 +51,7 @@
   font-size: clamp(1.5rem, 0.9rem + 2vw, 2.6rem);
   font-weight: 700;
   letter-spacing: var(--track-tight);
+  text-transform: uppercase;
   color: var(--ink);
   line-height: 1.05;
   transition: color 0.3s var(--ease);

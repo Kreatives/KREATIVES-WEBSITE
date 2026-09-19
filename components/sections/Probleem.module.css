@@ -16,10 +16,10 @@
 
 .statement {
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 500;
   font-size: var(--fs-statement);
   line-height: 1.18;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--track-body);
 }
 
 .word {

@@ -1,15 +1,4 @@
-import { Instrument_Serif, DM_Mono } from "next/font/google";
-
-// Instrument Serif: gebruikt voor het highlighten van losse woorden in koppen
-// (de serif-italic uit Ricky's hero). Wordt in CSS ~1.15x groter gezet naast
-// Articulat zodat de x-hoogte optisch matcht.
-export const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-serif",
-});
+import { DM_Mono } from "next/font/google";
 
 // DM Mono: eyebrow-labels boven H2 en meta/info-tekst, met ~10% tracking.
 export const dmMono = DM_Mono({

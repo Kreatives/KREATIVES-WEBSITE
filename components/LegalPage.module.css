@@ -9,6 +9,7 @@
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .title {
+  text-transform: none;
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: var(--track-tight);
@@ -38,6 +39,7 @@
   gap: 0.75rem;
 }
 .heading {
+  text-transform: none;
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: var(--track-tight);

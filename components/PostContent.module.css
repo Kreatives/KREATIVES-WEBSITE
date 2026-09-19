@@ -18,6 +18,7 @@
 }
 
 .h2 {
+  text-transform: none;
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: var(--track-tight);
@@ -27,6 +28,7 @@
   scroll-margin-top: 6rem;
 }
 .h3 {
+  text-transform: none;
   font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: var(--track-tight);

@@ -26,9 +26,9 @@
 
   /* Typografie */
   --font-sans: "forma-djr-deck", "Helvetica Neue", Arial, sans-serif;
-  /* --font-serif / --font-mono geleverd door next/font (variabelen op <html>) */
+  /* --font-mono geleverd door next/font (variabele op <html>) */
 
-  --track-tight: -0.04em; /* Articulat koppen */
+  --track-tight: normal; /* koppen: normale tracking */
   --track-body: -0.01em;
   --track-mono: 0.1em; /* DM Mono labels ~10% */
 
@@ -235,6 +235,7 @@ h3 {
   font-weight: 700;
   letter-spacing: var(--track-tight);
   line-height: 1.04;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
@@ -249,15 +250,14 @@ h3 {
   line-height: 1.15;
 }
 
-/* Instrument Serif italic accent — optisch ~1.16x groter zodat de
-   x-hoogte matcht met Articulat (font rendert van nature kleiner). */
+/* Accent: erft de kop-styling (geen aparte serif/italic meer), alleen kleur. */
 .accent {
-  font-family: var(--font-serif), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
-  font-size: 1.16em;
-  line-height: 1;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 .accent--orange {
   color: var(--orange);

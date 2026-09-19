@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { instrumentSerif, dmMono, TYPEKIT_CSS } from "@/lib/fonts";
+import { dmMono, TYPEKIT_CSS } from "@/lib/fonts";
 import { site, footer } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
@@ -110,7 +110,7 @@ export default async function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${instrumentSerif.variable} ${dmMono.variable}`}
+      className={`${dmMono.variable}`}
     >
       <head>
         {/* Forma DJR Deck — Adobe Typekit (kit jop8nvp) */}
