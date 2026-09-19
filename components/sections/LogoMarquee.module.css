@@ -9,8 +9,15 @@
   margin-bottom: clamp(1.5rem, 2.4vw, 2.25rem);
 }
 
+/* Kleinere gap dan de globale marquee zodat er méér logo's tegelijk in beeld
+   staan. gap en padding-right gelijk houden: dat houdt de -50%-loop naadloos. */
+.track {
+  gap: clamp(1.6rem, 1.1rem + 2.2vw, 3.25rem);
+  padding-right: clamp(1.6rem, 1.1rem + 2.2vw, 3.25rem);
+}
+
 .logo {
-  height: clamp(1.9rem, 1.4rem + 1.6vw, 2.9rem);
+  height: clamp(1.5rem, 1.15rem + 1.15vw, 2.3rem);
   width: auto;
   object-fit: contain;
   opacity: 0.7;

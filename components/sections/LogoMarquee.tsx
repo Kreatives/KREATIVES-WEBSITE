@@ -10,7 +10,7 @@ export default function LogoMarquee({ label }: { label?: string }) {
       </div>
       <div className="marquee">
         <div
-          className="marquee__track"
+          className={`marquee__track ${styles.track}`}
           style={{ "--marquee-dur": "48s" } as React.CSSProperties}
         >
           {logos.map((n, i) => (

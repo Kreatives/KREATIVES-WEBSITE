@@ -81,6 +81,9 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Onderrand vloeit over in de kleur van de logo-marquee eronder */}
+      <div className={styles.fade} aria-hidden />
     </section>
   );
 }

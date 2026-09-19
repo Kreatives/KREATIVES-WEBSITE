@@ -512,16 +512,23 @@ export const over = {
 };
 
 // TikTok-marquee onder aan de homepage (vervangt de oude "Over ons"-kaart).
-// Zodra Ricky de video's stuurt: zet ze in /public/tiktok als staande (9:16)
-// posters (poster) met de link naar de TikTok (href). Zolang de lijst leeg is
-// toont de sectie nette placeholder-tegels die naar het TikTok-profiel linken.
-export type TikTokVideo = { poster: string; href: string; caption?: string };
+// Video's staan als verticale (9:16) mp4 in /public/tiktok met een posterframe
+// (jpg) ernaast; ze spelen automatisch af (muted, loop) in de marquee.
+export type TikTokVideo = { src: string; poster: string; href: string };
 
 export const tiktok = {
-  label: "Bekend van TikTok",
+  eyebrow: "Social",
+  titleLead: "Bekend van",
+  titleAccent: "TikTok.",
+  intro:
+    "Misschien heb je me al eens voorbij zien scrollen. Op TikTok laat ik zien hoe we websites bouwen, van eerste schets tot livegang.",
   handle: "@ricksooo",
   profile: "https://www.tiktok.com/@ricksooo",
-  videos: [] as TikTokVideo[],
+  videos: [1, 2, 3, 4, 5, 6].map((n) => ({
+    src: `/tiktok/${n}.mp4`,
+    poster: `/tiktok/${n}.jpg`,
+    href: "https://www.tiktok.com/@ricksooo",
+  })) as TikTokVideo[],
 };
 
 export const pricing = {
