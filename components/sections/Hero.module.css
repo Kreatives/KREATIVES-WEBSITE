@@ -19,14 +19,15 @@
   opacity: 0.72;
 }
 
-/* Desktop-achtergrondvideo, over de foto en onder de overlay */
+/* Desktop-achtergrondvideo: dekt de foto volledig af (geen doorschijn),
+   de donkere overlay eroverheen zorgt voor contrast. */
 .video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.72;
+  opacity: 1;
 }
 
 .overlay {
