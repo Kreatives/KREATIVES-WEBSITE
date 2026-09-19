@@ -45,7 +45,7 @@ export default function Probleem() {
   const words = probleem.statement.split(" ");
 
   return (
-    <section className="section" id="probleem">
+    <section className={`section ${styles.sec}`} id="probleem">
       <div className="container">
         {/* Scalient about-stijl: label links, groot statement rechts */}
         <div className={styles.grid}>

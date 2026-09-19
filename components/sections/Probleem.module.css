@@ -1,3 +1,9 @@
+/* Deze sectie eindigt met de cards; onder-padding weg zodat de "Aanpak"-sectie
+   niet dubbele tussenruimte krijgt. */
+.sec {
+  padding-bottom: 0;
+}
+
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
