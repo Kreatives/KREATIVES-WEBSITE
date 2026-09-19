@@ -169,10 +169,7 @@
 @media (max-width: 720px) {
   .actions {
     width: 100%;
-    justify-content: stretch;
-  }
-  .actions :global(.btn) {
-    flex: 1 1 auto;
+    justify-content: center;
   }
 }
 
