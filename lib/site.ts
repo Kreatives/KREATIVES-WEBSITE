@@ -517,7 +517,6 @@ export const over = {
 export type TikTokVideo = { src: string; poster: string; href: string };
 
 export const tiktok = {
-  eyebrow: "Social",
   titleLead: "Bekend van",
   titleAccent: "TikTok.",
   intro:

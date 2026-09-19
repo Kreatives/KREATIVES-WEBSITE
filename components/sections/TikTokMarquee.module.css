@@ -23,6 +23,12 @@
   line-height: 1.5;
 }
 
+/* Kleinere gap tussen de video's; gap == padding-right houdt de loop naadloos. */
+.track {
+  gap: clamp(0.85rem, 0.5rem + 1vw, 1.5rem);
+  padding-right: clamp(0.85rem, 0.5rem + 1vw, 1.5rem);
+}
+
 .card {
   position: relative;
   flex: none;
@@ -32,6 +38,7 @@
   overflow: hidden;
   background: var(--ink);
   display: block;
+  box-shadow: 0 10px 26px rgba(17, 17, 17, 0.16);
 }
 .video {
   position: absolute;

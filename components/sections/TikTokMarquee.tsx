@@ -24,7 +24,6 @@ export default function TikTokMarquee() {
     <section className={`section ${styles.sec}`} aria-label="Bekend van TikTok">
       <div className="container">
         <div className={styles.head} data-reveal>
-          <span className="eyebrow">{tiktok.eyebrow}</span>
           <h2 className={`h2 ${styles.title}`}>
             {tiktok.titleLead}{" "}
             <span className="accent accent--orange">{tiktok.titleAccent}</span>
@@ -36,7 +35,7 @@ export default function TikTokMarquee() {
       <div className="marquee">
         <div
           ref={trackRef}
-          className="marquee__track"
+          className={`marquee__track ${styles.track}`}
           style={{ "--marquee-dur": "46s" } as React.CSSProperties}
         >
           {loop.map((v, i) => {
