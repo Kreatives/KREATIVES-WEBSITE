@@ -43,10 +43,10 @@ export const nav: NavItem[] = [
 export const hero = {
   // Headline volgt Ricky's eigen formulering. Instrument Serif italic op
   // het tweede deel (kleur erft van de witte tekst op de foto).
-  titleLead: "Jouw merk is sterker dan",
-  titleAccent: "je website laat zien.",
+  titleLead: "Zie er online uit als",
+  titleAccent: "de beste in je vak.",
   body:
-    "Wij bouwen maatwerk websites voor ondernemers die er online even goed uit willen zien als ze offline al zijn.",
+    "Klanten vergelijken je binnen een paar seconden met je concurrent. Met een strategisch ontworpen website op maat zorgen wij dat jij wint, en binnen 6 weken staat hij live.",
   primary: { label: "Gratis re-design", href: "/contact" },
   // Primaire hero-knop: linkt rechtstreeks naar de contactpagina.
   contactCta: { label: "Contact opnemen", href: "/contact" },
