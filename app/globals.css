@@ -137,6 +137,14 @@ select {
   padding-inline: var(--gutter);
 }
 
+/* Hero + logo-marquee samen exact één schermhoogte, zodat de marquee
+   ("Vertrouwd door 95 bedrijven" + logo's) binnen 100vh zichtbaar blijft. */
+.hero-stack {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
 .section {
   padding-block: var(--section-y);
 }

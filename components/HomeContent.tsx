@@ -41,8 +41,10 @@ export default async function HomeContent() {
   return (
     <>
       <RevealInit />
-      <Hero />
-      <LogoMarquee />
+      <div className="hero-stack">
+        <Hero />
+        <LogoMarquee />
+      </div>
       <Probleem />
       <USPs />
       <Werkwijze />
