@@ -88,27 +88,26 @@ export const usps = {
   titleAccent: "ons kiezen.",
   intro:
     "Je werkt rechtstreeks met de mensen die je site bouwen. Geen doorgeefluik, geen sjabloon dat wordt aangepast. Een aanpak die vooraf duidelijk is, en een eindresultaat dat bij je merk past.",
+  // Simpele stat-cards (geen beeld). Cijfers komen overeen met onze prijzen en
+  // werkwijze (100% maatwerk, 2 revisierondes inbegrepen, ~4 weken tot live).
   items: [
     {
-      no: "01",
-      title: "Vaste aanpak",
+      stat: "100%",
+      title: "Maatwerk",
       body:
-        "Vooraf weet je wat er wanneer gebeurt en wat het kost. We starten niet zonder dat alles op papier staat.",
-      image: "/brand/brand-1.webp",
+        "Elke site bouwen we vanaf nul rond jouw merk. Geen thema's, geen sjablonen.",
     },
     {
-      no: "02",
-      title: "Volledig op maat",
+      stat: "2",
+      title: "Revisierondes",
       body:
-        "We werken niet met thema's of kant-en-klare blokken. Elke site wordt gebouwd rond jouw merk, zodat hij er nergens anders uitziet.",
-      image: "/brand/brand-2.webp",
+        "Ruimte om het ontwerp aan te scherpen tot het klopt, zonder dat de prijs verandert.",
     },
     {
-      no: "03",
-      title: "Twee revisierondes",
+      stat: "4 wk",
+      title: "Tot livegang",
       body:
-        "Je krijgt de ruimte om het design aan te scherpen totdat het echt klopt. De prijs verandert daardoor niet.",
-      image: "/brand/work-2.webp",
+        "Van strategiegesprek tot live gemiddeld vier weken, met een planning die vooraf vastligt.",
     },
   ],
 };
