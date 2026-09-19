@@ -3,12 +3,20 @@ import Link from "next/link";
 import { Arrow } from "@/components/icons";
 import styles from "./PortfolioStrip.module.css";
 
+type PortfolioItem = {
+  name: string;
+  type: string;
+  branche: string;
+  image: string;
+  href?: string;
+};
+
 type PortfolioData = {
   eyebrow: string;
   titleLead: string;
   titleAccent: string;
   cta?: { label: string; href: string };
-  items: { name: string; type: string; branche: string; image: string }[];
+  items: PortfolioItem[];
 };
 
 export default function PortfolioStrip({ data }: { data: PortfolioData }) {
@@ -34,25 +42,38 @@ export default function PortfolioStrip({ data }: { data: PortfolioData }) {
         </div>
 
         <ul className={styles.grid}>
-          {data.items.map((item) => (
-            <li key={item.name} className={styles.item} data-reveal>
-              <div className={styles.media}>
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="(max-width: 760px) 100vw, 45vw"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <div className={styles.meta}>
-                <h3 className={styles.name}>{item.name}</h3>
-                <span className={styles.tags}>
-                  {item.type} · {item.branche}
-                </span>
-              </div>
-            </li>
-          ))}
+          {data.items.map((item) => {
+            const inner = (
+              <>
+                <div className={styles.media}>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 760px) 100vw, 45vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div className={styles.meta}>
+                  <h3 className={styles.name}>{item.name}</h3>
+                  <span className={styles.tags}>
+                    {item.type} · {item.branche}
+                  </span>
+                </div>
+              </>
+            );
+            return (
+              <li key={item.href ?? item.name} className={styles.item} data-reveal>
+                {item.href ? (
+                  <Link href={item.href} className={styles.link}>
+                    {inner}
+                  </Link>
+                ) : (
+                  inner
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
