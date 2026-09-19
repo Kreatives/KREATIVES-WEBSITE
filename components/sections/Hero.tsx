@@ -2,6 +2,7 @@ import Image from "next/image";
 import { hero } from "@/lib/site";
 import { Star } from "@/components/icons";
 import Button from "@/components/Button";
+import HeroVideo from "./HeroVideo";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -18,6 +19,7 @@ export default function Hero() {
           sizes="100vw"
           style={{ objectFit: "cover", objectPosition: hero.backgroundPosition }}
         />
+        <HeroVideo poster="/brand/hero-poster.webp" />
         <div className={styles.overlay} />
       </div>
 
