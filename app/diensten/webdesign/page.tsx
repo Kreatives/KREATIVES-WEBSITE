@@ -41,11 +41,7 @@ export default async function WebdesignPage() {
     ...webdesignFunnel.portfolio,
     items: projects.map((p) => ({
       name: p.name,
-      type: p.type,
-      branche:
-        p.tags.find((t) => t.toLowerCase() !== p.type.toLowerCase()) ??
-        p.tags[0] ??
-        "",
+      tags: p.tags,
       image: p.image,
       href: `/projecten/${p.slug}`,
     })),

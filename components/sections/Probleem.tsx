@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { probleem } from "@/lib/site";
+import { probleem, usps } from "@/lib/site";
 import styles from "./Probleem.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -59,6 +59,16 @@ export default function Probleem() {
             ))}
           </p>
         </div>
+
+        <ul className={styles.cards}>
+          {usps.items.map((u) => (
+            <li key={u.title} className={styles.card} data-reveal>
+              <span className={styles.stat}>{u.stat}</span>
+              <h3 className={styles.cardTitle}>{u.title}</h3>
+              <p className={styles.cardBody}>{u.body}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

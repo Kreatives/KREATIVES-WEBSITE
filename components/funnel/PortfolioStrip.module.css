@@ -72,9 +72,10 @@
 }
 .meta {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
 }
 .name {
   font-family: var(--font-sans);
@@ -83,12 +84,21 @@
   font-size: var(--fs-h3);
 }
 .tags {
-  font-family: var(--font-mono), monospace;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+.tag {
+  font-family: var(--font-sans);
   font-size: 0.78rem;
-  letter-spacing: var(--track-mono);
-  text-transform: uppercase;
+  letter-spacing: normal;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
   color: var(--muted);
-  text-align: right;
+  white-space: nowrap;
 }
 
 @media (max-width: 760px) {

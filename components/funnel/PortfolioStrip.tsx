@@ -5,8 +5,7 @@ import styles from "./PortfolioStrip.module.css";
 
 type PortfolioItem = {
   name: string;
-  type: string;
-  branche: string;
+  tags: string[];
   image: string;
   href?: string;
 };
@@ -56,9 +55,13 @@ export default function PortfolioStrip({ data }: { data: PortfolioData }) {
                 </div>
                 <div className={styles.meta}>
                   <h3 className={styles.name}>{item.name}</h3>
-                  <span className={styles.tags}>
-                    {item.type} · {item.branche}
-                  </span>
+                  <ul className={styles.tags}>
+                    {item.tags.map((t) => (
+                      <li key={t} className={styles.tag}>
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </>
             );

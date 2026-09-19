@@ -49,7 +49,7 @@ export const hero = {
     "Klanten vergelijken je binnen een paar seconden met je concurrent. Met een strategisch ontworpen website op maat zorgen wij dat jij wint, en binnen 6 weken staat hij live.",
   primary: { label: "Gratis re-design", href: "/contact" },
   // Primaire hero-knop: linkt rechtstreeks naar de contactpagina.
-  contactCta: { label: "Contact opnemen", href: "/contact" },
+  contactCta: { label: "Begin gratis", href: "/contact" },
   secondary: { label: "Bekijk ons werk", href: "/projecten" },
   // Social-proof widget
   socialProof: {
@@ -104,10 +104,10 @@ export const usps = {
         "Ruimte om het ontwerp aan te scherpen tot het klopt, zonder dat de prijs verandert.",
     },
     {
-      stat: "4 wk",
-      title: "Tot livegang",
+      stat: "6",
+      title: "Weken tot livegang",
       body:
-        "Van strategiegesprek tot live gemiddeld vier weken, met een planning die vooraf vastligt.",
+        "Van strategiegesprek tot livegang, met een planning die je vooraf krijgt.",
     },
   ],
 };
