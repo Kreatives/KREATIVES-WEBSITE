@@ -23,6 +23,14 @@ const PUBLIC_IMAGES = [
   "/logos/4.png",
   "/logos/5.png",
   "/logos/6.png",
+  "/logos/7.png",
+  "/logos/8.png",
+  "/logos/9.png",
+  "/logos/10.png",
+  "/logos/11.png",
+  "/logos/12.png",
+  "/logos/13.png",
+  "/logos/14.png",
 ];
 
 export default function AdminMedia() {

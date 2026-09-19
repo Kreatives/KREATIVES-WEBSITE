@@ -11,7 +11,7 @@ export default function LogoMarquee({ label }: { label?: string }) {
       <div className="marquee">
         <div
           className="marquee__track"
-          style={{ "--marquee-dur": "34s" } as React.CSSProperties}
+          style={{ "--marquee-dur": "48s" } as React.CSSProperties}
         >
           {logos.map((n, i) => (
             // eslint-disable-next-line @next/next/no-img-element

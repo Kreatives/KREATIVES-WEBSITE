@@ -3,11 +3,28 @@
   flex-direction: column;
   gap: 1.1rem;
   margin-bottom: clamp(3rem, 5vw, 4.5rem);
-  max-width: 60ch;
+}
+.headTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.allBtn {
+  flex: none;
 }
 .title {
   font-size: var(--fs-h2);
   color: var(--on-dark);
+  max-width: 40rem;
+}
+
+@media (max-width: 560px) {
+  .headTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
 
 .cols {

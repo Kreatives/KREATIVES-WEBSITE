@@ -6,7 +6,7 @@ import USPs from "@/components/sections/USPs";
 import Werkwijze from "@/components/sections/Werkwijze";
 import Cases from "@/components/sections/Cases";
 import Reviews from "@/components/sections/Reviews";
-import OverMij from "@/components/sections/OverMij";
+import TikTokMarquee from "@/components/sections/TikTokMarquee";
 import Pricing from "@/components/sections/Pricing";
 import ClosingCta from "@/components/sections/ClosingCta";
 import { getFeaturedProjects, getReviews, initialsOf } from "@/lib/cms";
@@ -42,9 +42,7 @@ export default async function HomeContent() {
     <>
       <RevealInit />
       <Hero />
-      <div className="mobile-only">
-        <LogoMarquee label="Vertrouwd door 95+ bedrijven" />
-      </div>
+      <LogoMarquee />
       <Probleem />
       <USPs />
       <Werkwijze />
@@ -52,7 +50,7 @@ export default async function HomeContent() {
         <Cases items={cases} />
         <Reviews items={reviewItems} />
       </div>
-      <OverMij />
+      <TikTokMarquee />
       <Pricing />
       <ClosingCta />
     </>

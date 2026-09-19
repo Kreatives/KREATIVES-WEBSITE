@@ -23,7 +23,7 @@ export const nav: NavItem[] = [
       { label: "AI", href: "/diensten/ai" },
     ],
   },
-  { label: "Projecten", href: "/projecten" },
+  { label: "Cases", href: "/projecten" },
   { label: "Kennisbank", href: "/blog" },
   {
     label: "Over ons",
@@ -48,6 +48,8 @@ export const hero = {
   body:
     "Wij bouwen maatwerk websites voor ondernemers die er online even goed uit willen zien als ze offline al zijn.",
   primary: { label: "Gratis re-design", href: "/contact" },
+  // Primaire hero-knop: linkt rechtstreeks naar de contactpagina.
+  contactCta: { label: "Contact opnemen", href: "/contact" },
   secondary: { label: "Bekijk ons werk", href: "/projecten" },
   // Social-proof widget
   socialProof: {
@@ -67,16 +69,17 @@ export const hero = {
 };
 
 export const marquee = {
-  label: "Vertrouwd door ondernemers door heel Nederland",
-  // logos 1..6 in /public/logos
-  logos: [1, 2, 3, 4, 5, 6],
+  label: "Vertrouwd door 95 bedrijven",
+  // logos 1..14 in /public/logos (witte/lichte logo's op donkere band)
+  logos: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 };
 
 export const probleem = {
-  eyebrow: "Herkenbaar?",
-  // Eén statement dat woord-voor-woord oplicht tijdens scrollen (GSAP).
+  // Korte "wie we zijn" in de Scalient about-stijl: label links, groot
+  // statement rechts dat woord-voor-woord oplicht tijdens scrollen (GSAP).
+  eyebrow: "Wie we zijn",
   statement:
-    "Je site staat er nog, maar hij klopt niet meer. Je bent gegroeid, je aanbod is verschoven, je prijzen zijn omhoog gegaan, de website niet. Ondertussen ziet je concurrent er online strakker uit dan jij, terwijl jij weet dat jij het betere werk levert.",
+    "KREATIVES bouwt maatwerk websites voor ondernemers die online willen laten zien wat ze offline al waarmaken. Van strategie en ontwerp tot bouw en livegang werk je rechtstreeks met de mensen die je site maken.",
 };
 
 export const usps = {
@@ -120,21 +123,21 @@ export const werkwijze = {
       title: "Strategiegesprek",
       body:
         "We beginnen met een gesprek over je merk, je doelgroep en wat de site concreet moet opleveren.",
-      image: "/brand/work-1.webp",
+      image: "/brand/stap-strategie.webp",
     },
     {
       no: "02",
       title: "Design",
       body:
         "Je krijgt een ontwerp op maat, met twee revisierondes om alles aan te scherpen tot het klopt.",
-      image: "/brand/work-3.webp",
+      image: "/brand/stap-design.webp",
     },
     {
       no: "03",
       title: "Development",
       body:
         "We bouwen de site snel, schaalbaar en technisch op orde, gericht op goede vindbaarheid.",
-      image: "/brand/work-4.webp",
+      image: "/brand/stap-development.webp",
     },
     {
       no: "04",
@@ -506,6 +509,19 @@ export const over = {
     "KREATIVES is opgezet vanuit één idee: de meeste ondernemers verdienen een betere site dan ze hebben. We houden het klein zodat je altijd weet wie er aan je site zit, en waarom we iets doen zoals we het doen.",
   cta: { label: "Lees meer over ons", href: "/over-ons" },
   portrait: "/brand/brand-1.webp" as string | null,
+};
+
+// TikTok-marquee onder aan de homepage (vervangt de oude "Over ons"-kaart).
+// Zodra Ricky de video's stuurt: zet ze in /public/tiktok als staande (9:16)
+// posters (poster) met de link naar de TikTok (href). Zolang de lijst leeg is
+// toont de sectie nette placeholder-tegels die naar het TikTok-profiel linken.
+export type TikTokVideo = { poster: string; href: string; caption?: string };
+
+export const tiktok = {
+  label: "Bekend van TikTok",
+  handle: "@ricksooo",
+  profile: "https://www.tiktok.com/@ricksooo",
+  videos: [] as TikTokVideo[],
 };
 
 export const pricing = {

@@ -32,7 +32,7 @@
   display: flex;
   align-items: flex-end;
   padding-top: 9rem;
-  padding-bottom: clamp(7rem, 5rem + 5vw, 9rem); /* ruimte voor logo-strip onderaan */
+  padding-bottom: clamp(4rem, 3rem + 3vw, 6rem);
   padding-left: clamp(1.25rem, 0.5rem + 2vw, 3rem);
   padding-right: clamp(1.25rem, 0.5rem + 2vw, 3rem);
   width: 100%;
@@ -140,43 +140,6 @@
   opacity: 0.7;
 }
 
-/* ---------- Logo-strip onderaan de hero ---------- */
-.logos {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
-  padding-inline: clamp(1rem, 2vw, 2rem);
-}
-.logoCell {
-  display: grid;
-  place-items: center;
-  padding: clamp(1rem, 1.5vw, 1.5rem) 0.5rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.18);
-}
-.logoCell:first-child {
-  border-left: 0;
-}
-.logoImg {
-  height: clamp(1.6rem, 1.2rem + 1vw, 2.1rem);
-  width: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.72;
-  transition: opacity 0.3s var(--ease);
-}
-.logoCell:hover .logoImg {
-  opacity: 1;
-}
-
 @media (max-width: 720px) {
   .hero {
     min-height: 88vh;
@@ -186,10 +149,6 @@
   }
   .actions :global(.btn) {
     flex: 1 1 auto;
-  }
-  /* Op mobiel verbergen: de marquee onder de hero toont dit al. */
-  .logos {
-    display: none;
   }
 }
 

@@ -24,15 +24,15 @@ export default function Probleem() {
       return;
     }
 
-    gsap.set(words, { opacity: 0.18 });
+    gsap.set(words, { opacity: 0.2 });
     const tween = gsap.to(words, {
       opacity: 1,
       stagger: 0.05,
       ease: "none",
       scrollTrigger: {
         trigger: el,
-        start: "top 78%",
-        end: "bottom 50%",
+        start: "top 80%",
+        end: "bottom 55%",
         scrub: 0.4,
       },
     });
@@ -47,16 +47,18 @@ export default function Probleem() {
   return (
     <section className="section" id="probleem">
       <div className="container">
-        {/* Label inline aan het begin van de heading; tekst wrapt onder zichzelf */}
-        <p ref={ref} className={styles.statement}>
-          <span className={styles.label}>{probleem.eyebrow}</span>
-          {words.map((w, i) => (
-            <span key={i} className={styles.word} data-w>
-              {w}
-              {i < words.length - 1 ? " " : ""}
-            </span>
-          ))}
-        </p>
+        {/* Scalient about-stijl: label links, groot statement rechts */}
+        <div className={styles.grid}>
+          <p className={styles.label}>{probleem.eyebrow}</p>
+          <p ref={ref} className={styles.statement}>
+            {words.map((w, i) => (
+              <span key={i} className={styles.word} data-w>
+                {w}
+                {i < words.length - 1 ? " " : ""}
+              </span>
+            ))}
+          </p>
+        </div>
       </div>
     </section>
   );

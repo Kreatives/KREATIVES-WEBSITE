@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { hero, marquee } from "@/lib/site";
+import { hero } from "@/lib/site";
 import { Star } from "@/components/icons";
-import RedesignTrigger from "@/components/RedesignTrigger";
+import Button from "@/components/Button";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -72,29 +72,14 @@ export default function Hero() {
           </p>
 
           <div className={styles.actions} data-reveal>
-            <RedesignTrigger variant="primary">
-              {hero.primary.label}
-            </RedesignTrigger>
+            <Button href={hero.contactCta.href} variant="primary">
+              {hero.contactCta.label}
+            </Button>
             <a href={hero.secondary.href} className={styles.secondaryLink}>
               {hero.secondary.label}
             </a>
           </div>
         </div>
-      </div>
-
-      {/* Logo-strip op de hero (image #53), met dunne verticale lijntjes */}
-      <div className={styles.logos} aria-label="Vertrouwd door ondernemers">
-        {marquee.logos.map((n) => (
-          <div key={n} className={styles.logoCell}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`/logos/${n}.png`}
-              alt=""
-              className={styles.logoImg}
-              loading="lazy"
-            />
-          </div>
-        ))}
       </div>
     </section>
   );

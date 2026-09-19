@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cases } from "@/lib/site";
 import { Arrow } from "@/components/icons";
+import Button from "@/components/Button";
 import styles from "./Cases.module.css";
 
 export type CaseItem = {
@@ -20,9 +21,12 @@ export default function Cases({ items }: { items: CaseItem[] }) {
     <section className="section section--dark" id="cases">
       <div className="container">
         <div className={styles.head}>
-          <span className="eyebrow" data-reveal>
-            {cases.eyebrow}
-          </span>
+          <div className={styles.headTop} data-reveal>
+            <span className="eyebrow">{cases.eyebrow}</span>
+            <Button href="/projecten" variant="ghost" className={styles.allBtn}>
+              Bekijk alle cases
+            </Button>
+          </div>
           <h2 className={`h2 ${styles.title}`} data-reveal>
             {cases.titleLead}{" "}
             <span className="accent accent--orange">{cases.titleAccent}</span>
