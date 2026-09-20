@@ -45,6 +45,9 @@ export const hero = {
   // het tweede deel (kleur erft van de witte tekst op de foto).
   titleLead: "Zie er online uit als",
   titleAccent: "de beste in je vak.",
+  // "de beste" krijgt een oranje onderstreping in de hero-kop.
+  titleUnderline: "de beste",
+  titleAccentTail: " in je vak.",
   body:
     "Klanten vergelijken je binnen een paar seconden met je concurrent. Met een strategisch ontworpen website op maat zorgen wij dat jij wint, en binnen 6 weken staat hij live.",
   primary: { label: "Gratis re-design", href: "/contact" },

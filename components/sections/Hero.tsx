@@ -66,7 +66,10 @@ export default function Hero() {
           <h1 className={`h-hero ${styles.title}`} data-reveal>
             {hero.titleLead}
             <br />
-            <span className="accent">{hero.titleAccent}</span>
+            <span className="accent">
+              <span className={styles.underline}>{hero.titleUnderline}</span>
+              {hero.titleAccentTail}
+            </span>
           </h1>
 
           <p className={`lead ${styles.body}`} data-reveal>

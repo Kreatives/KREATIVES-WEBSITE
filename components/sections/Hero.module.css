@@ -145,6 +145,13 @@
 .title :global(.accent) {
   color: var(--on-dark);
 }
+/* Oranje onderstreping onder "de beste" (wat dikker) */
+.underline {
+  text-decoration-line: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
+}
 
 .body {
   color: rgba(244, 243, 239, 0.78);
