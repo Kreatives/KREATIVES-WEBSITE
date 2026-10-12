@@ -31,6 +31,70 @@ export type Project = {
 
 export const projecten: Project[] = [
   {
+    slug: "smokey-joes",
+    name: "Smokey Joe's",
+    headline: "In twee weken van nul naar een rij voor de deur",
+    type: "Branding",
+    excerpt:
+      "Een compleet merk in twee weken, van logo en brandbook tot gevel, tassen en landingspagina.",
+    intro:
+      "Smokey Joe's opende in Rotterdam met burgers die je nergens anders vindt, maar een merk was er nog niet. In twee weken bouwden we alles op: van logo, kleuren en brandbook tot gevel, tassen, posters en de landingspagina.",
+    image: "/projects/smokey-joes.webp",
+    tags: ["Branding", "Horeca", "Landingspagina"],
+    client: "Smokey Joe's",
+    year: "2026",
+    sections: [
+      {
+        heading: "De klant",
+        body:
+          "Smokey Joe's is een burgerzaak in Rotterdam die bewust anders durft te zijn. Ze maken burgers met combinaties die je nergens anders tegenkomt, gemaakt voor een jonge doelgroep die uit eten gaat voor de ervaring en het daarna wil delen.",
+        bodyExtra:
+          "Toen ze bij ons kwamen, stond de zaak op het punt van openen. De keuken, het pand en de planning liepen allemaal tegelijk. Alleen het merk bestond nog niet.",
+      },
+      {
+        heading: "Het probleem",
+        body:
+          "Er was nog niets. Geen logo, geen kleuren, geen uitstraling en geen website. Het team had zijn handen vol aan alles wat bij een opening komt kijken, en de opening kwam snel dichterbij.",
+        bodyExtra:
+          "Zonder merk ben je op straat gewoon de zoveelste zaak. Voor een zaak die het moet hebben van nieuwsgierigheid en mond-tot-mondreclame is dat een groot risico, zeker in een stad met zoveel aanbod als Rotterdam.",
+      },
+      {
+        heading: "Hoe ze bij ons terechtkwamen",
+        body:
+          "Smokey Joe's kwam via ons netwerk bij ons binnen. Ze hadden iemand nodig die snel kon schakelen en alles in één keer kon neerzetten, van het logo tot de gevel en de website.",
+      },
+      {
+        heading: "Het doel",
+        body:
+          "Een merk dat meteen laat zien dat Smokey Joe's anders is. De burgers zijn gedurfd en dat moest je aan alles zien.",
+        bodyExtra:
+          "Tegelijk moest het merk aantrekkelijk en hip zijn voor een jonge doelgroep, zodat ze binnen willen lopen en er een foto van willen maken.",
+      },
+      {
+        heading: "Het proces",
+        body:
+          "We hadden twee weken. Daarom begonnen we bij de basis waar alles op leunt: het logo, de kleuren en de typografie. Die legden we vast in een brandbook, zodat elk volgend ontwerp er direct op kon voortbouwen.",
+        bodyExtra:
+          "Daarna vertaalden we het merk naar alles wat een klant tegenkomt: de gevel, de tassen waarin het eten mee naar huis gaat, de flyers en de landingspagina waar mensen het merk online leren kennen. De eigenaar had één duidelijke wens voor de opening: een rij voor de deur. Mensen gaan alleen in de rij staan voor iets dat er de moeite waard uitziet. Daarom ontwierpen we een poster die nieuwsgierig maakt en voorbijgangers laat weten dat hier iets nieuws opengaat.",
+      },
+      {
+        heading: "Wat we maakten",
+        body:
+          "Een compleet merk in twee weken. Een logo en kleurenpalet die opvallen tussen andere zaken, typografie die stoer en speels tegelijk is, en een brandbook dat vastlegt hoe het merk overal hetzelfde blijft.",
+        bodyExtra:
+          "Het merk staat op de gevel, op de tassen, op de flyers en posters en op de landingspagina.",
+      },
+      {
+        heading: "Het resultaat",
+        body:
+          "Bij de opening stond er een volle rij voor de deur, precies waar de eigenaar op hoopte. Smokey Joe's is inmiddels een herkenbare naam in Rotterdam en mensen kennen de zaak van de gekke burgers.",
+        bodyExtra:
+          "Het merk staat zo stevig dat ze nu al bezig zijn met uitbreiden.",
+      },
+    ],
+    related: ["burgers-frites", "mazadesign"],
+  },
+  {
     slug: "mazadesign",
     name: "Mazadesign",
     headline: "Een landingspagina die meehelpt in het verkoopgesprek",

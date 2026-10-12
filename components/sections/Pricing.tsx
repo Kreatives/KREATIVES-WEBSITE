@@ -42,11 +42,9 @@ export default function Pricing() {
               data-reveal
             >
               <div className={styles.cardHead}>
-                <div className={styles.cardTitleRow}>
-                  <h3 className={styles.cardName}>{p.name}</h3>
-                  {p.tag && <span className={styles.cardTag}>{p.tag}</span>}
-                </div>
+                <h3 className={styles.cardName}>{p.name}</h3>
                 <p className={styles.cardBody}>{p.body}</p>
+                {p.price && <p className={styles.cardPrice}>{p.price}</p>}
               </div>
 
               <div className={styles.cardCta}>

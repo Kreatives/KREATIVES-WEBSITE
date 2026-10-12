@@ -107,61 +107,87 @@ export default async function ProjectDetailPage({
           </div>
         </section>
 
-        {/* Body: per sectie beeld bovenin + 2-koloms tekst grid */}
+        {/* Body: tekst-only secties (kop links, tekst rechts) en secties met
+            beeld (tekst links, beeld rechts tegen de schermrand). */}
         <section className={`section ${styles.body}`}>
           <div className="container">
-            {project.sections.map((s, i) => (
-              <div key={i} className={styles.block}>
-                {(s.video || s.image) && (
-                  <div
-                    className={`${styles.blockMedia} ${
-                      s.videoPortrait ? styles.blockMediaPortrait : ""
-                    }`}
-                    data-reveal
-                  >
-                    {s.video ? (
-                      <video
-                        className={styles.blockVideo}
-                        src={s.video}
-                        poster={s.poster}
-                        preload="metadata"
-                        playsInline
-                        controls={!s.videoLoop}
-                        autoPlay={s.videoLoop}
-                        muted={s.videoLoop}
-                        loop={s.videoLoop}
-                      />
-                    ) : (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        src={s.image}
-                        alt=""
-                        className={styles.blockImg}
-                        loading="lazy"
-                      />
-                    )}
-                  </div>
-                )}
+            {project.sections.map((s, i) => {
+              const hasMedia = Boolean(s.video || s.image);
 
-                <div className={styles.blockText}>
+              const media = hasMedia ? (
+                <div
+                  className={`${styles.blockMedia} ${
+                    s.videoPortrait ? styles.blockMediaPortrait : ""
+                  }`}
+                  data-reveal
+                >
+                  {s.video ? (
+                    <video
+                      className={styles.blockVideo}
+                      src={s.video}
+                      poster={s.poster}
+                      preload="metadata"
+                      playsInline
+                      controls={!s.videoLoop}
+                      autoPlay={s.videoLoop}
+                      muted={s.videoLoop}
+                      loop={s.videoLoop}
+                    />
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={s.image}
+                      alt=""
+                      className={styles.blockImg}
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+              ) : null;
+
+              const paragraphs = (
+                <>
+                  <p className={styles.blockBody} data-reveal>
+                    {s.body}
+                  </p>
+                  {s.bodyExtra && (
+                    <p className={styles.blockBody} data-reveal>
+                      {s.bodyExtra}
+                    </p>
+                  )}
+                </>
+              );
+
+              if (hasMedia) {
+                return (
+                  <div
+                    key={i}
+                    className={`${styles.block} ${styles.blockMediaRow}`}
+                  >
+                    <div className={styles.blockCopy}>
+                      {s.heading && (
+                        <h2 className={styles.blockHeading} data-reveal>
+                          {s.heading}
+                        </h2>
+                      )}
+                      {paragraphs}
+                    </div>
+                    {media}
+                  </div>
+                );
+              }
+
+              return (
+                <div key={i} className={`${styles.block} ${styles.blockText}`}>
                   {s.heading && (
                     <h2 className={styles.blockHeading} data-reveal>
                       {s.heading}
                     </h2>
                   )}
-                  <div className={styles.blockCols}>
-                    <p className={styles.blockBody} data-reveal>
-                      {s.body}
-                    </p>
-                    {s.bodyExtra && (
-                      <p className={styles.blockBody} data-reveal>
-                        {s.bodyExtra}
-                      </p>
-                    )}
-                  </div>
+                  <div className={styles.blockCopyText}>{paragraphs}</div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

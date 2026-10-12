@@ -88,6 +88,16 @@
 .cardPlain .cardBody {
   color: var(--muted);
 }
+.cardPrice {
+  margin-top: 0.4rem;
+  font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: var(--track-tight);
+  color: var(--on-dark);
+}
+.cardPlain .cardPrice {
+  color: var(--text);
+}
 
 .divide {
   height: 1px;

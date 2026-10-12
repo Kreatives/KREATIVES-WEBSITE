@@ -79,22 +79,33 @@
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
 }
+/* Feiten als nette tabel: label links, waarde rechts, dunne scheidingslijn per rij */
 .facts dl {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+}
+.facts dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid rgba(244, 243, 239, 0.14);
+}
+.facts dl > div:first-child {
+  border-top: 1px solid rgba(244, 243, 239, 0.14);
 }
 .facts dt {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: rgba(244, 243, 239, 0.55);
   letter-spacing: -0.01em;
-  margin-bottom: 0.2rem;
 }
 .facts dd {
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--on-dark);
+  text-align: right;
 }
 .introBody {
   font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.35rem);
@@ -104,68 +115,80 @@
   max-width: 46ch;
 }
 
-/* Body-secties: image bovenin (gecentreerd), 2 koloms tekst eronder */
+/* Body-secties: twee layouts.
+   - Tekst-only: kop links, tekst rechts (editorial).
+   - Met beeld: tekst links, beeld rechts tegen de schermrand. */
 .body {
 }
 .block {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.75rem, 3vw, 2.75rem);
-  margin-bottom: clamp(3rem, 5vw, 5rem);
+  margin-bottom: clamp(3.5rem, 6vw, 6rem);
 }
 .block:last-child {
   margin-bottom: 0;
 }
 
+/* Tekst-only sectie */
+.blockText {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+/* Sectie met beeld: tekst links, beeld rechts, doorlopend tot de schermrand */
+.blockMediaRow {
+  display: grid;
+  grid-template-columns: minmax(0, 34rem) 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  margin-right: calc(50% - 50vw);
+}
+
+/* Tekstkolom (kop + alinea's onder elkaar) */
+.blockCopy {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+/* Alinea's van een tekst-only sectie staan onder elkaar in de rechterkolom */
+.blockCopyText {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.blockHeading {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: var(--track-tight);
+  text-transform: none;
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);
+  line-height: 1.15;
+}
+.blockBody {
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
 .blockMedia {
   position: relative;
   width: 100%;
-  max-width: 60rem;
-  margin-inline: auto;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--off-white-2);
 }
-.blockImg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+.blockImg,
 .blockVideo {
   display: block;
   width: 100%;
   height: auto;
 }
-/* Staande video's (testimonials) niet over de volle breedte uitrekken */
+/* Staande video (TikTok/testimonial): kleiner en tegen de rechterrand */
 .blockMediaPortrait {
-  max-width: 24rem;
-}
-
-.blockText {
-  max-width: 60rem;
-  margin-inline: auto;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.5rem, 3vw, 2.25rem);
-}
-.blockCols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  align-items: start;
-}
-.blockHeading {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  letter-spacing: var(--track-tight);
-  font-size: var(--fs-h2);
-  line-height: 1.1;
-  max-width: 18ch;
-}
-.blockBody {
-  color: var(--text);
-  font-size: 1rem;
-  line-height: 1.65;
+  max-width: 20rem;
+  margin-left: auto;
 }
 
 /* Verder lezen */
@@ -221,8 +244,16 @@
 
 @media (max-width: 860px) {
   .introGrid,
-  .blockCols,
+  .blockText,
+  .blockMediaRow,
   .relatedGrid {
     grid-template-columns: 1fr;
+  }
+  /* Beeld niet meer tegen de schermrand op mobiel, en staande video centreren */
+  .blockMediaRow {
+    margin-right: 0;
+  }
+  .blockMediaPortrait {
+    margin-inline: auto;
   }
 }

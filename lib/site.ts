@@ -541,11 +541,10 @@ export const pricing = {
   plans: [
     {
       name: "Maatwerk website",
-      tag: "Meest gekozen",
       body:
         "Een complete maatwerk website voor jouw merk, klaar om mee te groeien.",
-      price: "€2.495",
-      priceUnit: "eenmalig",
+      price: "Vanaf €2.500",
+      priceUnit: "",
       featured: true,
       features: [
         "Maatwerk ontwerp, geen sjablonen",
@@ -561,8 +560,8 @@ export const pricing = {
       name: "Maatwerk webshop",
       body:
         "Alles uit het website-pakket, uitgebreid met een complete webshop op maat van jouw assortiment.",
-      price: "€4.995",
-      priceUnit: "eenmalig",
+      price: "Vanaf €3.000",
+      priceUnit: "",
       featured: false,
       features: [
         "Alles uit Maatwerk website",
