@@ -113,17 +113,14 @@ export default async function ProjectDetailPage({
           <div className="container">
             {project.sections.map((s, i) => {
               const hasMedia = Boolean(s.video || s.image);
+              const isPhone = Boolean(s.video && s.videoPortrait);
 
-              const media = hasMedia ? (
-                <div
-                  className={`${styles.blockMedia} ${
-                    s.videoPortrait ? styles.blockMediaPortrait : ""
-                  }`}
-                  data-reveal
-                >
-                  {s.video ? (
+              // Staande video → in een iPhone-mockup met de video in het scherm.
+              const phone = isPhone ? (
+                <div className={styles.phone} data-reveal>
+                  <div className={styles.phoneScreen}>
                     <video
-                      className={styles.blockVideo}
+                      className={styles.phoneVideo}
                       src={s.video}
                       poster={s.poster}
                       preload="metadata"
@@ -133,17 +130,44 @@ export default async function ProjectDetailPage({
                       muted={s.videoLoop}
                       loop={s.videoLoop}
                     />
-                  ) : (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={s.image}
-                      alt=""
-                      className={styles.blockImg}
-                      loading="lazy"
-                    />
-                  )}
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/projects/iphone-frame.webp"
+                    alt=""
+                    className={styles.phoneFrame}
+                    aria-hidden
+                  />
                 </div>
               ) : null;
+
+              // Liggend beeld/video → vol in beeld, tegen de rechter schermrand.
+              const media =
+                hasMedia && !isPhone ? (
+                  <div className={styles.blockMedia} data-reveal>
+                    {s.video ? (
+                      <video
+                        className={styles.blockVideo}
+                        src={s.video}
+                        poster={s.poster}
+                        preload="metadata"
+                        playsInline
+                        controls={!s.videoLoop}
+                        autoPlay={s.videoLoop}
+                        muted={s.videoLoop}
+                        loop={s.videoLoop}
+                      />
+                    ) : (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={s.image}
+                        alt=""
+                        className={styles.blockImg}
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                ) : null;
 
               const paragraphs = (
                 <>
@@ -158,13 +182,10 @@ export default async function ProjectDetailPage({
                 </>
               );
 
-              // Testimonial: grote quote links, staande video rechts.
+              // Testimonial: grote quote links, iPhone rechts.
               if (s.quote) {
                 return (
-                  <div
-                    key={i}
-                    className={`${styles.block} ${styles.quoteRow}`}
-                  >
+                  <div key={i} className={`${styles.block} ${styles.phoneRow}`}>
                     <figure className={styles.quote}>
                       <blockquote className={styles.quoteText} data-reveal>
                         {s.quote}
@@ -175,11 +196,29 @@ export default async function ProjectDetailPage({
                         </figcaption>
                       )}
                     </figure>
-                    {media}
+                    {phone}
                   </div>
                 );
               }
 
+              // Sectie met staande video: tekst links, iPhone rechts.
+              if (isPhone) {
+                return (
+                  <div key={i} className={`${styles.block} ${styles.phoneRow}`}>
+                    <div className={styles.blockCopy}>
+                      {s.heading && (
+                        <h2 className={styles.blockHeading} data-reveal>
+                          {s.heading}
+                        </h2>
+                      )}
+                      {paragraphs}
+                    </div>
+                    {phone}
+                  </div>
+                );
+              }
+
+              // Sectie met liggend beeld: tekst links, beeld rechts.
               if (hasMedia) {
                 return (
                   <div

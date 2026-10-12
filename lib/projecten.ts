@@ -78,6 +78,7 @@ export const projecten: Project[] = [
           "We hadden twee weken. Daarom begonnen we bij de basis waar alles op leunt: het logo, de kleuren en de typografie. Die legden we vast in een brandbook, zodat elk volgend ontwerp er direct op kon voortbouwen.",
         bodyExtra:
           "Daarna vertaalden we het merk naar alles wat een klant tegenkomt: de gevel, de tassen waarin het eten mee naar huis gaat, de flyers en de landingspagina waar mensen het merk online leren kennen. De eigenaar had één duidelijke wens voor de opening: een rij voor de deur. Mensen gaan alleen in de rij staan voor iets dat er de moeite waard uitziet. Daarom ontwierpen we een poster die nieuwsgierig maakt en voorbijgangers laat weten dat hier iets nieuws opengaat.",
+        image: "/projects/smokey-poster.webp",
       },
       {
         heading: "Wat we maakten",
@@ -85,6 +86,7 @@ export const projecten: Project[] = [
           "Een compleet merk in twee weken. Een logo en kleurenpalet die opvallen tussen andere zaken, typografie die stoer en speels tegelijk is, en een brandbook dat vastlegt hoe het merk overal hetzelfde blijft.",
         bodyExtra:
           "Het merk staat op de gevel, op de tassen, op de flyers en posters en op de landingspagina.",
+        image: "/projects/smokey-packaging.webp",
       },
       {
         heading: "Het resultaat",
@@ -92,6 +94,10 @@ export const projecten: Project[] = [
           "Bij de opening stond er een volle rij voor de deur, precies waar de eigenaar op hoopte. Smokey Joe's is inmiddels een herkenbare naam in Rotterdam en mensen kennen de zaak van de gekke burgers.",
         bodyExtra:
           "Het merk staat zo stevig dat ze nu al bezig zijn met uitbreiden.",
+        video: "/projects/smokey-video.mp4",
+        poster: "/projects/smokey-video-poster.webp",
+        videoPortrait: true,
+        videoLoop: true,
       },
     ],
     related: ["burgers-frites", "mazadesign"],

@@ -190,19 +190,53 @@
   width: 100%;
   height: auto;
 }
-/* Staande video (TikTok/testimonial): kleiner */
-.blockMediaPortrait {
-  max-width: 18rem;
-  margin-left: auto;
+/* Rij met een staande video in een iPhone: tekst/quote links, telefoon rechts.
+   Smaller en gecentreerd zodat alles meer naar het midden komt. */
+.phoneRow {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 18rem);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  max-width: 60rem;
+  margin-inline: auto;
 }
 
-/* Quote-sectie: grote quote links, staande video rechts (dichtbij, geen bleed) */
-.quoteRow {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
+/* iPhone-mockup met de video gemaskeerd in het transparante scherm.
+   Steekt onderaan de sectie uit. */
+.phone {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 18rem;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1;
+  margin-bottom: clamp(-6rem, -8vw, -3.5rem);
 }
+.phoneScreen {
+  position: absolute;
+  left: 32.6%;
+  top: 8.49%;
+  width: 36.15%;
+  height: 62.76%;
+  overflow: hidden;
+  border-radius: 7%;
+  background: #000;
+}
+.phoneVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.phoneFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .quote {
   margin: 0;
   max-width: 32rem;
@@ -285,15 +319,17 @@
   .introGrid,
   .blockText,
   .blockMediaRow,
-  .quoteRow,
+  .phoneRow,
   .relatedGrid {
     grid-template-columns: 1fr;
   }
-  /* Beeld niet meer tegen de schermrand op mobiel, en staande video centreren */
+  /* Beeld niet meer tegen de schermrand op mobiel */
   .blockMediaRow {
     margin-right: 0;
   }
-  .blockMediaPortrait {
-    margin-inline: auto;
+  /* Telefoon op mobiel: niet uitsteken, gecentreerd en wat kleiner */
+  .phone {
+    margin-bottom: 0;
+    max-width: 15rem;
   }
 }
