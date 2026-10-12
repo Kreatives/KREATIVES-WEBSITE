@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
+import PlayableVideo from "@/components/PlayableVideo";
 import { getProjectBySlug, getProjects } from "@/lib/cms";
 import styles from "./project.module.css";
 
@@ -119,14 +120,7 @@ export default async function ProjectDetailPage({
               const phone = isPhone ? (
                 <div className={styles.phone} data-reveal>
                   <div className={styles.phoneScreen}>
-                    <video
-                      className={styles.phoneVideo}
-                      src={s.video}
-                      poster={s.poster}
-                      preload="metadata"
-                      playsInline
-                      controls
-                    />
+                    <PlayableVideo src={s.video ?? ""} poster={s.poster} />
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
