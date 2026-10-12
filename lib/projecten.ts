@@ -97,7 +97,6 @@ export const projecten: Project[] = [
         video: "/projects/smokey-video.mp4",
         poster: "/projects/smokey-video-poster.webp",
         videoPortrait: true,
-        videoLoop: true,
       },
     ],
     related: ["burgers-frites", "mazadesign"],

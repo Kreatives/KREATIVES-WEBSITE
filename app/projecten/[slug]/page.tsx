@@ -125,10 +125,7 @@ export default async function ProjectDetailPage({
                       poster={s.poster}
                       preload="metadata"
                       playsInline
-                      controls={!s.videoLoop}
-                      autoPlay={s.videoLoop}
-                      muted={s.videoLoop}
-                      loop={s.videoLoop}
+                      controls
                     />
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}

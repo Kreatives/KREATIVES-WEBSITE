@@ -119,6 +119,8 @@
    - Tekst-only: kop links, tekst rechts (editorial).
    - Met beeld: tekst links, beeld rechts tegen de schermrand. */
 .body {
+  position: relative;
+  z-index: 2; /* zodat de uitstekende telefoon over de donkere sectie valt */
 }
 /* Dunne scheidingslijn tussen de secties */
 .block {
@@ -140,13 +142,14 @@
   align-items: start;
 }
 
-/* Sectie met beeld: tekst links, beeld rechts, doorlopend tot de schermrand */
+/* Sectie met beeld: tekst links, compact beeld rechts (gecentreerde rij) */
 .blockMediaRow {
   display: grid;
-  grid-template-columns: minmax(0, 34rem) 1fr;
+  grid-template-columns: 1fr auto;
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  margin-right: calc(50% - 50vw);
+  max-width: 62rem;
+  margin-inline: auto;
 }
 
 /* Tekstkolom (kop + alinea's onder elkaar) */
@@ -179,7 +182,9 @@
 
 .blockMedia {
   position: relative;
-  width: 100%;
+  width: 20rem;
+  max-width: 100%;
+  margin-left: auto;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--off-white-2);
@@ -194,23 +199,23 @@
    Smaller en gecentreerd zodat alles meer naar het midden komt. */
 .phoneRow {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 18rem);
+  grid-template-columns: 1fr minmax(0, 30rem);
   gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-  max-width: 60rem;
+  align-items: start;
+  max-width: 64rem;
   margin-inline: auto;
 }
 
 /* iPhone-mockup met de video gemaskeerd in het transparante scherm.
-   Steekt onderaan de sectie uit. */
+   Groot, en steekt met de onderkant tot tegen de onderste (donkere) sectie. */
 .phone {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
-  max-width: 18rem;
+  max-width: 30rem;
   margin-inline: auto;
   aspect-ratio: 1 / 1;
-  margin-bottom: clamp(-6rem, -8vw, -3.5rem);
+  margin-bottom: calc(-1 * (var(--section-y) + 2rem));
 }
 .phoneScreen {
   position: absolute;
@@ -323,13 +328,14 @@
   .relatedGrid {
     grid-template-columns: 1fr;
   }
-  /* Beeld niet meer tegen de schermrand op mobiel */
-  .blockMediaRow {
-    margin-right: 0;
+  /* Beeld op mobiel vol breedte */
+  .blockMedia {
+    width: 100%;
+    margin-inline: 0;
   }
   /* Telefoon op mobiel: niet uitsteken, gecentreerd en wat kleiner */
   .phone {
     margin-bottom: 0;
-    max-width: 15rem;
+    max-width: 18rem;
   }
 }
