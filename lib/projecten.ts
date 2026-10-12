@@ -31,6 +31,79 @@ export type Project = {
 
 export const projecten: Project[] = [
   {
+    slug: "mazadesign",
+    name: "Mazadesign",
+    headline: "Een landingspagina die meehelpt in het verkoopgesprek",
+    type: "Webdesign",
+    excerpt:
+      "Een rustige, conversiegerichte landingspagina die het niveau van het bureau laat zien en bezoekers naar een gesprek brengt.",
+    intro:
+      "Mazadesign is het marketingbureau van Mahmut Mazlum: social advertising, e-mailmarketing, creative strategy en consulting voor webshops met ambitie. Het bureau groeide hard, maar de zelfgebouwde site bleef achter. In twee weken bouwden we een nieuwe landingspagina die wél laat zien waar Mazadesign nu staat.",
+    image: "/projects/mazadesign.webp",
+    tags: ["Webdesign", "Marketing", "Conversie"],
+    client: "Mazadesign",
+    year: "2026",
+    sections: [
+      {
+        heading: "De klant",
+        body:
+          "Mazadesign is het marketingbureau van Mahmut Mazlum. Hij helpt webshops groeien met social advertising, e-mailmarketing via Klaviyo, creative strategy en consulting. Voor merken die alles onder één dak willen, is hij hun vaste groeipartner.",
+        bodyExtra:
+          "Mahmut werkt voor merken met ambitie en levert daar aantoonbaar resultaat voor. Zijn klanten zijn ondernemers die cijfers willen zien voordat ze iemand hun marketingbudget toevertrouwen.",
+      },
+      {
+        heading: "Het probleem",
+        body:
+          "Mahmut had zijn website jaren geleden zelf gebouwd. Zijn bureau groeide, zijn klanten werden groter, maar de site bleef staan waar hij begon. Veel verschillende kleuren, geen duidelijke knoppen die iemand verder helpen en een uitstraling die niet meer modern aanvoelde.",
+        bodyExtra:
+          "Voor een marketingbureau is dat lastig. Je verkoopt groei en een sterke uitstraling aan anderen, terwijl je eigen site het tegenovergestelde laat zien. Mahmut zag dat zelf ook: de website liet niet meer zien wie hij inmiddels was.",
+      },
+      {
+        heading: "Waarom Mazadesign voor ons koos",
+        body:
+          "Mahmut kwam bij ons binnen nadat hij een van onze video's had gezien. Wat hem aansprak was de creativiteit in het werk.",
+        bodyExtra:
+          "Hij zocht iemand die verder kijkt dan een nette pagina en met een eigen idee komt over hoe een merk zich moet laten zien.",
+      },
+      {
+        heading: "Het doel",
+        body:
+          "Een uitstraling die past bij waar Mazadesign nu staat.",
+        bodyExtra:
+          "Een landingspagina die Mahmut met trots aan klanten kan laten zien en die bij een nieuwe bezoeker meteen vertrouwen opbouwt.",
+      },
+      {
+        heading: "Het proces",
+        body:
+          "Een ondernemer die een marketingbureau zoekt, wil maar één ding weten: werkt het? Daarom laat de pagina meteen resultaten zien. Bezoekers zien direct voor welke merken Mazadesign werkt en wat dat heeft opgeleverd, met resultaten uitgewerkt als korte cases.",
+        bodyExtra:
+          "Het ontwerp hebben we flink rustiger gemaakt. Minder kleuren, een strakke vormgeving en een lettertype dat we kozen op leesbaarheid, omdat de doelgroep vooral snel wil scannen. Elke sectie stuurt naar één duidelijke stap: een gesprek plannen. Prijzen staan bewust niet op de pagina, omdat elk traject op maat is en het gesprek de plek is om dat te bespreken. Mahmut had al een bestaande site met pagina's die goed gevonden worden in Google. We vervingen daarom alleen de homepage door deze nieuwe landingspagina en lieten de rest staan, zodat zijn vindbaarheid intact bleef. Binnen twee weken stond de pagina live.",
+      },
+      {
+        heading: "Wat we maakten",
+        body:
+          "Een one-pager die een bezoeker van twijfel naar een afspraak brengt. Bovenaan direct de merken waarvoor Mazadesign werkt. Daarna de problemen die webshop-eigenaren herkennen, de resultaten als bewijs, de diensten, een vergelijking met andere bureaus, reviews en de meestgestelde vragen.",
+        bodyExtra:
+          "Elk blok is gebouwd om snel te scannen en eindigt bij dezelfde vraag: plan een kennismaking.",
+      },
+      {
+        heading: "Het resultaat",
+        body:
+          "Sinds de livegang krijgt Mahmut veel complimenten van klanten en komen er betere aanvragen binnen. Het mooiste verhaal kwam uit een verkoopgesprek. Mahmut liet een potentiële klant de nieuwe website zien. Die zag de resultaten op de pagina en was direct overtuigd. De deal was rond nog voordat het gesprek voorbij was.",
+        image: "/projects/mazadesign-before-after.webp",
+      },
+      {
+        heading: "In zijn eigen woorden",
+        body:
+          "“Ik had mijn website jaren geleden zelf gemaakt, maar die liet gewoon niet meer zien wie ik ben. Nu kan ik hem met trots aan klanten laten zien.” Mahmut Mazlum, Mazadesign",
+        video: "/projects/mazadesign-testimonial.mp4",
+        poster: "/projects/mazadesign-testimonial-poster.webp",
+        videoPortrait: true,
+      },
+    ],
+    related: ["health-champs", "mazar-skin-clinic"],
+  },
+  {
     slug: "health-champs",
     name: "Health Champs",
     headline: "Van online visitekaartje naar een site die aanvragen binnenhaalt",
