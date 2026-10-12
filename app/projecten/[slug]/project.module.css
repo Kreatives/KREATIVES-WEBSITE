@@ -199,23 +199,22 @@
    Smaller en gecentreerd zodat alles meer naar het midden komt. */
 .phoneRow {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 30rem);
+  grid-template-columns: 1fr minmax(0, 38rem);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
-  max-width: 64rem;
-  margin-inline: auto;
 }
 
 /* iPhone-mockup met de video gemaskeerd in het transparante scherm.
-   Groot, en steekt met de onderkant tot tegen de onderste (donkere) sectie. */
+   Groot; de bovenkant blijft binnen de sectie, de onderkant (hand) steekt
+   een stuk in de onderste (donkere) sectie. */
 .phone {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 30rem;
-  margin-inline: auto;
+  max-width: 38rem;
+  margin-left: auto;
   aspect-ratio: 1 / 1;
-  margin-bottom: calc(-1 * (var(--section-y) + 2rem));
+  margin-bottom: calc(-1 * (var(--section-y) + 4rem));
 }
 .phoneScreen {
   position: absolute;
