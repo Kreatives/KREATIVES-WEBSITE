@@ -214,16 +214,16 @@
   max-width: 38rem;
   margin-left: auto;
   aspect-ratio: 1 / 1;
-  margin-bottom: calc(-1 * (var(--section-y) + 4rem));
+  margin-bottom: calc(-1 * (var(--section-y) + 10rem));
 }
 .phoneScreen {
   position: absolute;
-  left: 32.6%;
+  left: 35.83%;
   top: 8.49%;
-  width: 36.15%;
-  height: 62.76%;
+  width: 29.58%;
+  height: 62.71%;
   overflow: hidden;
-  border-radius: 7%;
+  border-radius: 6%;
   background: #000;
 }
 .phoneVideo {
@@ -332,9 +332,12 @@
     width: 100%;
     margin-inline: 0;
   }
-  /* Telefoon op mobiel: niet uitsteken, gecentreerd en wat kleiner */
+  /* Telefoon op mobiel: groot (min 90%), gecentreerd, en met de hand in de
+     onderste donkere sectie. */
   .phone {
-    margin-bottom: 0;
-    max-width: 18rem;
+    width: 90%;
+    max-width: 90%;
+    margin-inline: auto;
+    margin-bottom: calc(-1 * (var(--section-y) + 5rem));
   }
 }
