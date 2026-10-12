@@ -131,6 +131,15 @@
   width: 100%;
   height: auto;
 }
+.blockVideo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* Staande video's (testimonials) niet over de volle breedte uitrekken */
+.blockMediaPortrait {
+  max-width: 24rem;
+}
 
 .blockText {
   max-width: 60rem;

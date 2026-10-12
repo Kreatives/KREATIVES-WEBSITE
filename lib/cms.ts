@@ -8,6 +8,10 @@ export type CmsProjectSection = {
   body: string;
   bodyExtra?: string;
   image?: string;
+  video?: string;
+  poster?: string;
+  videoPortrait?: boolean;
+  videoLoop?: boolean;
 };
 
 export type CmsProject = {

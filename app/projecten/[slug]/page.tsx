@@ -112,15 +112,34 @@ export default async function ProjectDetailPage({
           <div className="container">
             {project.sections.map((s, i) => (
               <div key={i} className={styles.block}>
-                {s.image && (
-                  <div className={styles.blockMedia} data-reveal>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={s.image}
-                      alt=""
-                      className={styles.blockImg}
-                      loading="lazy"
-                    />
+                {(s.video || s.image) && (
+                  <div
+                    className={`${styles.blockMedia} ${
+                      s.videoPortrait ? styles.blockMediaPortrait : ""
+                    }`}
+                    data-reveal
+                  >
+                    {s.video ? (
+                      <video
+                        className={styles.blockVideo}
+                        src={s.video}
+                        poster={s.poster}
+                        preload="metadata"
+                        playsInline
+                        controls={!s.videoLoop}
+                        autoPlay={s.videoLoop}
+                        muted={s.videoLoop}
+                        loop={s.videoLoop}
+                      />
+                    ) : (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={s.image}
+                        alt=""
+                        className={styles.blockImg}
+                        loading="lazy"
+                      />
+                    )}
                   </div>
                 )}
 

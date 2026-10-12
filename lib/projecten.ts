@@ -7,6 +7,10 @@ export type ProjectSection = {
   body: string;
   bodyExtra?: string; // optionele tweede tekstkolom
   image?: string;
+  video?: string; // mp4-pad; wint van image als beide gezet zijn
+  poster?: string; // posterframe voor de video
+  videoPortrait?: boolean; // staande video (smaller tonen, niet full-width)
+  videoLoop?: boolean; // autoplay + loop zonder geluid (voor sfeer/walkthrough)
 };
 
 export type Project = {
@@ -26,6 +30,71 @@ export type Project = {
 };
 
 export const projecten: Project[] = [
+  {
+    slug: "health-champs",
+    name: "Health Champs",
+    headline: "Van online visitekaartje naar een site die aanvragen binnenhaalt",
+    type: "Webdesign",
+    excerpt:
+      "Van online visitekaartje naar een conversiegerichte site die aanvragen binnenhaalt.",
+    intro:
+      "Een coach die op Instagram groot is, maar online klein oogde. Voor Health Champs bouwden we een nieuwe site die laat zien wie Abdu echt is en die bezoekers in één lijn naar een intake brengt. Van start tot livegang in twee weken.",
+    image: "/projects/health-champs.webp",
+    tags: ["Webdesign", "Coaching", "Conversie"],
+    client: "Health Champs",
+    year: "2026",
+    sections: [
+      {
+        heading: "De klant",
+        body:
+          "Abdu Khalil speelde in zijn jeugd bij FC Twente, tot blessures een einde maakten aan zijn voetbaldroom. Hij vond fitness, ging bodybuilden en kwalificeerde zich in 2018 voor het NK Muscular Physique. Sinds 2019 helpt hij met Health Champs mensen aan een sterker lichaam via voeding, training en persoonlijke begeleiding.",
+        bodyExtra:
+          "Zijn klanten zijn drukke vaders, ondernemers, profvoetballers en artiesten. Mensen die de basis kennen, maar het nooit lang genoeg volhouden. Inmiddels begeleidde Abdu meer dan 1500 transformaties en volgen bijna 16.000 mensen hem op Instagram.",
+      },
+      {
+        heading: "Het probleem",
+        body:
+          "Op Instagram was Abdu sterk. Zijn website was dat niet. Het was een oude template die vooral vertelde wie hij was, een online visitekaartje zonder plan om bezoekers tot een aanvraag te brengen. En juist op mobiel, waar bijna al zijn volgers binnenkomen, werkte de site slecht.",
+        bodyExtra:
+          "Daardoor liep bijna alles via Instagram. Wie vanuit zijn profiel doorklikte, zag een coach die er online kleiner uitzag dan hij in werkelijkheid is. Abdu wist dat het beter moest, maar hij is zelf niet technisch en was er nooit aan toegekomen.",
+      },
+      {
+        heading: "Het doel",
+        body:
+          "Twee dingen moesten samenkomen. De site moest laten zien wie Abdu echt is, op hetzelfde niveau als zijn Instagram en zijn resultaten.",
+        bodyExtra:
+          "En de site moest gebouwd zijn op conversie, zodat een bezoeker zo snel mogelijk de stap zet naar een intake.",
+      },
+      {
+        heading: "Het proces",
+        body:
+          "We begonnen bij de vraag wat iemand in de fitnesswereld overtuigt om contact op te nemen. Het antwoord is zien dat het werkt. Daarom staan de before en afters direct in beeld, nog voordat je iets hoeft te lezen.",
+        bodyExtra:
+          "Abdu heeft veel bekende Nederlanders, artiesten en profvoetballers begeleid. Dat is sterk bewijs, maar het kan ook afschrikken. Een gewone vader van drie zou kunnen denken dat deze coach alleen voor bekende mensen is. We zetten daarom een paar bekende namen bovenaan als bewijs en gaven de rest een eigen plek verderop. Zo werkt het als vertrouwen zonder dat iemand zich buitengesloten voelt. Zijn bestaande logo bleef staan, de rest bouwden we opnieuw op in WordPress. Binnen twee weken stond de site live.",
+      },
+      {
+        heading: "Wat we maakten",
+        body:
+          "Een landingspagina die een bezoeker in één logische lijn meeneemt. Eerst het bewijs, met cijfers als 1500+ transformaties, 15 jaar ervaring en een 4.9 uit 5 aan reviews. Daarna de herkenning: je traint en let op je voeding, maar je ziet het niet terug in de spiegel. Dan de aanpak in drie heldere stappen, het verhaal van Abdu zelf en de resultaten van echte klanten.",
+        bodyExtra:
+          "De drie trajecten staan overzichtelijk naast elkaar, met het Supreme-traject als exclusief topaanbod voor maximaal vijf klanten per maand. Wie nog twijfelt, stuurt met één tik een appje naar Abdu. Precies het contact dat zijn volgers van Instagram al gewend zijn.",
+        video: "/projects/health-champs-walkthrough.mp4",
+        poster: "/projects/health-champs-walkthrough-poster.webp",
+        videoLoop: true,
+      },
+      {
+        heading: "Het resultaat",
+        body:
+          "Sinds de livegang zijn de aanvragen sterk gestegen. Bezoekers komen binnen met een duidelijk beeld van wat Abdu doet en welk traject bij hen past. En voor het eerst sinds de start van Health Champs koos een klant voor het Supreme-traject, de persoonlijke 1-op-1 begeleiding waar hij maar vijf plekken per maand voor vrijmaakt.",
+        bodyExtra:
+          "“Sinds de nieuwe website zijn de aanvragen echt abnormaal.” Abdu Khalil, Health Champs",
+        video: "/projects/health-champs-testimonial.mp4",
+        poster: "/projects/health-champs-testimonial-poster.webp",
+        videoPortrait: true,
+      },
+    ],
+    related: ["mazar-skin-clinic", "burgers-frites"],
+  },
   {
     slug: "burgers-frites",
     name: "Burgers&Frites Rotterdam",
