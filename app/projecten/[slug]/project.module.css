@@ -119,8 +119,9 @@
    - Tekst-only: kop links, tekst rechts (editorial).
    - Met beeld: tekst links, beeld rechts tegen de schermrand. */
 .body {
-  position: relative;
-  z-index: 2; /* zodat de uitstekende telefoon over de donkere sectie valt */
+  /* Telefoon die onderaan uitsteekt wordt netjes op de sectierand afgesneden,
+     zodat de arm niet doorloopt over de volgende (donkere) sectie. */
+  overflow: hidden;
 }
 /* Dunne scheidingslijn tussen de secties */
 .block {
@@ -214,7 +215,7 @@
   max-width: 38rem;
   margin-left: auto;
   aspect-ratio: 1 / 1;
-  margin-bottom: calc(-1 * (var(--section-y) + 10rem));
+  margin-bottom: calc(-1 * (var(--section-y) + 8rem));
 }
 .phoneScreen {
   position: absolute;
@@ -338,6 +339,6 @@
     width: 90%;
     max-width: 90%;
     margin-inline: auto;
-    margin-bottom: calc(-1 * (var(--section-y) + 5rem));
+    margin-bottom: calc(-1 * (var(--section-y) + 6rem));
   }
 }
