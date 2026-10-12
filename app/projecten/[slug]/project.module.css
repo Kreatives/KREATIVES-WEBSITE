@@ -120,19 +120,33 @@
    - Met beeld: tekst links, beeld rechts tegen de schermrand. */
 .body {
 }
+/* Dunne scheidingslijn tussen de secties */
 .block {
-  margin-bottom: clamp(3.5rem, 6vw, 6rem);
+  padding-top: clamp(2.75rem, 5vw, 4.5rem);
+  margin-top: clamp(2.75rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--line);
 }
-.block:last-child {
-  margin-bottom: 0;
+.block:first-child {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: none;
 }
 
-/* Tekst-only sectie */
+/* Tekst-only sectie: kop links, tekst rechts (afwisselend omgedraaid) */
 .blockText {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
+}
+.blockTextReverse {
+  grid-template-columns: 1.6fr 1fr;
+}
+.blockTextReverse .blockHeading {
+  order: 2;
+}
+.blockTextReverse .blockCopyText {
+  order: 1;
 }
 
 /* Sectie met beeld: tekst links, beeld rechts, doorlopend tot de schermrand */
@@ -160,10 +174,10 @@
 .blockHeading {
   font-family: var(--font-sans);
   font-weight: 700;
-  letter-spacing: var(--track-tight);
+  letter-spacing: -0.01em;
   text-transform: none;
-  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem);
-  line-height: 1.15;
+  font-size: 1rem;
+  line-height: 1.3;
 }
 .blockBody {
   color: var(--text);
@@ -185,10 +199,44 @@
   width: 100%;
   height: auto;
 }
-/* Staande video (TikTok/testimonial): kleiner en tegen de rechterrand */
+/* Staande video (TikTok/testimonial): kleiner */
 .blockMediaPortrait {
-  max-width: 20rem;
+  max-width: 18rem;
   margin-left: auto;
+}
+
+/* Quote-sectie: grote quote links, staande video rechts (dichtbij, geen bleed) */
+.quoteRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.quote {
+  margin: 0;
+  max-width: 32rem;
+}
+.quoteText {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.quoteText::before {
+  content: "\201C";
+  display: block;
+  font-size: 3.5em;
+  line-height: 0.7;
+  color: var(--orange);
+  margin-bottom: 0.1em;
+}
+.quoteAuthor {
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 /* Verder lezen */
@@ -245,7 +293,9 @@
 @media (max-width: 860px) {
   .introGrid,
   .blockText,
+  .blockTextReverse,
   .blockMediaRow,
+  .quoteRow,
   .relatedGrid {
     grid-template-columns: 1fr;
   }
@@ -255,5 +305,12 @@
   }
   .blockMediaPortrait {
     margin-inline: auto;
+  }
+  /* Omgedraaide tekstsecties op mobiel weer in leesvolgorde (kop boven tekst) */
+  .blockTextReverse .blockHeading {
+    order: 0;
+  }
+  .blockTextReverse .blockCopyText {
+    order: 0;
   }
 }

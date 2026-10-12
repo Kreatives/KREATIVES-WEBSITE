@@ -12,6 +12,8 @@ export type CmsProjectSection = {
   poster?: string;
   videoPortrait?: boolean;
   videoLoop?: boolean;
+  quote?: string;
+  quoteAuthor?: string;
 };
 
 export type CmsProject = {

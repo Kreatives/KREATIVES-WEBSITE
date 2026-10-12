@@ -158,6 +158,28 @@ export default async function ProjectDetailPage({
                 </>
               );
 
+              // Testimonial: grote quote links, staande video rechts.
+              if (s.quote) {
+                return (
+                  <div
+                    key={i}
+                    className={`${styles.block} ${styles.quoteRow}`}
+                  >
+                    <figure className={styles.quote}>
+                      <blockquote className={styles.quoteText} data-reveal>
+                        {s.quote}
+                      </blockquote>
+                      {s.quoteAuthor && (
+                        <figcaption className={styles.quoteAuthor} data-reveal>
+                          — {s.quoteAuthor}
+                        </figcaption>
+                      )}
+                    </figure>
+                    {media}
+                  </div>
+                );
+              }
+
               if (hasMedia) {
                 return (
                   <div
@@ -177,8 +199,14 @@ export default async function ProjectDetailPage({
                 );
               }
 
+              // Tekst-only: om en om kop links / kop rechts.
               return (
-                <div key={i} className={`${styles.block} ${styles.blockText}`}>
+                <div
+                  key={i}
+                  className={`${styles.block} ${styles.blockText} ${
+                    i % 2 === 1 ? styles.blockTextReverse : ""
+                  }`}
+                >
                   {s.heading && (
                     <h2 className={styles.blockHeading} data-reveal>
                       {s.heading}

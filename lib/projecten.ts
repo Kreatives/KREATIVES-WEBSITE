@@ -11,6 +11,8 @@ export type ProjectSection = {
   poster?: string; // posterframe voor de video
   videoPortrait?: boolean; // staande video (smaller tonen, niet full-width)
   videoLoop?: boolean; // autoplay + loop zonder geluid (voor sfeer/walkthrough)
+  quote?: string; // grote testimonial-quote; rendert een eigen quote-layout
+  quoteAuthor?: string; // naam + bedrijf onder de quote
 };
 
 export type Project = {
@@ -157,9 +159,10 @@ export const projecten: Project[] = [
         image: "/projects/mazadesign-before-after.webp",
       },
       {
-        heading: "In zijn eigen woorden",
-        body:
-          "“Ik had mijn website jaren geleden zelf gemaakt, maar die liet gewoon niet meer zien wie ik ben. Nu kan ik hem met trots aan klanten laten zien.” Mahmut Mazlum, Mazadesign",
+        body: "",
+        quote:
+          "Ik had mijn website jaren geleden zelf gemaakt, maar die liet gewoon niet meer zien wie ik ben. Nu kan ik hem met trots aan klanten laten zien.",
+        quoteAuthor: "Mahmut Mazlum, Mazadesign",
         video: "/projects/mazadesign-testimonial.mp4",
         poster: "/projects/mazadesign-testimonial-poster.webp",
         videoPortrait: true,
@@ -223,8 +226,11 @@ export const projecten: Project[] = [
         heading: "Het resultaat",
         body:
           "Sinds de livegang zijn de aanvragen sterk gestegen. Bezoekers komen binnen met een duidelijk beeld van wat Abdu doet en welk traject bij hen past. En voor het eerst sinds de start van Health Champs koos een klant voor het Supreme-traject, de persoonlijke 1-op-1 begeleiding waar hij maar vijf plekken per maand voor vrijmaakt.",
-        bodyExtra:
-          "“Sinds de nieuwe website zijn de aanvragen echt abnormaal.” Abdu Khalil, Health Champs",
+      },
+      {
+        body: "",
+        quote: "Sinds de nieuwe website zijn de aanvragen echt abnormaal.",
+        quoteAuthor: "Abdu Khalil, Health Champs",
         video: "/projects/health-champs-testimonial.mp4",
         poster: "/projects/health-champs-testimonial-poster.webp",
         videoPortrait: true,
