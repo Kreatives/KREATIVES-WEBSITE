@@ -132,21 +132,12 @@
   border-top: none;
 }
 
-/* Tekst-only sectie: kop links, tekst rechts (afwisselend omgedraaid) */
+/* Tekst-only sectie: kop links, tekst rechts */
 .blockText {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
-}
-.blockTextReverse {
-  grid-template-columns: 1.6fr 1fr;
-}
-.blockTextReverse .blockHeading {
-  order: 2;
-}
-.blockTextReverse .blockCopyText {
-  order: 1;
 }
 
 /* Sectie met beeld: tekst links, beeld rechts, doorlopend tot de schermrand */
@@ -293,7 +284,6 @@
 @media (max-width: 860px) {
   .introGrid,
   .blockText,
-  .blockTextReverse,
   .blockMediaRow,
   .quoteRow,
   .relatedGrid {
@@ -305,12 +295,5 @@
   }
   .blockMediaPortrait {
     margin-inline: auto;
-  }
-  /* Omgedraaide tekstsecties op mobiel weer in leesvolgorde (kop boven tekst) */
-  .blockTextReverse .blockHeading {
-    order: 0;
-  }
-  .blockTextReverse .blockCopyText {
-    order: 0;
   }
 }

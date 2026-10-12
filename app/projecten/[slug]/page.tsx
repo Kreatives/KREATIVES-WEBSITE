@@ -199,14 +199,9 @@ export default async function ProjectDetailPage({
                 );
               }
 
-              // Tekst-only: om en om kop links / kop rechts.
+              // Tekst-only: altijd kop links, tekst rechts.
               return (
-                <div
-                  key={i}
-                  className={`${styles.block} ${styles.blockText} ${
-                    i % 2 === 1 ? styles.blockTextReverse : ""
-                  }`}
-                >
+                <div key={i} className={`${styles.block} ${styles.blockText}`}>
                   {s.heading && (
                     <h2 className={styles.blockHeading} data-reveal>
                       {s.heading}
