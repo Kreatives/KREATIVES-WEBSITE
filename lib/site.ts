@@ -7,7 +7,7 @@ export const site = {
   domain: "https://www.kreatives.nl",
   email: "info@kreatives.nl",
   description:
-    "Webdesignbureau uit Arnhem dat 100+ websites bouwde voor ondernemers door heel Nederland. Van webdesign tot branding. Vraag een gratis strategiegesprek aan.",
+    "Webdesignbureau uit Arnhem dat 100+ websites bouwde voor ondernemers door heel Nederland. Van webdesign tot branding. Plan een vrijblijvend strategiegesprek.",
 };
 
 export type NavChild = { label: string; href: string };
@@ -49,10 +49,12 @@ export const hero = {
   titleUnderline: "de beste",
   titleAccentTail: " in je vak.",
   body:
-    "Klanten vergelijken je binnen een paar seconden met je concurrent. Met een strategisch ontworpen website op maat zorgen wij dat jij wint, en binnen 6 weken staat hij live.",
-  primary: { label: "Gratis re-design", href: "/contact" },
+    "Klanten vergelijken je binnen een paar seconden met je concurrent. Wij zorgen dat ze bij jou blijven, en contact opnemen. Binnen 6 weken live.",
+  primary: { label: "Plan een strategiegesprek", href: "/contact" },
   // Primaire hero-knop: linkt rechtstreeks naar de contactpagina.
-  contactCta: { label: "Begin gratis", href: "/contact" },
+  contactCta: { label: "Plan een strategiegesprek", href: "/contact" },
+  // Microcopy onder de primaire knop.
+  ctaMicro: "30 minuten, vrijblijvend, je krijgt direct concrete verbeterpunten.",
   secondary: { label: "Bekijk ons werk", href: "/projecten" },
   // Social-proof widget
   socialProof: {
@@ -63,8 +65,8 @@ export const hero = {
       { initials: "AN", color: "#5b3b1f", photo: "/team/angela.webp" },
     ],
     rating: "5/5",
-    label: "op Google",
-    trust: "Vertrouwd door 95+ ondernemers",
+    label: "uit 11 reviews op Google",
+    trust: "Vertrouwd door 100+ ondernemers",
   },
   background: "/brand/home-hero.webp",
   // Iets naar links croppen zodat de presentator in beeld blijft.
@@ -72,7 +74,7 @@ export const hero = {
 };
 
 export const marquee = {
-  label: "Vertrouwd door 95 bedrijven",
+  label: "Gewerkt voor onder andere",
   // logos 1..14 in /public/logos (witte/lichte logo's op donkere band)
   logos: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 };
@@ -95,22 +97,22 @@ export const usps = {
   // werkwijze (100% maatwerk, 2 revisierondes inbegrepen, ~4 weken tot live).
   items: [
     {
-      stat: "100%",
-      title: "Maatwerk",
+      stat: "1-op-1",
+      title: "Direct contact",
       body:
-        "Elke site bouwen we vanaf nul rond jouw merk. Geen thema's, geen sjablonen.",
+        "Je werkt rechtstreeks met de mensen die je site bouwen. Geen accountmanager, geen doorgeefluik.",
     },
     {
       stat: "2",
-      title: "Revisierondes",
+      title: "Revisierondes inbegrepen",
       body:
-        "Ruimte om het ontwerp aan te scherpen tot het klopt, zonder dat de prijs verandert.",
+        "Vaste prijs, ook als we onderweg bijschaven. We gaan door tot het klopt, zonder dat de prijs verandert.",
     },
     {
       stat: "6",
       title: "Weken tot livegang",
       body:
-        "Van strategiegesprek tot livegang, met een planning die je vooraf krijgt.",
+        "Van strategiegesprek tot live site, met een planning die je vooraf op papier krijgt.",
     },
   ],
 };
@@ -124,28 +126,28 @@ export const werkwijze = {
       no: "01",
       title: "Strategiegesprek",
       body:
-        "We beginnen met een gesprek over je merk, je doelgroep en wat de site concreet moet opleveren.",
+        "In 30 minuten bespreken we je merk, je doelgroep en wat de site concreet moet opleveren. Jij vertelt waar je nu tegenaan loopt, wij komen met een eerste richting. Daarna weet je precies wat je kunt verwachten.",
       image: "/brand/stap-strategie.webp",
     },
     {
       no: "02",
       title: "Design",
       body:
-        "Je krijgt een ontwerp op maat, met twee revisierondes om alles aan te scherpen tot het klopt.",
+        "Je krijgt binnen een week een ontwerp op maat te zien. Jij geeft gericht feedback in twee revisierondes, wij scherpen aan tot het klopt. Je hoeft zelf niets te ontwerpen, alleen aan te leveren wat we vooraf afspreken.",
       image: "/brand/stap-design.webp",
     },
     {
       no: "03",
       title: "Development",
       body:
-        "We bouwen de site snel, schaalbaar en technisch op orde, gericht op goede vindbaarheid.",
+        "We bouwen de site snel, schaalbaar en technisch op orde, met goede vindbaarheid als basis. In deze fase hoef jij weinig te doen. We houden je op de hoogte en leveren een testversie om door te lopen.",
       image: "/brand/stap-development.webp",
     },
     {
       no: "04",
       title: "Livegang",
       body:
-        "De site gaat live en je kunt daarna zelf je teksten en projecten blijven aanpassen.",
+        "Binnen zes weken na de start staat de site live. Je krijgt uitleg zodat je daarna zelf teksten en projecten aanpast, en wij blijven beschikbaar voor onderhoud en doorontwikkeling.",
       image: "/brand/work-5.webp",
     },
   ],
@@ -458,7 +460,7 @@ export const faqHome = {
     {
       category: "Proces",
       q: "Hoe lang duurt een project?",
-      a: "Gemiddeld vier weken van kennismaking tot livegang. Bij een grotere site of webshop loopt dat iets op, maar je kent de planning vanaf de start.",
+      a: "Gemiddeld zes weken van kennismaking tot livegang. Bij een grotere site of webshop loopt dat iets op, maar je kent de planning vanaf de start.",
     },
     {
       category: "Algemeen",
@@ -487,13 +489,23 @@ export const faqHome = {
     },
     {
       category: "Techniek",
-      q: "Kan ik de site daarna zelf aanpassen?",
-      a: "Ja. Je kunt na livegang zelf je teksten en projecten aanpassen. Voor grotere wijzigingen blijven we beschikbaar.",
+      q: "Is de site daarna van mij en kan ik zelf teksten aanpassen?",
+      a: "Ja, de site is volledig van jou. Na livegang pas je zelf je teksten en projecten aan, en voor grotere wijzigingen blijven we beschikbaar.",
+    },
+    {
+      category: "Techniek",
+      q: "Wordt mijn site ook gevonden in Google?",
+      a: "Ja. We bouwen elke site technisch op orde, met een nette structuur, snelle laadtijd en de SEO-basis goed ingericht. Een mooie site die niemand vindt heeft geen zin.",
     },
     {
       category: "Techniek",
       q: "Zorgen jullie ook voor hosting en onderhoud?",
-      a: "Het eerste jaar hosting en onderhoud zit standaard inbegrepen. Daarna kun je dit bij ons verlengen of zelf overnemen.",
+      a: "Het eerste jaar hosting en onderhoud zit standaard inbegrepen. Daarna verleng je dit bij ons voor een vast bedrag per jaar, of je neemt het zelf over.",
+    },
+    {
+      category: "Proces",
+      q: "Wat als het ontwerp me na twee rondes nog niet bevalt?",
+      a: "Dat gebeurt zelden, omdat we de richting vooraf samen vastleggen. Mocht het toch nog niet kloppen, dan lossen we dat samen op. We leveren niet op tot jij tevreden bent.",
     },
     {
       category: "Prijzen",
@@ -519,10 +531,10 @@ export const over = {
 export type TikTokVideo = { src: string; poster: string; href: string };
 
 export const tiktok = {
-  titleLead: "Bekend van",
-  titleAccent: "TikTok.",
+  titleLead: "Misschien ken je ons",
+  titleAccent: "al van je feed.",
   intro:
-    "Misschien heb je me al eens voorbij zien scrollen. Op TikTok laat ik zien hoe we websites bouwen, van eerste schets tot livegang.",
+    "We delen op TikTok en Instagram hoe we websites bouwen, van eerste schets tot livegang. Grote kans dat je ons al eens voorbij hebt zien komen.",
   handle: "@ricksooo",
   profile: "https://www.tiktok.com/@ricksooo",
   videos: [1, 2, 3, 4, 5, 6].map((n) => ({
@@ -537,7 +549,7 @@ export const pricing = {
   titleLead: "Transparante prijzen,",
   titleAccent: "geen verrassingen",
   body:
-    "Vooraf duidelijk wat je krijgt en wat het kost. Eén vaste prijs, twee revisierondes inbegrepen, live binnen vier weken.",
+    "Vooraf duidelijk wat je krijgt en wat het kost. Eén vaste prijs, twee revisierondes inbegrepen, live binnen zes weken.",
   plans: [
     {
       name: "Maatwerk website",
@@ -551,10 +563,10 @@ export const pricing = {
         "Tot 7 pagina's",
         "Mobiel-first responsive",
         "Twee revisierondes inbegrepen",
-        "Livegang binnen vier weken",
+        "Livegang binnen zes weken",
         "Eerste jaar hosting en onderhoud",
       ],
-      cta: { label: "Plan een gesprek", href: "/contact" },
+      cta: { label: "Plan een strategiegesprek", href: "/contact" },
     },
     {
       name: "Maatwerk webshop",
@@ -569,9 +581,9 @@ export const pricing = {
         "Voorraad en orderbeheer",
         "Klantaccounts en bestelhistorie",
         "Tot 30 producten klaar bij oplevering",
-        "30 dagen CRO",
+        "30 dagen optimaliseren we op meer verkopen",
       ],
-      cta: { label: "Plan een gesprek", href: "/contact" },
+      cta: { label: "Plan een strategiegesprek", href: "/contact" },
     },
   ],
 };
@@ -580,11 +592,12 @@ export const pricing = {
 export const closingCta = {
   // Urgentie-regel boven de titel; {maand} wordt in de component ingevuld.
   pulse: "4 plekken beschikbaar in",
-  titleLead: "Klaar om je site",
-  titleAccent: "kloppend te maken?",
+  titleLead: "Klaar om online te laten zien",
+  titleAccent: "wie je echt bent?",
   body:
-    "Plan een vrijblijvend gesprek. We kijken samen wat er nodig is en wat het kost.",
-  cta: { label: "Plan een gesprek", href: "/contact" },
+    "Plan een vrijblijvend strategiegesprek. We kijken samen waar je site nu aanvragen laat liggen en wat er nodig is om dat te veranderen.",
+  cta: { label: "Plan een strategiegesprek", href: "/contact" },
+  ctaMicro: "30 minuten, vrijblijvend, je krijgt direct concrete verbeterpunten.",
 };
 
 // ============================================================
@@ -635,7 +648,7 @@ export const diensten: Dienst[] = [
           "Na de livegang pas je zelf teksten en projecten aan, en blijven wij beschikbaar voor onderhoud en doorontwikkeling.",
       },
     ],
-    cta: { label: "Plan een gesprek", href: "/contact" },
+    cta: { label: "Plan een strategiegesprek", href: "/contact" },
     background: "/projects/2.webp",
   },
   {
@@ -669,7 +682,7 @@ export const diensten: Dienst[] = [
           "Alles bouwen we passend op jouw situatie, met aandacht voor privacy, kosten en betrouwbaarheid in productie.",
       },
     ],
-    cta: { label: "Plan een gesprek", href: "/contact" },
+    cta: { label: "Plan een strategiegesprek", href: "/contact" },
     background: "/projects/7.webp",
   },
 ];
@@ -749,10 +762,10 @@ export const footer = {
       links: [
         { label: "Werkwijze", href: "/werkwijze" },
         { label: "Diensten", href: "/diensten" },
-        { label: "Projecten", href: "/projecten" },
+        { label: "Cases", href: "/projecten" },
         { label: "Reviews", href: "/reviews" },
         { label: "Over ons", href: "/over-ons" },
-        { label: "Blog", href: "/blog" },
+        { label: "Kennisbank", href: "/blog" },
         { label: "Prijzen", href: "/#prijzen" },
         { label: "Contact", href: "/contact" },
       ],
@@ -764,7 +777,6 @@ export const footer = {
         { label: "Maatwerk website", href: "/#prijzen" },
         { label: "Maatwerk webshop", href: "/#prijzen" },
         { label: "Redesign", href: "/contact" },
-        { label: "Gratis blauwdruk", href: "/blauwdruk" },
       ],
     },
   ],
@@ -773,6 +785,8 @@ export const footer = {
     email: site.email,
     response: "Reactie binnen één werkdag",
     location: "Nederland, op afstand",
+    // KvK-nummer voor vertrouwen bij gevestigde bedrijven. Leeg = niet tonen.
+    kvk: "",
   },
 };
 
@@ -798,7 +812,7 @@ export const overOnsVerhaal = {
     "Ik zag te veel ondernemers rondlopen met een site die niet meer paste bij wat ze inmiddels deden. Niet omdat ze er niet in wilden investeren, maar omdat de opties niet klopten: te duur, te generiek, of een wachtrij van drie maanden.",
     "KREATIVES is daar direct op gebouwd. Maatwerk websites die snel laden en technisch op orde staan, voor een prijs die past bij wat een serieuze ondernemer redelijk kan investeren.",
   ],
-  primaryCta: { label: "Plan een gesprek", href: "/contact" },
+  primaryCta: { label: "Plan een strategiegesprek", href: "/contact" },
   cta: { label: "Bekijk ons werk", href: "/projecten" },
   media: {
     main: "/brand/over-verhaal.webp",
@@ -875,7 +889,7 @@ export const overOnsResultaten = {
   titleAccent: "cijfers.",
   items: [
     {
-      number: "95+",
+      number: "100+",
       label: "Projecten opgeleverd",
       body:
         "Sinds de start hebben we voor merken door heel Nederland maatwerk websites en webshops gebouwd.",
@@ -887,10 +901,10 @@ export const overOnsResultaten = {
         "Iedere klant die een review achterliet, beoordeelde de samenwerking met de hoogst mogelijke score.",
     },
     {
-      number: "4 wk",
+      number: "6 wk",
       label: "Gemiddelde livegang",
       body:
-        "Van strategiegesprek tot livegang doen we gemiddeld vier weken, ongeacht of het een site of webshop is.",
+        "Van strategiegesprek tot livegang doen we gemiddeld zes weken, ongeacht of het een site of webshop is.",
     },
     {
       number: "100%",
@@ -968,7 +982,7 @@ export const webdesignFunnel = {
     eyebrow: "Waarom KREATIVES",
     titleLead: "Wat je bij ons",
     titleAccent: "anders merkt.",
-    cta: { label: "Plan een gesprek", href: "/contact" },
+    cta: { label: "Plan een strategiegesprek", href: "/contact" },
     items: [
       {
         title: "We ontwerpen op wat de site moet doen",
@@ -1025,7 +1039,7 @@ export const webdesignFunnel = {
       },
       {
         q: "Hoe lang duurt een redesign?",
-        a: "Gemiddeld vier weken, van strategiegesprek tot livegang. Bij een grotere site of webshop loopt dat iets op, maar je weet de planning vooraf.",
+        a: "Gemiddeld zes weken, van strategiegesprek tot livegang. Bij een grotere site of webshop loopt dat iets op, maar je weet de planning vooraf.",
       },
       {
         q: "Lever ik zelf de teksten aan?",
@@ -1237,7 +1251,7 @@ export const werkwijzePage = {
     items: [
       {
         q: "Hoe lang duurt een project?",
-        a: "Gemiddeld vier weken van kennismaking tot livegang. Grotere projecten lopen iets uit, maar je kent de planning vanaf de start.",
+        a: "Gemiddeld zes weken van kennismaking tot livegang. Grotere projecten lopen iets uit, maar je kent de planning vanaf de start.",
       },
       {
         q: "Wat als ik al een site heb?",
@@ -1269,7 +1283,7 @@ export const overOnsCta = {
   body:
     "Plan een gesprek. We kijken samen of het past en wat er nodig is. Geen offerte, geen verplichtingen.",
   calendly: "https://calendly.com/info-jtw/blueprint-sessie",
-  calendlyLabel: "Plan een gesprek",
+  calendlyLabel: "Plan een strategiegesprek",
   subjects: ["Maatwerk website", "Maatwerk webshop", "Redesign", "Iets anders"],
   privacy:
     "Door op verzenden te klikken ga je akkoord met onze privacyverklaring.",
@@ -1304,7 +1318,7 @@ export const comingSoon = {
       href: `mailto:${site.email}`,
     },
     {
-      label: "Plan een gesprek",
+      label: "Plan een strategiegesprek",
       sub: "Gratis & vrijblijvend",
       href: overOnsCta.calendly,
       primary: true,

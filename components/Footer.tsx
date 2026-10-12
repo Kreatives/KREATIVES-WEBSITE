@@ -63,6 +63,9 @@ export default function Footer() {
             </a>
             <span className={styles.contactSub}>{footer.contact.response}</span>
             <span className={styles.contactSub}>{footer.contact.location}</span>
+            {footer.contact.kvk && (
+              <span className={styles.contactSub}>KvK {footer.contact.kvk}</span>
+            )}
           </div>
         </div>
 

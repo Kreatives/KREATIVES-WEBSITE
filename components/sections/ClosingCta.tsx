@@ -28,6 +28,9 @@ export default function ClosingCta() {
           >
             {closingCta.cta.label}
           </Button>
+          {closingCta.ctaMicro && (
+            <p className={styles.micro}>{closingCta.ctaMicro}</p>
+          )}
         </div>
       </div>
     </section>

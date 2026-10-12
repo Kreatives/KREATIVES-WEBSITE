@@ -63,3 +63,9 @@
 .btn {
   margin-top: 0.5rem;
 }
+.micro {
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--on-dark-muted, rgba(244, 243, 239, 0.62));
+}

@@ -184,6 +184,14 @@
   opacity: 0.7;
 }
 
+/* Microcopy onder de primaire knop */
+.micro {
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--on-dark-muted, rgba(244, 243, 239, 0.7));
+}
+
 @media (max-width: 720px) {
   .actions {
     width: 100%;

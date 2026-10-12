@@ -84,6 +84,11 @@ export default function Hero() {
               {hero.secondary.label}
             </a>
           </div>
+          {hero.ctaMicro && (
+            <p className={styles.micro} data-reveal>
+              {hero.ctaMicro}
+            </p>
+          )}
         </div>
       </div>
 

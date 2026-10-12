@@ -116,7 +116,7 @@ export const termsConditions: LegalDoc = {
       heading: "5. Uitvoering en oplevering",
       body: [
         "KREATIVES voert de opdracht naar beste inzicht en vermogen uit. Genoemde opleverdata zijn een indicatie en gelden alleen als richttermijn, geen fatale termijn.",
-        "Een typische livegang vindt plaats binnen ongeveer vier weken, mits de opdrachtgever tijdig de benodigde content en feedback aanlevert.",
+        "Een typische livegang vindt plaats binnen ongeveer zes weken, mits de opdrachtgever tijdig de benodigde content en feedback aanlevert.",
       ],
     },
     {

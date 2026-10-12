@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { nav, hero } from "@/lib/site";
-import RedesignTrigger, { openRedesign } from "@/components/RedesignTrigger";
 import Logo from "@/components/Logo";
 import styles from "./Nav.module.css";
 
@@ -95,9 +94,9 @@ export default function Nav() {
           )}
         </nav>
 
-        <RedesignTrigger variant="primary" className={styles.cta}>
+        <a href={hero.primary.href} className={styles.cta}>
           {hero.primary.label}
-        </RedesignTrigger>
+        </a>
 
         <button
           className={styles.burger}
@@ -204,16 +203,13 @@ export default function Nav() {
             );
           })}
         </nav>
-        <button
-          type="button"
+        <a
+          href={hero.primary.href}
           className={styles.overlayCta}
-          onClick={() => {
-            setOpen(false);
-            openRedesign();
-          }}
+          onClick={() => setOpen(false)}
         >
           {hero.primary.label}
-        </button>
+        </a>
 
         <div className={styles.overlayFoot}>
           <span className="eyebrow">Direct contact</span>
