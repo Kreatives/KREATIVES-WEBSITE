@@ -86,7 +86,7 @@ function buildBlocks(row: ScanRow, contact: ScanContact, resultUrl: string): any
   blocks.push(h2("Antwoorden"));
   blocks.push(bullet(`Branche: ${branche || "-"}`));
   blocks.push(bullet(`Ideale klant: ${a.idealeKlant || "-"}`));
-  blocks.push(bullet(`Doel: ${a.doel || "-"}`));
+  blocks.push(bullet(`Doel: ${a.doel.join(", ") || "-"}`));
   blocks.push(bullet(`Timing: ${a.timing || "-"}`));
   blocks.push(bullet(`Budget: ${a.budget || "-"}`));
 

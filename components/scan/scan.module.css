@@ -207,10 +207,84 @@
   margin: 0 0 0.6rem;
 }
 .groupLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
   font-weight: 600;
   font-size: 1rem;
   margin-bottom: 0.7rem;
   padding: 0;
+}
+.groupHint {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.optionCheck {
+  display: inline-grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.7rem;
+  color: #fff;
+  vertical-align: -2px;
+}
+.optionActive .optionCheck {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+/* ---------- Laad-animatie (analyse) ---------- */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+}
+.spinner {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  border: 3px solid var(--off-white-2);
+  border-top-color: var(--orange);
+  animation: scanSpin 0.8s linear infinite;
+  margin-bottom: 1.5rem;
+}
+@keyframes scanSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loadingTitle {
+  font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+.loadingText {
+  font-size: 1.05rem;
+  color: var(--text);
+  min-height: 1.5em;
+  animation: scanFade 0.4s var(--ease);
+}
+.loadingSub {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+@keyframes scanFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---------- Analyse ---------- */

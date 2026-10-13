@@ -46,15 +46,22 @@ export default function WebsiteScanFlow() {
 
   return (
     <div className={styles.flow}>
-      <div className={styles.progressHead}>
-        <span className={styles.progressLabel}>
-          Stap {Math.min(step + 1, TOTAL_STEPS)}/{TOTAL_STEPS}
-        </span>
-        <span className={styles.progressPct}>{progress}%</span>
-      </div>
-      <div className={styles.progressTrack} aria-hidden>
-        <span className={styles.progressFill} style={{ width: `${progress}%` }} />
-      </div>
+      {step !== 4 && (
+        <>
+          <div className={styles.progressHead}>
+            <span className={styles.progressLabel}>
+              Stap {step + 1}/{TOTAL_STEPS - 1}
+            </span>
+            <span className={styles.progressPct}>{progress}%</span>
+          </div>
+          <div className={styles.progressTrack} aria-hidden>
+            <span
+              className={styles.progressFill}
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </>
+      )}
 
       {step === 0 && (
         <Step
@@ -161,13 +168,23 @@ export default function WebsiteScanFlow() {
           onBack={() => setStep(2)}
           onNext={() => setStep(4)}
           nextLabel="Start de scan"
-          nextDisabled={!answers.doel || !answers.timing || !answers.budget}
+          nextDisabled={
+            answers.doel.length === 0 || !answers.timing || !answers.budget
+          }
         >
-          <Group
+          <MultiGroup
             label="Wat moet je website vooral opleveren?"
+            hint="Meerdere mogelijk"
             options={doelOpties}
-            value={answers.doel}
-            onSelect={(v) => update("doel", v)}
+            selected={answers.doel}
+            onToggle={(v) =>
+              update(
+                "doel",
+                answers.doel.includes(v)
+                  ? answers.doel.filter((x) => x !== v)
+                  : [...answers.doel, v]
+              )
+            }
           />
           <Group
             label="Wanneer wil je hiermee aan de slag?"
@@ -261,6 +278,48 @@ function Group({
   );
 }
 
+function MultiGroup({
+  label,
+  hint,
+  options,
+  selected,
+  onToggle,
+}: {
+  label: string;
+  hint?: string;
+  options: readonly string[];
+  selected: string[];
+  onToggle: (v: string) => void;
+}) {
+  return (
+    <fieldset className={styles.group}>
+      <legend className={styles.groupLabel}>
+        {label}
+        {hint && <span className={styles.groupHint}>{hint}</span>}
+      </legend>
+      <div className={styles.options}>
+        {options.map((o) => {
+          const on = selected.includes(o);
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={on}
+              className={`${styles.option} ${on ? styles.optionActive : ""}`}
+              onClick={() => onToggle(o)}
+            >
+              <span className={styles.optionCheck} aria-hidden>
+                {on ? "✓" : ""}
+              </span>
+              {o}
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
 function AnalyseStep({
   answers,
   onBack,
@@ -269,13 +328,21 @@ function AnalyseStep({
   onBack: () => void;
 }) {
   const router = useRouter();
-  const [done, setDone] = useState(0);
+  const [active, setActive] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const startedRef = useRef(false);
 
   useEffect(() => {
     if (startedRef.current) return;
     startedRef.current = true;
+    let finished = false;
+    const fail = () => {
+      if (!finished) {
+        finished = true;
+        setError("We konden je website niet goed bekijken.");
+      }
+    };
+    const timeout = setTimeout(fail, 150000);
 
     (async () => {
       try {
@@ -303,27 +370,39 @@ function AnalyseStep({
               message?: string;
             };
             if (ev.type === "step" && typeof ev.step === "number") {
-              setDone((d) => Math.max(d, (ev.step as number) + 1));
+              setActive((a) => Math.max(a, ev.step as number));
             } else if (ev.type === "done" && ev.id) {
+              finished = true;
+              clearTimeout(timeout);
               router.push(`/website-scan/resultaat/${ev.id}`);
               return;
             } else if (ev.type === "error") {
+              finished = true;
+              clearTimeout(timeout);
               setError(ev.message ?? "We konden je website niet goed bekijken.");
               return;
             }
           }
         }
+        // Stream eindigde zonder done/error → toch een nette melding.
+        fail();
       } catch {
-        setError("We konden je website niet goed bekijken.");
+        fail();
+      } finally {
+        clearTimeout(timeout);
       }
     })();
+
+    return () => clearTimeout(timeout);
   }, [answers, router]);
 
   if (error) {
     return (
-      <div className={styles.analyse}>
-        <h2 className={styles.stepTitle}>Dat lukte niet helemaal</h2>
-        <p className={styles.analyseLead}>{error} Plan een gesprek, dan kijk ik er zelf naar.</p>
+      <div className={styles.loading}>
+        <h2 className={styles.loadingTitle}>Dat lukte niet helemaal</h2>
+        <p className={styles.loadingSub}>
+          {error} Plan een gesprek, dan kijk ik er zelf naar.
+        </p>
         <div className={styles.stepNav}>
           <button type="button" className={styles.back} onClick={onBack}>
             Opnieuw proberen
@@ -336,34 +415,15 @@ function AnalyseStep({
     );
   }
 
+  const label = scanChecks[Math.min(active, scanChecks.length - 1)];
   return (
-    <div className={styles.analyse}>
-      <h2 className={styles.stepTitle}>We bekijken je website</h2>
-      <p className={styles.analyseLead}>
-        Dit duurt even. We lopen je homepage door als je klant.
+    <div className={styles.loading}>
+      <div className={styles.spinner} aria-hidden />
+      <h2 className={styles.loadingTitle}>We bekijken je website</h2>
+      <p key={label} className={styles.loadingText}>
+        {label}…
       </p>
-      <ul className={styles.checks}>
-        {scanChecks.map((c, i) => {
-          const state = i < done ? "done" : i === done ? "active" : "todo";
-          return (
-            <li
-              key={c}
-              className={`${styles.check} ${
-                state === "done"
-                  ? styles.checkDone
-                  : state === "active"
-                  ? styles.checkActive
-                  : ""
-              }`}
-            >
-              <span className={styles.checkMark} aria-hidden>
-                {state === "done" ? "✓" : ""}
-              </span>
-              {c}
-            </li>
-          );
-        })}
-      </ul>
+      <p className={styles.loadingSub}>Dit duurt ongeveer een halve minuut.</p>
     </div>
   );
 }

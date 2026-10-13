@@ -63,7 +63,7 @@ export type ScanAnswers = {
   branche: Branche | "";
   brancheAnders: string;
   idealeKlant: string;
-  doel: string;
+  doel: string[]; // meerdere doelen mogelijk
   timing: string;
   budget: string;
 };
@@ -74,7 +74,7 @@ export const emptyAnswers: ScanAnswers = {
   branche: "",
   brancheAnders: "",
   idealeKlant: "",
-  doel: "",
+  doel: [],
   timing: "",
   budget: "",
 };

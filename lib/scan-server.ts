@@ -347,7 +347,11 @@ async function callClaude(
   const run = async () => {
     const msg = await client.messages.create({
       model: SCAN_MODEL,
-      max_tokens: 8000,
+      max_tokens: 6000,
+      // Snel: geen extended thinking, lage effort. Prima voor een gestructureerde
+      // eerste diagnose; scheelt flink in wachttijd.
+      thinking: { type: "disabled" },
+      output_config: { effort: "low" },
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userBlocks }],
     });
@@ -395,7 +399,7 @@ export async function analyzeSite(
   const context = [
     `BRANCHE: ${branche || "onbekend"}`,
     `IDEALE KLANT (opgegeven door de ondernemer): ${answers.idealeKlant || "onbekend"}`,
-    `DOEL VAN DE WEBSITE: ${answers.doel || "onbekend"}`,
+    `DOEL VAN DE WEBSITE: ${answers.doel.join(", ") || "onbekend"}`,
     "",
     `WEBSITE: ${target}`,
     `PAGINATITEL: ${site.title}`,

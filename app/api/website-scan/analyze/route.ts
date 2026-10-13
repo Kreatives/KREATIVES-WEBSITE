@@ -9,7 +9,7 @@ import {
 } from "@/lib/scan-server";
 
 export const runtime = "nodejs";
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
   const raw = await req.json().catch(() => ({}));
