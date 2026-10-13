@@ -93,16 +93,9 @@ export default function WebsiteScanFlow() {
           {urlTouched && !urlOk && answers.url !== "" && (
             <p className={styles.error}>Vul een geldig webadres in.</p>
           )}
-          <button
-            type="button"
-            className={styles.textLink}
-            onClick={() => {
-              setAnswers((a) => ({ ...a, geenWebsite: true }));
-              setStep(4);
-            }}
-          >
-            Ik heb nog geen website
-          </button>
+          <a className={styles.textLink} href={SCAN_BOOKING}>
+            Ik heb nog geen website — plan direct een gesprek
+          </a>
         </Step>
       )}
 

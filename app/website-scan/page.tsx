@@ -12,18 +12,20 @@ export const metadata: Metadata = {
 
 export default function WebsiteScanPage() {
   return (
-    <main className={styles.page}>
-      <section className={styles.intro}>
-        <span className="eyebrow">{scan.name}</span>
-        <h1 className={styles.introTitle}>
-          Zou jouw klant op je website{" "}
-          <span className="accent accent--orange">actie ondernemen?</span>
-        </h1>
-        <p className={styles.introBody}>
-          We bekijken je homepage door de ogen van je ideale klant en geven een
-          eerlijke, concrete diagnose. Geen laadsnelheid of SEO, alleen of je
-          bezoeker overtuigd raakt en contact opneemt.
-        </p>
+    <main className={styles.scanPage}>
+      <section className={styles.hero}>
+        <div className={styles.heroInner}>
+          <span className={styles.heroEyebrow}>{scan.name}</span>
+          <h1 className={styles.heroKop}>
+            Zou jouw klant op je website{" "}
+            <span className={styles.heroAccent}>actie ondernemen?</span>
+          </h1>
+          <p className={styles.heroLead}>
+            In een paar minuten bekijk ik je homepage door de ogen van je ideale
+            klant en geef ik een eerlijke, concrete diagnose. Geen laadsnelheid
+            of SEO, alleen of je bezoeker overtuigd raakt en contact opneemt.
+          </p>
+        </div>
       </section>
 
       <section className={styles.flowWrap}>

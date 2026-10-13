@@ -30,6 +30,11 @@ const MATCH_FRACTION: Record<string, number> = {
   deels: 0.6,
   slecht: 0.32,
 };
+const MATCH_COLOR: Record<string, string> = {
+  goed: "#1d7a46",
+  deels: "#d07a12",
+  slecht: "#c0392b",
+};
 
 function scoreColor(score: number): string {
   if (score >= 70) return "#1d7a46";
@@ -215,11 +220,15 @@ function Report({
             title="Spreekt je site de juiste klant aan?"
           />
           <div className={styles.doelCards}>
-            <article className={styles.card}>
+            <article className={`${styles.card} ${styles.cardMuted}`}>
+              <span className={styles.cardTag}>Jouw input</span>
               <span className={styles.cardLabel}>Wie jij wilt aanspreken</span>
               <p>{report.doelgroep.opgegeven}</p>
             </article>
             <article className={styles.card}>
+              <span className={`${styles.cardTag} ${styles.cardTagAccent}`}>
+                Wat ik zie
+              </span>
               <span className={styles.cardLabel}>
                 Wat je huidige website uitstraalt
               </span>
@@ -227,9 +236,15 @@ function Report({
             </article>
           </div>
           <div className={styles.matchGauge}>
-            <Ring fraction={MATCH_FRACTION[report.doelgroep.match]} color="var(--orange)">
+            <Ring
+              fraction={MATCH_FRACTION[report.doelgroep.match]}
+              color={MATCH_COLOR[report.doelgroep.match]}
+            >
               <span className={styles.ringSmall}>Match</span>
-              <span className={styles.ringBig}>
+              <span
+                className={styles.ringBig}
+                style={{ color: MATCH_COLOR[report.doelgroep.match] }}
+              >
                 {MATCH_LABEL[report.doelgroep.match]}
               </span>
             </Ring>
