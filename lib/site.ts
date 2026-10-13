@@ -2,6 +2,10 @@
 // KREATIVES tone-of-voice skill (geen "geen X maar Y", geen staccato,
 // geen em-dashes, geen lege bureautaal, Nederlands, ondernemer-aan-tafel).
 
+// Centrale boekingslink (Calendly). Alle "Plan een strategiegesprek"-knoppen
+// linken hiernaartoe in plaats van naar de contactpagina.
+export const CALENDLY = "https://calendly.com/info-jtw/blueprint-sessie";
+
 export const site = {
   name: "KREATIVES",
   domain: "https://www.kreatives.nl",
@@ -50,9 +54,9 @@ export const hero = {
   titleAccentTail: " in je vak.",
   body:
     "Klanten vergelijken je binnen een paar seconden met je concurrent. Wij zorgen dat ze bij jou blijven, en contact opnemen. Binnen 6 weken live.",
-  primary: { label: "Plan een strategiegesprek", href: "/contact" },
+  primary: { label: "Plan een strategiegesprek", href: CALENDLY },
   // Primaire hero-knop: linkt rechtstreeks naar de contactpagina.
-  contactCta: { label: "Plan een strategiegesprek", href: "/contact" },
+  contactCta: { label: "Plan een strategiegesprek", href: CALENDLY },
   // Microcopy onder de primaire knop.
   ctaMicro: "30 minuten, vrijblijvend, je krijgt direct concrete verbeterpunten.",
   secondary: { label: "Bekijk ons werk", href: "/projecten" },
@@ -65,7 +69,7 @@ export const hero = {
       { initials: "AN", color: "#5b3b1f", photo: "/team/angela.webp" },
     ],
     rating: "5/5",
-    label: "uit 11 reviews op Google",
+    label: "uit reviews op Google",
     trust: "Vertrouwd door 100+ ondernemers",
   },
   background: "/brand/home-hero.webp",
@@ -566,7 +570,7 @@ export const pricing = {
         "Livegang binnen zes weken",
         "Eerste jaar hosting en onderhoud",
       ],
-      cta: { label: "Plan een strategiegesprek", href: "/contact" },
+      cta: { label: "Plan een strategiegesprek", href: CALENDLY },
     },
     {
       name: "Maatwerk webshop",
@@ -583,7 +587,7 @@ export const pricing = {
         "Tot 30 producten klaar bij oplevering",
         "30 dagen optimaliseren we op meer verkopen",
       ],
-      cta: { label: "Plan een strategiegesprek", href: "/contact" },
+      cta: { label: "Plan een strategiegesprek", href: CALENDLY },
     },
   ],
 };
@@ -596,7 +600,7 @@ export const closingCta = {
   titleAccent: "wie je echt bent?",
   body:
     "Plan een vrijblijvend strategiegesprek. We kijken samen waar je site nu aanvragen laat liggen en wat er nodig is om dat te veranderen.",
-  cta: { label: "Plan een strategiegesprek", href: "/contact" },
+  cta: { label: "Plan een strategiegesprek", href: CALENDLY },
   ctaMicro: "30 minuten, vrijblijvend, je krijgt direct concrete verbeterpunten.",
 };
 
@@ -648,7 +652,7 @@ export const diensten: Dienst[] = [
           "Na de livegang pas je zelf teksten en projecten aan, en blijven wij beschikbaar voor onderhoud en doorontwikkeling.",
       },
     ],
-    cta: { label: "Plan een strategiegesprek", href: "/contact" },
+    cta: { label: "Plan een strategiegesprek", href: CALENDLY },
     background: "/projects/2.webp",
   },
   {
@@ -682,7 +686,7 @@ export const diensten: Dienst[] = [
           "Alles bouwen we passend op jouw situatie, met aandacht voor privacy, kosten en betrouwbaarheid in productie.",
       },
     ],
-    cta: { label: "Plan een strategiegesprek", href: "/contact" },
+    cta: { label: "Plan een strategiegesprek", href: CALENDLY },
     background: "/projects/7.webp",
   },
 ];
@@ -812,7 +816,7 @@ export const overOnsVerhaal = {
     "Ik zag te veel ondernemers rondlopen met een site die niet meer paste bij wat ze inmiddels deden. Niet omdat ze er niet in wilden investeren, maar omdat de opties niet klopten: te duur, te generiek, of een wachtrij van drie maanden.",
     "KREATIVES is daar direct op gebouwd. Maatwerk websites die snel laden en technisch op orde staan, voor een prijs die past bij wat een serieuze ondernemer redelijk kan investeren.",
   ],
-  primaryCta: { label: "Plan een strategiegesprek", href: "/contact" },
+  primaryCta: { label: "Plan een strategiegesprek", href: CALENDLY },
   cta: { label: "Bekijk ons werk", href: "/projecten" },
   media: {
     main: "/brand/over-verhaal.webp",
@@ -982,7 +986,7 @@ export const webdesignFunnel = {
     eyebrow: "Waarom KREATIVES",
     titleLead: "Wat je bij ons",
     titleAccent: "anders merkt.",
-    cta: { label: "Plan een strategiegesprek", href: "/contact" },
+    cta: { label: "Plan een strategiegesprek", href: CALENDLY },
     items: [
       {
         title: "We ontwerpen op wat de site moet doen",
