@@ -1,37 +1,35 @@
 import "server-only";
+import nodemailer from "nodemailer";
 import { CALENDLY } from "@/lib/site";
 import type { ScanContact, ScanRow } from "@/lib/scan-server";
 import { budgetToNumber, leadRating } from "@/lib/scan-server";
 
-const FROM = () => process.env.RESEND_FROM ?? "KREATIVES <info@kreatives.nl>";
-const NOTIFY = () => process.env.LEAD_NOTIFY_EMAIL ?? "info@kreatives.nl";
+// Hergebruikt dezelfde SMTP-config als het contactformulier (lib/mailer.ts).
+const host = process.env.SMTP_HOST ?? "smtp.hostinger.com";
+const port = Number(process.env.SMTP_PORT ?? 465);
+const user = process.env.SMTP_USER ?? "";
+const pass = process.env.SMTP_PASS ?? "";
+const NOTIFY = () => process.env.LEAD_NOTIFY_EMAIL || process.env.CONTACT_TO || user;
 const BOOKING = () => process.env.BOOKING_URL ?? CALENDLY;
 
-async function resend(payload: {
-  from: string;
-  to: string;
-  subject: string;
-  html: string;
-  text: string;
-  reply_to?: string;
-}): Promise<void> {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) throw new Error("RESEND_API_KEY ontbreekt.");
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) {
-    throw new Error(`Resend: ${res.status} ${(await res.text()).slice(0, 200)}`);
+let cached: nodemailer.Transporter | null = null;
+function transport() {
+  if (!cached) {
+    cached = nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+    });
   }
+  return cached;
 }
 
 function esc(s: string): string {
-  return (s || "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c] as string));
+  return (s || "").replace(
+    /[&<>]/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c] as string)
+  );
 }
 
 /** Notificatie naar KREATIVES bij elke lead met contactgegevens. */
@@ -42,6 +40,7 @@ export async function sendLeadNotification(
   notionPageId: string | null,
   notionFailed: boolean
 ): Promise<void> {
+  if (!user || !pass) throw new Error("SMTP niet geconfigureerd.");
   const a = row.answers;
   const branche = a.branche === "Anders" ? a.brancheAnders : a.branche;
   const rating = leadRating(a.budget, a.timing);
@@ -74,21 +73,17 @@ export async function sendLeadNotification(
     )
     .join("");
 
-  const html = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#111">
-    <h2>Nieuwe scan-lead: ${esc(contact.bedrijf)} — rating ${rating}/5</h2>
-    ${notionLine}
-    <table>${table}</table>
-    <p><a href="${resultUrl}">Bekijk de resultaatpagina</a></p>
-  </div>`;
-  const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\nRapport: ${resultUrl}`;
-
-  await resend({
-    from: FROM(),
+  await transport().sendMail({
+    from: `"KREATIVES Scan" <${user}>`,
     to: NOTIFY(),
-    reply_to: contact.email,
+    replyTo: contact.email || undefined,
     subject: `Nieuwe scan-lead: ${contact.bedrijf} – rating ${rating}/5`,
-    html,
-    text,
+    html: `<div style="font-family:Arial,sans-serif;font-size:15px;color:#111">
+      <h2>Nieuwe scan-lead: ${esc(contact.bedrijf)} — rating ${rating}/5</h2>
+      ${notionLine}<table>${table}</table>
+      <p><a href="${resultUrl}">Bekijk de resultaatpagina</a></p></div>`,
+    text:
+      rows.map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\nRapport: ${resultUrl}`,
   });
 }
 
@@ -98,6 +93,8 @@ export async function sendVisitorReport(
   contact: ScanContact,
   resultUrl: string
 ): Promise<void> {
+  if (!user || !pass) throw new Error("SMTP niet geconfigureerd.");
+  if (!contact.email) return;
   const r = row.report;
   const pijn = r
     ? r.topPijnpunten
@@ -110,20 +107,15 @@ export async function sendVisitorReport(
        <h3>Je grootste pijnpunten</h3><ol>${pijn}</ol>`
     : `<p>Bedankt. Je begint met een schone lei. In een gesprek maken we er een concreet plan van.</p>`;
 
-  const html = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#111;max-width:560px">
-    <h2>Je website-diagnose</h2>
-    ${body}
-    <p><a href="${resultUrl}" style="display:inline-block;background:#fd6d17;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none">Bekijk je volledige rapport</a></p>
-    <p>Wil je het samen doorlopen? <a href="${BOOKING()}">Plan een gratis gesprek van 30 minuten</a>.</p>
-    <p style="color:#888;font-size:13px">Deze scan is een automatische eerste analyse. In een gesprek kijk ik er zelf naar.</p>
-  </div>`;
-  const text = `Je website-diagnose staat klaar: ${resultUrl}\n\nPlan een gesprek: ${BOOKING()}`;
-
-  await resend({
-    from: FROM(),
+  await transport().sendMail({
+    from: `"KREATIVES" <${user}>`,
     to: contact.email,
     subject: "Je website-diagnose van KREATIVES",
-    html,
-    text,
+    html: `<div style="font-family:Arial,sans-serif;font-size:15px;color:#111;max-width:560px">
+      <h2>Je website-diagnose</h2>${body}
+      <p><a href="${resultUrl}" style="display:inline-block;background:#fd6d17;color:#fff;padding:10px 18px;border-radius:999px;text-decoration:none">Bekijk je volledige rapport</a></p>
+      <p>Wil je het samen doorlopen? <a href="${BOOKING()}">Plan een gratis gesprek van 30 minuten</a>.</p>
+      <p style="color:#888;font-size:13px">Deze scan is een automatische eerste analyse. In een gesprek kijk ik er zelf naar.</p></div>`,
+    text: `Je website-diagnose staat klaar: ${resultUrl}\n\nPlan een gesprek: ${BOOKING()}`,
   });
 }
