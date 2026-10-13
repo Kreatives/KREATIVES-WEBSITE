@@ -214,7 +214,7 @@
 }
 .listTitle {
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   font-size: 1.02rem;
 }
 .listSub {

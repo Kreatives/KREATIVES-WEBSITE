@@ -13,7 +13,7 @@
 .p {
   font-size: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
   line-height: 1.68;
-  letter-spacing: -0.005em;
+  letter-spacing: normal;
   color: var(--ink);
 }
 
@@ -106,7 +106,7 @@
 .table th {
   font-family: var(--font-sans);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   background: var(--off-white-2, #eceae2);
 }
 .table tbody tr:last-child td {

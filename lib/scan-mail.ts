@@ -1,6 +1,6 @@
 import "server-only";
 import nodemailer from "nodemailer";
-import { CALENDLY } from "@/lib/site";
+import { SCAN_BOOKING } from "@/lib/scan";
 import type { ScanContact, ScanRow } from "@/lib/scan-server";
 import { budgetToNumber, leadRating } from "@/lib/scan-server";
 
@@ -10,7 +10,7 @@ const port = Number(process.env.SMTP_PORT ?? 465);
 const user = process.env.SMTP_USER ?? "";
 const pass = process.env.SMTP_PASS ?? "";
 const NOTIFY = () => process.env.LEAD_NOTIFY_EMAIL || process.env.CONTACT_TO || user;
-const BOOKING = () => process.env.BOOKING_URL ?? CALENDLY;
+const BOOKING = () => process.env.BOOKING_URL ?? SCAN_BOOKING;
 
 let cached: nodemailer.Transporter | null = null;
 function transport() {

@@ -8,6 +8,9 @@ export const scan = {
   route: "/website-scan",
 };
 
+// Aparte boekingslink voor de website-analyse call (resultaatpagina + foutstatus).
+export const SCAN_BOOKING = "https://calendly.com/info-jtw/website-analyse";
+
 export type Branche =
   | "Horeca & food"
   | "Coach of personal brand"

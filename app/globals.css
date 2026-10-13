@@ -29,7 +29,7 @@
   /* --font-mono geleverd door next/font (variabele op <html>) */
 
   --track-tight: normal; /* koppen: normale tracking */
-  --track-body: -0.01em;
+  --track-body: normal;
   --track-mono: 0.1em; /* DM Mono labels ~10% */
 
   /* Type-schaal — ÉÉN bron van waarheid voor de hele site.
@@ -229,7 +229,7 @@ select {
   font-family: var(--font-sans);
   font-size: 1.05rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--muted);
 }
 .section--dark .eyebrow {
@@ -299,7 +299,7 @@ h3 {
   display: inline-flex;
   align-items: stretch;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   border-radius: var(--radius-btn);
   overflow: hidden;
   transition: background 0.3s var(--ease), color 0.3s var(--ease),

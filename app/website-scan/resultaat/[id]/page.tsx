@@ -21,7 +21,7 @@ export default async function ScanResultPage({
   if (!row) notFound();
 
   return (
-    <main className={styles.page}>
+    <main className={styles.resultPage}>
       <ScanResult
         id={row.id}
         geenWebsite={row.geen_website}

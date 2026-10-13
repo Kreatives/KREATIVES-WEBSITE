@@ -43,7 +43,7 @@
   color: var(--on-dark);
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   padding: 0.7rem 1.3rem;
   border-radius: 999px;
   text-decoration: none;

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CALENDLY } from "@/lib/site";
+import { SCAN_BOOKING } from "@/lib/scan";
 import {
   brancheOpties,
   budgetOpties,
@@ -407,7 +407,7 @@ function AnalyseStep({
           <button type="button" className={styles.back} onClick={onBack}>
             Opnieuw proberen
           </button>
-          <a className={styles.next} href={CALENDLY}>
+          <a className={styles.next} href={SCAN_BOOKING}>
             Plan een gesprek
           </a>
         </div>

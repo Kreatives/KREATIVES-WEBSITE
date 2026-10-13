@@ -16,6 +16,7 @@ const DARK_HERO_PREFIXES = [
   "/blog",
   "/projecten",
   "/contact",
+  "/website-scan/resultaat",
 ];
 
 function Chevron() {

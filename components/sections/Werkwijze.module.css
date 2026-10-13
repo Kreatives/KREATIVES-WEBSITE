@@ -51,7 +51,7 @@
   font-size: clamp(1.5rem, 0.9rem + 2vw, 2.6rem);
   font-weight: 700;
   letter-spacing: var(--track-tight);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--ink);
   line-height: 1.05;
   transition: color 0.3s var(--ease);

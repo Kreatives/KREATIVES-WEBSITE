@@ -53,7 +53,7 @@
   padding: 0.5rem 1rem;
   border-radius: 999px;
   font-size: 0.85rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--on-dark);
   background: rgba(244, 243, 239, 0.12);
   border: 1px solid rgba(244, 243, 239, 0.18);
@@ -140,7 +140,7 @@
 }
 .linkLabel {
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   font-size: 1.02rem;
 }
 .linkSub {
@@ -178,7 +178,7 @@
   border: 0;
   color: rgba(244, 243, 239, 0.55);
   font-size: 0.85rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;

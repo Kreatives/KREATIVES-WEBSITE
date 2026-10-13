@@ -89,7 +89,7 @@
 .label {
   font-family: var(--font-sans);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--ink);
   font-size: 1rem;
   line-height: 1.3;

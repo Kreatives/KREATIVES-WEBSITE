@@ -65,7 +65,7 @@
   font-family: var(--font-sans);
   font-size: 1.05rem;
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   font-weight: 500;
   color: var(--on-dark-muted);
   margin-bottom: 1.1rem;

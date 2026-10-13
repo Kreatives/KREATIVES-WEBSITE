@@ -22,7 +22,7 @@
   font-family: var(--font-sans);
   font-size: 0.88rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--on-dark);
 }
 .pulseDot {

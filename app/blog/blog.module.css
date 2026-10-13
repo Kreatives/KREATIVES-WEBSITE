@@ -31,7 +31,7 @@
 .metaLine {
   font-size: 0.9rem;
   color: var(--muted);
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
 }
 
 .filters {
@@ -43,7 +43,7 @@
 .chip {
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   padding: 0.55rem 1.1rem;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
@@ -122,7 +122,7 @@
 .tag {
   font-family: var(--font-sans);
   font-size: 0.85rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   border: 1px solid var(--line);

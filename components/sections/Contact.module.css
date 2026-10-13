@@ -71,7 +71,7 @@
 .legend {
   font-family: var(--font-sans);
   font-size: 1.05rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--muted);
 }
 .radios {
@@ -118,7 +118,7 @@
 .field label {
   font-family: var(--font-sans);
   font-size: 1rem;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: var(--muted);
 }
 .field input,
