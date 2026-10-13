@@ -9,9 +9,11 @@ import {
   type Verdict,
 } from "@/lib/scan";
 
-// De brief vroeg "claude-sonnet-5-5"; dat model-ID bestaat niet. De huidige
-// Sonnet is claude-sonnet-4-6. Pas hier aan als er een nieuwer model is.
-export const SCAN_MODEL = "claude-sonnet-4-6";
+// Snelheid boven alles voor deze tool: Haiku 4.5 (Anthropic's snelste). Voor een
+// diepere analyse kun je dit op "claude-sonnet-4-6" of "claude-opus-4-8" zetten
+// (verwijder dan niet de effort/thinking-logica hieronder — Haiku ondersteunt
+// die niet, Sonnet/Opus wel).
+export const SCAN_MODEL = "claude-haiku-4-5";
 
 const CANONIEKE_CATEGORIEEN = [
   "Doelgroep & boodschap",
@@ -344,16 +346,18 @@ async function callClaude(
   userBlocks: Anthropic.MessageParam["content"]
 ): Promise<any> {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const isHaiku = SCAN_MODEL.includes("haiku");
   const run = async () => {
     const msg = await client.messages.create({
       model: SCAN_MODEL,
       max_tokens: 6000,
-      // Snel: geen extended thinking, lage effort. Prima voor een gestructureerde
-      // eerste diagnose; scheelt flink in wachttijd.
-      thinking: { type: "disabled" },
-      output_config: { effort: "low" },
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userBlocks }],
+      // Haiku ondersteunt geen effort/extended thinking; Sonnet/Opus wel (lage
+      // effort + thinking uit = snel).
+      ...(isHaiku
+        ? {}
+        : { thinking: { type: "disabled" as const }, output_config: { effort: "low" as const } }),
     });
     const text = msg.content
       .filter((b): b is Anthropic.TextBlock => b.type === "text")
