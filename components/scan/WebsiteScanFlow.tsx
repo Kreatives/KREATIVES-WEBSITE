@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { CALENDLY } from "@/lib/site";
 import {
   brancheOpties,
   budgetOpties,
@@ -14,7 +15,6 @@ import {
 } from "@/lib/scan";
 import styles from "./scan.module.css";
 
-const STORAGE_KEY = "kreatives-scan";
 const TOTAL_STEPS = 5; // URL, branche, klant, doel/timing/budget, analyse
 
 function normalizeUrl(raw: string): string {
@@ -33,22 +33,12 @@ function isValidUrl(raw: string): boolean {
 }
 
 export default function WebsiteScanFlow() {
-  const router = useRouter();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<ScanAnswers>(emptyAnswers);
   const [urlTouched, setUrlTouched] = useState(false);
 
   function update<K extends keyof ScanAnswers>(key: K, value: ScanAnswers[K]) {
     setAnswers((a) => ({ ...a, [key]: value }));
-  }
-
-  function persistAndGo(next: ScanAnswers) {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    router.push("/website-scan/resultaat/demo");
-  }
-
-  function startAnalyse() {
-    setStep(4);
   }
 
   const urlOk = isValidUrl(answers.url);
@@ -100,9 +90,8 @@ export default function WebsiteScanFlow() {
             type="button"
             className={styles.textLink}
             onClick={() => {
-              const next = { ...answers, geenWebsite: true };
-              setAnswers(next);
-              persistAndGo(next);
+              setAnswers((a) => ({ ...a, geenWebsite: true }));
+              setStep(4);
             }}
           >
             Ik heb nog geen website
@@ -170,7 +159,7 @@ export default function WebsiteScanFlow() {
         <Step
           title="Doel, timing en budget"
           onBack={() => setStep(2)}
-          onNext={startAnalyse}
+          onNext={() => setStep(4)}
           nextLabel="Start de scan"
           nextDisabled={!answers.doel || !answers.timing || !answers.budget}
         >
@@ -195,9 +184,7 @@ export default function WebsiteScanFlow() {
         </Step>
       )}
 
-      {step === 4 && (
-        <AnalyseStep onDone={() => persistAndGo(answers)} />
-      )}
+      {step === 4 && <AnalyseStep answers={answers} onBack={() => setStep(0)} />}
     </div>
   );
 }
@@ -274,33 +261,86 @@ function Group({
   );
 }
 
-function AnalyseStep({ onDone }: { onDone: () => void }) {
+function AnalyseStep({
+  answers,
+  onBack,
+}: {
+  answers: ScanAnswers;
+  onBack: () => void;
+}) {
+  const router = useRouter();
   const [done, setDone] = useState(0);
-  const calledRef = useRef(false);
+  const [error, setError] = useState<string | null>(null);
+  const startedRef = useRef(false);
 
   useEffect(() => {
-    // Fase 1: gesimuleerde voortgang. In fase 2 wordt elke check gekoppeld aan
-    // een echte backend-stap (screenshot, data verzamelen, AI-analyse).
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    scanChecks.forEach((_, i) => {
-      timers.push(setTimeout(() => setDone(i + 1), 650 * (i + 1)));
-    });
-    timers.push(
-      setTimeout(() => {
-        if (!calledRef.current) {
-          calledRef.current = true;
-          onDone();
+    if (startedRef.current) return;
+    startedRef.current = true;
+
+    (async () => {
+      try {
+        const res = await fetch("/api/website-scan/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(answers),
+        });
+        if (!res.body) throw new Error("no stream");
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = "";
+        for (;;) {
+          const { value, done: rdone } = await reader.read();
+          if (rdone) break;
+          buf += decoder.decode(value, { stream: true });
+          const lines = buf.split("\n");
+          buf = lines.pop() ?? "";
+          for (const line of lines) {
+            if (!line.trim()) continue;
+            const ev = JSON.parse(line) as {
+              type: string;
+              step?: number;
+              id?: string;
+              message?: string;
+            };
+            if (ev.type === "step" && typeof ev.step === "number") {
+              setDone((d) => Math.max(d, (ev.step as number) + 1));
+            } else if (ev.type === "done" && ev.id) {
+              router.push(`/website-scan/resultaat/${ev.id}`);
+              return;
+            } else if (ev.type === "error") {
+              setError(ev.message ?? "We konden je website niet goed bekijken.");
+              return;
+            }
+          }
         }
-      }, 650 * scanChecks.length + 800)
+      } catch {
+        setError("We konden je website niet goed bekijken.");
+      }
+    })();
+  }, [answers, router]);
+
+  if (error) {
+    return (
+      <div className={styles.analyse}>
+        <h2 className={styles.stepTitle}>Dat lukte niet helemaal</h2>
+        <p className={styles.analyseLead}>{error} Plan een gesprek, dan kijk ik er zelf naar.</p>
+        <div className={styles.stepNav}>
+          <button type="button" className={styles.back} onClick={onBack}>
+            Opnieuw proberen
+          </button>
+          <a className={styles.next} href={CALENDLY}>
+            Plan een gesprek
+          </a>
+        </div>
+      </div>
     );
-    return () => timers.forEach(clearTimeout);
-  }, [onDone]);
+  }
 
   return (
     <div className={styles.analyse}>
       <h2 className={styles.stepTitle}>We bekijken je website</h2>
       <p className={styles.analyseLead}>
-        Dit duurt een halve minuut. We lopen je homepage door als je klant.
+        Dit duurt even. We lopen je homepage door als je klant.
       </p>
       <ul className={styles.checks}>
         {scanChecks.map((c, i) => {

@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { CALENDLY } from "@/lib/site";
-import {
-  emptyAnswers,
-  getMockReport,
-  type ScanAnswers,
-  type ScanReport,
-  type Verdict,
-} from "@/lib/scan";
+import type { ScanAnswers, ScanReport, Verdict } from "@/lib/scan";
 import styles from "./scan.module.css";
 
-const STORAGE_KEY = "kreatives-scan";
-// Fase 2: echte uitlegvideo. Leeg = knop toont een nette melding.
+// Fase 2: echte uitlegvideo. Leeg = het videoblok verschijnt niet.
 const VIDEO_URL = "";
 
 const VERDICT_KOP: Record<Verdict, string> = {
@@ -27,35 +20,37 @@ const AFHAAK_LABEL: Record<string, string> = {
   "haakt af": "Haakt af",
 };
 
-export default function ScanResult() {
-  const [answers, setAnswers] = useState<ScanAnswers>(emptyAnswers);
-  const [loaded, setLoaded] = useState(false);
+type Contact = { voornaam: string; email: string };
 
-  useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (raw) setAnswers({ ...emptyAnswers, ...JSON.parse(raw) });
-    } catch {
-      // geen opgeslagen antwoorden → mock met standaardwaarden
-    }
-    setLoaded(true);
-  }, []);
+export type ScanResultProps = {
+  id: string;
+  geenWebsite: boolean;
+  answers: ScanAnswers;
+  report: ScanReport | null;
+};
 
-  const report = useMemo(() => getMockReport(answers), [answers]);
-
-  if (!loaded) return null;
-  if (answers.geenWebsite) return <GeenWebsite answers={answers} />;
-  return <Report report={report} answers={answers} />;
+export default function ScanResult({
+  id,
+  geenWebsite,
+  answers,
+  report,
+}: ScanResultProps) {
+  if (geenWebsite) return <GeenWebsite id={id} answers={answers} />;
+  if (!report) return <NietGelukt />;
+  return <Report id={id} report={report} answers={answers} />;
 }
 
 function Report({
+  id,
   report,
   answers,
 }: {
+  id: string;
   report: ScanReport;
   answers: ScanAnswers;
 }) {
   const [unlocked, setUnlocked] = useState(false);
+  const [contact, setContact] = useState<Contact | null>(null);
   const coldLead =
     answers.timing === "Ik oriënteer me nog" || answers.budget === "Onder €1.500";
 
@@ -70,7 +65,6 @@ function Report({
         <p className={styles.verdictUitleg}>{report.eindoordeel.uitleg}</p>
       </header>
 
-      {/* Doelgroep */}
       <section className={styles.block}>
         <div className={styles.doelgroep}>
           <div className={styles.doelgroepCol}>
@@ -79,20 +73,21 @@ function Report({
           </div>
           <div className={styles.doelgroepCol}>
             <span className={styles.miniLabel}>
-              Voor wie je website lijkt te maken
+              Voor wie je website het lijkt te maken
             </span>
             <p>{report.doelgroep.watDeSiteUitstraalt}</p>
           </div>
         </div>
         <p className={styles.matchLine}>
-          <span className={`${styles.matchBadge} ${styles[`match_${report.doelgroep.match}`]}`}>
+          <span
+            className={`${styles.matchBadge} ${styles[`match_${report.doelgroep.match}`]}`}
+          >
             Match: {report.doelgroep.match}
           </span>
           {report.doelgroep.toelichting}
         </p>
       </section>
 
-      {/* Totaalscore + categorieën */}
       <section className={styles.block}>
         <div className={styles.scoreHead}>
           <div className={styles.scoreNum}>
@@ -112,10 +107,7 @@ function Report({
                 <span className={styles.barScore}>{c.score}/10</span>
               </div>
               <div className={styles.barTrack} aria-hidden>
-                <span
-                  className={styles.barFill}
-                  style={{ width: `${c.score * 10}%` }}
-                />
+                <span className={styles.barFill} style={{ width: `${c.score * 10}%` }} />
               </div>
               <p className={styles.barObs}>{c.observatie}</p>
             </li>
@@ -123,15 +115,19 @@ function Report({
         </ul>
       </section>
 
-      {/* Pijnpunt 1 (altijd zichtbaar) */}
       <section className={styles.block}>
         <span className="eyebrow">Je grootste pijnpunt</span>
-        <Pijnpunt p={report.topPijnpunten[0]} index={1} />
+        {report.topPijnpunten[0] && <Pijnpunt p={report.topPijnpunten[0]} index={1} />}
       </section>
 
-      {/* Gate */}
       {!unlocked ? (
-        <GateForm onUnlock={() => setUnlocked(true)} />
+        <GateForm
+          id={id}
+          onUnlock={(c) => {
+            setContact(c);
+            setUnlocked(true);
+          }}
+        />
       ) : (
         <>
           <section className={styles.block}>
@@ -199,12 +195,8 @@ function Report({
               </div>
               <div className={styles.kopNieuw}>
                 <span className={styles.miniLabel}>Voorstel</span>
-                <p className={styles.kopNieuwText}>
-                  “{report.nieuweKop.voorgesteldeKop}”
-                </p>
-                <p className={styles.kopSub}>
-                  {report.nieuweKop.voorgesteldeSubkop}
-                </p>
+                <p className={styles.kopNieuwText}>“{report.nieuweKop.voorgesteldeKop}”</p>
+                <p className={styles.kopSub}>{report.nieuweKop.voorgesteldeSubkop}</p>
               </div>
             </div>
           </section>
@@ -221,7 +213,7 @@ function Report({
       )}
 
       <VideoBlok />
-      <CallBlok coldLead={coldLead} />
+      <CallBlok coldLead={coldLead} contact={contact} />
 
       <p className={styles.disclaimer}>
         Deze scan is een automatische eerste analyse. In een gesprek kijk ik er
@@ -252,8 +244,20 @@ function Pijnpunt({
   );
 }
 
-function GateForm({ onUnlock }: { onUnlock: () => void }) {
+function GateForm({
+  id,
+  onUnlock,
+}: {
+  id: string;
+  onUnlock: (c: Contact) => void;
+}) {
   const [sending, setSending] = useState(false);
+  const [voornaam, setVoornaam] = useState("");
+  const [email, setEmail] = useState("");
+  const [bedrijf, setBedrijf] = useState("");
+  const [telefoon, setTelefoon] = useState("");
+  const [honey, setHoney] = useState("");
+
   return (
     <section className={styles.gate}>
       <div className={styles.gatePreview} aria-hidden>
@@ -264,8 +268,21 @@ function GateForm({ onUnlock }: { onUnlock: () => void }) {
         onSubmit={(e) => {
           e.preventDefault();
           setSending(true);
-          // Fase 2: lead opslaan + rapport mailen. Fase 1: direct ontgrendelen.
-          setTimeout(onUnlock, 300);
+          // Rapport staat al op de pagina: direct ontgrendelen, lead op de
+          // achtergrond verwerken (Notion + mail).
+          fetch("/api/website-scan/lead", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id,
+              voornaam,
+              email,
+              bedrijf,
+              telefoon,
+              company_url: honey,
+            }),
+          }).catch(() => {});
+          onUnlock({ voornaam, email });
         }}
       >
         <h2 className={styles.gateTitle}>Ontvang je volledige rapport</h2>
@@ -273,7 +290,6 @@ function GateForm({ onUnlock }: { onUnlock: () => void }) {
           De overige pijnpunten, de walkthrough per sectie en je nieuwe kop.
           Direct op deze pagina en in je mail.
         </p>
-        {/* Honeypot tegen bots */}
         <input
           type="text"
           name="company_url"
@@ -281,24 +297,38 @@ function GateForm({ onUnlock }: { onUnlock: () => void }) {
           autoComplete="off"
           className={styles.hp}
           aria-hidden
+          value={honey}
+          onChange={(e) => setHoney(e.target.value)}
         />
         <div className={styles.gateFields}>
-          <input className={styles.input} placeholder="Voornaam" required />
+          <input
+            className={styles.input}
+            placeholder="Voornaam"
+            required
+            value={voornaam}
+            onChange={(e) => setVoornaam(e.target.value)}
+          />
           <input
             className={styles.input}
             type="email"
             placeholder="E-mailadres"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             className={styles.input}
             placeholder="Bedrijfsnaam"
             required
+            value={bedrijf}
+            onChange={(e) => setBedrijf(e.target.value)}
           />
           <input
             className={styles.input}
             type="tel"
             placeholder="Telefoon (optioneel)"
+            value={telefoon}
+            onChange={(e) => setTelefoon(e.target.value)}
           />
         </div>
         <button className={styles.next} type="submit" disabled={sending}>
@@ -311,6 +341,7 @@ function GateForm({ onUnlock }: { onUnlock: () => void }) {
 
 function VideoBlok() {
   const [open, setOpen] = useState(false);
+  if (!VIDEO_URL) return null;
   return (
     <section className={styles.videoBlok}>
       <button
@@ -327,12 +358,7 @@ function VideoBlok() {
         </span>
       </button>
       {open && (
-        <div
-          className={styles.modal}
-          role="dialog"
-          aria-modal
-          onClick={() => setOpen(false)}
-        >
+        <div className={styles.modal} role="dialog" aria-modal onClick={() => setOpen(false)}>
           <div className={styles.modalInner} onClick={(e) => e.stopPropagation()}>
             <button
               type="button"
@@ -342,11 +368,7 @@ function VideoBlok() {
             >
               ✕
             </button>
-            {VIDEO_URL ? (
-              <video src={VIDEO_URL} controls autoPlay className={styles.modalVideo} />
-            ) : (
-              <p className={styles.modalNote}>De uitlegvideo volgt binnenkort.</p>
-            )}
+            <video src={VIDEO_URL} controls autoPlay className={styles.modalVideo} />
           </div>
         </div>
       )}
@@ -354,19 +376,26 @@ function VideoBlok() {
   );
 }
 
-function CallBlok({ coldLead }: { coldLead: boolean }) {
+function CallBlok({
+  coldLead,
+  contact,
+}: {
+  coldLead: boolean;
+  contact: Contact | null;
+}) {
+  const src = contact
+    ? `${CALENDLY}?name=${encodeURIComponent(contact.voornaam)}&email=${encodeURIComponent(contact.email)}`
+    : CALENDLY;
   return (
     <section className={`${styles.callBlok} ${coldLead ? styles.callCold : ""}`}>
-      <h2 className={styles.callTitle}>
-        Plan een gratis gesprek van 30 minuten
-      </h2>
+      <h2 className={styles.callTitle}>Plan een gratis gesprek van 30 minuten</h2>
       <p className={styles.callLead}>
         We lopen je scan samen door en ik laat zien wat je als eerste moet
         aanpakken.
       </p>
       <div className={styles.calendly}>
         <iframe
-          src={CALENDLY}
+          src={src}
           title="Plan een gesprek"
           className={styles.calendlyFrame}
           loading="lazy"
@@ -376,7 +405,24 @@ function CallBlok({ coldLead }: { coldLead: boolean }) {
   );
 }
 
-function GeenWebsite({ answers }: { answers: ScanAnswers }) {
+function NietGelukt() {
+  return (
+    <div className={styles.result}>
+      <header className={styles.resultHead}>
+        <h1 className={styles.verdictKop}>We konden je website niet goed bekijken</h1>
+        <p className={styles.verdictUitleg}>
+          Soms lukt het automatisch bekijken niet. Plan een gesprek, dan kijk ik
+          er zelf naar.
+        </p>
+      </header>
+      <CallBlok coldLead={false} contact={null} />
+    </div>
+  );
+}
+
+function GeenWebsite({ id, answers }: { id: string; answers: ScanAnswers }) {
+  const [unlocked, setUnlocked] = useState(false);
+  const [contact, setContact] = useState<Contact | null>(null);
   return (
     <div className={styles.result}>
       <header className={styles.resultHead}>
@@ -410,8 +456,17 @@ function GeenWebsite({ answers }: { answers: ScanAnswers }) {
         </div>
       </section>
 
-      <VideoBlok />
-      <CallBlok coldLead={false} />
+      {!unlocked ? (
+        <GateForm
+          id={id}
+          onUnlock={(c) => {
+            setContact(c);
+            setUnlocked(true);
+          }}
+        />
+      ) : null}
+
+      <CallBlok coldLead={false} contact={contact} />
 
       <p className={styles.disclaimer}>
         Dit is een eerste richting. In een gesprek maken we er een concreet plan

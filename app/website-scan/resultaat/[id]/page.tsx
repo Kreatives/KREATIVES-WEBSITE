@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import ScanResult from "@/components/scan/ScanResult";
+import { getScanRow } from "@/lib/scan-server";
 import styles from "@/components/scan/scan.module.css";
 
 export const metadata: Metadata = {
@@ -7,11 +9,25 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Fase 1: resultaat komt uit sessionStorage (mock). Fase 2: via [id] uit de DB.
-export default function ScanResultPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ScanResultPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const row = await getScanRow(id);
+  if (!row) notFound();
+
   return (
     <main className={styles.page}>
-      <ScanResult />
+      <ScanResult
+        id={row.id}
+        geenWebsite={row.geen_website}
+        answers={row.answers}
+        report={row.report}
+      />
     </main>
   );
 }
