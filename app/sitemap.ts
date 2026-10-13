@@ -16,6 +16,7 @@ const STATIC_PAGES: { path: string; priority: number; changeFrequency: Freq }[] 
   { path: "/diensten", priority: 0.7, changeFrequency: "monthly" },
   { path: "/werkwijze", priority: 0.8, changeFrequency: "monthly" },
   { path: "/projecten", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/website-scan", priority: 0.9, changeFrequency: "monthly" },
   { path: "/blauwdruk", priority: 0.8, changeFrequency: "monthly" },
   { path: "/over-ons", priority: 0.7, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
