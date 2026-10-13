@@ -9,8 +9,11 @@ import { site } from "@/lib/site";
 
 const NOTION_VERSION = "2025-09-03";
 const TOKEN = () => process.env.NOTION_TOKEN ?? "";
-const DATA_SOURCE_ID = () => process.env.NOTION_DATA_SOURCE_ID ?? "";
-const DATABASE_ID = () => process.env.NOTION_DATABASE_ID ?? "";
+// Bekende IDs van de LEAD TRACKER; overschrijfbaar via env.
+const DATA_SOURCE_ID = () =>
+  process.env.NOTION_DATA_SOURCE_ID ?? "3371d309-46f0-803e-bce0-000bdd431c96";
+const DATABASE_ID = () =>
+  process.env.NOTION_DATABASE_ID ?? "3371d30946f0808d8bcbf1c240230a06";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

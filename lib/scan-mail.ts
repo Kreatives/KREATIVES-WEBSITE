@@ -3,7 +3,7 @@ import { CALENDLY } from "@/lib/site";
 import type { ScanContact, ScanRow } from "@/lib/scan-server";
 import { budgetToNumber, leadRating } from "@/lib/scan-server";
 
-const FROM = () => process.env.RESEND_FROM ?? "KREATIVES <scan@kreatives.nl>";
+const FROM = () => process.env.RESEND_FROM ?? "KREATIVES <info@kreatives.nl>";
 const NOTIFY = () => process.env.LEAD_NOTIFY_EMAIL ?? "info@kreatives.nl";
 const BOOKING = () => process.env.BOOKING_URL ?? CALENDLY;
 

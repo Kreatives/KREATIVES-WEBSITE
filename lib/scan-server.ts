@@ -87,24 +87,84 @@ export function assertSafeUrl(raw: string): URL {
   return u;
 }
 
-/* ---------- ScreenshotOne ---------- */
+/* ---------- Screenshots via Apify (actor dz_omar/screenshot) ---------- */
 
-function screenshotUrl(target: string, viewportWidth: number): string {
-  const key = process.env.SCREENSHOTONE_ACCESS_KEY ?? "";
-  const params = new URLSearchParams({
-    access_key: key,
-    url: target,
-    viewport_width: String(viewportWidth),
-    full_page: "true",
-    format: "jpg",
-    image_quality: "70",
-    block_cookie_banners: "true",
-    block_ads: "true",
-    block_chats: "true",
-    cache: "true",
-    cache_ttl: "86400",
+const APIFY_ACTOR = "xmubUaYl4YC9fvvJi";
+
+type Shot = { base64: string; mediaType: "image/png" | "image/jpeg" | "image/webp" };
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function findImageUrl(item: any): string | null {
+  if (!item || typeof item !== "object") return null;
+  // Voorkeur voor bekende sleutels.
+  for (const k of ["screenshotUrl", "screenshot", "imageUrl", "image", "url"]) {
+    const v = item[k];
+    if (typeof v === "string" && /^https?:\/\//.test(v) &&
+        /(key-value-stores|\.png|\.jpe?g|\.webp|screenshot)/i.test(v)) {
+      return v;
+    }
+  }
+  // Anders: eerste string die op een afbeeldings-URL lijkt (diep zoeken).
+  let found: string | null = null;
+  const walk = (o: any) => {
+    if (found || !o) return;
+    if (typeof o === "string") {
+      if (/^https?:\/\/.*(key-value-stores|\.png|\.jpe?g|\.webp)/i.test(o)) found = o;
+      return;
+    }
+    if (typeof o === "object") for (const val of Object.values(o)) walk(val);
+  };
+  walk(item);
+  return found;
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
+async function captureScreenshot(
+  target: string,
+  width: number,
+  height: number
+): Promise<Shot | null> {
+  const token = process.env.APIFY_TOKEN;
+  if (!token) return null;
+
+  const run = await fetch(
+    `https://api.apify.com/v2/acts/${APIFY_ACTOR}/run-sync-get-dataset-items?token=${token}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fullPage: true,
+        link_urls: [{ url: target }],
+        window_Width: width,
+        window_Height: height,
+        waitUntil: "networkidle2",
+        cookies: [],
+      }),
+      signal: AbortSignal.timeout(90000),
+    }
+  );
+  if (!run.ok) throw new Error(`Apify run gaf status ${run.status}`);
+  const items = await run.json();
+  const item = Array.isArray(items) ? items[0] : items;
+  const imgUrl = findImageUrl(item);
+  if (!imgUrl) {
+    console.error("[website-scan] geen screenshot-URL in Apify-output:", JSON.stringify(item)?.slice(0, 400));
+    return null;
+  }
+
+  const sep = imgUrl.includes("?") ? "&" : "?";
+  const img = await fetch(`${imgUrl}${sep}token=${token}`, {
+    signal: AbortSignal.timeout(30000),
   });
-  return `https://api.screenshotone.com/take?${params.toString()}`;
+  if (!img.ok) return null;
+  const ct = img.headers.get("content-type") ?? "image/png";
+  const mediaType: Shot["mediaType"] = ct.includes("jpeg")
+    ? "image/jpeg"
+    : ct.includes("webp")
+    ? "image/webp"
+    : "image/png";
+  const buf = Buffer.from(await img.arrayBuffer());
+  return { base64: buf.toString("base64"), mediaType };
 }
 
 /* ---------- HTML ophalen + inhoud per sectie extraheren ---------- */
@@ -314,9 +374,11 @@ export async function analyzeSite(
   const target = u.toString();
   const domein = u.hostname.replace(/^www\./, "");
 
-  // Stap 0: screenshots klaarzetten (ScreenshotOne rendert on-demand via URL)
-  const shotDesktop = screenshotUrl(target, 1440);
-  const shotMobile = screenshotUrl(target, 390);
+  // Stap 0: screenshots starten (desktop + mobiel) via Apify
+  const shotsPromise = Promise.all([
+    captureScreenshot(target, 1440, 900).catch(() => null),
+    captureScreenshot(target, 390, 844).catch(() => null),
+  ]);
   onStep?.(0);
 
   // Stap 1: doelgroep (uit de antwoorden) — markeer verwerkt
@@ -325,6 +387,7 @@ export async function analyzeSite(
   // Stap 2: HTML + opbouw lezen
   const site = await fetchSiteData(target);
   onStep?.(2);
+  const [deskShot, mobShot] = await shotsPromise;
 
   const branche =
     answers.branche === "Anders" ? answers.brancheAnders : answers.branche;
@@ -348,22 +411,27 @@ export async function analyzeSite(
 
   // Stap 3-5: bewijs, actie, branding — dit beoordeelt het model in één call.
   onStep?.(3);
-  const raw = await callClaude([
-    {
+  const blocks: Array<Anthropic.TextBlockParam | Anthropic.ImageBlockParam> = [];
+  if (deskShot)
+    blocks.push({
       type: "image",
-      source: { type: "url", url: shotDesktop },
-    },
-    {
+      source: { type: "base64", media_type: deskShot.mediaType, data: deskShot.base64 },
+    });
+  if (mobShot)
+    blocks.push({
       type: "image",
-      source: { type: "url", url: shotMobile },
-    },
-    {
-      type: "text",
-      text:
-        "Hierboven staan twee screenshots van de homepage: eerst desktop (1440px breed), dan mobiel (390px breed). Hieronder de data en de antwoorden van de ondernemer. Beoordeel de homepage volgens je instructies en geef alleen de JSON terug.\n\n" +
-        context,
-    },
-  ]);
+      source: { type: "base64", media_type: mobShot.mediaType, data: mobShot.base64 },
+    });
+  blocks.push({
+    type: "text",
+    text:
+      (deskShot || mobShot
+        ? "Hierboven staan screenshots van de homepage (eerst desktop, dan mobiel). "
+        : "Er zijn geen screenshots beschikbaar; beoordeel op basis van onderstaande data. ") +
+      "Hieronder de data en de antwoorden van de ondernemer. Beoordeel de homepage volgens je instructies en geef alleen de JSON terug.\n\n" +
+      context,
+  });
+  const raw = await callClaude(blocks);
   onStep?.(4);
   const report = toReport(raw, domein);
   onStep?.(5);
