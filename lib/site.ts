@@ -540,11 +540,11 @@ export const tiktok = {
   intro:
     "We delen op TikTok en Instagram hoe we websites bouwen, van eerste schets tot livegang. Grote kans dat je ons al eens voorbij hebt zien komen.",
   handle: "@ricksooo",
-  profile: "https://www.tiktok.com/@ricksooo",
+  profile: "https://www.tiktok.com/@rickywebdesign",
   videos: [1, 2, 3, 4, 5, 6].map((n) => ({
     src: `/tiktok/${n}.mp4`,
     poster: `/tiktok/${n}.jpg`,
-    href: "https://www.tiktok.com/@ricksooo",
+    href: "https://www.tiktok.com/@rickywebdesign",
   })) as TikTokVideo[],
 };
 
@@ -750,7 +750,7 @@ export const footer = {
     },
     {
       label: "TikTok",
-      href: "https://www.tiktok.com/@ricksooo",
+      href: "https://www.tiktok.com/@rickywebdesign",
       icon: "tiktok" as const,
     },
     {
