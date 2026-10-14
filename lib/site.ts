@@ -55,11 +55,11 @@ export const hero = {
   body:
     "Klanten vergelijken je binnen een paar seconden met je concurrent. Wij zorgen dat ze bij jou blijven, en contact opnemen. Binnen 6 weken live.",
   primary: { label: "Plan een strategiegesprek", href: CALENDLY },
-  // Primaire hero-knop: linkt rechtstreeks naar de contactpagina.
-  contactCta: { label: "Plan een strategiegesprek", href: CALENDLY },
+  // Primaire hero-knop: de gratis groeiscan als hoofd-CTA.
+  contactCta: { label: "Doe de gratis groeiscan", href: "/website-scan" },
   // Microcopy onder de primaire knop.
-  ctaMicro: "30 minuten, vrijblijvend, je krijgt direct concrete verbeterpunten.",
-  secondary: { label: "Bekijk ons werk", href: "/projecten" },
+  ctaMicro: "Gratis en in een paar minuten, je ziet meteen waarom bezoekers afhaken.",
+  secondary: { label: "Plan een strategiegesprek", href: CALENDLY },
   // Social-proof widget
   socialProof: {
     avatars: [
