@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { probleem, usps } from "@/lib/site";
@@ -59,6 +60,12 @@ export default function Probleem() {
             ))}
           </p>
         </div>
+
+        <p className={styles.pillarLink} data-reveal>
+          <Link href="/blog/bedrijf-gegroeid-website-niet">
+            Waarom je site achterloopt als je groeit
+          </Link>
+        </p>
 
         <ul className={styles.cards}>
           {usps.items.map((u) => (
