@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import BlogArchive from "@/components/BlogArchive";
 import { getPosts } from "@/lib/cms";
+import { steden } from "@/lib/steden";
 import styles from "./blog.module.css";
+import regios from "./regios.module.css";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -54,6 +57,38 @@ export default async function BlogIndexPage() {
               tags: p.tags,
             }))}
           />
+        </div>
+      </section>
+
+      <section className={`section section--alt ${regios.sec}`} id="regios">
+        <div className="container">
+          <div className={regios.head}>
+            <span className="eyebrow" data-reveal>
+              Regio's
+            </span>
+            <h2 className="h2" data-reveal>
+              Webdesign{" "}
+              <span className="accent accent--orange">in jouw stad.</span>
+            </h2>
+            <p className={`lead muted ${regios.intro}`} data-reveal>
+              Voor bedrijven waarvan de website niet is meegegroeid met het
+              bedrijf. Lees de aanpak voor jouw regio, met de prijzen en
+              doorlooptijd die overal gelden.
+            </p>
+          </div>
+          <ul className={regios.grid}>
+            {steden.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/${s.slug}`} className={regios.card} data-reveal>
+                  <span className={regios.city}>
+                    <span>Webdesign {s.city}</span>
+                    <span aria-hidden>→</span>
+                  </span>
+                  <span className={regios.sub}>{s.meta}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>

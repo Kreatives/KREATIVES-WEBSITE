@@ -28,7 +28,14 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Cases", href: "/projecten" },
-  { label: "Kennisbank", href: "/blog" },
+  {
+    label: "Kennisbank",
+    href: "/blog",
+    children: [
+      { label: "Blog", href: "/blog" },
+      { label: "Regio's", href: "/blog#regios" },
+    ],
+  },
   {
     label: "Over ons",
     href: "/over-ons",
