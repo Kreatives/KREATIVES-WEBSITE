@@ -20,6 +20,13 @@ const nextConfig = {
       // eventueel geindexeerde /en-pagina's hun autoriteit doorgeven i.p.v. 404'en.
       { source: "/en", destination: "/", permanent: true },
       { source: "/en/:path*", destination: "/", permanent: true },
+      // De blog 'drie-redenen' gaat op in de pillar (zelfde drie signalen).
+      // 301 zodat de opgebouwde autoriteit meeverhuist i.p.v. te 404'en.
+      {
+        source: "/blog/drie-redenen-om-je-site-opnieuw-te-laten-bouwen",
+        destination: "/blog/bedrijf-gegroeid-website-niet",
+        permanent: true,
+      },
     ];
   },
 };

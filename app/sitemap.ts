@@ -14,6 +14,13 @@ const STATIC_PAGES: { path: string; priority: number; changeFrequency: Freq }[] 
   { path: "/diensten/webdesign", priority: 0.9, changeFrequency: "monthly" },
   { path: "/diensten/ai", priority: 0.8, changeFrequency: "monthly" },
   { path: "/diensten", priority: 0.7, changeFrequency: "monthly" },
+  // Commerciële stadspagina's (webdesign per stad).
+  { path: "/webdesign-arnhem", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/webdesign-nijmegen", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/webdesign-apeldoorn", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/webdesign-utrecht", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/webdesign-rotterdam", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/webdesign-amsterdam", priority: 0.8, changeFrequency: "monthly" },
   { path: "/werkwijze", priority: 0.8, changeFrequency: "monthly" },
   { path: "/projecten", priority: 0.8, changeFrequency: "monthly" },
   { path: "/website-scan", priority: 0.9, changeFrequency: "monthly" },

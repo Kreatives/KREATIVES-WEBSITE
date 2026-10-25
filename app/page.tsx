@@ -1,7 +1,16 @@
 import HomeContent from "@/components/HomeContent";
+import { reviewsSchema } from "@/lib/schema";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  return <HomeContent />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
+      />
+      <HomeContent />
+    </>
+  );
 }

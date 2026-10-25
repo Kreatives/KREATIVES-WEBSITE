@@ -48,6 +48,14 @@ export async function generateMetadata({
       publishedTime: post.date,
       authors: [AUTHOR.name],
     },
+    // Twitter-waarden per post zetten in plaats van de site-standaard uit de
+    // root layout erven. Anders toont elke gedeelde blog de homepage-titel.
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
   };
 }
 
@@ -67,6 +75,15 @@ export default async function PostDetailPage({
     .slice(0, 3);
 
   const { mainBlocks, faqItems, afterBlocks } = splitPostBlocks(post.body);
+
+  // Absolute beeld-URL voor het schema. DB-posts leveren al een volledige
+  // Supabase-URL; statische posts een pad vanaf de root. Alleen prefixen als
+  // het nog geen http-URL is, anders ontstaat een dubbele URL.
+  const imageAbs = post.image
+    ? post.image.startsWith("http")
+      ? post.image
+      : `${SITE_URL}${post.image}`
+    : undefined;
   const FAQ_ID = "veelgestelde-vragen";
   const headings = extractHeadings(mainBlocks);
   const tocHeadings = faqItems.length
@@ -78,7 +95,7 @@ export default async function PostDetailPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: post.image ? `${SITE_URL}${post.image}` : undefined,
+    image: imageAbs,
     datePublished: post.date,
     dateModified: post.date,
     author: {

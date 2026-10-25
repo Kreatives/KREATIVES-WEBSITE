@@ -1,0 +1,48 @@
+.sec {
+}
+
+.head {
+  max-width: 48rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.intro {
+  margin-top: 1rem;
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.cityLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.cityLink:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.cityLink span:last-child {
+  color: var(--orange);
+}
+
+.scanLine {
+  font-size: 1.05rem;
+}
+.scanLine a {
+  color: var(--orange);
+  font-weight: 600;
+}

@@ -2,6 +2,8 @@
 // Eén entry per artikel. /blog/[slug] leest hier uit en pre-rendert
 // alle artikelen statisch via generateStaticParams.
 
+import { groeiPosts } from "./blog-groei";
+
 export type Post = {
   slug: string;
   title: string;
@@ -258,23 +260,6 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "drie-redenen-om-je-site-opnieuw-te-laten-bouwen",
-    title: "Drie redenen om je site opnieuw te laten bouwen",
-    excerpt:
-      "Niet elke verouderde site hoeft direct vervangen te worden. Maar deze drie signalen geven aan dat het tijd wordt.",
-    date: "2026-02-05",
-    readingMinutes: 6,
-    image: "/projects/4.webp",
-    tags: ["Redesign", "Strategie"],
-    body: [
-      "Een nieuwe site bouwen is een investering, en het is niet altijd nodig. Soms is een opfrisbeurt of een aantal aanpassingen genoeg. Maar deze drie signalen wijzen er bijna altijd op dat een complete herbouw de juiste keuze is.",
-      "Het eerste signaal: de site klopt niet meer met wat je doet. Misschien ben je gestart met één product en lever je inmiddels vijf, of richt je je nu op een heel andere doelgroep dan vier jaar geleden. Een site die structureel om die verandering heen moet worden geplooid, raakt op een gegeven moment versleten.",
-      "Het tweede signaal: de techniek loopt achter. Sites die laden in meer dan drie seconden, niet goed op mobiel werken, of nog op een verouderde CMS-versie draaien, schrikken bezoekers af voordat ze überhaupt aan je content toekomen. Hier geldt ook dat zoekmachines je positie verlagen, dus de schade stapelt zich op.",
-      "Het derde signaal: je schaamt je een beetje. Dat klinkt subjectief, maar in de praktijk is het de meest betrouwbare indicator. Als je je kaartje uitdeelt en stiekem hoopt dat de ontvanger de site niet meteen opent, is het tijd om iets te doen.",
-      "Geen van deze signalen op zichzelf maakt een herbouw direct noodzakelijk. Maar zodra twee of drie van toepassing zijn, is het bijna altijd verstandiger om een nieuwe site te laten bouwen dan om door te blijven aanpassen.",
-    ],
-  },
-  {
     slug: "ai-website-herkennen-en-fixen",
     title: "Website met AI gemaakt? 10 signalen die je verraden",
     excerpt:
@@ -371,6 +356,8 @@ export const posts: Post[] = [
       "Wil je een website die het hele jaar door aanmeldingen oplevert voor je kinderopvang? [Neem contact met ons op](/contact) of plan een [gratis blueprint-sessie](/blauwdruk). We denken graag met je mee over de opzet, de teksten en de vindbaarheid, en laten je zien wat er voor jouw opvang mogelijk is.",
     ],
   },
+  // SEO-groeicluster: pillar + twee satellieten (zie lib/blog-groei.ts).
+  ...groeiPosts,
 ];
 
 export function getAllPostSlugs() {

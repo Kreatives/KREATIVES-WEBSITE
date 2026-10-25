@@ -68,8 +68,18 @@ const jsonLd = {
   },
   areaServed: [
     { "@type": "City", name: "Arnhem" },
+    { "@type": "City", name: "Nijmegen" },
+    { "@type": "City", name: "Apeldoorn" },
+    { "@type": "City", name: "Utrecht" },
+    { "@type": "City", name: "Rotterdam" },
+    { "@type": "City", name: "Amsterdam" },
     { "@type": "Country", name: "Nederland" },
   ],
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 51.9851,
+    longitude: 5.8987,
+  },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: [

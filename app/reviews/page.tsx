@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import { reviewsPage } from "@/lib/site";
 import { getReviews, initialsOf } from "@/lib/cms";
+import { reviewsSchema } from "@/lib/schema";
 import styles from "./reviews.module.css";
 
 export const metadata: Metadata = {
@@ -24,6 +25,10 @@ export default async function ReviewsPage() {
   return (
     <>
       <RevealInit />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
+      />
       <section className={`section ${styles.sec}`} id="top">
         <div className="container">
           <div className={styles.head}>

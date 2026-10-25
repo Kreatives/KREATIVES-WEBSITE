@@ -1,0 +1,25 @@
+.hero {
+  padding-top: clamp(8rem, 7rem + 5vw, 11rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.title {
+  text-transform: none;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: var(--track-tight);
+  line-height: 1.04;
+  font-size: clamp(2.2rem, 1.3rem + 3.6vw, 3.6rem);
+  color: var(--on-dark);
+  max-width: 22ch;
+  margin-top: 1.25rem;
+}
+
+.bodySec {
+}
+
+/* Eén leeskolom, zelfde breedte als de artikeltekst. */
+.column {
+  max-width: 44rem;
+  margin-inline: auto;
+}
