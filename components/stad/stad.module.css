@@ -23,3 +23,8 @@
   max-width: 44rem;
   margin-inline: auto;
 }
+
+/* "Verder lezen" + afsluiting onder de FAQ: zelfde ademruimte als de FAQ zelf. */
+.after {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}

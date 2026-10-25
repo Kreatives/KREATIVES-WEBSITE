@@ -210,7 +210,11 @@ export default async function PostDetailPage({
               <div className={styles.main}>
                 <PostContent blocks={mainBlocks} />
                 <PostFaq id={FAQ_ID} items={faqItems} />
-                {afterBlocks.length > 0 && <PostContent blocks={afterBlocks} />}
+                {afterBlocks.length > 0 && (
+                  <div className={styles.after}>
+                    <PostContent blocks={afterBlocks} />
+                  </div>
+                )}
               </div>
             </div>
           </div>

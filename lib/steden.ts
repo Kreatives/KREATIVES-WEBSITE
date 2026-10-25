@@ -65,8 +65,7 @@ export const steden: Stad[] = [
       "Nee. Alleen de eerste twee schermen en de teamparagraaf zijn anders. De rest van de aanpak is hetzelfde.",
       "## Verder lezen",
       "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt) — de check voor het eerste gesprek\n- [Case Health Champs](/projecten/health-champs) — hetzelfde patroon, opgelost\n- [Case Burgers&Frites](/projecten/burgers-frites) — 500% meer franchise-aanvragen\n- [Webdesign Arnhem: de complete gids](/blog/webdesign-arnhem) — achtergrond en keuzehulp\n- [Cases](/projecten) — werk uit de regio",
-      "Plan een gesprek. Je krijgt de punten mee op papier, ook als je daarna bij een ander bouwt. Of [check je eigen site eerst](/website-scan), dat duurt twee minuten.",
-      "---"
+      "Plan een gesprek. Je krijgt de punten mee op papier, ook als je daarna bij een ander bouwt. Of [check je eigen site eerst](/website-scan), dat duurt twee minuten."
     ]
   },
   {
@@ -122,8 +121,7 @@ export const steden: Stad[] = [
       "Nee. De opbouw blijft gelijk, alleen het teamdeel is korter. We mikken op praktijken met een team, vanaf twee behandelaars.",
       "## Verder lezen",
       "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt) — de check voor het eerste contact\n- [Webdesign Arnhem](/webdesign-arnhem) — de buurstad",
-      "Plan een gesprek. Je krijgt concrete verbeterpunten mee, ook als je daarna ergens anders bouwt. Of [check je eigen site eerst](/website-scan).",
-      "---"
+      "Plan een gesprek. Je krijgt concrete verbeterpunten mee, ook als je daarna ergens anders bouwt. Of [check je eigen site eerst](/website-scan)."
     ]
   },
   {
@@ -179,8 +177,7 @@ export const steden: Stad[] = [
       "Nee. Alleen het teamdeel en de eerste schermen zijn anders. We werken voor bedrijven met een ploeg, van twee tot tien mensen.",
       "## Verder lezen",
       "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Webdesign Arnhem](/webdesign-arnhem) — de buurstad\n- [Case Health Champs](/projecten/health-champs) — hetzelfde patroon, opgelost\n- [Webdesign Arnhem: de complete gids](/blog/webdesign-arnhem) — achtergrond en keuzehulp",
-      "Plan een gesprek. Je krijgt de punten op papier mee, ook als je daarna zelf aan de slag gaat. Of [check je eigen site eerst](/website-scan).",
-      "---"
+      "Plan een gesprek. Je krijgt de punten op papier mee, ook als je daarna zelf aan de slag gaat. Of [check je eigen site eerst](/website-scan)."
     ]
   },
   {
@@ -236,8 +233,7 @@ export const steden: Stad[] = [
       "Nee. Alleen de teamparagraaf en de eerste schermen zijn anders. We werken voor bureaus met een team, van twee tot tien mensen.",
       "## Verder lezen",
       "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Personal branding op social media](/blog/personal-branding-social-media) — voor je werving\n- [Case Health Champs](/projecten/health-champs) — hetzelfde patroon, opgelost\n- [Webdesign Arnhem: de complete gids](/blog/webdesign-arnhem) — achtergrond en keuzehulp",
-      "Plan een gesprek van dertig minuten. Je krijgt concrete punten over je huidige site mee. Of [check je eigen site eerst](/website-scan), dat duurt twee minuten.",
-      "---"
+      "Plan een gesprek van dertig minuten. Je krijgt concrete punten over je huidige site mee. Of [check je eigen site eerst](/website-scan), dat duurt twee minuten."
     ]
   },
   {
@@ -294,8 +290,7 @@ export const steden: Stad[] = [
       "Nee. Alleen de eerste twee schermen en de teamparagraaf zijn anders. We richten ons op zaken met een team, van twee tot tien mensen.",
       "## Verder lezen",
       "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Horeca](/horeca) — het traject voor restaurants en bezorgzaken\n- [Cases](/projecten) — werk in Rotterdam en elders",
-      "Plan een gesprek. Je krijgt de punten mee, ook als je daarna verder kijkt. Of [check je eigen site eerst](/website-scan), dat duurt twee minuten.",
-      "---"
+      "Plan een gesprek. Je krijgt de punten mee, ook als je daarna verder kijkt. Of [check je eigen site eerst](/website-scan), dat duurt twee minuten."
     ]
   },
   {
@@ -351,8 +346,7 @@ export const steden: Stad[] = [
       "Nee. Alleen de eerste schermen en de teamparagraaf zijn anders. We richten ons op bedrijven met personeel, van twee tot tien.",
       "## Verder lezen",
       "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt) — de check voor het eerste gesprek\n- [Case Health Champs](/projecten/health-champs) — hetzelfde patroon, opgelost\n- [Webdesign Arnhem: de complete gids](/blog/webdesign-arnhem) — achtergrond en keuzehulp",
-      "Plan een gesprek. Je krijgt concrete verbeterpunten over je huidige site mee, ook als je daarna zelf aan de slag gaat. Of [check je eigen site eerst](/website-scan).",
-      "---"
+      "Plan een gesprek. Je krijgt concrete verbeterpunten over je huidige site mee, ook als je daarna zelf aan de slag gaat. Of [check je eigen site eerst](/website-scan)."
     ]
   }
 ];
