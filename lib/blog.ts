@@ -7,6 +7,10 @@ import { kennisbankPrijsPillar } from "./blog-kennisbank-01-pillar";
 import { kennisbankPrijs } from "./blog-kennisbank-01";
 import { kennisbankSignalen } from "./blog-kennisbank-02";
 import { kennisbankRedesign } from "./blog-kennisbank-03";
+import { kennisbankAi } from "./blog-kennisbank-04";
+import { kennisbankConversie } from "./blog-kennisbank-05";
+import { kennisbankBranche } from "./blog-kennisbank-06";
+import { kennisbankVraagbank } from "./blog-kennisbank-07";
 
 export type Post = {
   slug: string;
@@ -321,6 +325,14 @@ export const posts: Post[] = [
   ...kennisbankSignalen,
   // Kennisbank cluster 03: redesign en migratie.
   ...kennisbankRedesign,
+  // Kennisbank cluster 04: AI en webdesign.
+  ...kennisbankAi,
+  // Kennisbank cluster 05: conversie en psychologie.
+  ...kennisbankConversie,
+  // Kennisbank cluster 06: branches en B2B.
+  ...kennisbankBranche,
+  // Kennisbank cluster 07: vraagbank over kosten.
+  ...kennisbankVraagbank,
 ];
 
 export function getAllPostSlugs() {

@@ -9,7 +9,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Een site die niet meegroeit, werkt tegen je. Twaalf signalen die je waarschijnlijk herkent, en wat je per signaal kunt doen.",
     date: "2026-10-25",
-    readingMinutes: 10,
+    readingMinutes: 6,
     image: "/projects/5.webp",
     tags: ["Groei", "Diagnose"],
     body: [
@@ -32,7 +32,9 @@ export const kennisbankSignalen: Post[] = [
       "**10. Sollicitanten haken af na het bekijken van de site.** Wie solliciteert kijkt eerst. Een site die kleiner is dan het bedrijf trekt mensen die bij een kleiner bedrijf willen werken.",
       "**11. Nieuwe collega's staan niet op de site.** Of de foto's zijn van mensen die al weg zijn. Dan is de site ouder dan je team.",
       "**12. Je durft de site niet te noemen in een vacaturetekst.** Omdat je weet dat hij niet verkoopt.",
+      "## Wat je per signaal doet, in stappen",
       "## Wat je per signaal doet",
+      "| Signaal | Eerste actie |\n| --- | --- |\n| Je stuurt een link en hoort niets | Bewijs bovenaan: namen, gezichten, cases |\n| Klanten vragen naar dingen die er al staan | Zet ze in de eerste sectie, groter en duidelijker |\n| Je wordt uitgenodigd voor te kleine klussen | Voeg een project toe dat groter is dan je gemiddelde |\n| Je zegt vaak \"dat staat op de site\" | Herstructureer de pagina waar het hoort te staan |\n| Je schaamt je een beetje | Nieuwe eerste sectie met eigen foto's |\n| Aanvragen onder je verwachting | Boodschap en prijsindicatie aanpakken |\n| Vage aanvragen | Formulier met één kwalificerende vraag |\n| Advertenties leveren minder op | Landingspagina per campagne |\n| Je verkoopt op prijs | Bewijs toevoegen, prijs onderbouwen |\n| Sollicitanten haken af | Teampagina en werken-bij pagina |\n| Nieuwe collega's staan er niet op | Team bijwerken, oude foto's vervangen |\n| Je durft de site niet te noemen | Vanaf hier: hele site vernieuwen |",
       "Bij 1, 2 en 3: begin bij bewijs. Namen, functies, gezichten, cases met het proces erbij. Dat verandert het snelst en kost het minst.",
       "Bij 6, 7 en 9: werk aan de boodschap. Zet bovenaan wat je doet en voor wie, in één zin zonder jargon. Voeg een prijsindicatie toe, want onduidelijkheid over prijs is een van de grootste afhaakredenen.",
       "Bij 10, 11 en 12: een teampagina met echte mensen en een pagina over werken bij. Dat is geen HR-detail, het is je werving.",
@@ -62,7 +64,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Een site uit een andere tijd valt op, en niet goed. Wat een verouderde site je kost aan vertrouwen en aanvragen, en waar je het aan ziet.",
     date: "2026-10-24",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/3.webp",
     tags: ["Groei", "Diagnose"],
     body: [
@@ -79,6 +81,7 @@ export const kennisbankSignalen: Post[] = [
       "Een site die op de telefoon horizontaal moet worden gescrold. Een formulier met een veld 'onderwerp'. Een footer met een kvk-nummer in een andere kleur.",
       "En het duidelijkste: de site noemt een team dat niet meer klopt, diensten die je niet meer doet, of een jaar in de footer dat voorbij is.",
       "## Wat het kost",
+      "| Post | Wat het je kost |\n| --- | --- |\n| Afhakers | bij tien aanvragen per maand twee kwijt, bij 3.000 euro per opdracht 6.000 euro |\n| Duurdere advertenties | drie keer zoveel kosten per aanvraag bij 1 procent in plaats van 3 |\n| Lagere prijs | minder kunnen vragen voor hetzelfde werk |\n| Sollicitanten | mensen die bij een bedrijf uit 2019 willen werken |\n| Herstel | een nieuwe site kost meer dan onderhoud was |",
       "**Afhakers.** Een bezoeker die twijfelt aan het bedrijf, haakt af. Bij tien serieuze aanvragen per maand en twee die afhaken, is dat bij een opdracht van 3.000 euro 6.000 euro per maand.",
       "**Duurdere advertenties.** Een verouderde landingspagina converteert slechter, dus betaal je per aanvraag meer. Bij 1 procent in plaats van 3 procent is dat drie keer zoveel.",
       "**Een lagere prijs.** Wie geen vertrouwen wekt, verkoopt op prijs. Je kunt minder vragen voor hetzelfde werk.",
@@ -112,7 +115,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Een site kan er verzorgd uitzien en niets doen. Wat er dan ontbreekt, en waarom ontwerp alleen nooit genoeg is.",
     date: "2026-10-23",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Conversie", "Diagnose"],
     body: [
@@ -123,6 +126,7 @@ export const kennisbankSignalen: Post[] = [
       "Ontwerp regelt hoe iets aanvoelt. Of het verzorgd overkomt, of het prettig leest, of het bij je merk past. Dat is echt belangrijk, want een slordige site wekt wantrouwen.",
       "Ontwerp regelt niet wat er staat. Een prachtig vormgegeven pagina met een vage kop en geen bewijs levert niets op, want de bezoeker weet na het lezen nog steeds niet wat je doet.",
       "## De drie dingen die ontbreken",
+      "| Wat ontbreekt | Wat je ziet | Wat je toevoegt |\n| --- | --- | --- |\n| Een belofte | Een sfeerkop zonder aanbod | Eén zin met wat je levert en voor wie |\n| Bewijs | Beeld zonder resultaat | Een case met een cijfer |\n| Een korte weg | Contact onderaan, tien velden | Knop na het bewijs, drie velden |",
       "**Een belofte.** Bovenaan moet staan wat je levert en voor wie. In één zin, zonder jargon. Niet je slogan, maar je aanbod.",
       "**Bewijs.** Een case, een cijfer, een quote. Iets waaruit blijkt dat je het al eerder deed. Zonder bewijs is elke belofte een claim.",
       "**Een korte weg.** Een formulier met drie velden, een telefoonnummer dat zichtbaar is, een prijsindicatie. Hoe minder stappen, hoe meer aanvragen.",
@@ -174,11 +178,11 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Beide zijn websites. De een laat zien dat je bestaat, de ander haalt opdrachten binnen. Wat het verschil is en welke je nu hebt.",
     date: "2026-10-22",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/2.webp",
     tags: ["Conversie", "Strategie"],
     body: [
-      "> **TL;DR:** Een visitekaartje laat zien dat je bestaat. Een verkoopmachine haalt opdrachten binnen. Het verschil zit in of de site een volgende stap afdwingt: een aanbod, bewijs, een korte route naar contact en een reden om nu te reageren. Een visitekaartje is niet fout, maar het levert niets op.",
+      "> **TL;DR:** Een visitekaartje laat zien dat je bestaat. Een verkoopmachine haalt opdrachten binnen. Het verschil zit in of de site een volgende stap afdwingt: een aanbod, bewijs, een korte route naar contact en een reden om nu te reageren. Een visitekaartje is op zich prima en levert alleen niets op.",
       "Bijna elke ondernemer begint met een visitekaartje. Je bent net begonnen, je wilt iets online hebben, en de site zegt wie je bent en wat je doet.",
       "Dat is op dat moment logisch. Het probleem is dat veel sites op dat niveau blijven staan terwijl het bedrijf doorgroeit.",
       "## Wat een visitekaartje doet",
@@ -189,6 +193,7 @@ export const kennisbankSignalen: Post[] = [
       "Hij haalt bezwaren weg voor ze worden geuit. Prijsindicatie, werkwijze, doorlooptijd, wat er met je huidige site gebeurt.",
       "Hij maakt de volgende stap klein. Drie velden, een zichtbaar telefoonnummer, een agenda-link.",
       "## Het verschil in cijfers",
+      "| | Visitekaartje | Verkoopmachine |\n| --- | --- | --- |\n| Conversie | 0,5 tot 1 procent | 3 tot 5 procent |\n| Aanvragen bij 500 bezoekers | 2 tot 5 | 15 tot 25 |\n| Wat de bezoeker moet doen | zelf bedenken | een kleine stap |\n| Wat je moet aanleveren | niets | aanbod, doelgroep, bezwaren |",
       "Een visitekaartje converteert rond de 0,5 tot 1 procent. Een verkoopmachine zit op 3 tot 5 procent bij hetzelfde verkeer.",
       "Bij 500 bezoekers per maand is dat twee tot vijf aanvragen tegenover vijftien tot vijfentwintig. Zelfde verkeer, zelfde aanbod.",
       "## Waarom mensen bij een visitekaartje blijven",
@@ -234,7 +239,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Bezoekers beslissen sneller dan je denkt. Wat er in die eerste seconden gebeurt, wat ze concluderen en hoe je dat stuurt.",
     date: "2026-10-21",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/4.webp",
     tags: ["Conversie", "Psychologie"],
     body: [
@@ -245,6 +250,7 @@ export const kennisbankSignalen: Post[] = [
       "De bezoeker ziet de bovenkant van de pagina. Hij let op: past dit bij wat ik zocht, ziet dit verzorgd uit, en snap ik wat hier staat.",
       "Bij twijfel gaat hij terug. Dat teruggaan kost je de bezoeker, en je ziet het nergens in je cijfers.",
       "## De drie oordelen",
+      "| Oordeel | Waar het misgaat | Wat het oplost |\n| --- | --- | --- |\n| Past dit bij mij? | Stockfoto's, verkeerde sfeer | Eigen beeld van je werk en je pand |\n| Is dit verzorgd? | Scheve uitlijning, spelfout in de kop | Een controle voor publicatie |\n| Snap ik wat hier staat? | \"Welkom\" of \"samen bouwen aan groei\" | Eén zin met aanbod en doelgroep |",
       "**Past dit bij mij?** Een bouwbedrijf met een site vol stockfoto's van glazen kantoren past niet. Een kliniek met felle kleuren en schreeuwende koppen past niet.",
       "**Is dit verzorgd?** Scheve uitlijning, een foto die niet scherp is, een spelfout in de kop. Elke slordigheid is een aanwijzing over hoe je werkt.",
       "**Snap ik wat hier staat?** Een kop met \"welkom\" of \"samen bouwen aan groei\" geeft geen antwoord. Een kop met \"websites voor bouwbedrijven, live in zes weken\" wel.",
@@ -267,6 +273,7 @@ export const kennisbankSignalen: Post[] = [
       "Tijd op de pagina. Onder de tien seconden betekent dat er niets wordt gelezen.",
       "Scroll-diepte. Als niemand voorbij de eerste scherm komt, is de rest van de pagina onbereikbaar.",
       "## Hoe je een kop herschrijft",
+      "| Zwakke kop | Waarom | Sterke kop |\n| --- | --- | --- |\n| Welkom bij KREATIVES | zegt niets | Websites voor klinieken, live in zes weken |\n| Samen bouwen aan groei | hol | Een site die aanvragen oplevert |\n| Wij zijn gespecialiseerd in | over jezelf | Webdesign voor bouwbedrijven in Gelderland |",
       "Zet het aanbod in de kop. Wat je levert, in gewone woorden.",
       "Zet de doelgroep erbij. Wie je helpt.",
       "Zet het resultaat erbij als het concreet is. Binnen welke tijd, met welk gevolg.",
@@ -293,7 +300,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Een site uit de startfase noemt de mensen van toen. Wat dat doet met klanten en sollicitanten, en hoe je het fixt.",
     date: "2026-10-20",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/6.webp",
     tags: ["Groei", "Team"],
     body: [
@@ -312,6 +319,7 @@ export const kennisbankSignalen: Post[] = [
       "Sollicitanten zien dat er collega's zijn en hoe het team is samengesteld. Dat trekt mensen die bij een team willen horen.",
       "Je laat zien dat je een bedrijf bent en geen losse ondernemer. Dat is precies het verschil dat je wilt maken.",
       "## Wat je op de homepage zet",
+      "| Wat | Waarom |\n| --- | --- |\n| Een cijfer over het aantal mensen | Formaat in één getal |\n| Een foto van het pand of de werkplek | Bewijs dat niemand kan veinzen |\n| Een case met een team erop | Laat zien dat je met meer mensen werkt |",
       "Een cijfer over het aantal mensen. Niet in de footer, in de eerste twee schermen.",
       "Een foto van het pand of de werkplek. Dat is het bewijs van formaat dat niemand kan veinzen.",
       "Een case met een team erop, in plaats van een case met alleen een eindfoto.",
@@ -349,7 +357,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Sollicitanten kijken eerst naar je site. Wat ze daar zien bepaalt of ze reageren. Hoe je site je werving saboteert en wat je eraan doet.",
     date: "2026-10-19",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/5.webp",
     tags: ["Groei", "Werving"],
     body: [
@@ -369,6 +377,7 @@ export const kennisbankSignalen: Post[] = [
       "Een eerlijk verhaal over hoe het is om er te werken, inclusief de lastige kanten. Wie alleen voordelen noemt, klinkt als een brochure.",
       "Een korte sollicitatieflow. Naam, e-mail, cv, klaar. Geen formulier met tien velden en een motivatiebrief van 500 woorden.",
       "## Wat je op de vacaturepagina zet",
+      "| Onderdeel | Waarom |\n| --- | --- |\n| Het werk, met een eerlijke dag | Kandidaten willen het werk zien, niet de eisen |\n| De leidinggevende met naam en foto | Wie je baas wordt is een selectiecriterium |\n| De voorwaarden in gewone taal | Salarisrange, uren, vakantiedagen, reiskosten |\n| Wat er na de sollicitatie gebeurt | Termijn en aantal gesprekken |",
       "Wat het werk is, met een eerlijke beschrijving van een dag. Niet de functie-eisen als eerste, maar het werk.",
       "Wie de leidinggevende is, met naam en foto. Sollicitanten willen weten aan wie ze verantwoording afleggen.",
       "De voorwaarden in gewone taal. Salarisrange, uren, vakantiedagen, reiskosten.",
@@ -385,6 +394,7 @@ export const kennisbankSignalen: Post[] = [
       "Want groei betekent mensen aannemen, en mensen aannemen betekent dat je site moet werken als wervingskanaal.",
       "Een bedrijf dat negen mensen heeft en er drie bij wil, heeft een site nodig die negen mensen laat zien. Anders solliciteren er alleen mensen die bij een klein bedrijf willen beginnen, en die blijven kort.",
       "## Wat het kost als je het niet doet",
+      "| Post | Wat het je kost |\n| --- | --- |\n| Vacature blijft open | omzet die je misloopt, plus overwerk bij het team |\n| Verkeerde mensen | begeleiding en verloop |\n| Opnieuw werven | advertentiekosten en tijd |\n| Uitzenden als noodoplossing | een marge die je weggeeft |",
       "Een vacature die drie maanden openstaat kost je omzet. Bij een gemiddelde marge per medewerker van een paar duizend euro per maand, is dat een groot bedrag.",
       "Daar komt bij dat je de verkeerde mensen aantrekt. Die kosten begeleiding en gaan weer weg.",
       "## Veelgestelde vragen",
@@ -405,7 +415,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Voor een telefoontje gaat er een zoekproces aan vooraf. Wat iemand opzoekt, in welke volgorde, en wat er gebeurt als hij het niet vindt.",
     date: "2026-10-18",
-    readingMinutes: 9,
+    readingMinutes: 5,
     image: "/projects/3.webp",
     tags: ["Conversie", "Diagnose"],
     body: [
@@ -420,6 +430,7 @@ export const kennisbankSignalen: Post[] = [
       "Hij vergelijkt met één of twee alternatieven. Vaak de partij die bovenaan de zoekresultaten stond.",
       "En dan belt hij, of niet.",
       "## Wat hij hoopt te vinden",
+      "| Wat hij zoekt | Waarom | Waar het hoort |\n| --- | --- | --- |\n| Bewijs dat je bestaat | Vertrouwen dat het echt is | Adres, kvk, gezicht |\n| Bewijs dat je dit deed | Inschatten of je het kunt | Cases met hetzelfde type klant |\n| Prijs en proces | Weten waar hij aan begint | Prijsindicatie en werkwijze |\n| Een reden voor jou | Kiezen tussen alternatieven | Doorlooptijd, vaste prijs, eigen team |",
       "Bevestiging dat je bestaat en echt bent. Een adres, een kvk, een gezicht.",
       "Bewijs dat je dit eerder deed. Cases met hetzelfde type opdrachtgever.",
       "Duidelijkheid over prijs en proces. Zodat hij weet waar hij aan begint.",
@@ -469,13 +480,14 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Je hoeft geen bureau te zijn om te zien wat er mis is. Twintig checks die je in een half uur doet, met per check wat een goed antwoord is.",
     date: "2026-10-17",
-    readingMinutes: 10,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Diagnose", "Checklist"],
     body: [
       "> **TL;DR:** Een eerlijke zelfscan in 30 minuten, in vier blokken: eerste indruk, inhoud, techniek en vertrouwen. Twintig checks met per check wat een goed antwoord is. Haal je er vijf niet, dan weet je waar je moet beginnen.",
       "Een audit klinkt als iets voor een bureau. Het meeste kun je zelf, als je weet waar je op let en eerlijk durft te zijn.",
       "Doe dit op een laptop en op je telefoon. Zet een timer op 30 minuten en schrijf de uitslagen op, ook de goede.",
+      "| Blok | Tijd | Waar het over gaat |\n| --- | --- | --- |\n| Eerste indruk | 5 minuten | boodschap, knop, snelheid, mobiel |\n| Inhoud | 10 minuten | prijs, cases, team, werkwijze |\n| Techniek | 10 minuten | formulier, https, sitemap, titels |\n| Vertrouwen | 5 minuten | adres, kvk, privacy |",
       "## Blok 1: eerste indruk (5 minuten)",
       "Open de homepage op je telefoon.",
       "**1.** Staat er binnen één scherm wat je doet en voor wie?",
@@ -534,7 +546,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Bij een site zonder aanvragen wordt vaak aan snelheid of design gedacht. Meestal is de boodschap het probleem. Hoe je dat herkent en herschrijft.",
     date: "2026-10-16",
-    readingMinutes: 8,
+    readingMinutes: 4,
     image: "/projects/2.webp",
     tags: ["Conversie", "Positionering"],
     body: [
@@ -542,6 +554,7 @@ export const kennisbankSignalen: Post[] = [
       "Er gaat veel aandacht naar laadsnelheid en design. Beide zijn echt, maar ze lossen een vaag verhaal niet op.",
       "Een snelle site met een vage kop is een snelle weg naar niets. De bezoeker is snel binnen en snel weer weg.",
       "## Hoe je een vage boodschap herkent",
+      "| Signaal | Wat het betekent |\n| --- | --- |\n| Woorden die overal passen | kwaliteit, maatwerk, persoonlijk |\n| De kop gaat over jou | \"Wij zijn een bureau dat\" |\n| Een slogan in plaats van een aanbod | drie woorden met een punt ertussen |\n| Je weet na het lezen nog niets | geen aanbod, geen doelgroep, geen prijs |",
       "De kop bevat woorden die op elke branche passen: kwaliteit, maatwerk, persoonlijk, meedenken, ontzorgen.",
       "De kop gaat over jou en niet over de lezer. \"Wij zijn een bureau dat...\" in plaats van \"Voor bouwbedrijven die...\".",
       "Er staat een slogan in plaats van een aanbod. Iets met een punt ertussen en drie woorden.",
@@ -589,7 +602,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Klein zijn wordt vaak als excuus gebruikt op een site. Terwijl het een voordeel is als je het goed brengt. Het verschil zit in hoe je het zegt.",
     date: "2026-10-15",
-    readingMinutes: 7,
+    readingMinutes: 4,
     image: "/projects/4.webp",
     tags: ["Positionering", "Groei"],
     body: [
@@ -600,6 +613,7 @@ export const kennisbankSignalen: Post[] = [
       "Bij \"klein team\" vult een opdrachtgever in: kan dit wel, met z'n drieën? Wie doet het als er iemand ziek is? En sollicitanten denken: geen structuur, geen begeleiding.",
       "Dat is niet eerlijk, want een klein team heeft echte voordelen. Maar de lezer kent die voordelen niet uit zichzelf.",
       "## Wat je in plaats daarvan zegt",
+      "| In plaats van | Zeg dit |\n| --- | --- |\n| We zijn een klein team | Je spreekt dezelfde persoon van gesprek tot oplevering |\n| We zijn bewust klein | Beslissingen worden dezelfde dag genomen |\n| We hebben geen accountmanagers | Je hebt één aanspreekpunt, zonder tussenlaag |",
       "Zeg wat klein zijn oplevert, concreet. \"Je spreekt dezelfde persoon van eerste gesprek tot oplevering.\" Dat is een voordeel dat een groot bureau niet kan bieden.",
       "\"Beslissingen worden dezelfde dag genomen.\" Dat is waar en het is waardevol.",
       "\"Er zit geen accountmanager tussen.\" Concreet en controleerbaar.",
@@ -646,7 +660,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Geen prijs op de site voelt veilig. Voor de bezoeker is het een reden om af te haken. Wat er gebeurt als je niets noemt en hoe je het oplost zonder je vast te leggen.",
     date: "2026-10-14",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/7.webp",
     tags: ["Conversie", "Prijzen"],
     body: [
@@ -654,6 +668,7 @@ export const kennisbankSignalen: Post[] = [
       "De reden om geen prijs te noemen is meestal dat elke situatie anders is. Dat is waar.",
       "Maar de bezoeker weet dat niet. Die ziet geen prijs en vult zelf iets in, meestal te laag of te hoog.",
       "## Wat er gebeurt zonder prijs",
+      "| Groep | Wat ze doen |\n| --- | --- |\n| Zoekt binnen budget | haakt af, vraagt niet |\n| Belt alleen voor de prijs | gesprek begint bij het verkeerde onderwerp |\n| Verwacht te weinig | schrikt bij de offerte |\n| Verwacht het juiste | belt, en dat zijn de goeie |",
       "Een deel haakt af. Ze willen weten of het binnen hun budget past en ze gaan het niet vragen als ze bang zijn voor het antwoord.",
       "Een deel belt alleen om de prijs. Dat gesprek begint bij het verkeerde onderwerp en kost je tijd.",
       "Een deel komt met een verkeerde verwachting. Ze dachten 800 euro, het is 4.000, en het gesprek is meteen moeilijk.",
@@ -665,7 +680,7 @@ export const kennisbankSignalen: Post[] = [
       "## Hoe je het doet zonder je vast te leggen",
       "Noem een vanaf-bedrag per type opdracht. \"Een site van vijf pagina's begint bij 2.500 euro.\"",
       "Noem wat de prijs bepaalt. Aantal pagina's, fotografie, koppelingen, teksten. Dan snapt de lezer waarom het ene project meer kost dan het andere.",
-      "Noem wat er in de basis zit. Dan is het vanaf-bedrag geen lokkertje maar een echt aanbod.",
+      "Noem wat er in de basis zit. Dan is het vanaf-bedrag een echt aanbod.",
       "## Wat je niet doet",
       "Een vanaf-bedrag noemen dat je nooit haalt. Dan voelt elke offerte als een tegenvaller.",
       "Alleen \"op aanvraag\" zetten. Dat is hetzelfde als niets.",
@@ -704,7 +719,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Een site die niet meegroeide mist de pagina's die bij een volwassen bedrijf horen. Welke vijf, wat ze opleveren en in welke volgorde je ze bouwt.",
     date: "2026-10-13",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/3.webp",
     tags: ["Structuur", "Groei"],
     body: [
@@ -712,6 +727,7 @@ export const kennisbankSignalen: Post[] = [
       "Een site uit de startfase heeft home, diensten, over ons en contact. Dat is genoeg als je met z'n tweeën bent en alles via het netwerk komt.",
       "Zodra je mensen in dienst hebt en opdrachten van buiten je netwerk wilt, mist er iets. Niet omdat de site slecht is, maar omdat hij voor een ander formaat bedrijf is gemaakt.",
       "## De vijf pagina's",
+      "| Pagina | Welke drempel het wegneemt |\n| --- | --- |\n| Werken bij | Je site werft niet mee |\n| Teampagina | Je lijkt kleiner dan je bent |\n| Wat er met je huidige site gebeurt | Niemand durft te vervangen |\n| Prijzen | De helft belt alleen om de prijs |\n| Werkwijze met doorlooptijd | Het project lijkt onoverzichtelijk |",
       "**1. Werken bij.** Met het echte werk, de voorwaarden en een korte sollicitatieflow. Zonder deze pagina werft je site niet mee.",
       "**2. Teampagina.** Namen, functies, gezichten. Zodat een klant weet met wie hij werkt en een sollicitant weet of er collega's zijn.",
       "**3. Wat er met je huidige site gebeurt.** De grootste zorg bij een redesign is verlies van wat er al staat. Een pagina die uitlegt hoe je omgaat met bestaande content, URL's en rankings haalt die zorg weg.",
@@ -756,13 +772,15 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "De site die je bouwde toen je begon, past niet bij het bedrijf van nu. Zeven concrete verschillen tussen een startsite en een site voor een gegroeid bedrijf.",
     date: "2026-10-12",
-    readingMinutes: 7,
+    readingMinutes: 4,
     image: "/projects/5.webp",
     tags: ["Groei", "Structuur"],
     body: [
       "> **TL;DR:** Een startsite overtuigt via de persoon, een site voor een gegroeid bedrijf overtuigt via het bedrijf. Zeven verschillen: bewijs in plaats van belofte, team in plaats van oprichter, proces in plaats van improvisatie, prijs in plaats van op aanvraag, voorwaarden in plaats van informeel, cases in plaats van portfolio, en werving als pagina.",
       "Er is niets mis met de site waarmee je begon. Hij paste bij die tijd: jij, je aanbod, je eerste klanten.",
       "Het probleem is dat je hem liet staan terwijl het bedrijf veranderde. Hieronder wat er anders is als je hem nu opnieuw zou bouwen.",
+      "## Wat er anders is",
+      "| Startsite | Site voor een gegroeid bedrijf |\n| --- | --- |\n| belofte | bewijs met een resultaat |\n| de oprichter | het team |\n| improvisatie | proces met doorlooptijd |\n| op aanvraag | prijsindicatie |\n| informeel | voorwaarden en privacyverklaring |\n| portfolio | cases met vraag, aanpak en resultaat |\n| geen werving | werken-bij als pagina |",
       "## 1. Bewijs in plaats van belofte",
       "Een startsite zegt wat je kunt. Een site voor een gegroeid bedrijf laat zien wat je deed, met een resultaat erbij.",
       "Dat is geen arrogantie, het is het enige waar een nieuwe klant op kan afgaan.",
@@ -811,7 +829,7 @@ export const kennisbankSignalen: Post[] = [
     excerpt:
       "Een nieuwe vormgeving lost een vaag merk niet op. Hoe je het verschil herkent tussen een ontwerpprobleem en een merkprobleem, en wat je dan wel doet.",
     date: "2026-10-11",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Positionering", "Diagnose"],
     body: [
@@ -819,6 +837,7 @@ export const kennisbankSignalen: Post[] = [
       "Dit is de duurste verwarring in het vak. Ondernemers laten een nieuwe site ontwerpen, de site wordt mooi, en er verandert niets aan de aanvragen.",
       "Dan concluderen ze dat design niet werkt. Maar het probleem zat een laag dieper.",
       "## Het verschil in één vraag",
+      "| Antwoord | Wat het is | Wat je doet |\n| --- | --- | --- |\n| Ja, ik kan het in één zin zeggen | designprobleem | ontwerpen |\n| Nee, ik moet erover nadenken | merkprobleem | eerst positioneren |",
       "Vraag: kun je in één zin zeggen waarom een klant jou kiest en niet de partij drie straten verder?",
       "Kun je dat, dan is er een merk en is het een designprobleem. Kun je het niet, dan is het een merkprobleem en gaat een ontwerp het niet oplossen.",
       "## Waar een designprobleem aan te herkennen",
@@ -847,7 +866,7 @@ export const kennisbankSignalen: Post[] = [
       "Of je vaker op kwaliteit dan op prijs wordt gekozen.",
       "En of je vaker nee zegt tegen opdrachten die niet passen. Dat is het teken dat het scherp genoeg is.",
       "## Wat je niet doet",
-      "Een nieuw logo laten maken als eerste stap. Dat is vormgeving op een leeg fundament.",
+      "Een nieuw logo laten maken als eerste stap. Dat is vormgeving zonder inhoud eronder.",
       "Je positionering in een middag bedenken met een template. Dat werkt zelden, want het gaat over keuzes die je moet durven maken.",
       "Doorgaan met iedereen bedienen. Dan blijft het vaag.",
       "## En als het beide is",

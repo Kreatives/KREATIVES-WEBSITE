@@ -9,7 +9,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een bouwbedrijf heeft andere eisen dan een kliniek of een groothandel. Daarom lopen de prijzen per branche uiteen. Hier zie je wat elke branche vraagt en waarom.",
     date: "2026-10-25",
-    readingMinutes: 11,
+    readingMinutes: 7,
     image: "/projects/3.webp",
     tags: ["Prijzen", "Branches"],
     body: [
@@ -72,7 +72,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Naast de bouw betaal je elke maand voor hosting, onderhoud en licenties. Wat dat kost, wat je echt nodig hebt en hoe je niet te veel betaalt.",
     date: "2026-10-24",
-    readingMinutes: 9,
+    readingMinutes: 6,
     image: "/projects/4.webp",
     tags: ["Prijzen", "Onderhoud"],
     body: [
@@ -124,7 +124,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Sommige bureaus bouwen een site die je eenmalig betaalt en daarna van jou is. Wat daarvan waar is, wat je dan zelf moet regelen en voor wie het werkt.",
     date: "2026-10-23",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/6.webp",
     tags: ["Prijzen", "Eigendom"],
     body: [
@@ -133,6 +133,7 @@ export const kennisbankPrijs: Post[] = [
       "Het abonnement lijkt aantrekkelijk omdat de maandlast laag is en je nergens naar hoeft te kijken. Tot je wilt stoppen of iets ingewikkelds wilt, en blijkt dat je de site niet meekrijgt.",
       "Hieronder wat er echt mogelijk is, wat je dan zelf doet en voor wie het past.",
       "## Wat je eenmalig kunt afrekenen",
+      "| Onderdeel | Eenmalig | Maandelijks |\n| --- | --- | --- |\n| Ontwerp en bouw | ja | nee |\n| Fotografie | ja | nee |\n| Hosting | nee | ja, 10 tot 40 euro |\n| Domeinnaam | nee | ja, 15 euro per jaar |\n| Onderhoud en updates | nee | ja, of zelf |\n| Back-ups | nee | ja, of zelf |",
       "De bouw. Ontwerp, teksten, fotografie, techniek en oplevering zijn werk dat je één keer betaalt. Bij ons staat daar een vaste prijs tegenover, en na oplevering is de site van jou.",
       "De code. Je krijgt de bestanden en de inloggegevens. Er zit geen licentie op die je maandelijks moet verlengen om de site te laten werken.",
       "Het domein. Dat staat op jouw naam, niet op die van ons. Als je ooit weggaat, neem je het mee.",
@@ -177,7 +178,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een webshop bouwen is meer dan producten uploaden. Wat de prijs bepaalt, welke platformen wat kosten en waar de rekening echt oploopt.",
     date: "2026-10-22",
-    readingMinutes: 10,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Prijzen", "Webshop"],
     body: [
@@ -226,7 +227,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een logo van 150 euro en een logo van 4.000 euro zijn twee verschillende producten. Wat het verschil is, wat een huisstijl echt omvat en waar je op moet letten.",
     date: "2026-10-21",
-    readingMinutes: 9,
+    readingMinutes: 5,
     image: "/projects/2.webp",
     tags: ["Prijzen", "Branding"],
     body: [
@@ -274,7 +275,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een landingspagina is één pagina met één doel. Wat dat kost, wanneer het genoeg is en wanneer je beter een volledige site neemt.",
     date: "2026-10-20",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/7.webp",
     tags: ["Prijzen", "Landingspagina"],
     body: [
@@ -310,6 +311,15 @@ export const kennisbankPrijs: Post[] = [
       "Als je uit organische zoekopdrachten klanten wilt halen. Een landingspagina rankt niet op de meeste zoektermen, want er is geen structuur en geen interne linkkracht.",
       "Als je meerdere diensten hebt. Dan heb je een pagina per dienst nodig, en dat is een site.",
       "Als bezoekers meer willen weten voor ze beslissen. Een landingspagina geeft geen ruimte voor uitleg over werkwijze, team en prijzen.",
+      "## Wat je op een landingspagina zet",
+      "Een kop die het aanbod in één zin zegt. Geen slogan, maar wat je levert en voor wie.",
+      "Bewijs. Een case, een cijfer, een quote van een klant.",
+      "Een formulier met zo weinig velden als mogelijk. Naam, e-mail en één vraag die kwalificeert.",
+      "Een bezwaren-blok met de drie dingen die iemand tegenhoudt, met een antwoord.",
+      "## Wat je met de uitslag doet",
+      "Bij een conversie onder de twee procent: herschrijf de kop en het aanbod.",
+      "Bij een conversie boven de vijf procent: verhoog het advertentiebudget.",
+      "En kijk altijd naar de kwaliteit. Veel aanvragen die nooit klant worden, betekent een te ruim aanbod.",
       "## Waar het misgaat",
       "Een landingspagina zonder verkeer. Hij staat er en er komt niemand. Reken het advertentiebudget mee in je beslissing.",
       "Een landingspagina met een menu. Dan is het geen landingspagina meer en lekt de bezoeker weg.",
@@ -332,7 +342,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een site in twee talen is meer dan een vertaalknop. Wat het kost, wat er technisch bij komt en wanneer meertalig zin heeft.",
     date: "2026-10-19",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/5.webp",
     tags: ["Prijzen", "Meertalig"],
     body: [
@@ -387,7 +397,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Onderhoud is geen abonnement op niets doen. Wat er jaarlijks echt gebeurt, wat het kost en hoe je een pakket beoordeelt.",
     date: "2026-10-18",
-    readingMinutes: 8,
+    readingMinutes: 4,
     image: "/projects/4.webp",
     tags: ["Prijzen", "Onderhoud"],
     body: [
@@ -438,7 +448,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een freelancer is goedkoper en persoonlijker. Een bureau is duurder en breder. Waar het verschil echt zit en hoe je kiest.",
     date: "2026-10-17",
-    readingMinutes: 9,
+    readingMinutes: 5,
     image: "/projects/6.webp",
     tags: ["Prijzen", "Keuze"],
     body: [
@@ -446,6 +456,7 @@ export const kennisbankPrijs: Post[] = [
       "Dit is een keuze die veel ondernemers uitstellen, en dat is begrijpelijk. Aan de ene kant is een freelancer iemand die je direct spreekt en die de helft kost. Aan de andere kant wil je niet over twee jaar met een half afgemaakte site zitten omdat hij stopte.",
       "De eerlijke vergelijking gaat niet over prijs. Hij gaat over wat je nodig hebt en wie dat kan leveren.",
       "## Wat je bij een freelancer krijgt",
+      "| | Freelancer | Bureau |\n| --- | --- | --- |\n| Wie je spreekt | de bouwer zelf | account en uitvoering |\n| Prijs | 1.500 tot 6.000 euro | 6.000 tot 25.000 euro |\n| Doorlooptijd | 2 tot 6 weken | 6 tot 16 weken |\n| Bij uitval | niemand | team neemt over |\n| Bij groei | beperkt | meerdere disciplines |\n| Afhankelijkheid | één persoon | contractueel geregeld |",
       "Direct contact met de persoon die bouwt. Korte lijnen, snelle beslissingen, geen accountmanager ertussen.",
       "Een lagere prijs, omdat je geen overhead betaalt voor een kantoor en een team.",
       "Meestal één discipline. Een ontwerper ontwerpt, een developer bouwt. Zelden beide op niveau, en bijna nooit met teksten en fotografie erbij.",
@@ -500,7 +511,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een offerte van twee regels en een offerte van vier pagina's zeggen allebei weinig als je niet weet waar je op let. Dit zijn de signalen dat er iets niet klopt.",
     date: "2026-10-16",
-    readingMinutes: 9,
+    readingMinutes: 5,
     image: "/projects/3.webp",
     tags: ["Prijzen", "Offertes"],
     body: [
@@ -509,6 +520,7 @@ export const kennisbankPrijs: Post[] = [
       "Toch worden de meeste offertes beoordeeld op het eindbedrag. Dat is precies waarom de goedkoopste partij vaak duurder uitpakt: er staat minder in, en de ontbrekende posten komen later als meerwerk.",
       "Hieronder de twaalf signalen dat je een offerte niet moet tekenen.",
       "## Over de prijsopbouw",
+      "| Wat je ziet | Wat het betekent | Wat je vraagt |\n| --- | --- | --- |\n| Eén bedrag zonder posten | je kunt niet vergelijken | uitsplitsing per pagina |\n| Geen aantal pagina's | scope is open | vast aantal en types |\n| Geen eigenaarschap | site blijft van de bouwer | overdracht van code en accounts |\n| Geen onderhoud | stilstand na oplevering | wat zit er in het eerste jaar |\n| Geen betalingsschema | alles vooraf | termijnen aan mijlpalen |",
       "**1. Eén bedrag zonder posten.** Je kunt niet zien waar het geld naartoe gaat en dus niet vergelijken met een andere offerte.",
       "**2. Geen onderscheid tussen eenmalig en maandelijks.** De bouw en het onderhoud staan door elkaar, waardoor je de totalen niet kunt berekenen.",
       "**3. Een prijs die ver onder de bandbreedte zit.** Bij een site van tien pagina's voor 900 euro ontbreekt er iets: teksten, fotografie, SEO of nazorg.",
@@ -563,7 +575,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Twee offertes voor hetzelfde bedrijf kunnen vier keer verschillen. Dat komt niet door marge, maar door wat er wel en niet in zit. Hier zie je de posten.",
     date: "2026-10-15",
-    readingMinutes: 9,
+    readingMinutes: 4,
     image: "/projects/1.webp",
     tags: ["Prijzen", "Offertes"],
     body: [
@@ -571,7 +583,7 @@ export const kennisbankPrijs: Post[] = [
       "Je vraagt drie offertes en krijgt 2.500, 4.800 en 9.000 euro. Alle drie zeggen ze een website te bouwen. Hetzelfde bedrijf, dezelfde wensen op papier.",
       "Dat verschil is geen willekeur en ook geen oplichting. Het is een verschil in wat er onder 'een website' wordt verstaan.",
       "Hieronder wat er in die 6.500 euro verschil zit, zodat je zelf kunt beoordelen welke offerte bij je past.",
-      "## De posten die het verschil maken",
+      "## De posten waar het geld zit",
       "| Post | Goedkope offerte | Dure offerte |\n| --- | --- | --- |\n| Strategie | Niet genoemd | Halve dag sessie, positionering |\n| Teksten | Jij levert aan | Geschreven door copywriter |\n| Fotografie | Jij levert aan | Halve dag op locatie |\n| Aantal pagina's | 5 | 12 |\n| Revisierondes | 1 | 3 |\n| Koppelingen | Geen | Formulier naar CRM |\n| Testwerk | Basis | Op drie browsers en toestellen |\n| Toegankelijkheid | Niet genoemd | WCAG-basis |\n| Nazorg | 30 dagen | 3 maanden |",
       "Elke regel is een paar honderd tot een paar duizend euro. Bij elkaar is dat het verschil.",
       "## Waarom de goedkope offerte niet per se slecht is",
@@ -588,7 +600,7 @@ export const kennisbankPrijs: Post[] = [
       "Vraag naar de prijs per ontbrekende post. Dan zie je meteen of de goedkope offerte echt goedkoper is of alleen smaller.",
       "Kijk naar het totaal inclusief wat je zelf moet inkopen. Dat is het enige bedrag dat je kunt vergelijken.",
       "## Veelgestelde vragen",
-      "### Is de duurste offerte de beste?",
+      "### Is de duurste offerte altijd de juiste?",
       "Nee. De duurste kan posten bevatten die je niet nodig hebt. De vraag is of de posten die jij nodig hebt erin zitten.",
       "### Kan een partij zijn prijs onderbouwen?",
       "Een serieuze partij kan per post uitleggen hoeveel uur erin zit. Vraag daarom als je twijfelt.",
@@ -605,15 +617,16 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een website is voor de Belastingdienst een bedrijfsmiddel. Wat je mag aftrekken, hoe je het afschrijft en waar je op moet letten.",
     date: "2026-10-14",
-    readingMinutes: 7,
+    readingMinutes: 4,
     image: "/projects/4.webp",
     tags: ["Prijzen", "Zakelijk"],
     body: [
       "> **TL;DR:** Kosten voor een website zijn in de meeste gevallen zakelijke kosten en daarmee aftrekbaar, maar de bouw wordt gezien als investering en moet je meestal in vijf jaar afschrijven. Hosting, onderhoud en advertenties zijn direct aftrekbaar. Bij een bedrag onder de 450 euro mag je in één keer afschrijven.",
-      "Een website is voor de fiscus geen visitekaartje maar een bedrijfsmiddel. Dat betekent dat je hem in principe activeert en in stappen afschrijft, in plaats van het hele bedrag in één jaar van de winst af te trekken.",
+      "Voor de fiscus is een website een bedrijfsmiddel. Dat betekent dat je hem in principe activeert en in stappen afschrijft, in plaats van het hele bedrag in één jaar van de winst af te trekken.",
       "Dat is geen slecht nieuws. Je krijgt het geld er alsnog uit, alleen verdeeld over vijf jaar. En er zijn uitzonderingen.",
       "Hieronder wat wel en niet kan. Dit is geen fiscaal advies, dus controleer je situatie met je boekhouder.",
       "## Wat direct aftrekbaar is",
+      "| Post | Behandeling |\n| --- | --- |\n| Hosting en domein | direct aftrekbaar |\n| Onderhoud en updates | direct aftrekbaar |\n| Advertenties | direct aftrekbaar |\n| Nieuwe site van 8.000 euro | afschrijven, 5 jaar |\n| Groot onderhoud van 3.000 euro | afschrijven, 5 jaar |\n| Losse fotoshoot van 400 euro | direct aftrekbaar |",
       "Hosting en domeinnaam. Doorlopende kosten van een paar honderd euro per jaar zijn gewoon bedrijfskosten.",
       "Onderhoud en support. Zolang het om lopend beheer gaat en niet om een verbouwing van de site.",
       "Advertenties en SEO. Kosten om verkeer te krijgen zijn direct aftrekbaar.",
@@ -655,7 +668,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een website is een kostenpost tot je hem als investering bekijkt. Hoe je uitrekent wat een site moet opleveren en wanneer hij zich terugverdient.",
     date: "2026-10-13",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/2.webp",
     tags: ["Prijzen", "Strategie"],
     body: [
@@ -664,6 +677,7 @@ export const kennisbankPrijs: Post[] = [
       "Dat klinkt als een verkooptruc, maar het is gewoon rekenen. Als je weet wat een klant je oplevert en hoeveel aanvragen je nodig hebt, weet je ook wat een site mag kosten.",
       "Hieronder de rekensom, met eerlijke getallen.",
       "## De drie getallen die je nodig hebt",
+      "| Getal | Voorbeeld |\n| --- | --- |\n| Gemiddelde opdracht | 2.400 euro |\n| Marge per opdracht | 1.100 euro |\n| Huidige aanvragen per maand | 4 |\n| Nodig voor terugverdienen van 6.000 euro | 6 opdrachten |\n| Benodigde maanden bij 1 extra aanvraag | 6 tot 9 |",
       "De gemiddelde waarde van een opdracht. Niet je hoogste, niet je laagste, maar het gemiddelde over je laatste twintig opdrachten.",
       "Je marge daarop. Wat er overblijft na inkoop, uren en kosten. Bij dienstverlening zit dat vaak rond de 30 tot 50 procent.",
       "Je conversie. Het percentage bezoekers dat een aanvraag doet. Bij zakelijk verkeer is 2 tot 5 procent normaal.",
@@ -705,7 +719,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een slechte site kost niets zolang je hem laat staan. Tot je gaat rekenen. Dit is wat hij je per maand kost aan gemiste aanvragen en extra advertentiekosten.",
     date: "2026-10-12",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/7.webp",
     tags: ["Prijzen", "Strategie"],
     body: [
@@ -714,6 +728,7 @@ export const kennisbankPrijs: Post[] = [
       "Tot je gaat tellen wat er binnenkomt aan aanvragen die afhaken. Dan blijkt de site elke maand geld te kosten, alleen niet op een factuur.",
       "Hieronder de posten, met getallen die je zelf kunt invullen.",
       "## Post 1: de aanvragen die afhaken",
+      "| Post | Per jaar |\n| --- | --- |\n| Aanvragen die afhaken | 4.800 euro |\n| Extra advertentiekosten | 1.200 euro |\n| Tijd aan vragen en herstel | 2.400 euro |\n| Sollicitanten die afhaken | 1.500 euro |\n| Eenmalig herstel | 3.500 euro |\n| Totaal eerste jaar | 13.400 euro |",
       "Iemand die je site bekijkt en afhaakt, was een potentiële klant. Bij tien serieuze aanvragen per maand en twee die afhaken door de site, is dat 6.000 euro bij een opdracht van 3.000 euro.",
       "Over een jaar is dat 72.000 euro. Bij een hogere opdrachtwaarde loopt het harder.",
       "Dit is de grootste post en de moeilijkste om te bewijzen, omdat je nooit ziet wie er wegklikte. Je merkt het aan het aantal aanvragen dat onder je verwachting blijft.",
@@ -754,7 +769,7 @@ export const kennisbankPrijs: Post[] = [
     excerpt:
       "Een goede site kost een paar duizend euro en dat geld is er zelden los. Vijf manieren om het toch rond te krijgen zonder je aan een abonnement vast te leggen.",
     date: "2026-10-11",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/5.webp",
     tags: ["Prijzen", "Budget"],
     body: [
@@ -762,6 +777,7 @@ export const kennisbankPrijs: Post[] = [
       "Als je een site van 6.000 euro wilt en er staat 2.000 op de rekening, is de neiging om te wachten. Wachten duurt alleen lang en ondertussen blijft de oude site staan.",
       "Er zijn betere routes. Ze vragen allemaal een keuze over wat je eerst doet, en dat is precies waar het over gaat.",
       "## Route 1: in fases bouwen",
+      "| Route | Wat het doet | Wat het kost |\n| --- | --- | --- |\n| In fases bouwen | spreidt de investering | langere doorlooptijd |\n| Zelf content aanleveren | haalt uren uit de opdracht | 20 tot 40 uur van jou |\n| Kleiner startpakket | verlaagt het bedrag | minder pagina's |\n| Gespreid betalen | spreidt de uitgave | soms rente of fee |\n| Als investering opnemen | groot bedrag in één keer | aflossing per maand |",
       "Begin met de pagina's die het meeste opleveren: home, diensten, contact. Laat de rest liggen tot de eerste opdrachten binnen zijn.",
       "Een basis van vijf pagina's kost 2.500 euro. De resterende pagina's voeg je toe als de site loopt, en dan betaal je ze uit wat hij oplevert.",
       "Het nadeel: je hebt een tijdje een dunne site. Zorg dat de basis sterk genoeg is om op te staan.",

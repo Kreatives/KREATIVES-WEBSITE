@@ -9,7 +9,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een redesign kan rankings kosten, maar hoeft niet. Wat er echt gebeurt met je posities, hoe lang herstel duurt en wat het verschil maakt.",
     date: "2026-10-25",
-    readingMinutes: 10,
+    readingMinutes: 7,
     image: "/projects/3.webp",
     tags: ["Redesign", "SEO"],
     body: [
@@ -26,7 +26,7 @@ export const kennisbankRedesign: Post[] = [
       "## Wat er gebeurt bij een goede redesign",
       "Er verandert weinig aan posities. Soms stijgt het verkeer, omdat de site sneller is en de structuur beter.",
       "Dat is geen geluk. Het is het gevolg van vier dingen die goed zijn gedaan.",
-      "## De vier dingen die het verschil maken",
+      "## De vier dingen die de prijs bepalen",
       "**Een volledige redirect-mapping.** Elke oude URL krijgt een 301 naar de best passende nieuwe. Niet naar de homepage, maar naar de pagina met dezelfde inhoud.",
       "**Contentbehoud.** Pagina's die rankings hebben, blijven bestaan of worden samengevoegd met een redirect. Je gooit geen verkeer weg omdat een pagina niet in het nieuwe ontwerp paste.",
       "**Een betere structuur.** De nieuwe hiërarchie is logischer dan de oude, met pillar-pagina's en interne links. Dat compenseert wat je aan URL-waarde verliest.",
@@ -45,12 +45,7 @@ export const kennisbankRedesign: Post[] = [
       "Een partij die het goed doet, vraagt om een export van je URL's voor er iets wordt getekend. Die vraagt ook naar je Search Console en je analytics, want daar staat welke pagina's waarde hebben.",
       "Een partij die het slecht doet, begint bij een moodboard. Dan is de mapping iets dat achteraf wordt geregeld, en achteraf is te laat.",
       "## De vier soorten pagina's en wat ze krijgen",
-      "| Type pagina | Wat er gebeurt |",
-      "| --- | --- |",
-      "| Pagina met verkeer en links | Blijft, of verhuist met een 301 naar dezelfde inhoud |",
-      "| Pagina met verkeer, verouderd | Verhuist en wordt herschreven |",
-      "| Pagina zonder verkeer, met links | Blijft of krijgt een 301 naar de dichtstbijzijnde pagina |",
-      "| Pagina zonder verkeer en zonder links | Mag 410 geven |",
+      "| Type pagina | Wat er gebeurt |\n| --- | --- |\n| Pagina met verkeer en links | Blijft, of verhuist met een 301 naar dezelfde inhoud |\n| Pagina met verkeer, verouderd | Verhuist en wordt herschreven |\n| Pagina zonder verkeer, met links | Blijft of krijgt een 301 naar de dichtstbijzijnde pagina |\n| Pagina zonder verkeer en zonder links | Mag 410 geven |",
       "Die laatste categorie is de enige waar je iets mag laten vallen. Zodra er verkeer of een link is, is laten vallen een keuze die je moet kunnen verantwoorden.",
       "## Wat je na dertig dagen evalueert",
       "Zijn de posities op de pagina's met verkeer gelijk gebleven of gestegen? Zo niet, welke redirect ontbreekt er.",
@@ -61,6 +56,14 @@ export const kennisbankRedesign: Post[] = [
       "De redirects. Negen van de tien keer zit daar de fout, en dat is ook het snelst te herstellen.",
       "Of de verdwenen content ergens staat. Zo niet, zet hem terug, ook als het niet in het nieuwe ontwerp past.",
       "Of de site technisch in orde is: sitemap, robots.txt, laadtijd, mobiel.",
+      "## Wat je in de eerste week doet",
+      "Een nulmeting: analytics aan, huidige posities en verkeer vastleggen.",
+      "De lijst maken van pagina's met verkeer en links, met per pagina het label.",
+      "De redirect-mapping bouwen en testen voor er iets live gaat.",
+      "## Wat je meet",
+      "Aanvragen per maand, voor en na. Dat is het enige dat de opdracht rechtvaardigt.",
+      "Verkeer per pagina. Een daling op een pagina met verkeer wijst op een gemiste redirect.",
+      "En het aantal 404's. Dat is je eerste signaal.",
       "## Wat je niet doet",
       "Live gaan op vrijdag. Dan zit je in het weekend met een probleem.",
       "Alle URL's tegelijk veranderen zonder redirect.",
@@ -93,7 +96,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een redirect-mapping is het belangrijkste document bij een redesign. Zo bouw je er een die niets kwijtraakt, met de volgorde en de valkuilen.",
     date: "2026-10-24",
-    readingMinutes: 10,
+    readingMinutes: 4,
     image: "/projects/4.webp",
     tags: ["Redesign", "SEO"],
     body: [
@@ -150,7 +153,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "De dag van de livegang is te laat om na te denken. Dit is de lijst die je een week vooraf afwerkt, met per punt wie het doet.",
     date: "2026-10-23",
-    readingMinutes: 9,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Redesign", "Checklist"],
     body: [
@@ -158,6 +161,7 @@ export const kennisbankRedesign: Post[] = [
       "De livegang is het spannendste moment van een traject en het slechtste moment om na te denken. Alles gebeurt tegelijk en er is haast.",
       "Daarom hoort de voorbereiding een week eerder klaar te zijn. Hieronder wat er op die lijst staat.",
       "## Redirects",
+      "| Onderdeel | Klaar wanneer | Wie |\n| --- | --- | --- |\n| Redirects | mapping getest en live | bouwer |\n| Back-up | momentopname van de oude site | bouwer |\n| Formulieren | testaanvraag aangekomen | bouwer en jij |\n| Analytics | doelen ingesteld | bouwer |\n| DNS | TTL verlaagd naar 300 | bouwer |\n| Content | alle teksten nagelezen | jij |",
       "De volledige mapping is gemaakt en getest. Elke oude URL met waarde heeft een bestemming met dezelfde inhoud.",
       "Er zijn geen ketens en geen redirects naar 404's.",
       "Iemand anders dan de maker heeft de mapping nagelopen.",
@@ -230,7 +234,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een nieuw domein betekent dat je alles opnieuw moet opbouwen. Wat je meeneemt, wat je achterlaat en hoe je de overgang doet.",
     date: "2026-10-22",
-    readingMinutes: 9,
+    readingMinutes: 4,
     image: "/projects/6.webp",
     tags: ["Redesign", "Migratie"],
     body: [
@@ -239,6 +243,7 @@ export const kennisbankRedesign: Post[] = [
       "Het is ook de duurste SEO-operatie die er is. Je bouwt een reputatie op een adres en die reputatie verhuist niet mee.",
       "Hieronder wat er gebeurt en hoe je het verlies beperkt.",
       "## Wat er gebeurt",
+      "| Wat je meeneemt | Hoe |\n| --- | --- |\n| URL-structuur | paden één op één overnemen |\n| Redirects | 301 per oude URL |\n| Search Console | nieuw domein toevoegen en oude laten staan |\n| Sitemap | opnieuw indienen |\n| Interne links | allemaal omzetten |\n| Externe vermeldingen | laten aanpassen waar het kan |",
       "De links naar je oude domein wijzen naar het oude adres. De waarde daarvan verhuist alleen via redirects, en redirects geven niet alles door.",
       "De geschiedenis van het oude domein telt niet mee voor het nieuwe. Het nieuwe begint op nul.",
       "Mensen die je als bladwijzer hebben, komen op het oude adres en moeten wennen aan het nieuwe.",
@@ -290,7 +295,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Bij een redesign moet elke pagina een beslissing krijgen. Drie opties, met de regels waarmee je kiest en de fout die het meest voorkomt.",
     date: "2026-10-21",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/2.webp",
     tags: ["Redesign", "Content"],
     body: [
@@ -298,6 +303,7 @@ export const kennisbankRedesign: Post[] = [
       "Een redesign is ook een opruiming. Er staan pagina's op je site die niemand leest, die verouderd zijn of die dubbel zijn.",
       "Dat is een kans om te snoeien. Maar snoeien op gevoel kost verkeer.",
       "## De drie labels",
+      "| Label | Wanneer | Wat je doet |\n| --- | --- | --- |\n| Meenemen | verkeer, links of waarde | één op één overzetten |\n| Herschrijven | onderwerp klopt, tekst niet | opnieuw schrijven |\n| Vervallen | geen verkeer, geen links, dubbel | 301 naar de sterkste pagina |",
       "**Meenemen.** De pagina heeft verkeer, links of waarde en de inhoud klopt nog. Hij verhuist naar de nieuwe structuur met dezelfde inhoud.",
       "**Herschrijven.** De pagina heeft waarde maar de inhoud is verouderd of te dun. Hij verhuist en wordt herschreven, met dezelfde zoekterm als basis.",
       "**Laten vallen.** De pagina heeft geen verkeer, geen links en geen functie. Hij verdwijnt, met een 410 of een redirect naar de dichtstbijzijnde pagina.",
@@ -335,7 +341,7 @@ export const kennisbankRedesign: Post[] = [
       "Dat is precies waarom je naar de cijfers kijkt en niet naar de lengte.",
       "## Wat je met de vrijgekomen ruimte doet",
       "Pagina's die wegvallen, maken ruimte voor pagina's die er wel moeten zijn. Gebruik die ruimte voor de vijf pagina's die een gegroeid bedrijf mist, zoals werken bij en een prijzenpagina.",
-      "Zo wordt de opruiming geen verlies maar een ruil: rommel eruit, bewijs erin.",
+      "Zo levert de opruiming iets op: rommel eruit, bewijs erin.",
       "## Veelgestelde vragen",
       "### Hoeveel pagina's mag ik laten vallen?",
       "Zoveel als er geen verkeer en geen links hebben. Bij een gemiddelde site is dat een kwart tot de helft.",
@@ -354,7 +360,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Niet elke ontevredenheid vraagt een nieuwe site. Vijf situaties waarin een redesign nodig is en vier waarin je beter kunt bijwerken.",
     date: "2026-10-20",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/5.webp",
     tags: ["Redesign", "Diagnose"],
     body: [
@@ -362,6 +368,7 @@ export const kennisbankRedesign: Post[] = [
       "Er zijn twee soorten ontevredenheid over een site. De ene gaat over hoe hij aanvoelt, de andere over wat hij doet.",
       "De eerste lost een lik verf soms op. De tweede vraagt een nieuwe site.",
       "## Vijf situaties waarin het nodig is",
+      "| Signaal | Redesign | Bijwerken |\n| --- | --- | --- |\n| Werkt niet op mobiel | ja | nee |\n| Verouderde structuur | ja | nee |\n| Nieuwe dienst of doelgroep | nee | ja |\n| Slechte snelheid door techniek | ja | nee |\n| Verouderde foto's | nee | ja |\n| Onscherpe boodschap | nee | ja |",
       "**1. De site werkt niet op mobiel.** Meer dan de helft van je bezoek komt van een telefoon. Werkt het daar niet, dan is de site kapot.",
       "**2. De structuur is een doolhof.** Bezoekers en zoekmachines vinden niet wat ze zoeken, en er is geen logische hiërarchie.",
       "**3. Het systeem wordt niet meer ondersteund.** Geen updates meer, geen back-ups, kwetsbaar.",
@@ -412,7 +419,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Als je overstapt, moet je weten wat je overneemt. Dit is de due diligence op een bestaande site, met de dingen die het vaakst ontbreken.",
     date: "2026-10-19",
-    readingMinutes: 9,
+    readingMinutes: 6,
     image: "/projects/3.webp",
     tags: ["Redesign", "Eigendom"],
     body: [
@@ -420,6 +427,7 @@ export const kennisbankRedesign: Post[] = [
       "Een site overnemen klinkt als een administratieve stap. In de praktijk is het de plek waar overstappen misgaat.",
       "Want de vorige partij heeft soms de inloggegevens, het domein staat op hun naam, en er is geen back-up. Dan neem je een site over die je niet kunt beheren.",
       "## De vier checks",
+      "| Check | Goed | Fout |\n| --- | --- | --- |\n| Toegang | alle accounts in eigen beheer | inlog bij de vorige partij |\n| Eigenaarschap | domein op jouw naam | domein op naam van het bureau |\n| Code | in een eigen repository | alleen via een builder |\n| Koppelingen | gedocumenteerd | niemand weet hoe ze werken |",
       "**Toegang.** Heb je de inloggegevens van hosting, CMS en domein? Zo niet, dan kun je niets.",
       "**Eigendom.** Staat het domein op jouw naam? Zit er een licentie op het thema of de plugins die maandelijks betaald moet worden?",
       "**Technische staat.** Is de site up to date, is er een back-up, is er onderhoud gepleegd?",
@@ -460,7 +468,7 @@ export const kennisbankRedesign: Post[] = [
       "De site meteen omgooien. Eerst stabiliseren, dan plannen.",
       "## Wat een overname kost",
       "Een technische intake, een back-up, een stabilisatieronde en een inventarisatie: samen 600 tot 1.200 euro.",
-      "Dat is werk dat je niet ziet, maar zonder dat werk is elke volgende stap een risico.",
+      "Dat werk zie je niet terug in het eindresultaat, en zonder het is elke volgende stap een risico.",
       "## Wat je met de vorige partij bespreekt",
       "De gegevens, de overdracht en de termijn waarbinnen ze nog vragen beantwoorden.",
       "Wat er nog openstaat aan facturen. Betaal wat klopt, zodat er geen discussie is over de toegang.",
@@ -491,7 +499,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een hostingwissel is technischer dan hij lijkt. Wat er mis kan gaan, wat je vooraf regelt en hoe je het risico klein houdt.",
     date: "2026-10-18",
-    readingMinutes: 7,
+    readingMinutes: 4,
     image: "/projects/4.webp",
     tags: ["Redesign", "Techniek"],
     body: [
@@ -499,6 +507,7 @@ export const kennisbankRedesign: Post[] = [
       "Hosting verhuizen is een technische operatie met een simpele kern: de site moet op een andere server komen zonder dat iemand het merkt.",
       "Gaat het goed, dan verandert er niets aan je posities. Gaat het mis, dan ligt de site een dag plat en dat kost wel.",
       "## Waarom mensen verhuizen",
+      "| Risico | Wat je regelt |\n| --- | --- |\n| Downtime | verhuizen buiten kantooruren |\n| Trage server | eerst testen op snelheid |\n| Redirectfouten | paden één op één overnemen |\n| Mailverlies | MX-records vooraf overzetten |\n| Verkeersdip | Search Console en analytics volgen |",
       "De huidige hosting is te traag, te duur, of de partij is gestopt. Soms is het simpelweg omdat de site bij een vorig bureau stond en je hem zelf wilt beheren.",
       "De reden bepaalt het risico. Verhuizen naar een betere server is een verbetering. Verhuizen naar een goedkopere kan een verslechtering zijn.",
       "## Wat er mis kan gaan",
@@ -559,7 +568,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een site in één keer omgooien is riskant en duur. In fases vernieuwen houdt je verkeer en je aanvragen intact. Zo werkt dat.",
     date: "2026-10-17",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Redesign", "Strategie"],
     body: [
@@ -567,6 +576,7 @@ export const kennisbankRedesign: Post[] = [
       "Een redesign in één keer betekent zes weken waarin niets verandert en dan een sprong. Die sprong is riskant: alles tegelijk, en als er iets mis is, is het overal mis.",
       "Gefaseerd werken is het alternatief. Je pakt de belangrijkste pagina's eerst, houdt de rest live, en breidt uit zodra de basis staat.",
       "## De volgorde",
+      "| Fase | Inhoud | Doorlooptijd |\n| --- | --- | --- |\n| 1 | home en diensten | 2 weken |\n| 2 | cases en over ons | 2 weken |\n| 3 | blog en kennisbank | 3 weken |\n| 4 | formulieren en koppelingen | 1 week |\n| 5 | oude URL's en redirects | 1 week |",
       "**Fase 1: de homepage en de dienstenpagina's.** Daar komt het meeste verkeer en daar haakt het meeste af. Hier zit de winst.",
       "**Fase 2: de pagina's die vertrouwen dragen.** Cases, reviews, team, werkwijze, prijzen.",
       "**Fase 3: de rest.** Blog, kennisbank, juridische pagina's, de minder bezochte pagina's.",
@@ -633,7 +643,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een redesign kost gemiddeld 4.000 euro. Met deze vijftien fouten wordt het twee keer zo duur en levert het de helft op.",
     date: "2026-10-16",
-    readingMinutes: 10,
+    readingMinutes: 5,
     image: "/projects/2.webp",
     tags: ["Redesign", "Checklist"],
     body: [
@@ -641,6 +651,7 @@ export const kennisbankRedesign: Post[] = [
       "Een redesign is een project met veel mensen en veel meningen. Dat is precies waar het duur wordt.",
       "Hieronder de vijftien fouten die het vaakst voorkomen, in de volgorde waarin ze gebeuren.",
       "## Voorbereiding",
+      "| Fout | Wat het kost |\n| --- | --- |\n| Vage opdracht | twee extra rondes |\n| Geen redirectplan | verkeersverlies van maanden |\n| Alles tegelijk live | niet te herleiden dip |\n| Geen eigenaarschap | opnieuw betalen bij vertrek |\n| Content vergeten | 3.000 euro extra |",
       "**1. Een vage opdracht.** \"Maak het mooier\" levert een smaakdiscussie op. Een opdracht met een doel levert een resultaat.",
       "**2. Geen beslisser aan tafel.** Als elke beslissing terug naar een directeur moet, duurt alles drie keer zo lang.",
       "**3. Te veel beslissers.** Het omgekeerde. Iedereen mag iets vinden en niemand beslist.",
@@ -696,7 +707,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Goedkoop redesignen en het daarna twee keer overdoen is duurder dan één keer goed. De rekensom over vijf jaar.",
     date: "2026-10-15",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/7.webp",
     tags: ["Redesign", "Prijzen"],
     body: [
@@ -704,6 +715,7 @@ export const kennisbankRedesign: Post[] = [
       "De verleiding is om een goedkope partij te nemen en te kijken hoe het gaat. Bevalt het niet, dan doe je het opnieuw.",
       "Dat klinkt als risicospreiding. In de praktijk betaal je drie keer en zit je vijf jaar met een half product.",
       "## De rekensom van drie keer",
+      "| Poging | Bedrag | Resultaat |\n| --- | --- | --- |\n| 1 | 3.000 euro | mooier, structuur klopt niet |\n| 2 | 4.500 euro | nieuwe structuur, teksten blijven zwak |\n| 3 | 6.000 euro | eindelijk goed |\n| Totaal | 13.500 euro | 14 maanden verder |",
       "Poging 1: 3.000 euro. De site is mooier maar de structuur klopt niet en de teksten zijn oud. Na vier maanden blijkt de conversie niet gestegen.",
       "Poging 2: 3.500 euro bij een andere partij. Nu wordt de structuur aangepakt, maar de techniek is nog oud en de site is traag.",
       "Poging 3: 4.000 euro. Nu wordt het goed gedaan, maar je bent twee jaar verder.",
@@ -723,7 +735,7 @@ export const kennisbankRedesign: Post[] = [
       "## Wat je vraagt voor je tekent",
       "Of de structuur onderdeel is van de opdracht. Als het antwoord alleen over ontwerp gaat, weet je genoeg.",
       "Of de teksten worden geschreven. Zo niet, dan doe je ze zelf of besteed je ze apart aan.",
-      "Of de redirects worden geregeld. Zonder dat is het geen redesign maar een nieuwe site.",
+      "Of de redirects worden geregeld. Zonder dat bouw je een nieuwe site in plaats van een redesign.",
       "Of er een nulmeting komt en wie die doet. Zonder meting kun je de opdracht niet beoordelen.",
       "Of de fotografie in de offerte zit. Zo niet, dan komt die er los bij en dat is 400 tot 900 euro.",
       "## Wat je zelf bijhoudt tijdens het traject",
@@ -757,7 +769,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een nieuwe structuur betekent nieuwe URL's. Zo bouw je het redirect-plan dat niets kwijtraakt, in zes stappen met de test per stap.",
     date: "2026-10-14",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/3.webp",
     tags: ["Redesign", "SEO"],
     body: [
@@ -765,6 +777,7 @@ export const kennisbankRedesign: Post[] = [
       "Een nieuwe structuur is soms nodig. De oude is gegroeid zonder plan, met categorieën die niet meer kloppen en URL's met jaartallen erin.",
       "Elke wijziging van een URL met waarde vraagt een redirect. Zonder dat is het een 404 en ben je de pagina kwijt.",
       "## Stap 1: exporteer alles",
+      "| Kolom | Voorbeeld |\n| --- | --- |\n| Oude URL | /diensten-webdesign |\n| Nieuwe URL | /diensten/webdesign |\n| Status | 301 |\n| Verkeer | 340 per maand |\n| Getest | ja |",
       "Alle URL's uit de sitemap, uit Search Console en uit analytics. Ook de pagina's zonder verkeer, want die kunnen links hebben.",
       "Zet er het verkeer en het aantal links per URL bij. Dat bepaalt de prioriteit.",
       "## Stap 2: bepaal de bestemming",
@@ -790,11 +803,11 @@ export const kennisbankRedesign: Post[] = [
       "Alles naar de homepage. Dan verlies je de relatie tussen zoekterm en pagina.",
       "Redirects naar een pagina die niet bestaat.",
       "De oude URL's laten bestaan naast de nieuwe. Dan concurreren ze.",
-      "## Wat je in de mapping vastlegt",
+      "## Welke kolommen de mapping heeft",
       "Per regel de oude URL, de nieuwe URL, het type en de reden. Die laatste kolom dwingt je na te denken.",
       "Een markering voor pagina's die een redirect naar een categorie krijgen in plaats van een detailpagina, met de reden erbij.",
       "Een markering voor pagina's die een 410 krijgen, met de onderbouwing dat er geen verkeer en geen links zijn.",
-      "## Wat je test voor de livegang",
+      "## Wat je test voor de livegang, per regel",
       "Elke regel op statuscode. Een 301 is goed, een 302 is tijdelijk en moet een 301 worden.",
       "Elke bestemming op statuscode. Een 301 naar een 404 is een fout die je pas ziet als je hem test.",
       "Of er ketens zijn ontstaan. A naar B en B naar C moet A naar C worden.",
@@ -831,7 +844,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Bij een redesign gaat er veel weg. Dit is wat je altijd bewaart, ook als het niet in het nieuwe ontwerp past.",
     date: "2026-10-13",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/5.webp",
     tags: ["Redesign", "Content"],
     body: [
@@ -839,6 +852,7 @@ export const kennisbankRedesign: Post[] = [
       "Een redesign voelt als een schone lei. Die neiging is goed, maar hij kost verkeer als je te veel weggooit.",
       "Hieronder wat je bewaart, ook als het niet in het nieuwe ontwerp past.",
       "## Bewaar: pagina's met verkeer",
+      "| Onderdeel | Bewaren | Weggooien |\n| --- | --- | --- |\n| Pagina's met verkeer | ja | nee |\n| Pagina's met links | ja | nee |\n| Cases en reviews | ja | nee |\n| Foto's van je werk | ja | nee |\n| URL-structuur | ja | nee |\n| Verouderde prijslijsten | nee | ja |",
       "Elke pagina die bezoekers krijgt, blijft. Ook als hij niet in het nieuwe menu past, ook als hij lelijk is.",
       "Je past het ontwerp aan de pagina aan, niet andersom. Een pagina met vijftig bezoekers per maand is een pagina die je niet weggooit.",
       "## Bewaar: pagina's met links",
@@ -905,7 +919,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "Een redesign tijdens een campagne kost je advertentiegeld als je niet oplet. Wat je regelt voor de landingspagina's, de tracking en de timing.",
     date: "2026-10-12",
-    readingMinutes: 7,
+    readingMinutes: 5,
     image: "/projects/4.webp",
     tags: ["Redesign", "Campagnes"],
     body: [
@@ -913,6 +927,7 @@ export const kennisbankRedesign: Post[] = [
       "Advertenties verwijzen naar URL's. Verandert een URL, dan verwijst de advertentie naar een 404 en betaal je voor een lege pagina.",
       "Dat is de simpele versie. Er zijn meer manieren waarop een redesign een campagne sloopt.",
       "## Wat er misgaat",
+      "| Wat misgaat | Wat je vooraf regelt |\n| --- | --- |\n| Landingspagina verdwijnt | 301 naar de nieuwe pagina |\n| Boodschap wijkt af | advertentie en pagina gelijktrekken |\n| Campagne pauzeren vergeten | pauze inplannen voor de livegang |\n| Meting breekt | doelen opnieuw instellen |",
       "**De landingspagina verhuist.** De advertentie wijst naar een 404 en je betaalt voor niets.",
       "**De conversiemeting breekt.** Het formulier heeft een nieuwe pagina, de meting staat op de oude, en je ziet geen conversies meer.",
       "**De boodschap verandert.** De advertentie belooft iets anders dan de nieuwe pagina zegt.",
@@ -978,7 +993,7 @@ export const kennisbankRedesign: Post[] = [
     excerpt:
       "De maand na een livegang bepaalt of je de fouten op tijd ziet. Wat je dagelijks en wekelijks controleert, en wanneer je moet ingrijpen.",
     date: "2026-10-11",
-    readingMinutes: 8,
+    readingMinutes: 5,
     image: "/projects/1.webp",
     tags: ["Redesign", "Monitoring"],
     body: [
@@ -1015,13 +1030,7 @@ export const kennisbankRedesign: Post[] = [
       "Wij controleren de techniek: 404's, redirects, laadtijd, serverfouten, crawl-fouten in Search Console.",
       "Samen kijken we op dag zeven en dag dertig naar de cijfers. Op dag zeven om te zien of de basis staat, op dag dertig om te bepalen of de opdracht geslaagd is.",
       "## De cijfers die je bijhoudt",
-      "| Dag | Wat | Goed | Ingrijpen |",
-      "| --- | --- | --- | --- |",
-      "| 1 tot 7 | Aantal 404's | Onder de tien | Boven de twintig: mapping herstellen |",
-      "| 1 tot 7 | Formulier | Verstuurt en komt aan | Kapot: direct fixen |",
-      "| 1 tot 7 | Posities top 10 pagina's | Gelijk of licht gestegen | Meer dan 20 procent daling: redirect checken |",
-      "| 8 tot 30 | Aanvragen per week | Gelijk of hoger | Lager: inhoud en boodschap nalopen |",
-      "| 8 tot 30 | Laadtijd | Onder de drie seconden | Boven de vier: technisch nalopen |",
+      "| Dag | Wat | Goed | Ingrijpen |\n| --- | --- | --- | --- |\n| 1 tot 7 | Aantal 404's | Onder de tien | Boven de twintig: mapping herstellen |\n| 1 tot 7 | Formulier | Verstuurt en komt aan | Kapot: direct fixen |\n| 1 tot 7 | Posities top 10 pagina's | Gelijk of licht gestegen | Meer dan 20 procent daling: redirect checken |\n| 8 tot 30 | Aanvragen per week | Gelijk of hoger | Lager: inhoud en boodschap nalopen |\n| 8 tot 30 | Laadtijd | Onder de drie seconden | Boven de vier: technisch nalopen |",
       "Deze tabel is ook je verantwoording. Als iemand later vraagt wat er na de livegang is gedaan, staat het er.",
       "## Wat je na dertig dagen vastlegt",
       "Een korte evaluatie met de cijfers van voor en na. Niet om iemand de schuld te geven, maar om te weten wat werkt.",

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import AnalyticsListeners from "@/components/AnalyticsListeners";
 import { dmMono, TYPEKIT_CSS } from "@/lib/fonts";
@@ -49,6 +50,11 @@ export const viewport: Viewport = {
   themeColor: "#1a1a1a",
   colorScheme: "light",
 };
+
+// Google Analytics 4. Alleen in productie laden, zodat lokale en preview-
+// bezoeken de statistieken niet vervuilen.
+const GA_ID = "G-L33R5LCKY7";
+const gaEnabled = process.env.NODE_ENV === "production";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -136,6 +142,20 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {gaEnabled && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
+        )}
       </head>
       <body>
         {bare ? (
