@@ -8,7 +8,7 @@ import ClosingCta from "@/components/funnel/ClosingCta";
 import { aiFunnel } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AI",
+  title: "AI voor je website: chat, content en automatisering",
   description:
     "AI als werktool binnen een doordacht proces. Snellere oplevering, slimmere mogelijkheden en lagere kosten, zonder in te leveren op vakmanschap.",
   alternates: { canonical: "/diensten/ai" },

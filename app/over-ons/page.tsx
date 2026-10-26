@@ -27,7 +27,7 @@ export default function OverOnsPage() {
     <>
       <RevealInit />
       <HeroOver />
-      <LogoMarquee label="Vertrouwd door 95+ bedrijven" />
+      <LogoMarquee label="Vertrouwd door 100+ bedrijven" />
       <Verhaal />
       <Kernwaarden />
       <OverOnsTeam />

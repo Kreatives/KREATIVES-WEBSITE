@@ -15,7 +15,7 @@ import { steden } from "@/lib/steden";
 import stedenStyles from "./steden.module.css";
 
 export const metadata: Metadata = {
-  title: "Webdesign",
+  title: "Webdesign laten maken voor bedrijven met een team",
   description:
     "Redesigns en landingspagina's voor ondernemers die meer willen dan een nette site. Maatwerk webdesign gebouwd op uitstraling én conversie.",
   alternates: { canonical: "/diensten/webdesign" },

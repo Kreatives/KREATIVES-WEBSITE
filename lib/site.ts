@@ -54,11 +54,11 @@ export const nav: NavItem[] = [
 export const hero = {
   // Headline volgt Ricky's eigen formulering. Instrument Serif italic op
   // het tweede deel (kleur erft van de witte tekst op de foto).
-  titleLead: "Zie er online uit als",
-  titleAccent: "de beste in je vak.",
-  // "de beste" krijgt een oranje onderstreping in de hero-kop.
-  titleUnderline: "de beste",
-  titleAccentTail: " in je vak.",
+  titleLead: "Je bedrijf is verder dan je",
+  titleAccent: "website laat zien.",
+  // "website" krijgt een oranje onderstreping in de hero-kop.
+  titleUnderline: "website",
+  titleAccentTail: " laat zien.",
   body:
     "Klanten vergelijken je binnen een paar seconden met je concurrent. Wij zorgen dat ze bij jou blijven, en contact opnemen. Binnen 6 weken live.",
   primary: { label: "Plan een strategiegesprek", href: CALENDLY },
@@ -546,7 +546,7 @@ export const tiktok = {
   titleAccent: "al van je feed.",
   intro:
     "We delen op TikTok en Instagram hoe we websites bouwen, van eerste schets tot livegang. Grote kans dat je ons al eens voorbij hebt zien komen.",
-  handle: "@ricksooo",
+  handle: "@rickywebdesign",
   profile: "https://www.tiktok.com/@rickywebdesign",
   videos: [1, 2, 3, 4, 5, 6].map((n) => ({
     src: `/tiktok/${n}.mp4`,

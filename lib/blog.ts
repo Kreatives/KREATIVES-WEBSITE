@@ -3,6 +3,10 @@
 // alle artikelen statisch via generateStaticParams.
 
 import { groeiPosts } from "./blog-groei";
+import { kennisbankPrijsPillar } from "./blog-kennisbank-01-pillar";
+import { kennisbankPrijs } from "./blog-kennisbank-01";
+import { kennisbankSignalen } from "./blog-kennisbank-02";
+import { kennisbankRedesign } from "./blog-kennisbank-03";
 
 export type Post = {
   slug: string;
@@ -16,55 +20,8 @@ export type Post = {
 };
 
 export const posts: Post[] = [
-  {
-    slug: "wat-kost-een-website-laten-maken-in-2026",
-    title: "Wat kost een website laten maken in 2026?",
-    excerpt:
-      "Een eerlijke uitleg van de prijzen in 2026, wat de kosten bepaalt en wat je per branche mag verwachten. Inclusief prijstabel.",
-    date: "2026-06-24",
-    readingMinutes: 8,
-    image: "/projects/3.webp",
-    tags: ["Prijzen", "Webdesign"],
-    body: [
-      "> **TL;DR:** Een professionele website laten maken kost in 2026 grofweg tussen de 750 euro voor een enkele landingspagina en 15.000 euro of meer voor uitgebreid maatwerk met webshop of koppelingen. De meeste ondernemers zitten tussen de 2.500 en 6.000 euro. De prijs hangt vooral af van het aantal pagina's, de mate van maatwerk en of er techniek zoals een webshop of boekingssysteem bij komt kijken.",
-      "Vraag tien bureaus wat een website kost en je krijgt tien verschillende antwoorden. Dat is niet omdat iemand je iets probeert aan te smeren, maar omdat een website net zoiets is als een huis. Een studio bouw je anders dan een vrijstaande woning, en de prijs volgt de vraag. Hieronder lees je precies wat je in 2026 mag verwachten en waar je geld naartoe gaat.",
-      "## Prijzen per type website in 2026",
-      "Dit zijn de richtprijzen die wij in de markt zien. Ze gelden voor een site die door een professional wordt gebouwd, niet voor een kant-en-klaar sjabloon dat je zelf invult.",
-      "| Type website | Indicatieve prijs | Voor wie |\n| --- | --- | --- |\n| Losse landingspagina | 750 tot 1.500 euro | Eén aanbod of campagne |\n| Website van 5 tot 8 pagina's | 2.000 tot 5.000 euro | De meeste mkb-ondernemers |\n| Maatwerk website | 5.000 tot 12.000 euro | Merken die willen opvallen |\n| Webshop | 4.000 tot 15.000 euro | Verkoop van producten |\n| Website met koppelingen | 8.000 euro en meer | Boekingen, CRM, klantportaal |",
-      "Let op: dit zijn eenmalige bouwkosten. Reken daarnaast op terugkerende kosten voor hosting, domein en onderhoud. Daar komen we verderop op terug.",
-      "## Wat bepaalt de prijs van je website?",
-      "De meeste ondernemers denken dat het aantal pagina's de prijs bepaalt. Dat is maar deels waar. Vier dingen wegen zwaarder.",
-      "### 1. De mate van maatwerk",
-      "Een template is snel en goedkoop, maar past zich aan jou aan in plaats van andersom. Echt [maatwerk webdesign](/diensten/webdesign) wordt rond jouw aanbod en merk gebouwd, en dat kost meer uren. Die uren verdienen zich terug in een site die beter converteert, maar ze zitten wel in de offerte.",
-      "### 2. De hoeveelheid content",
-      "Wie zelf goede teksten en beeld aanlevert, is goedkoper uit dan wie het bureau laat schrijven en fotograferen. Copywriting, fotografie en het opzetten van een goede structuur zijn losse posten die snel oplopen.",
-      "### 3. De techniek eronder",
-      "Een etalagesite is een ander verhaal dan een site met een webshop, een boekingssysteem of een koppeling met je boekhouding. Elke koppeling is bouwwerk en testwerk, en dat zie je terug in de prijs.",
-      "### 4. Wie het bouwt",
-      "Een zzp'er is doorgaans goedkoper dan een bureau, maar levert ook een ander pakket. Bij een bureau betaal je mee aan strategie, meerdere specialisten en continuïteit als er over een jaar iets moet worden aangepast.",
-      "## Website laten maken: prijs per branche",
-      "De branche waarin je zit, stuurt de prijs meer dan je denkt. Niet omdat de ene ondernemer meer betaalt dan de andere, maar omdat elke branche zijn eigen eisen heeft.",
-      "| Branche | Typische prijs | Waarom |\n| --- | --- | --- |\n| Coach of adviseur | 2.000 tot 4.500 euro | Vertrouwen en autoriteit uitstralen |\n| Restaurant of horeca | 1.500 tot 4.000 euro | Sfeer, menu en reserveringen |\n| Webshop of retail | 4.000 tot 15.000 euro | Productbeheer en betalingen |\n| Bouw of installatie | 2.500 tot 5.000 euro | Portfolio en offerteaanvragen |\n| Zorg of praktijk | 3.000 tot 6.000 euro | Afspraken en privacy |",
-      "Zoek je specifiek uit wat een site in jouw vak kost? Lees dan ook onze gidsen over een [website voor een restaurant](/blog/website-voor-restaurant-laten-maken) of een [website voor coaches](/blog/website-voor-coaches).",
-      "## Wat kost een website per maand?",
-      "Naast de eenmalige bouwkosten heb je terugkerende kosten. Die worden vaak vergeten, terwijl ze bepalen of je site over drie jaar nog goed werkt.",
-      "- Domeinnaam: 10 tot 20 euro per jaar\n- Hosting: 5 tot 40 euro per maand, afhankelijk van de zwaarte\n- Onderhoud en updates: 25 tot 150 euro per maand\n- Eventuele licenties voor plug-ins of een webshop-platform",
-      "Wie kiest voor een goedkope losse bouwer en daarna zelf het onderhoud laat versloffen, betaalt dat vaak dubbel terug bij de eerstvolgende storing. Reken onderhoud dus mee vanaf dag één.",
-      "## Waarom een goedkope website duur kan uitpakken",
-      "Een site van een paar honderd euro klinkt aantrekkelijk, en soms is het genoeg. Maar de rekening komt vaak later. Een template die niet is gebouwd rond jouw aanbod, converteert minder, is lastig uit te breiden en moet binnen een paar jaar alsnog opnieuw. In [onze cases](/projecten) zie je wat er gebeurt als een site wél rond het merk wordt opgebouwd: minder bezoekers die afhaken, meer die contact opnemen.",
-      "De eerlijke vuistregel: kijk naar de waarde van één klant. Is een klant in jouw vak een paar honderd euro of meer waard, dan verdient een goed gebouwde site zich vaak binnen een jaar terug.",
-      "## Veelgestelde vragen over de kosten van een website",
-      "### Wat is de goedkoopste manier om een website te laten maken?",
-      "Een losse landingspagina of een template die je zelf invult. Reken op 0 tot 1.500 euro. Prima voor een eerste stap of een campagne, maar beperkt in groei en uitstraling.",
-      "### Waarom lopen offertes zo uiteen?",
-      "Omdat 'een website' alles kan betekenen, van één pagina tot een platform met koppelingen. Vraag altijd naar een uitgesplitste offerte, zodat je posten kunt vergelijken in plaats van eindbedragen.",
-      "### Kan ik in termijnen betalen?",
-      "Bij de meeste bureaus wel, meestal een deel vooraf en de rest bij oplevering. Vraag dit gerust, het is gebruikelijk.",
-      "### Hoe weet ik welke prijs klopt voor mijn situatie?",
-      "Dat weet je pas als je aanbod, doelen en techniek helder zijn. Daarom beginnen wij met een [gratis blueprint-sessie](/blauwdruk): daarin bepalen we samen wat je écht nodig hebt, zodat de offerte klopt en er achteraf geen verrassingen zijn.",
-      "Wil je een concreet bedrag voor jouw plannen? Plan een [vrijblijvende blueprint-sessie](/blauwdruk) of bekijk eerst [wat we voor andere ondernemers bouwden](/projecten).",
-    ],
-  },
+  // Kennisbank cluster 01, pillar (uitgebreide versie).
+  kennisbankPrijsPillar,
   {
     slug: "ai-website-laten-maken",
     title: "AI-website laten maken: kosten en valkuilen",
@@ -358,6 +315,12 @@ export const posts: Post[] = [
   },
   // SEO-groeicluster: pillar + twee satellieten (zie lib/blog-groei.ts).
   ...groeiPosts,
+  // Kennisbank cluster 01: prijs en budget.
+  ...kennisbankPrijs,
+  // Kennisbank cluster 02: signalen en diagnose.
+  ...kennisbankSignalen,
+  // Kennisbank cluster 03: redesign en migratie.
+  ...kennisbankRedesign,
 ];
 
 export function getAllPostSlugs() {

@@ -31,6 +31,7 @@ Werkwijze: strategiegesprek van 30 minuten, vaste prijs, ontwerp, bouw, livegang
 
 - [Home](/)
 - [Webdesign](/diensten/webdesign)
+- [Prijzen](/prijzen)
 - [Werkwijze](/werkwijze)
 - [Projecten](/projecten)
 - [Over ons](/over-ons)
@@ -43,7 +44,7 @@ Werkwijze: strategiegesprek van 30 minuten, vaste prijs, ontwerp, bouw, livegang
 - [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt) — het vooronderzoek dat je nu verliest
 - [Je website als je team groeit](/blog/website-team-groei) — onderhoud bij elke nieuwe collega
 - [Wanneer is het tijd om je website te vernieuwen](/blog/wanneer-is-het-tijd-om-je-website-te-vernieuwen) — zeven signalen
-- [Website laten maken in Arnhem](/blog/website-laten-maken-arnhem) — kosten en keuze
+- [Webdesign Arnhem](/webdesign-arnhem) — kosten en keuze voor een Arnhems bedrijf
 
 ## Vestiging
 

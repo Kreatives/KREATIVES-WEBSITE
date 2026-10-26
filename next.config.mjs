@@ -27,6 +27,10 @@ const nextConfig = {
         destination: "/blog/bedrijf-gegroeid-website-niet",
         permanent: true,
       },
+      // Logische URL's die de site zelf suggereert maar niet bestonden (404).
+      { source: "/cases", destination: "/projecten", permanent: true },
+      { source: "/kennisbank", destination: "/blog", permanent: true },
+      { source: "/diensten/redesign", destination: "/diensten/webdesign", permanent: true },
     ];
   },
 };

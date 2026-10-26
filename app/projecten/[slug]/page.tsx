@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import PlayableVideo from "@/components/PlayableVideo";
+import ClosingCta from "@/components/funnel/ClosingCta";
 import { getProjectBySlug, getProjects } from "@/lib/cms";
+import { CALENDLY } from "@/lib/site";
 import styles from "./project.module.css";
 
 export const dynamic = "force-dynamic";
@@ -243,6 +245,15 @@ export default async function ProjectDetailPage({
             })}
           </div>
         </section>
+
+        <ClosingCta
+          data={{
+            title: "Hetzelfde resultaat voor jouw bedrijf?",
+            accent: "jouw bedrijf?",
+            body: "Plan een gesprek van dertig minuten. We kijken waar jouw site aanvragen laat liggen en wat er nodig is om dat te veranderen. Geen offerte, geen verplichtingen.",
+            cta: { label: "Plan een strategiegesprek", href: CALENDLY },
+          }}
+        />
 
         {related.length > 0 && (
           <section className="section section--dark cosmos-bg">

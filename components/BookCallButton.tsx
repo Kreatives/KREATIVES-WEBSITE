@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import styles from "./BookCallButton.module.css";
 
@@ -59,6 +60,7 @@ const OPTIONS = [
 export default function BookCallButton() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     function onDown(e: MouseEvent) {
@@ -76,6 +78,11 @@ export default function BookCallButton() {
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  // Op de website-scan dekt de sticky widget op mobiel de 'Volgende'-knop af,
+  // waardoor je de scan niet kunt afmaken. Daar laten we hem weg; de scan heeft
+  // zijn eigen boekingslijn in het resultaat.
+  if (pathname?.startsWith("/website-scan")) return null;
 
   return (
     <div className={styles.root} ref={ref}>
