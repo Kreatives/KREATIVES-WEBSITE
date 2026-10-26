@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import { SCAN_BOOKING } from "@/lib/scan";
 import type { ScanAnswers, ScanReport, Verdict } from "@/lib/scan";
 import styles from "./scan.module.css";
@@ -50,13 +51,14 @@ export type ScanResultProps = {
 };
 
 export default function ScanResult({
+  id,
   geenWebsite,
   answers,
   report,
 }: ScanResultProps) {
   if (geenWebsite) return <GeenWebsite answers={answers} />;
   if (!report) return <NietGelukt />;
-  return <Report report={report} answers={answers} />;
+  return <Report id={id} report={report} answers={answers} />;
 }
 
 /* ---------- Herbruikbare bouwstenen ---------- */
@@ -186,9 +188,11 @@ const IconArrowDown = () => (
 /* ---------- Volledig rapport ---------- */
 
 function Report({
+  id,
   report,
   answers,
 }: {
+  id: string;
   report: ScanReport;
   answers: ScanAnswers;
 }) {
@@ -405,6 +409,7 @@ function Report({
         </section>
 
         <VideoBlok />
+        <LeadBlok id={id} answers={answers} />
         <CallBlok coldLead={coldLead} />
 
         <p className={styles.disclaimer}>
@@ -414,6 +419,116 @@ function Report({
         </p>
       </div>
     </>
+  );
+}
+
+function bedrijfUitUrl(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "") || "Onbekend";
+  } catch {
+    return "Onbekend";
+  }
+}
+
+// Niet-blokkerende lead-vorm: het resultaat is al zichtbaar. Vraagt alleen
+// voornaam + e-mail; het bedrijf leiden we af uit de gescande URL. Hangt op de
+// bestaande /api/website-scan/lead (bewaren + Notion + mail naar bezoeker/ons).
+function LeadBlok({ id, answers }: { id: string; answers: ScanAnswers }) {
+  const [voornaam, setVoornaam] = useState("");
+  const [email, setEmail] = useState("");
+  const [hp, setHp] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
+    "idle"
+  );
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const canSend = voornaam.trim().length >= 2 && emailOk && status !== "sending";
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!canSend) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/website-scan/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id,
+          voornaam: voornaam.trim(),
+          email: email.trim(),
+          bedrijf: bedrijfUitUrl(answers.url),
+          company_url: hp,
+        }),
+      });
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (data?.ok) {
+        track("scan_lead");
+        setStatus("done");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "done") {
+    return (
+      <section className={styles.leadBlok}>
+        <h2 className={styles.leadTitle}>Je rapport is onderweg</h2>
+        <p className={styles.leadBody}>
+          We sturen je de volledige analyse per mail. Check ook je spam, voor de
+          zekerheid.
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section className={styles.leadBlok}>
+      <h2 className={styles.leadTitle}>Dit rapport in je mail?</h2>
+      <p className={styles.leadBody}>
+        Laat je naam en e-mailadres achter, dan sturen we je de volledige
+        analyse na zodat je hem rustig kunt teruglezen.
+      </p>
+      <form className={styles.leadForm} onSubmit={submit} noValidate>
+        <input
+          type="text"
+          className={styles.leadInput}
+          placeholder="Voornaam"
+          value={voornaam}
+          onChange={(e) => setVoornaam(e.target.value)}
+          autoComplete="given-name"
+          aria-label="Voornaam"
+        />
+        <input
+          type="email"
+          className={styles.leadInput}
+          placeholder="E-mailadres"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+          aria-label="E-mailadres"
+        />
+        <input
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          className={styles.leadHp}
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+          aria-hidden
+        />
+        <button type="submit" className={styles.leadBtn} disabled={!canSend}>
+          {status === "sending" ? "Versturen…" : "Stuur me het rapport"}
+        </button>
+      </form>
+      {status === "error" && (
+        <p className={styles.leadError}>
+          Er ging iets mis. Probeer het zo nog eens.
+        </p>
+      )}
+    </section>
   );
 }
 
