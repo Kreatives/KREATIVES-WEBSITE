@@ -39,8 +39,17 @@ export default function Button(props: AsLink | AsButton) {
   );
 
   if ("href" in props && props.href) {
+    // Calendly in een nieuw tabblad: je site blijft open én het klik-event kan
+    // versturen voordat er genavigeerd wordt (anders gaat het verloren).
+    const ext = props.href.includes("calendly.com")
+      ? { target: "_blank", rel: "nofollow noopener noreferrer" }
+      : {};
     return (
-      <a className={cls} {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
+      <a
+        className={cls}
+        {...ext}
+        {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
         {inner}
       </a>
     );
