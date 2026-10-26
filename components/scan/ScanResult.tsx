@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { SCAN_BOOKING } from "@/lib/scan";
 import type { ScanAnswers, ScanReport, Verdict } from "@/lib/scan";
 import styles from "./scan.module.css";
@@ -462,7 +462,7 @@ function LeadBlok({ id, answers }: { id: string; answers: ScanAnswers }) {
       });
       const data = await res.json().catch(() => ({ ok: false }));
       if (data?.ok) {
-        track("scan_lead");
+        trackEvent("scan_lead");
         setStatus("done");
       } else {
         setStatus("error");

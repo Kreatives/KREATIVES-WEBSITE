@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { trackEvent } from "@/lib/analytics";
 import styles from "./BookCallButton.module.css";
 
 const CALENDLY_URL = "https://calendly.com/info-jtw/blueprint-sessie";
@@ -119,7 +120,10 @@ export default function BookCallButton() {
         className={styles.button}
         aria-expanded={open}
         aria-label="Contactopties openen"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          if (!open) trackEvent("book_call_open");
+          setOpen((v) => !v);
+        }}
       >
         <span className={styles.avatar} aria-hidden>
           <Image

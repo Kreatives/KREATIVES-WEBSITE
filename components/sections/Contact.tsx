@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { contact } from "@/lib/site";
 import { submitContact } from "@/app/actions/contact";
 import Button from "@/components/Button";
@@ -58,7 +58,7 @@ export default function Contact() {
     }
     form.reset();
     setSent(true);
-    track("contact_submit");
+    trackEvent("contact_submit");
   }
 
   return (
