@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
+import AnalyticsListeners from "@/components/AnalyticsListeners";
 import { dmMono, TYPEKIT_CSS } from "@/lib/fonts";
 import { site, footer } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -147,6 +149,8 @@ export default async function RootLayout({
             <RedesignWizard />
           </SmoothScroll>
         )}
+        <Analytics />
+        <AnalyticsListeners />
       </body>
     </html>
   );

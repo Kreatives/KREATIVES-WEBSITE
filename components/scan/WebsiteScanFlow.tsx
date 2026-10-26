@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { SCAN_BOOKING } from "@/lib/scan";
 import {
   brancheOpties,
@@ -70,6 +71,7 @@ export default function WebsiteScanFlow() {
           onNext={() => {
             setUrlTouched(true);
             if (urlOk) {
+              track("scan_start");
               update("url", normalizeUrl(answers.url));
               setStep(1);
             }
@@ -367,6 +369,7 @@ function AnalyseStep({
             } else if (ev.type === "done" && ev.id) {
               finished = true;
               clearTimeout(timeout);
+              track("scan_complete");
               router.push(`/website-scan/resultaat/${ev.id}`);
               return;
             } else if (ev.type === "error") {

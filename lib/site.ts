@@ -557,44 +557,57 @@ export const tiktok = {
 
 export const pricing = {
   eyebrow: "Prijzen",
-  titleLead: "Transparante prijzen,",
-  titleAccent: "geen verrassingen",
+  titleLead: "Vaste prijzen,",
+  titleAccent: "geen verrassingen.",
   body:
-    "Vooraf duidelijk wat je krijgt en wat het kost. Eén vaste prijs, twee revisierondes inbegrepen, live binnen zes weken.",
+    "Drie trajecten met een vaste prijs, van een losse landingspagina tot een complete herbouw met merk. Per traject staat erbij wat er wel en niet in zit.",
   plans: [
     {
-      name: "Maatwerk website",
+      name: "Landing",
       body:
-        "Een complete maatwerk website voor jouw merk, klaar om mee te groeien.",
-      price: "Vanaf €2.500",
-      priceUnit: "",
-      featured: true,
-      features: [
-        "Maatwerk ontwerp, geen sjablonen",
-        "Tot 7 pagina's",
-        "Mobiel-first responsive",
-        "Twee revisierondes inbegrepen",
-        "Livegang binnen zes weken",
-        "Eerste jaar hosting en onderhoud",
-      ],
-      cta: { label: "Plan een strategiegesprek", href: CALENDLY },
-    },
-    {
-      name: "Maatwerk webshop",
-      body:
-        "Alles uit het website-pakket, uitgebreid met een complete webshop op maat van jouw assortiment.",
-      price: "Vanaf €3.000",
+        "Eén pagina die het gesprek voorbereidt, voor als je al adverteert.",
+      price: "€2.499",
       priceUnit: "",
       featured: false,
       features: [
-        "Alles uit Maatwerk website",
-        "Volledige productcatalogus",
-        "Voorraad en orderbeheer",
-        "Klantaccounts en bestelhistorie",
-        "Tot 30 producten klaar bij oplevering",
-        "30 dagen optimaliseren we op meer verkopen",
+        "Copy en ontwerp door ons",
+        "Twee ontwerprondes",
+        "Formulier en meting op je eigen GA4",
+        "Live in twee weken",
       ],
-      cta: { label: "Plan een strategiegesprek", href: CALENDLY },
+      cta: { label: "Bekijk Landing", href: "/prijzen" },
+    },
+    {
+      name: "Herbouw",
+      body:
+        "De site die weer klopt met waar je bedrijf nu staat.",
+      price: "€4.995",
+      priceUnit: "",
+      featured: true,
+      features: [
+        "Strategie, copy en ontwerp",
+        "Tot tien pagina's",
+        "Drie ontwerprondes",
+        "SEO-basis en GA4 op je naam",
+        "Drie maanden beheer inbegrepen",
+      ],
+      cta: { label: "Bekijk Herbouw", href: "/prijzen" },
+    },
+    {
+      name: "Signatuur",
+      body:
+        "Alles uit Herbouw, plus een merk dat klopt met je niveau.",
+      price: "€9.945",
+      priceUnit: "",
+      featured: false,
+      features: [
+        "Alles uit Herbouw",
+        "Logo, kleur en typografie",
+        "Merkhandleiding",
+        "Fotodag op locatie",
+        "Tot twaalf pagina's",
+      ],
+      cta: { label: "Bekijk Signatuur", href: "/prijzen" },
     },
   ],
 };
