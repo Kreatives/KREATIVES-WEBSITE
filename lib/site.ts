@@ -777,7 +777,7 @@ export const footer = {
         { label: "Reviews", href: "/reviews" },
         { label: "Over ons", href: "/over-ons" },
         { label: "Kennisbank", href: "/blog" },
-        { label: "Prijzen", href: "/#prijzen" },
+        { label: "Prijzen", href: "/prijzen" },
         { label: "Contact", href: "/contact" },
       ],
     },

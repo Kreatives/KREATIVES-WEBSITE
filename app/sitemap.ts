@@ -36,6 +36,7 @@ const STATIC_PAGES: {
   { path: "/werkwijze", priority: 0.8, changeFrequency: "monthly", lastmod: "2026-07-07" },
   { path: "/projecten", priority: 0.8, changeFrequency: "monthly", lastmod: "2026-07-16" },
   { path: "/website-scan", priority: 0.9, changeFrequency: "monthly", lastmod: "2026-10-25" },
+  { path: "/prijzen", priority: 0.9, changeFrequency: "monthly", lastmod: "2026-10-26" },
   { path: "/blauwdruk", priority: 0.8, changeFrequency: "monthly", lastmod: "2026-07-07" },
   { path: "/over-ons", priority: 0.7, changeFrequency: "monthly", lastmod: "2026-07-16" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly", lastmod: "2026-10-25" },
