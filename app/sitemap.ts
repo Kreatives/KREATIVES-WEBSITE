@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { projecten } from "@/lib/projecten";
+import { projectenEn } from "@/lib/projecten-en";
 import { posts as staticPosts } from "@/lib/blog";
 import { REDIRECTED_SLUGS } from "@/lib/redirects";
 
@@ -104,6 +105,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const enProjectUrls = projectenEn.map((p) => ({
+    url: `${site.domain}/en/projects/${p.slug}`,
+    lastModified: iso(PROJECTS_LASTMOD),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
   const postUrls = (await livePosts())
     // URL's met een 301 uitsluiten (bijv. 'drie-redenen' → pillar).
     .filter((p) => !REDIRECTED_SLUGS.has(p.slug))
@@ -114,5 +122,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-  return [...base, ...projectUrls, ...postUrls];
+  return [...base, ...projectUrls, ...enProjectUrls, ...postUrls];
 }

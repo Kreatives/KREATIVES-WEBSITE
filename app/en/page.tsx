@@ -74,6 +74,7 @@ export default async function EnHome() {
           meta={casesEn}
           allHref={casesEn.allHref}
           allLabel={casesEn.allLabel}
+          basePath="/en/projects"
         />
         <Reviews items={reviewItems} meta={reviewsMetaEn} />
       </div>

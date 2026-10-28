@@ -60,6 +60,7 @@ export default async function EnProjects() {
         }}
         allHref={CALENDLY}
         allLabel="Book a strategy call"
+        basePath="/en/projects"
       />
     </>
   );

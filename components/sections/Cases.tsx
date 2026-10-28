@@ -13,7 +13,7 @@ export type CaseItem = {
   tags: string[];
 };
 
-export default function Cases({ items, meta = cases, allHref = "/projecten", allLabel = "Bekijk alle cases" }: { items: CaseItem[]; meta?: { eyebrow: string; titleLead: string; titleAccent: string }; allHref?: string; allLabel?: string }) {
+export default function Cases({ items, meta = cases, allHref = "/projecten", allLabel = "Bekijk alle cases", basePath = "/projecten" }: { items: CaseItem[]; meta?: { eyebrow: string; titleLead: string; titleAccent: string }; allHref?: string; allLabel?: string; basePath?: string }) {
   const left = items.filter((_, i) => i % 2 === 0);
   const right = items.filter((_, i) => i % 2 === 1);
 
@@ -34,12 +34,12 @@ export default function Cases({ items, meta = cases, allHref = "/projecten", all
         <div className={styles.cols}>
           <ul className={styles.col}>
             {left.map((c) => (
-              <Card key={c.slug} c={c} />
+              <Card key={c.slug} c={c} basePath={basePath} />
             ))}
           </ul>
           <ul className={`${styles.col} ${styles.colOffset}`}>
             {right.map((c) => (
-              <Card key={c.slug} c={c} />
+              <Card key={c.slug} c={c} basePath={basePath} />
             ))}
           </ul>
         </div>
@@ -48,10 +48,10 @@ export default function Cases({ items, meta = cases, allHref = "/projecten", all
   );
 }
 
-function Card({ c }: { c: CaseItem }) {
+function Card({ c, basePath }: { c: CaseItem; basePath: string }) {
   return (
     <li className={styles.card} data-reveal>
-      <Link href={`/projecten/${c.slug}`} className={styles.link}>
+      <Link href={`${basePath}/${c.slug}`} className={styles.link}>
         <div className={styles.media}>
           <Image
             src={c.image}
