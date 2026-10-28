@@ -34,30 +34,6 @@ function CalendarIcon() {
   );
 }
 
-const OPTIONS = [
-  {
-    label: "WhatsApp",
-    sub: "Stuur een berichtje",
-    href: WHATSAPP_URL,
-    external: true,
-    icon: <WhatsappIcon />,
-  },
-  {
-    label: "E-mail",
-    sub: EMAIL,
-    href: `mailto:${EMAIL}`,
-    external: false,
-    icon: <MailIcon />,
-  },
-  {
-    label: "Plan een gesprek",
-    sub: "Gratis & vrijblijvend",
-    href: CALENDLY_URL,
-    external: true,
-    icon: <CalendarIcon />,
-  },
-];
-
 export default function BookCallButton() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -85,6 +61,32 @@ export default function BookCallButton() {
   // zijn eigen boekingslijn in het resultaat.
   if (pathname?.startsWith("/website-scan")) return null;
 
+  // Engelse variant op /en.
+  const en = pathname?.startsWith("/en") ?? false;
+  const options = [
+    {
+      label: "WhatsApp",
+      sub: en ? "Send a message" : "Stuur een berichtje",
+      href: WHATSAPP_URL,
+      external: true,
+      icon: <WhatsappIcon />,
+    },
+    {
+      label: en ? "Email" : "E-mail",
+      sub: EMAIL,
+      href: `mailto:${EMAIL}`,
+      external: false,
+      icon: <MailIcon />,
+    },
+    {
+      label: en ? "Book a call" : "Plan een gesprek",
+      sub: en ? "Free & non-binding" : "Gratis & vrijblijvend",
+      href: CALENDLY_URL,
+      external: true,
+      icon: <CalendarIcon />,
+    },
+  ];
+
   return (
     <div className={styles.root} ref={ref}>
       <div
@@ -92,7 +94,7 @@ export default function BookCallButton() {
         role="menu"
         aria-hidden={!open}
       >
-        {OPTIONS.map((o, i) => (
+        {options.map((o, i) => (
           <a
             key={o.label}
             href={o.href}
@@ -101,7 +103,7 @@ export default function BookCallButton() {
             className={styles.option}
             role="menuitem"
             tabIndex={open ? 0 : -1}
-            style={{ transitionDelay: open ? `${0.04 * (OPTIONS.length - i)}s` : "0s" }}
+            style={{ transitionDelay: open ? `${0.04 * (options.length - i)}s` : "0s" }}
             onClick={() => setOpen(false)}
           >
             <span className={styles.optIcon} aria-hidden>
@@ -119,7 +121,7 @@ export default function BookCallButton() {
         type="button"
         className={styles.button}
         aria-expanded={open}
-        aria-label="Contactopties openen"
+        aria-label={en ? "Open contact options" : "Contactopties openen"}
         onClick={() => {
           if (!open) trackEvent("book_call_open");
           setOpen((v) => !v);
@@ -135,8 +137,12 @@ export default function BookCallButton() {
           />
         </span>
         <span className={styles.text}>
-          <span className={styles.title}>Plan een gesprek</span>
-          <span className={styles.sub}>Gratis &amp; vrijblijvend</span>
+          <span className={styles.title}>
+            {en ? "Book a call" : "Plan een gesprek"}
+          </span>
+          <span className={styles.sub}>
+            {en ? "Free & non-binding" : "Gratis & vrijblijvend"}
+          </span>
         </span>
         <span
           className={`${styles.icon} ${open ? styles.iconOpen : ""}`}

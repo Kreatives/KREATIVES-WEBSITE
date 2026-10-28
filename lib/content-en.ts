@@ -153,7 +153,7 @@ export const pricingEn = {
     {
       name: "Landing",
       body: "One page that prepares the conversation, for when you already advertise.",
-      price: "€2,499",
+      price: "$2,499",
       priceUnit: "",
       featured: false,
       features: [
@@ -167,7 +167,7 @@ export const pricingEn = {
     {
       name: "Rebuild",
       body: "The site that fits where your business stands today.",
-      price: "€4,995",
+      price: "$4,995",
       priceUnit: "",
       featured: true,
       features: [
@@ -182,7 +182,7 @@ export const pricingEn = {
     {
       name: "Signature",
       body: "Everything in Rebuild, plus a brand that matches your level.",
-      price: "€9,945",
+      price: "$9,945",
       priceUnit: "",
       featured: false,
       features: [

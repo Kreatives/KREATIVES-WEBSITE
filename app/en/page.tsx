@@ -6,7 +6,6 @@ import Probleem from "@/components/sections/Probleem";
 import Werkwijze from "@/components/sections/Werkwijze";
 import Cases from "@/components/sections/Cases";
 import Reviews from "@/components/sections/Reviews";
-import TikTokMarquee from "@/components/sections/TikTokMarquee";
 import Pricing from "@/components/sections/Pricing";
 import ClosingCta from "@/components/sections/ClosingCta";
 import { getFeaturedProjects, initialsOf } from "@/lib/cms";
@@ -20,7 +19,6 @@ import {
   casesEn,
   reviewsMetaEn,
   reviewsPageEn,
-  tiktokEn,
   pricingEn,
   closingCtaEn,
   projectLinesEn,
@@ -79,7 +77,6 @@ export default async function EnHome() {
         />
         <Reviews items={reviewItems} meta={reviewsMetaEn} />
       </div>
-      <TikTokMarquee data={tiktokEn} />
       <Pricing data={pricingEn} />
       <ClosingCta data={closingCtaEn} locale="en" />
       <SiteJsonLd />
