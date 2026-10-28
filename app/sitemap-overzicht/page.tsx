@@ -2,12 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import { getPosts, getProjects } from "@/lib/cms";
+import { REDIRECTED_SLUGS } from "@/lib/redirects";
+import { steden } from "@/lib/steden";
+import { OG_IMAGE } from "@/lib/site";
 import styles from "./sitemap-overzicht.module.css";
 
 // Interne, visuele sitemap voor Ricky. Niet in de navigatie, niet indexeerbaar.
 export const metadata: Metadata = {
   title: "Sitemap-overzicht",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/sitemap-overzicht" },
+  openGraph: {
+    title: "Sitemap-overzicht | KREATIVES",
+    description: "De volledige paginastructuur van kreatives.nl in één oogopslag.",
+    url: "/sitemap-overzicht",
+    images: [OG_IMAGE],
+  },
 };
 
 export const dynamic = "force-dynamic";
@@ -17,6 +27,7 @@ type Node = { href: string; label: string; children?: Node[] };
 export default async function SitemapOverzichtPage() {
   const [projects, posts] = await Promise.all([getProjects(), getPosts()]);
   const sortedPosts = posts
+    .filter((p) => !REDIRECTED_SLUGS.has(p.slug))
     .slice()
     .sort((a, b) => (a.date > b.date ? -1 : 1));
 
@@ -37,6 +48,13 @@ export default async function SitemapOverzichtPage() {
           ],
         },
       ],
+    },
+    {
+      title: "Regio's",
+      items: steden.map((s) => ({
+        href: `/${s.slug}`,
+        label: `Webdesign ${s.city}`,
+      })),
     },
     {
       title: "Werk",
@@ -71,7 +89,7 @@ export default async function SitemapOverzichtPage() {
         { href: "/werkwijze", label: "Werkwijze" },
         { href: "/reviews", label: "Reviews" },
         { href: "/faq", label: "Veelgestelde vragen" },
-        { href: "/blauwdruk", label: "Blueprint-sessie" },
+        { href: "/blauwdruk", label: "Gratis blauwdruk" },
         { href: "/contact", label: "Contact" },
       ],
     },
@@ -102,7 +120,7 @@ export default async function SitemapOverzichtPage() {
           </h1>
           <p className={styles.lead} data-reveal>
             De volledige structuur van kreatives.nl in één oogopslag. Dit is een
-            interne pagina (niet in het menu, niet vindbaar in Google). {total}{" "}
+            interne pagina (niet in het menu, niet in Google). {total}{" "}
             pagina&apos;s in totaal. De versie voor Google Search Console staat op{" "}
             <a className={styles.xml} href="/sitemap.xml">
               /sitemap.xml

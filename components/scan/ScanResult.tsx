@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { SCAN_BOOKING } from "@/lib/scan";
 import type { ScanAnswers, ScanReport, Verdict } from "@/lib/scan";
@@ -553,6 +553,17 @@ function Pijnpunt({
 
 function VideoBlok() {
   const [open, setOpen] = useState(false);
+
+  // Escape sluit de video-overlay, net als het mobiele menu.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   if (!VIDEO_URL) return null;
   return (
     <section className={styles.videoBlok}>
@@ -570,7 +581,13 @@ function VideoBlok() {
         </span>
       </button>
       {open && (
-        <div className={styles.modal} role="dialog" aria-modal onClick={() => setOpen(false)}>
+        <div
+          className={styles.modal}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Uitleg van Ricky"
+          onClick={() => setOpen(false)}
+        >
           <div className={styles.modalInner} onClick={(e) => e.stopPropagation()}>
             <button
               type="button"

@@ -7,7 +7,7 @@ import StatsBlock from "@/components/funnel/StatsBlock";
 import FounderWords from "@/components/funnel/FounderWords";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
-import { werkwijzePage } from "@/lib/site";
+import { werkwijzePage, OG_IMAGE } from "@/lib/site";
 import { getBigReviewItems } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
     "Van brief naar live, zonder verrassingen. Een heldere lijn in vijf stappen, met een vaste tijdlijn, één aanspreekpunt en revisierondes inbegrepen.",
   alternates: { canonical: "/werkwijze" },
   openGraph: {
-    title: "Werkwijze — KREATIVES",
+    title: "Werkwijze | KREATIVES",
     description:
       "Een voorspelbaar traject van brief naar live, in vijf heldere stappen.",
     url: "/werkwijze",
+    images: [OG_IMAGE],
   },
 };
 

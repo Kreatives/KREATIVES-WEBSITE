@@ -2,16 +2,12 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { projecten } from "@/lib/projecten";
 import { posts as staticPosts } from "@/lib/blog";
+import { REDIRECTED_SLUGS } from "@/lib/redirects";
 
 // Elk uur verversen zodat nieuw gepubliceerde blogs vanzelf in de sitemap komen.
 export const revalidate = 3600;
 
 type Freq = "weekly" | "monthly" | "yearly";
-
-// URL's met een 301 horen niet in de sitemap. De pillar vangt het oude adres op.
-const REDIRECTED_SLUGS = new Set([
-  "drie-redenen-om-je-site-opnieuw-te-laten-bouwen",
-]);
 
 // Alle statische, publieke pagina's. `lastmod` is de laatste écht inhoudelijke
 // wijziging per pagina (ISO-datum), niet de requesttijd. Een betekenisloze,
@@ -41,11 +37,16 @@ const STATIC_PAGES: {
   { path: "/over-ons", priority: 0.7, changeFrequency: "monthly", lastmod: "2026-07-16" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly", lastmod: "2026-10-25" },
   { path: "/reviews", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-25" },
-  { path: "/faq", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-07-07" },
-  { path: "/contact", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-07-07" },
-  { path: "/sitemap-overzicht", priority: 0.3, changeFrequency: "yearly", lastmod: "2026-06-06" },
+  { path: "/faq", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-26" },
+  { path: "/contact", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-26" },
+  // /sitemap-overzicht staat op noindex, dus hoort niet in de sitemap.
   { path: "/voorwaarden", priority: 0.3, changeFrequency: "yearly", lastmod: "2026-06-06" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly", lastmod: "2026-06-06" },
+  // Engelstalige variant.
+  { path: "/en", priority: 0.7, changeFrequency: "monthly", lastmod: "2026-10-28" },
+  { path: "/en/projects", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-28" },
+  { path: "/en/about", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-28" },
+  { path: "/en/reviews", priority: 0.5, changeFrequency: "monthly", lastmod: "2026-10-28" },
 ];
 
 // Projectcases wijzigen zelden; de laatste CMS-opzet als vaste datum.

@@ -2,34 +2,34 @@ import { closingCta } from "@/lib/site";
 import Button from "@/components/Button";
 import styles from "./ClosingCta.module.css";
 
-export default function ClosingCta() {
-  const maand = new Date().toLocaleString("nl-NL", { month: "long" });
+export default function ClosingCta({ data = closingCta, locale = "nl" }: { data?: typeof closingCta; locale?: "nl" | "en" }) {
+  const maand = new Date().toLocaleString(locale === "en" ? "en-US" : "nl-NL", { month: "long" });
   return (
     <section className={`section--dark cosmos-bg ${styles.sec}`} id="contact">
       <div className="container">
         <div className={styles.inner} data-reveal>
-          {closingCta.pulse && (
+          {data.pulse && (
             <span className={styles.pulse}>
               <span className={styles.pulseDot} aria-hidden />
-              {closingCta.pulse} {maand}.
+              {data.pulse} {maand}.
             </span>
           )}
           <h2 className={`h2 ${styles.title}`}>
-            {closingCta.titleLead}{" "}
+            {data.titleLead}{" "}
             <span className="accent accent--orange">
-              {closingCta.titleAccent}
+              {data.titleAccent}
             </span>
           </h2>
-          <p className={styles.body}>{closingCta.body}</p>
+          <p className={styles.body}>{data.body}</p>
           <Button
-            href={closingCta.cta.href}
+            href={data.cta.href}
             variant="primary"
             className={styles.btn}
           >
-            {closingCta.cta.label}
+            {data.cta.label}
           </Button>
-          {closingCta.ctaMicro && (
-            <p className={styles.micro}>{closingCta.ctaMicro}</p>
+          {data.ctaMicro && (
+            <p className={styles.micro}>{data.ctaMicro}</p>
           )}
         </div>
       </div>

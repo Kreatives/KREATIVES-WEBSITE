@@ -9,7 +9,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import BookCallButton from "@/components/BookCallButton";
-import RedesignWizard from "@/components/RedesignWizard";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,6 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Webdesign & Branding uit Arnhem | KREATIVES",
     description: site.description,
+    images: [`${site.domain}/twitter-image.png`],
   },
   robots: { index: true, follow: true },
 };
@@ -124,10 +124,12 @@ export default async function RootLayout({
 }) {
   const pathname = (await headers()).get("x-pathname") || "";
   const bare = pathname.startsWith("/login") || pathname.startsWith("/admin");
+  // Engelse variant op /en: schakelt de taal van <html>, de nav en de footer om.
+  const locale: "nl" | "en" = pathname.startsWith("/en") ? "en" : "nl";
 
   return (
     <html
-      lang="nl"
+      lang={locale}
       className={`${dmMono.variable}`}
     >
       <head>
@@ -162,11 +164,10 @@ gtag('config', '${GA_ID}');`}
           children
         ) : (
           <SmoothScroll>
-            <Nav />
+            <Nav locale={locale} />
             <main>{children}</main>
-            <Footer />
+            <Footer locale={locale} />
             <BookCallButton />
-            <RedesignWizard />
           </SmoothScroll>
         )}
         <Analytics />

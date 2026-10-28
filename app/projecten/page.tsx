@@ -4,6 +4,7 @@ import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import { Arrow } from "@/components/icons";
 import { getProjects } from "@/lib/cms";
+import { OG_IMAGE } from "@/lib/site";
 import styles from "./projecten.module.css";
 
 export const metadata: Metadata = {
@@ -11,6 +12,13 @@ export const metadata: Metadata = {
   description:
     "Maatwerk websites en webshops die we de afgelopen periode hebben opgeleverd voor merken en ondernemers door heel Nederland.",
   alternates: { canonical: "/projecten" },
+  openGraph: {
+    title: "Projecten | KREATIVES",
+    description:
+      "Een doorsnede van het werk dat we recent hebben opgeleverd, met de aanpak en het resultaat per project.",
+    url: "/projecten",
+    images: [OG_IMAGE],
+  },
 };
 
 export const dynamic = "force-dynamic";

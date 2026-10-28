@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { SCAN_BOOKING } from "@/lib/scan";
@@ -37,13 +37,16 @@ export default function WebsiteScanFlow() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<ScanAnswers>(emptyAnswers);
   const [urlTouched, setUrlTouched] = useState(false);
+  // Honeypot: voor mensen onzichtbaar, bots vullen hem in. De analyze-route
+  // breekt de aanvraag af zodra dit veld gevuld binnenkomt.
+  const [hp, setHp] = useState("");
 
   function update<K extends keyof ScanAnswers>(key: K, value: ScanAnswers[K]) {
     setAnswers((a) => ({ ...a, [key]: value }));
   }
 
   const urlOk = isValidUrl(answers.url);
-  const progress = Math.round(((step + 1) / TOTAL_STEPS) * 100);
+  const progress = Math.round(((step + 1) / (TOTAL_STEPS - 1)) * 100);
 
   return (
     <div className={styles.flow}>
@@ -70,13 +73,14 @@ export default function WebsiteScanFlow() {
           onBack={null}
           onNext={() => {
             setUrlTouched(true);
-            if (urlOk) {
+            // Wie eerder "nog geen website" koos en terugkwam, mag zonder URL door.
+            if (urlOk || answers.geenWebsite) {
+              if (urlOk) update("url", normalizeUrl(answers.url));
               trackEvent("scan_start");
-              update("url", normalizeUrl(answers.url));
               setStep(1);
             }
           }}
-          nextDisabled={!urlOk}
+          nextDisabled={!urlOk && !answers.geenWebsite}
         >
           <label className={styles.srOnly} htmlFor="scan-url">
             Website-URL
@@ -89,15 +93,34 @@ export default function WebsiteScanFlow() {
             placeholder="jouwbedrijf.nl"
             value={answers.url}
             autoFocus
-            onChange={(e) => update("url", e.target.value)}
+            onChange={(e) => {
+              update("url", e.target.value);
+              if (e.target.value) update("geenWebsite", false);
+            }}
             onBlur={() => setUrlTouched(true)}
           />
           {urlTouched && !urlOk && answers.url !== "" && (
             <p className={styles.error}>Vul een geldig webadres in.</p>
           )}
-          <a className={styles.textLink} href={SCAN_BOOKING}>
-            Ik heb nog geen website — plan direct een gesprek
-          </a>
+          <input
+            type="text"
+            className={styles.srOnly}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden
+            value={hp}
+            onChange={(e) => setHp(e.target.value)}
+          />
+          <button
+            type="button"
+            className={styles.textLink}
+            onClick={() => {
+              update("geenWebsite", true);
+              setStep(1);
+            }}
+          >
+            Ik heb nog geen website
+          </button>
         </Step>
       )}
 
@@ -196,7 +219,9 @@ export default function WebsiteScanFlow() {
         </Step>
       )}
 
-      {step === 4 && <AnalyseStep answers={answers} onBack={() => setStep(0)} />}
+      {step === 4 && (
+        <AnalyseStep answers={answers} hp={hp} onBack={() => setStep(0)} />
+      )}
     </div>
   );
 }
@@ -260,6 +285,7 @@ function Group({
           <button
             key={o}
             type="button"
+            aria-pressed={value === o}
             className={`${styles.option} ${
               value === o ? styles.optionActive : ""
             }`}
@@ -317,19 +343,21 @@ function MultiGroup({
 
 function AnalyseStep({
   answers,
+  hp,
   onBack,
 }: {
   answers: ScanAnswers;
+  hp: string;
   onBack: () => void;
 }) {
   const router = useRouter();
   const [active, setActive] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const startedRef = useRef(false);
+  // Ophogen laat het effect hieronder opnieuw lopen, zodat "Opnieuw proberen"
+  // echt een nieuwe analyse start in plaats van terug te springen naar stap 1.
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    if (startedRef.current) return;
-    startedRef.current = true;
     let finished = false;
     const fail = () => {
       if (!finished) {
@@ -344,7 +372,7 @@ function AnalyseStep({
         const res = await fetch("/api/website-scan/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(answers),
+          body: JSON.stringify({ ...answers, company_url: hp }),
         });
         if (!res.body) throw new Error("no stream");
         const reader = res.body.getReader();
@@ -390,7 +418,7 @@ function AnalyseStep({
     })();
 
     return () => clearTimeout(timeout);
-  }, [answers, router]);
+  }, [answers, router, attempt, hp]);
 
   if (error) {
     return (
@@ -400,13 +428,29 @@ function AnalyseStep({
           {error} Plan een gesprek, dan kijk ik er zelf naar.
         </p>
         <div className={styles.stepNav}>
-          <button type="button" className={styles.back} onClick={onBack}>
+          <button
+            type="button"
+            className={styles.back}
+            onClick={() => {
+              setError(null);
+              setActive(0);
+              setAttempt((a) => a + 1);
+            }}
+          >
             Opnieuw proberen
           </button>
           <a className={styles.next} href={SCAN_BOOKING}>
             Plan een gesprek
           </a>
         </div>
+        <button
+          type="button"
+          className={styles.textLink}
+          style={{ marginTop: "1rem" }}
+          onClick={onBack}
+        >
+          Antwoorden aanpassen
+        </button>
       </div>
     );
   }

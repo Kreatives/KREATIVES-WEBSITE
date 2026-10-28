@@ -122,7 +122,7 @@ export const termsConditions: LegalDoc = {
     {
       heading: "6. Revisies",
       body: [
-        "Bij een ontwerptraject zijn twee revisierondes inbegrepen. Aanvullende wijzigingen of meerwerk buiten de oorspronkelijke opdracht worden in overleg en tegen het geldende tarief uitgevoerd.",
+        "Het aantal ontwerp- en revisierondes staat per traject in de offerte: twee bij Landing, drie bij Herbouw en Signatuur. Aanvullende wijzigingen of meerwerk buiten de oorspronkelijke opdracht worden in overleg en tegen het geldende tarief uitgevoerd.",
       ],
     },
     {

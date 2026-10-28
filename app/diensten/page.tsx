@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
-import { dienstenOverzicht } from "@/lib/site";
+import { dienstenOverzicht, OG_IMAGE } from "@/lib/site";
 import { Arrow } from "@/components/icons";
 import styles from "./diensten.module.css";
 
@@ -11,10 +11,11 @@ export const metadata: Metadata = {
     "Maatwerk webdesign en AI-oplossingen van KREATIVES. Twee diensten die elkaar versterken: websites die kloppen met je merk en AI die werk uit handen neemt.",
   alternates: { canonical: "/diensten" },
   openGraph: {
-    title: "Diensten — KREATIVES",
+    title: "Diensten | KREATIVES",
     description:
       "Maatwerk webdesign en AI-oplossingen die elkaar versterken.",
     url: "/diensten",
+    images: [OG_IMAGE],
   },
 };
 

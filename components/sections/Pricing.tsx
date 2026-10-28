@@ -18,22 +18,22 @@ function Check() {
   );
 }
 
-export default function Pricing() {
+export default function Pricing({ data = pricing }: { data?: typeof pricing }) {
   return (
     <section className={`section ${styles.sec}`} id="prijzen">
       <div className="container">
         <div className={styles.head}>
           <h2 className={`h2 ${styles.title}`} data-reveal>
-            {pricing.titleLead}{" "}
-            <span className={styles.titleMuted}>{pricing.titleAccent}</span>
+            {data.titleLead}{" "}
+            <span className={styles.titleMuted}>{data.titleAccent}</span>
           </h2>
           <p className={`lead muted ${styles.body}`} data-reveal>
-            {pricing.body}
+            {data.body}
           </p>
         </div>
 
         <div className={styles.grid}>
-          {pricing.plans.map((p) => (
+          {data.plans.map((p) => (
             <article
               key={p.name}
               className={`${styles.card} ${

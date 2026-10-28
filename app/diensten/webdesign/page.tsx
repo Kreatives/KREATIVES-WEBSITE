@@ -9,7 +9,7 @@ import IconCards from "@/components/funnel/IconCards";
 import FounderWords from "@/components/funnel/FounderWords";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
-import { webdesignFunnel } from "@/lib/site";
+import { webdesignFunnel, OG_IMAGE } from "@/lib/site";
 import { getBigReviewItems, getFeaturedProjects } from "@/lib/cms";
 import { steden } from "@/lib/steden";
 import stedenStyles from "./steden.module.css";
@@ -20,10 +20,11 @@ export const metadata: Metadata = {
     "Redesigns en landingspagina's voor ondernemers die meer willen dan een nette site. Maatwerk webdesign gebouwd op uitstraling én conversie.",
   alternates: { canonical: "/diensten/webdesign" },
   openGraph: {
-    title: "Webdesign — KREATIVES",
+    title: "Webdesign | KREATIVES",
     description:
       "Redesigns en landingspagina's gebouwd op uitstraling én conversie.",
     url: "/diensten/webdesign",
+    images: [OG_IMAGE],
   },
 };
 

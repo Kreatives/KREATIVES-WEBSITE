@@ -64,8 +64,8 @@ export const posts: Post[] = [
       "### Is een AI-website beter voor Google?",
       "Niet automatisch. Google beoordeelt de kwaliteit en bruikbaarheid van je content, niet of er AI aan te pas kwam. Slecht ingezette AI schaadt je vindbaarheid juist.",
       "### Kan ik later AI-functies toevoegen aan mijn bestaande site?",
-      "Vaak wel, mits je site technisch gezond is. In een [blueprint-sessie](/blauwdruk) kijken we of dat in jouw geval kan.",
-      "Benieuwd wat AI concreet voor jouw site kan betekenen? Bekijk onze [AI-diensten](/diensten/ai) of plan een [vrijblijvende blueprint-sessie](/blauwdruk).",
+      "Vaak wel, mits je site technisch gezond is. In een [strategiegesprek](/blauwdruk) kijken we of dat in jouw geval kan.",
+      "Benieuwd wat AI concreet voor jouw site kan betekenen? Bekijk onze [AI-diensten](/diensten/ai) of plan een [vrijblijvend strategiegesprek](/blauwdruk).",
     ],
   },
   {
@@ -97,7 +97,7 @@ export const posts: Post[] = [
       "## Vernieuwen of opnieuw bouwen?",
       "Niet elk signaal vraagt om een complete herbouw. Soms is een opfrisbeurt genoeg. Dit is het verschil.",
       "| Situatie | Aanpak |\n| --- | --- |\n| Verouderde uitstraling, techniek is gezond | Opfrissen |\n| Trage of onveilige techniek | Herbouwen |\n| Aanbod en doelgroep zijn veranderd | Herbouwen |\n| Losse pagina presteert slecht | Landingspagina vernieuwen |",
-      "Twijfel je tussen opfrissen en opnieuw bouwen? Bekijk [wat we voor anderen deden](/projecten) of laat ons in een [blueprint-sessie](/blauwdruk) meekijken.",
+      "Twijfel je tussen opfrissen en opnieuw bouwen? Bekijk [wat we voor anderen deden](/projecten) of laat ons in een [strategiegesprek](/blauwdruk) meekijken.",
       "## Veelgestelde vragen over het vernieuwen van je website",
       "### Hoe vaak moet een website vernieuwd worden?",
       "Als vuistregel elke drie tot vijf jaar. Techniek en verwachtingen verschuiven snel, en na die periode loopt een site meestal op meerdere vlakken achter.",
@@ -105,7 +105,7 @@ export const posts: Post[] = [
       "Een opfrisbeurt is er soms al vanaf een paar honderd euro, een volledige herbouw begint meestal rond 2.500 euro. Lees onze uitleg over [wat een website in 2026 kost](/blog/wat-kost-een-website-laten-maken-in-2026).",
       "### Verlies ik mijn Google-posities bij een nieuwe site?",
       "Niet als het goed gebeurt. Met de juiste doorverwijzingen en behoud van je content houd je je posities, en vaak verbeter je ze zelfs.",
-      "Herken je twee of meer signalen? Plan dan een [vrijblijvende blueprint-sessie](/blauwdruk) en ontdek wat een [nieuwe website](/diensten/webdesign) je oplevert.",
+      "Herken je twee of meer signalen? Plan dan een [vrijblijvend strategiegesprek](/blauwdruk) en ontdek wat een [nieuwe website](/diensten/webdesign) je oplevert.",
     ],
   },
   {
@@ -145,7 +145,7 @@ export const posts: Post[] = [
       "Met een snelle site, je adres en openingstijden goed vermeld, en een gekoppeld Google-bedrijfsprofiel. Zo verschijn je bij zoekopdrachten als 'eten + jouw plaats'.",
       "### Kan ik het menu zelf bijwerken?",
       "Bij een goed gebouwde site wel. Vraag hier vooraf naar, want een menu dat je zelf beheert scheelt je op termijn veel tijd en geld.",
-      "Klaar om je tafels voller te krijgen? Plan een [vrijblijvende blueprint-sessie](/blauwdruk) of bekijk eerst [wat we voor andere ondernemers bouwden](/projecten).",
+      "Klaar om je tafels voller te krijgen? Plan een [vrijblijvend strategiegesprek](/blauwdruk) of bekijk eerst [wat we voor andere ondernemers bouwden](/projecten).",
     ],
   },
   {
@@ -184,7 +184,7 @@ export const posts: Post[] = [
       "Door te schrijven over de vragen waar jouw doelgroep mee worstelt. Elk artikel dat een echt probleem beantwoordt, trekt precies de mensen die je zoekt.",
       "### Moet ik mijn tarieven op de site zetten?",
       "Dat mag, maar het hoeft niet. Belangrijker is dat de bezoeker de waarde voelt en makkelijk een gesprek kan plannen, waarin je de prijs in context zet.",
-      "Klaar voor een site die klanten oplevert in plaats van alleen bezoekers? Plan een [vrijblijvende blueprint-sessie](/blauwdruk) of bekijk [wat we voor anderen bouwden](/projecten).",
+      "Klaar voor een site die klanten oplevert in plaats van alleen bezoekers? Plan een [vrijblijvend strategiegesprek](/blauwdruk) of bekijk [wat we voor anderen bouwden](/projecten).",
     ],
   },
   {
@@ -257,7 +257,7 @@ export const posts: Post[] = [
       "Dit is de fout die je niet ziet, en daarom de duurste. Een AI-builder geeft je een pagina, geen systeem. Er is vaak geen CMS om zelf teksten aan te passen zonder dat er iets breekt. Er zit geen structuur achter die is bedacht vanuit wat jouw klant nodig heeft om te beslissen. En er is geen plan voor vindbaarheid of een logische reden waarom sectie drie op sectie twee volgt. De eerste negen punten prompt je er vanavond nog uit. Dit tiende punt niet. Een goede structuur komt niet uit een tekstvak. Die komt van iemand die vaak genoeg heeft gezien wat werkt voor bedrijven zoals dat van jou. Meer daarover lees je in onze gids over een [AI-website laten maken](/blog/ai-website-laten-maken).",
       "## Je site in één avond een stuk beter maken",
       "Loop de eerste negen punten van boven naar beneden langs en pak ze één voor één op. Begin bij de tekst, want daar zit de meeste winst: haal het staccato-ritme en de contrastzinnen eruit en schrijf zoals je praat. Verklein daarna je kop, ruim de schaduwen op en vervang de standaard gradient door je eigen kleuren. In een paar uur ziet je site er al rustiger en eigener uit.",
-      "Het tiende punt vraagt meer. Wil je dat je site niet alleen beter oogt maar ook echt klanten oplevert, dan helpt het om de structuur en de strategie er goed onder te leggen. Daar kijken we bij [maatwerk webdesign](/diensten/webdesign) en in een [gratis blueprint-sessie](/blauwdruk) samen met je naar.",
+      "Het tiende punt vraagt meer. Wil je dat je site niet alleen beter oogt maar ook echt klanten oplevert, dan helpt het om de structuur en de strategie er goed onder te leggen. Daar kijken we bij [maatwerk webdesign](/diensten/webdesign) en in een [gratis strategiegesprek](/blauwdruk) samen met je naar.",
       "## Veelgestelde vragen over AI-websites",
       "### Kun je zien of een website door AI is gemaakt?",
       "Vaak wel. Let op staccato-zinnen, contrastformuleringen, een enorme kop, dropshadows op alles en een paars-blauwe gradient. Eén zo'n signaal zegt weinig, maar zodra je er drie of meer op één site ziet, is de kans groot dat er weinig sturing aan te pas is gekomen.",
@@ -267,7 +267,7 @@ export const posts: Post[] = [
       "Begin bij de tekst en het kleurgebruik, want daar zit de snelste winst. Schrijf natuurlijke zinnen, kies een eigen palet, verklein je kop en haal overbodige schaduwen en emoji's weg. Werk daarna aan de structuur en zorg voor een CMS waarmee je zelf kunt bijwerken.",
       "### Moet ik mijn site helemaal opnieuw laten bouwen?",
       "Niet altijd. Als de basis klopt, kom je met de aanpassingen hierboven al een heel eind. Merk je dat de opbouw niet aansluit op je aanbod of dat je niets zelf kunt wijzigen, dan is een doordachte herbouw meestal verstandiger dan eindeloos blijven bijschaven. In [onze cases](/projecten) zie je het verschil dat dat maakt.",
-      "Wil je weten hoe jouw site scoort op deze tien punten? [Stuur ons een bericht](/contact) of plan een [gratis blueprint-sessie](/blauwdruk). We lopen je website met je langs deze punten en vertellen je precies wat we zouden aanpakken, en in welke volgorde.",
+      "Wil je weten hoe jouw site scoort op deze tien punten? [Stuur ons een bericht](/contact) of plan een [gratis strategiegesprek](/blauwdruk). We lopen je website met je langs deze punten en vertellen je precies wat we zouden aanpakken, en in welke volgorde.",
     ],
   },
   {
@@ -314,7 +314,7 @@ export const posts: Post[] = [
       "Zorg dat ouders hun vragen beantwoord krijgen en dat aanmelden makkelijk is. Laat echte foto's zien, toon je tarieven met een rekentool, plaats ervaringen van andere ouders en maak het aanvragen van een rondleiding met een kort formulier zo eenvoudig mogelijk. Zorg daarnaast dat je lokaal goed vindbaar bent.",
       "### Kan ik een rekentool voor de opvangkosten toevoegen?",
       "Ja. Een rekentool die de netto kosten na kinderopvangtoeslag laat zien, is een van de meest gewaardeerde onderdelen van een kinderopvangsite. Het geeft ouders duidelijkheid en scheelt jou vragen over prijs.",
-      "Wil je een website die het hele jaar door aanmeldingen oplevert voor je kinderopvang? [Neem contact met ons op](/contact) of plan een [gratis blueprint-sessie](/blauwdruk). We denken graag met je mee over de opzet, de teksten en de vindbaarheid, en laten je zien wat er voor jouw opvang mogelijk is.",
+      "Wil je een website die het hele jaar door aanmeldingen oplevert voor je kinderopvang? [Neem contact met ons op](/contact) of plan een [gratis strategiegesprek](/blauwdruk). We denken graag met je mee over de opzet, de teksten en de vindbaarheid, en laten je zien wat er voor jouw opvang mogelijk is.",
     ],
   },
   // SEO-groeicluster: pillar + twee satellieten (zie lib/blog-groei.ts).

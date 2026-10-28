@@ -113,16 +113,20 @@ export default function Contact() {
 
           <div className={styles.row}>
             <div className={styles.field}>
-              <label htmlFor="naam">Volledige naam</label>
+              <label htmlFor="naam">Volledige naam*</label>
               <input
                 id="naam"
                 name="naam"
                 type="text"
                 autoComplete="name"
                 placeholder="Hoe heet je?"
+                aria-invalid={Boolean(errors.naam)}
+                aria-describedby={errors.naam ? "naam-err" : undefined}
               />
               {errors.naam && (
-                <span className={styles.err}>{errors.naam}</span>
+                <span className={styles.err} id="naam-err">
+                  {errors.naam}
+                </span>
               )}
             </div>
             <div className={styles.field}>
@@ -133,9 +137,13 @@ export default function Contact() {
                 type="email"
                 autoComplete="email"
                 placeholder="je@bedrijf.nl"
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? "email-err" : undefined}
               />
               {errors.email && (
-                <span className={styles.err}>{errors.email}</span>
+                <span className={styles.err} id="email-err">
+                  {errors.email}
+                </span>
               )}
             </div>
           </div>
@@ -177,15 +185,19 @@ export default function Contact() {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="bericht">Bericht</label>
+            <label htmlFor="bericht">Bericht*</label>
             <textarea
               id="bericht"
               name="bericht"
               rows={5}
               placeholder="Vertel kort over je project."
+              aria-invalid={Boolean(errors.bericht)}
+              aria-describedby={errors.bericht ? "bericht-err" : undefined}
             />
             {errors.bericht && (
-              <span className={styles.err}>{errors.bericht}</span>
+              <span className={styles.err} id="bericht-err">
+                {errors.bericht}
+              </span>
             )}
           </div>
 

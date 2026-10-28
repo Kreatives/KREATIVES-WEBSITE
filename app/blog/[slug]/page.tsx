@@ -13,6 +13,7 @@ import PostCta from "@/components/PostCta";
 import PostFaq from "@/components/PostFaq";
 import { formatDate } from "@/lib/blog";
 import { getPostBySlug, getPosts } from "@/lib/cms";
+import { REDIRECTED_SLUGS } from "@/lib/redirects";
 import styles from "./post.module.css";
 
 const SITE_URL = "https://www.kreatives.nl";
@@ -40,7 +41,7 @@ export async function generateMetadata({
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
-      title: `${post.title} — KREATIVES blog`,
+      title: `${post.title} | KREATIVES blog`,
       description: post.excerpt,
       url: `/blog/${post.slug}`,
       images: [post.image],
@@ -69,6 +70,7 @@ export default async function PostDetailPage({
   if (!post) notFound();
 
   const others = (await getPosts())
+    .filter((p) => !REDIRECTED_SLUGS.has(p.slug))
     .slice()
     .sort((a, b) => (a.date > b.date ? -1 : 1))
     .filter((p) => p.slug !== slug)
@@ -109,7 +111,7 @@ export default async function PostDetailPage({
       name: "KREATIVES",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/KREATIVES%20LOGO.svg`,
+        url: `${SITE_URL}/brand/logo.svg`,
       },
     },
     mainEntityOfPage: {

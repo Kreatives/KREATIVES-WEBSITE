@@ -12,7 +12,7 @@ export const CATEGORIES = [
 const MONEY_PAGES = [
   ["/diensten/webdesign", "maatwerk webdesign / redesign"],
   ["/diensten/ai", "AI-websites"],
-  ["/blauwdruk", "gratis blueprint-sessie"],
+  ["/blauwdruk", "gratis blauwdruk"],
   ["/projecten", "onze cases"],
   ["/contact", "contact / gesprek plannen"],
 ];

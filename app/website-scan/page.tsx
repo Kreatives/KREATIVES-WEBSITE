@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import WebsiteScanFlow from "@/components/scan/WebsiteScanFlow";
 import { scan } from "@/lib/scan";
+import { OG_IMAGE } from "@/lib/site";
 import styles from "@/components/scan/scan.module.css";
 
 export const metadata: Metadata = {
@@ -11,11 +12,25 @@ export const metadata: Metadata = {
   description:
     "Laat je homepage analyseren door de ogen van je ideale klant. In een paar minuten zie je waar bezoekers afhaken en waarom. Voor bedrijven met een team.",
   alternates: { canonical: "/website-scan" },
+  openGraph: {
+    title: "Website-scan | KREATIVES",
+    description:
+      "Laat je homepage analyseren door de ogen van je ideale klant. In een paar minuten zie je waar bezoekers afhaken.",
+    url: "/website-scan",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Website-scan | KREATIVES",
+    description:
+      "Laat je homepage analyseren door de ogen van je ideale klant.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function WebsiteScanPage() {
   return (
-    <main className={styles.scanPage}>
+    <div className={styles.scanPage}>
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <span className={styles.heroEyebrow}>{scan.name}</span>
@@ -34,6 +49,6 @@ export default function WebsiteScanPage() {
       <section className={styles.flowWrap}>
         <WebsiteScanFlow />
       </section>
-    </main>
+    </div>
   );
 }

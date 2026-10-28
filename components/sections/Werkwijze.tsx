@@ -5,7 +5,7 @@ import Image from "next/image";
 import { werkwijze } from "@/lib/site";
 import styles from "./Werkwijze.module.css";
 
-export default function Werkwijze() {
+export default function Werkwijze({ data = werkwijze }: { data?: typeof werkwijze }) {
   const [open, setOpen] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
   const followRef = useRef<HTMLDivElement>(null);
@@ -26,18 +26,18 @@ export default function Werkwijze() {
       <div className="container">
         <div className={styles.head}>
           <span className="eyebrow" data-reveal>
-            {werkwijze.eyebrow}
+            {data.eyebrow}
           </span>
           <h2 className={`h2 ${styles.title}`} data-reveal>
-            {werkwijze.titleLead}{" "}
+            {data.titleLead}{" "}
             <span className="accent accent--orange">
-              {werkwijze.titleAccent}
+              {data.titleAccent}
             </span>
           </h2>
         </div>
 
         <ul className={styles.list}>
-          {werkwijze.steps.map((s, i) => {
+          {data.steps.map((s, i) => {
             const isOpen = open === i;
             return (
               <li
@@ -91,7 +91,7 @@ export default function Werkwijze() {
         className={`${styles.follow} ${hover !== null ? styles.followOn : ""}`}
         aria-hidden
       >
-        {werkwijze.steps.map((s, i) => (
+        {data.steps.map((s, i) => (
           <div
             key={s.no}
             className={styles.followImg}

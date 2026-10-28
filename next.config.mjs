@@ -14,12 +14,27 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          // Voorkomt dat de browser het content-type gaat raden (XSS via
+          // geüploade bestanden) en dat de site in een iframe verdwijnt.
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
-      // Oude Engelstalige URL's bestaan niet meer; 301 naar de homepage zodat
-      // eventueel geindexeerde /en-pagina's hun autoriteit doorgeven i.p.v. 404'en.
-      { source: "/en", destination: "/", permanent: true },
-      { source: "/en/:path*", destination: "/", permanent: true },
+      // (De oude /en -> / redirects zijn verwijderd: /en is nu de Engelse site.)
       // De blog 'drie-redenen' gaat op in de pillar (zelfde drie signalen).
       // 301 zodat de opgebouwde autoriteit meeverhuist i.p.v. te 404'en.
       {

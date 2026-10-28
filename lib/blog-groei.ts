@@ -71,7 +71,7 @@ export const groeiPosts: Post[] = [
       "### Wat als ik net iemand heb aangenomen?",
       "Dan is dit het moment. Een teamfoto met de nieuwe collega erop is een half uur werk en meteen het sterkste bewijs dat je hebt.",
       "## Verder lezen",
-      "- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt) — de check die je nu verliest\n- [Je website als je team groeit](/blog/website-team-groei) — wat je bijhoudt bij elke nieuwe collega\n- [Wanneer is het tijd om je website te vernieuwen](/blog/wanneer-is-het-tijd-om-je-website-te-vernieuwen) — de zeven signalen\n- [Website-scan](/website-scan) — twaalf vragen, direct een score\n- [Case Health Champs](/projecten/health-champs) — van visitekaartje naar aanvragen\n- [Webdesign](/diensten/webdesign) — wat we bouwen",
+      "- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt), de check die je nu verliest\n- [Je website als je team groeit](/blog/website-team-groei), wat je bijhoudt bij elke nieuwe collega\n- [Wanneer is het tijd om je website te vernieuwen](/blog/wanneer-is-het-tijd-om-je-website-te-vernieuwen), de zeven signalen\n- [Website-scan](/website-scan), twaalf vragen, direct een score\n- [Case Health Champs](/projecten/health-champs), van visitekaartje naar aanvragen\n- [Webdesign](/diensten/webdesign), wat we bouwen",
       "Wil je weten waar jouw site nu afhaakt? [Doe de scan van twee minuten](/website-scan) en je ziet het direct, zonder e-mailadres. Liever een gesprek van dertig minuten? Dat kan ook, en je krijgt de punten mee op papier."
     ]
   },
@@ -128,7 +128,7 @@ export const groeiPosts: Post[] = [
       "### Wat als mijn concurrent een slechtere site heeft maar wel belt?",
       "Dan wint hij op bereikbaarheid. Zet je nummer groot genoeg neer en zorg dat je opneemt. Een gemiste oproep is duurder dan een lelijke pagina.",
       "## Verder lezen",
-      "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon en de volgorde\n- [Je website als je team groeit](/blog/website-team-groei) — wat je bijhoudt\n- [Reviews](/reviews) — wat klanten over ons zeggen",
+      "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet), het hele patroon en de volgorde\n- [Je website als je team groeit](/blog/website-team-groei), wat je bijhoudt\n- [Reviews](/reviews), wat klanten over ons zeggen",
       "Wil je weten wat een klant bij jou nu wel en niet vindt? [Doe de scan](/website-scan) en je ziet waar je punten laat liggen. Of plan een gesprek, dan lopen we het samen door."
     ]
   },
@@ -188,7 +188,7 @@ export const groeiPosts: Post[] = [
       "### Wie houdt dit bij?",
       "Iemand met een naam, niet \"het team\". Bij ons is dat de persoon die de beheeromgeving beheert, en dat is meestal de eigenaar of de office-manager.",
       "## Verder lezen",
-      "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet) — het hele patroon\n- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt) — de check die je moet halen\n- [Werkwijze](/werkwijze) — hoe wij een traject inrichten",
+      "- [Je bedrijf is gegroeid, je website niet](/blog/bedrijf-gegroeid-website-niet), het hele patroon\n- [Wat een klant opzoekt voor hij je belt](/blog/wat-een-klant-opzoekt), de check die je moet halen\n- [Werkwijze](/werkwijze), hoe wij een traject inrichten",
       "Wil je weten hoe jouw site er nu voor staat? [Doe de scan van twee minuten](/website-scan). Wil je dat hij meegroeit zonder dat je er elke maand aan denkt, plan dan een gesprek."
     ]
   }

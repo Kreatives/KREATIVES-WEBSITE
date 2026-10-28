@@ -3,25 +3,27 @@ import RevealInit from "@/components/RevealInit";
 import Button from "@/components/Button";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
-import { CALENDLY, site } from "@/lib/site";
+import { CALENDLY, site, OG_IMAGE } from "@/lib/site";
 import styles from "./prijzen.module.css";
 
 export const metadata: Metadata = {
   title: "Prijzen: drie trajecten, vaste prijs",
   description:
-    "Drie trajecten met een vaste prijs: Landing (€2.499), Herbouw (€4.995) en Signatuur (€9.945). Je ziet het ontwerp voordat er gebouwd wordt, en per traject staat erbij wat er niet in zit.",
+    "Drie trajecten met een vaste prijs: Landing (€2.499), Herbouw (€4.995) en Signatuur (€9.945). Je ziet het ontwerp voordat er gebouwd wordt.",
   alternates: { canonical: "/prijzen" },
   openGraph: {
-    title: "Prijzen — KREATIVES",
+    title: "Prijzen | KREATIVES",
     description:
       "Drie trajecten, vaste prijzen, en per traject staat erbij wat er niet in zit.",
     url: "/prijzen",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Prijzen — KREATIVES",
+    title: "Prijzen | KREATIVES",
     description:
       "Drie trajecten, vaste prijzen, en per traject staat erbij wat er niet in zit.",
+    images: [OG_IMAGE],
   },
 };
 
@@ -83,7 +85,7 @@ const plans: Plan[] = [
       "Ontwerp in drie rondes, goedgekeurd voordat de bouw start",
       "Bouw, SEO-basis, GA4 en Search Console op jouw naam",
       "Fotobriefing en regie, zodat je niet met losse beelden blijft zitten",
-      "Drie maanden beheer inbegrepen",
+      "Eerste jaar hosting en onderhoud inbegrepen",
       "24 maanden herstelgarantie op de techniek",
     ],
     niet: [
@@ -129,8 +131,8 @@ const garanties = [
       "Voorwaarde: het strategiegesprek is geweest en de boodschap per pagina ligt vast voordat we ontwerpen.",
   },
   {
-    title: "Vier weken, gerekend vanaf akkoord op de copy.",
-    body: "Loopt het door onze schuld uit, dan gaat er €250 per week van de prijs af, tot maximaal €1.000. De klok stopt als wij op jou wachten. Daarom krijg je op dag één een lijst met precies wat we van je nodig hebben, en briefen wij de fotograaf.",
+    title: "Twee weken voor Landing, vier voor Herbouw, zes voor Signatuur.",
+    body: "De klok start bij akkoord op de copy. Loopt het door onze schuld uit, dan gaat er €250 per week van de prijs af, tot maximaal €1.000. De klok stopt als wij op jou wachten. Daarom krijg je op dag één een lijst met precies wat we van je nodig hebben, en briefen wij de fotograaf.",
     voorwaarde:
       "Voorwaarde: cases, cijfers en namen zijn binnen vijf werkdagen na de start compleet.",
   },
@@ -148,7 +150,7 @@ const faq = {
   items: [
     {
       q: "Waarom €4.995 en niet €1.250?",
-      a: "Bij €1.250 krijg je drie tot vijf pagina's in je bestaande huisstijl, zonder tekst en zonder iemand die meedenkt over de volgorde. Bij €4.995 zit de boodschap per pagina erin, de copy, het ontwerp, de bouw, de meting en drie maanden beheer. Dat is het verschil tussen een site die er staat en een site die het gesprek voor je doet.",
+      a: "Bij €1.250 krijg je drie tot vijf pagina's in je bestaande huisstijl, zonder tekst en zonder iemand die meedenkt over de volgorde. Bij €4.995 zit de boodschap per pagina erin, de copy, het ontwerp, de bouw, de meting en het eerste jaar hosting en onderhoud. Dat is het verschil tussen een site die er staat en een site die het gesprek voor je doet.",
     },
     {
       q: "Kan ik in termijnen betalen?",
@@ -164,7 +166,7 @@ const faq = {
     },
     {
       q: "Ons marketingbureau doet de campagnes. Hoe werkt dat samen?",
-      a: "Prima. Zij doen de campagne, wij de pagina's waar de klik landt. Bij Landing krijgt je bureau een briefing van ons, zodat de boodschap in de advertentie en op de pagina hetzelfde is.",
+      a: "Prima. Zij doen de campagne, wij de pagina's waar de klik landt. Bij Landing krijgt jouw bureau een briefing van ons, zodat de boodschap in de advertentie en op de pagina hetzelfde is.",
     },
   ],
 };

@@ -14,6 +14,11 @@ export const site = {
     "Webdesignbureau uit Arnhem dat 100+ websites bouwde voor ondernemers door heel Nederland. Van webdesign tot branding. Plan een vrijblijvend strategiegesprek.",
 };
 
+// Vaste social-share-afbeelding. Next.js vervangt bij een subpagina het hele
+// openGraph-object, dus elke pagina die eigen OG-tekst zet moet deze zelf
+// meegeven, anders valt de afbeelding weg.
+export const OG_IMAGE = `${site.domain}/opengraph-image.png`;
+
 export type NavChild = { label: string; href: string };
 export type NavItem = { label: string; href?: string; children?: NavChild[] };
 
@@ -62,8 +67,8 @@ export const hero = {
   body:
     "Klanten vergelijken je binnen een paar seconden met je concurrent. Wij zorgen dat ze bij jou blijven, en contact opnemen. Binnen 6 weken live.",
   primary: { label: "Plan een strategiegesprek", href: CALENDLY },
-  // Primaire hero-knop: de gratis groeiscan als hoofd-CTA.
-  contactCta: { label: "Doe de gratis groeiscan", href: "/website-scan" },
+  // Primaire hero-knop: de gratis website-scan als hoofd-CTA.
+  contactCta: { label: "Doe de gratis website-scan", href: "/website-scan" },
   // Microcopy onder de primaire knop.
   ctaMicro: "Gratis en in een paar minuten, je ziet meteen waarom bezoekers afhaken.",
   secondary: { label: "Plan een strategiegesprek", href: CALENDLY },
@@ -105,7 +110,7 @@ export const usps = {
   intro:
     "Je werkt rechtstreeks met de mensen die je site bouwen. Geen doorgeefluik, geen sjabloon dat wordt aangepast. Een aanpak die vooraf duidelijk is, en een eindresultaat dat bij je merk past.",
   // Simpele stat-cards (geen beeld). Cijfers komen overeen met onze prijzen en
-  // werkwijze (100% maatwerk, 2 revisierondes inbegrepen, ~4 weken tot live).
+  // werkwijze (100% maatwerk, afgesproken revisierondes inbegrepen, ~6 weken tot live).
   items: [
     {
       stat: "1-op-1",
@@ -114,7 +119,7 @@ export const usps = {
         "Je werkt rechtstreeks met de mensen die je site bouwen. Geen accountmanager, geen doorgeefluik.",
     },
     {
-      stat: "2",
+      stat: "2-3",
       title: "Revisierondes inbegrepen",
       body:
         "Vaste prijs, ook als we onderweg bijschaven. We gaan door tot het klopt, zonder dat de prijs verandert.",
@@ -144,7 +149,7 @@ export const werkwijze = {
       no: "02",
       title: "Design",
       body:
-        "Je krijgt binnen een week een ontwerp op maat te zien. Jij geeft gericht feedback in twee revisierondes, wij scherpen aan tot het klopt. Je hoeft zelf niets te ontwerpen, alleen aan te leveren wat we vooraf afspreken.",
+        "Je krijgt binnen een week een ontwerp op maat te zien. Jij geeft gericht feedback in de afgesproken revisierondes, wij scherpen aan tot het klopt. Je hoeft zelf niets te ontwerpen, alleen aan te leveren wat we vooraf afspreken.",
       image: "/brand/stap-design.webp",
     },
     {
@@ -486,7 +491,7 @@ export const faqHome = {
     {
       category: "Prijzen",
       q: "Komen er kosten achteraf bij?",
-      a: "Nee. We werken met één heldere prijs vooraf, inclusief twee revisierondes. Wat we afspreken is wat je betaalt.",
+      a: "Nee. We werken met één heldere prijs vooraf, inclusief de afgesproken revisierondes. Wat we afspreken is wat je betaalt.",
     },
     {
       category: "Proces",
@@ -589,7 +594,7 @@ export const pricing = {
         "Tot tien pagina's",
         "Drie ontwerprondes",
         "SEO-basis en GA4 op je naam",
-        "Drie maanden beheer inbegrepen",
+        "Eerste jaar hosting en onderhoud inbegrepen",
       ],
       cta: { label: "Bekijk Herbouw", href: "/prijzen" },
     },
@@ -647,9 +652,9 @@ export const diensten: Dienst[] = [
     titleLead: "Maatwerk webdesign dat",
     titleAccent: "blijft hangen.",
     body:
-      "We ontwerpen en bouwen websites vanaf nul rond jouw merk. Geen thema's of sjablonen, maar een ontwerp dat klopt met hoe je gezien wilt worden en dat technisch op orde staat.",
+      "We ontwerpen en bouwen websites vanaf nul rond jouw merk. Je krijgt een ontwerp dat klopt met hoe je gezien wilt worden, en dat technisch op orde staat.",
     intro:
-      "Van eerste schets tot livegang werk je rechtstreeks met de mensen die je site bouwen. Helder traject, vaste prijs, twee revisierondes inbegrepen.",
+      "Van eerste schets tot livegang werk je rechtstreeks met de mensen die je site bouwen. Helder traject, vaste prijs, revisierondes inbegrepen.",
     items: [
       {
         title: "Strategie en concept",
@@ -664,7 +669,7 @@ export const diensten: Dienst[] = [
       {
         title: "Development",
         body:
-          "We bouwen snel, schaalbaar en technisch op orde, met een fundament voor goede vindbaarheid en pagina's die in een oogwenk laden.",
+          "We bouwen snel, schaalbaar en technisch op orde, met een basis voor goede vindbaarheid en pagina's die in een oogwenk laden.",
       },
       {
         title: "Beheer na livegang",
@@ -683,7 +688,7 @@ export const diensten: Dienst[] = [
     body:
       "We bouwen AI-oplossingen die aansluiten op hoe jij werkt: van slimme chat en contentgeneratie tot het automatiseren van terugkerende taken in je bedrijf.",
     intro:
-      "Geen losse experimenten, maar AI die we direct in je website en processen verweven, met aandacht voor privacy en betrouwbaarheid.",
+      "AI die we direct in je website en processen verwerken, met aandacht voor privacy en betrouwbaarheid.",
     items: [
       {
         title: "AI-chat en assistenten",
@@ -858,7 +863,7 @@ export const overOnsKernwaarden = {
     {
       title: "Transparant",
       body:
-        "Vooraf weet je wat er gebeurt, wanneer, en wat het kost. Twee revisierondes inbegrepen, zonder dat de prijs onderweg verandert.",
+        "Vooraf weet je wat er gebeurt, wanneer, en wat het kost. Revisierondes inbegrepen, zonder dat de prijs onderweg verandert.",
     },
     {
       title: "Concreet",
@@ -934,7 +939,7 @@ export const overOnsResultaten = {
       number: "100%",
       label: "Maatwerk",
       body:
-        "Iedere site bouwen we vanaf nul rond het merk. Geen sjablonen, geen recyclede ontwerpen.",
+        "Iedere site bouwen we vanaf nul rond het merk, zonder sjabloon of gerecycled ontwerp.",
     },
   ],
 };
@@ -1222,7 +1227,7 @@ export const werkwijzePage = {
       {
         no: "04",
         title: "Bouw & verfijning",
-        body: "We bouwen de site in een live-omgeving zodat je ziet hoe hij er echt uitziet. De twee revisierondes zitten in deze fase.",
+        body: "We bouwen de site in een live-omgeving zodat je ziet hoe hij er echt uitziet. De revisierondes zitten in deze fase.",
       },
       {
         no: "05",
@@ -1238,10 +1243,10 @@ export const werkwijzePage = {
     body:
       "Vier dingen die bij elk traject vaststaan, zodat je nooit voor verrassingen komt te staan.",
     stats: [
-      { number: "4", label: "Weken tot oplevering", body: "Van eerste gesprek tot livegang werk je met een planning die we vooraf vastleggen." },
+      { number: "6", label: "Weken tot oplevering", body: "Van eerste gesprek tot livegang werk je met een planning die we vooraf vastleggen." },
       { number: "1", label: "Vast aanspreekpunt", body: "Eén persoon die je project kent, van begin tot eind. Geen doorverbinden." },
       { number: "0", label: "Verborgen kosten", body: "Eén heldere prijs vooraf. Wat we afspreken is wat je betaalt." },
-      { number: "2", label: "Revisierondes inbegrepen", body: "Ruimte om aan te scherpen tot het klopt, zonder meerwerk-discussie." },
+      { number: "2-3", label: "Revisierondes inbegrepen", body: "Ruimte om aan te scherpen tot het klopt, zonder meerwerk-discussie." },
     ],
   },
   socialProof: {
@@ -1311,41 +1316,4 @@ export const overOnsCta = {
   subjects: ["Maatwerk website", "Maatwerk webshop", "Redesign", "Iets anders"],
   privacy:
     "Door op verzenden te klikken ga je akkoord met onze privacyverklaring.",
-};
-
-// ============================================================
-// "Binnenkort live" — tijdelijke linktree-style screen
-// Verwijderen: in app/page.tsx <HomeContent /> renderen i.p.v. <ComingSoon />.
-// ============================================================
-
-export const comingSoon = {
-  status: "Wij zijn bezig met de website",
-  title: "KREATIVES",
-  subtitle:
-    "Onze nieuwe site staat bijna live. Tot die tijd bereik je ons hier direct.",
-  background: hero.background,
-  // TODO: echte telefoonnummer invullen (nu placeholder).
-  links: [
-    {
-      label: "Bel ons",
-      sub: "+31 6 13 06 62 50",
-      href: "tel:+31613066250",
-    },
-    {
-      label: "WhatsApp",
-      sub: "Stuur ons een berichtje",
-      href: "https://wa.me/31613066250",
-    },
-    {
-      label: "Mail ons",
-      sub: site.email,
-      href: `mailto:${site.email}`,
-    },
-    {
-      label: "Plan een strategiegesprek",
-      sub: "Gratis & vrijblijvend",
-      href: overOnsCta.calendly,
-      primary: true,
-    },
-  ],
 };

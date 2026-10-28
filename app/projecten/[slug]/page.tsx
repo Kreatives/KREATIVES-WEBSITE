@@ -24,7 +24,7 @@ export async function generateMetadata({
     description: project.excerpt,
     alternates: { canonical: `/projecten/${project.slug}` },
     openGraph: {
-      title: `${project.name} — KREATIVES`,
+      title: `${project.name} | KREATIVES`,
       description: project.excerpt,
       url: `/projecten/${project.slug}`,
       images: [project.image],
@@ -185,7 +185,7 @@ export default async function ProjectDetailPage({
                       </blockquote>
                       {s.quoteAuthor && (
                         <figcaption className={styles.quoteAuthor} data-reveal>
-                          — {s.quoteAuthor}
+                          {s.quoteAuthor}
                         </figcaption>
                       )}
                     </figure>

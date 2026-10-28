@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
-import { reviewsPage } from "@/lib/site";
+import { reviewsPage, OG_IMAGE } from "@/lib/site";
 import { getReviews, initialsOf } from "@/lib/cms";
 import { reviewsSchema } from "@/lib/schema";
 import styles from "./reviews.module.css";
@@ -11,9 +11,10 @@ export const metadata: Metadata = {
     "Lees wat ondernemers en merken over de samenwerking met KREATIVES zeggen. Ongefilterde reviews over proces, resultaat en uitstraling.",
   alternates: { canonical: "/reviews" },
   openGraph: {
-    title: "Reviews — KREATIVES",
+    title: "Reviews | KREATIVES",
     description: "Wat klanten over ons zeggen, in hun eigen woorden.",
     url: "/reviews",
+    images: [OG_IMAGE],
   },
 };
 

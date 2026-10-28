@@ -21,7 +21,9 @@ export async function POST(req: NextRequest) {
   const id = String(raw?.id ?? "");
   const contact: ScanContact = {
     voornaam: String(raw?.voornaam ?? "").trim(),
-    email: String(raw?.email ?? "").trim(),
+    // Lowercase opslaan: de boekingswebhook matcht op e-mailadres en doet dat
+    // ook lowercase. Zonder dit mist een lead met hoofdletters in het adres.
+    email: String(raw?.email ?? "").trim().toLowerCase(),
     telefoon: String(raw?.telefoon ?? "").trim(),
     bedrijf: String(raw?.bedrijf ?? "").trim(),
   };

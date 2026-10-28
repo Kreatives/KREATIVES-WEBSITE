@@ -13,8 +13,10 @@ export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
   const raw = await req.json().catch(() => ({}));
-  const answers: ScanAnswers = { ...emptyAnswers, ...raw };
   const honeypot = typeof raw?.company_url === "string" ? raw.company_url : "";
+  // Honeypot hoort niet in de opgeslagen antwoorden.
+  const { company_url: _hp, ...rest } = raw ?? {};
+  const answers: ScanAnswers = { ...emptyAnswers, ...rest };
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     req.headers.get("x-real-ip") ||

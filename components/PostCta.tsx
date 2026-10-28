@@ -17,8 +17,8 @@ export default function PostCta() {
       <div className={styles.body}>
         <h3 className={styles.title}>Start je project</h3>
         <p className={styles.text}>
-          Plan een vrijblijvende blueprint-sessie. We kijken samen wat jouw
-          site echt nodig heeft.
+          Plan een vrijblijvend strategiegesprek. We kijken samen wat jouw site
+          echt nodig heeft.
         </p>
         <Link href="/contact" className={styles.btn}>
           Plan een gesprek

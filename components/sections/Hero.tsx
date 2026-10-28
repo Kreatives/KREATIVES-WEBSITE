@@ -5,19 +5,19 @@ import Button from "@/components/Button";
 import HeroVideo from "./HeroVideo";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+export default function Hero({ data = hero }: { data?: typeof hero }) {
   return (
     <section className={styles.hero} id="top">
       {/* Achtergrondfoto (placeholder) + verplichte donkere overlay (Fase 5) */}
       <div className={styles.bg} aria-hidden>
         <Image
-          src={hero.background}
+          src={data.background}
           alt=""
           fill
           priority
           quality={90}
           sizes="100vw"
-          style={{ objectFit: "cover", objectPosition: hero.backgroundPosition }}
+          style={{ objectFit: "cover", objectPosition: data.backgroundPosition }}
         />
         <HeroVideo poster="/brand/hero-poster.webp" />
         <div className={styles.overlay} />
@@ -27,7 +27,7 @@ export default function Hero() {
         <div className={styles.content}>
           <div className={styles.proof} data-reveal>
             <div className={styles.avatars} aria-hidden>
-              {hero.socialProof.avatars.map((a, i) => (
+              {data.socialProof.avatars.map((a, i) => (
                 <span
                   key={i}
                   className={styles.avatar}
@@ -53,40 +53,45 @@ export default function Hero() {
                   ))}
                 </span>
                 <span className={styles.proofRating}>
-                  <strong>{hero.socialProof.rating}</strong>{" "}
-                  {hero.socialProof.label}
+                  <strong>{data.socialProof.rating}</strong>{" "}
+                  {data.socialProof.label}
                 </span>
               </span>
               <span className={styles.proofLabel}>
-                {hero.socialProof.trust}
+                {data.socialProof.trust}
               </span>
             </div>
           </div>
 
           <h1 className={`h-hero ${styles.title}`} data-reveal>
-            {hero.titleLead}
+            {data.titleLead}
             <br />
             <span className="accent">
-              <span className={styles.underline}>{hero.titleUnderline}</span>
-              {hero.titleAccentTail}
+              <span className={styles.underline}>{data.titleUnderline}</span>
+              {data.titleAccentTail}
             </span>
           </h1>
 
           <p className={`lead ${styles.body}`} data-reveal>
-            {hero.body}
+            {data.body}
           </p>
 
           <div className={styles.actions} data-reveal>
-            <Button href={hero.contactCta.href} variant="primary">
-              {hero.contactCta.label}
+            <Button href={data.contactCta.href} variant="primary">
+              {data.contactCta.label}
             </Button>
-            <a href={hero.secondary.href} className={styles.secondaryLink}>
-              {hero.secondary.label}
+            <a
+              href={data.secondary.href}
+              className={styles.secondaryLink}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+            >
+              {data.secondary.label}
             </a>
           </div>
-          {hero.ctaMicro && (
+          {data.ctaMicro && (
             <p className={styles.micro} data-reveal>
-              {hero.ctaMicro}
+              {data.ctaMicro}
             </p>
           )}
         </div>

@@ -50,7 +50,7 @@ function Card({ r, hidden }: { r: ReviewItem; hidden: boolean }) {
   );
 }
 
-export default function Reviews({ items: source }: { items: ReviewItem[] }) {
+export default function Reviews({ items: source, meta = reviews }: { items: ReviewItem[]; meta?: { eyebrow: string; titleLead: string; titleAccent: string; rating: string; ratingLabel: string } }) {
   // Verdeel de reviews over twee rijen zodat ze niet allemaal hetzelfde tonen.
   const mid = Math.ceil(source.length / 2);
   const rowA = source.slice(0, mid);
@@ -64,12 +64,12 @@ export default function Reviews({ items: source }: { items: ReviewItem[] }) {
       <div className="container">
         <div className={styles.head}>
           <span className="eyebrow" data-reveal>
-            {reviews.eyebrow}
+            {meta.eyebrow}
           </span>
           <h2 className={`h2 ${styles.title}`} data-reveal>
-            {reviews.titleLead}{" "}
+            {meta.titleLead}{" "}
             <span className="accent accent--orange">
-              {reviews.titleAccent}
+              {meta.titleAccent}
             </span>
           </h2>
           <div className={styles.rating} data-reveal>
@@ -79,7 +79,7 @@ export default function Reviews({ items: source }: { items: ReviewItem[] }) {
               ))}
             </span>
             <span className={styles.ratingLabel}>
-              <strong>{reviews.rating}</strong> {reviews.ratingLabel}
+              <strong>{meta.rating}</strong> {meta.ratingLabel}
             </span>
           </div>
         </div>

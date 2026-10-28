@@ -5,9 +5,9 @@ import { tiktok } from "@/lib/site";
 import { TikTok } from "@/components/icons";
 import styles from "./TikTokMarquee.module.css";
 
-export default function TikTokMarquee() {
+export default function TikTokMarquee({ data = tiktok }: { data?: typeof tiktok }) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const loop = [...tiktok.videos, ...tiktok.videos];
+  const loop = [...data.videos, ...data.videos];
 
   // Forceer muted + autoplay betrouwbaar (Safari zet het muted-attribuut niet
   // altijd via SSR, waardoor autoplay blokkeert).
@@ -25,10 +25,10 @@ export default function TikTokMarquee() {
       <div className="container">
         <div className={styles.head} data-reveal>
           <h2 className={`h2 ${styles.title}`}>
-            {tiktok.titleLead}{" "}
-            <span className="accent accent--orange">{tiktok.titleAccent}</span>
+            {data.titleLead}{" "}
+            <span className="accent accent--orange">{data.titleAccent}</span>
           </h2>
-          <p className={styles.intro}>{tiktok.intro}</p>
+          <p className={styles.intro}>{data.intro}</p>
         </div>
       </div>
 
@@ -39,13 +39,13 @@ export default function TikTokMarquee() {
           style={{ "--marquee-dur": "46s" } as React.CSSProperties}
         >
           {loop.map((v, i) => {
-            const clone = i >= tiktok.videos.length;
+            const clone = i >= data.videos.length;
             return (
               <a
                 key={i}
                 href={v.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className={styles.card}
                 aria-hidden={clone}
                 tabIndex={clone ? -1 : undefined}
@@ -63,7 +63,7 @@ export default function TikTokMarquee() {
                 <span className={styles.overlay} aria-hidden />
                 <span className={styles.handle}>
                   <TikTok className={styles.ico} />
-                  {tiktok.handle}
+                  {data.handle}
                 </span>
               </a>
             );

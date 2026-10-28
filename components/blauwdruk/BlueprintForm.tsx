@@ -107,7 +107,7 @@ export default function BlueprintForm() {
   return (
     <div className={styles.formCard}>
       <h3 className={styles.formCardTitle}>Vraag je gratis blauwdruk aan</h3>
-      <p className={styles.formCardLabel}>Vul het in — het duurt twee minuten.</p>
+      <p className={styles.formCardLabel}>Vul het in, het duurt twee minuten.</p>
       <form className={styles.form} onSubmit={onSubmit} noValidate>
         {/* Honeypot tegen bots — laat dit veld leeg. */}
         <input

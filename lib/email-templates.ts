@@ -125,7 +125,7 @@ export function buildNotificationEmail(data: ContactMail) {
 }
 
 export function buildConfirmationEmail(data: ContactMail) {
-  const isRedesign = /redesign/i.test(data.source);
+  const isRedesign = /redesign/i.test(data.subject);
   const fn = firstName(data.name);
   const hi = fn ? `Bedankt, ${escapeHtml(fn)}!` : "Bedankt!";
 

@@ -3,7 +3,9 @@ import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import BlogArchive from "@/components/BlogArchive";
 import { getPosts } from "@/lib/cms";
+import { REDIRECTED_SLUGS } from "@/lib/redirects";
 import { steden } from "@/lib/steden";
+import { OG_IMAGE } from "@/lib/site";
 import styles from "./blog.module.css";
 import regios from "./regios.module.css";
 
@@ -12,12 +14,20 @@ export const metadata: Metadata = {
   description:
     "Artikelen over webdesign, strategie en hoe we bij KREATIVES denken over maatwerk en het bouwen van sites die werken.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog | KREATIVES",
+    description:
+      "Artikelen over webdesign, strategie en hoe we bij KREATIVES naar maatwerk kijken.",
+    url: "/blog",
+    images: [OG_IMAGE],
+  },
 };
 
 export const dynamic = "force-dynamic";
 
 export default async function BlogIndexPage() {
   const posts = (await getPosts())
+    .filter((p) => !REDIRECTED_SLUGS.has(p.slug))
     .slice()
     .sort((a, b) => (a.date > b.date ? -1 : 1));
 

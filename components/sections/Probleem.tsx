@@ -9,7 +9,7 @@ import styles from "./Probleem.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Probleem() {
+export default function Probleem({ data = probleem, usps: uspsData = usps }: { data?: typeof probleem; usps?: typeof usps }) {
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -43,14 +43,14 @@ export default function Probleem() {
     };
   }, []);
 
-  const words = probleem.statement.split(" ");
+  const words = data.statement.split(" ");
 
   return (
     <section className={`section ${styles.sec}`} id="probleem">
       <div className="container">
         {/* Scalient about-stijl: label links, groot statement rechts */}
         <div className={styles.grid}>
-          <p className={styles.label}>{probleem.eyebrow}</p>
+          <h2 className={styles.label}>{data.eyebrow}</h2>
           <p ref={ref} className={styles.statement}>
             {words.map((w, i) => (
               <span key={i} className={styles.word} data-w>
@@ -68,7 +68,7 @@ export default function Probleem() {
         </p>
 
         <ul className={styles.cards}>
-          {usps.items.map((u) => (
+          {uspsData.items.map((u) => (
             <li key={u.title} className={styles.card} data-reveal>
               <span className={styles.stat}>{u.stat}</span>
               <h3 className={styles.cardTitle}>{u.title}</h3>

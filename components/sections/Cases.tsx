@@ -13,7 +13,7 @@ export type CaseItem = {
   tags: string[];
 };
 
-export default function Cases({ items }: { items: CaseItem[] }) {
+export default function Cases({ items, meta = cases, allHref = "/projecten", allLabel = "Bekijk alle cases" }: { items: CaseItem[]; meta?: { eyebrow: string; titleLead: string; titleAccent: string }; allHref?: string; allLabel?: string }) {
   const left = items.filter((_, i) => i % 2 === 0);
   const right = items.filter((_, i) => i % 2 === 1);
 
@@ -22,14 +22,12 @@ export default function Cases({ items }: { items: CaseItem[] }) {
       <div className="container">
         <div className={styles.head}>
           <div className={styles.headTop} data-reveal>
-            <span className="eyebrow">{cases.eyebrow}</span>
-            <Button href="/projecten" variant="ghost" className={styles.allBtn}>
-              Bekijk alle cases
-            </Button>
+            <span className="eyebrow">{meta.eyebrow}</span>
+            <Button href={allHref} variant="ghost" className={styles.allBtn}>{allLabel}</Button>
           </div>
           <h2 className={`h2 ${styles.title}`} data-reveal>
-            {cases.titleLead}{" "}
-            <span className="accent accent--orange">{cases.titleAccent}</span>
+            {meta.titleLead}{" "}
+            <span className="accent accent--orange">{meta.titleAccent}</span>
           </h2>
         </div>
 

@@ -5,6 +5,7 @@ import RevealInit from "@/components/RevealInit";
 import Reviews from "@/components/sections/Reviews";
 import BlueprintForm from "@/components/blauwdruk/BlueprintForm";
 import { getReviews, initialsOf } from "@/lib/cms";
+import { OG_IMAGE } from "@/lib/site";
 import styles from "@/components/blauwdruk/Blueprint.module.css";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +13,15 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Gratis blauwdruk voor jouw website",
   description:
-    "Ontvang een gratis blauwdruk: een concrete structuur voor jouw website — welke pagina's je nodig hebt en wat er op elke pagina moet staan. Binnen 48 uur in je inbox.",
+    "Ontvang een gratis blauwdruk: een concrete structuur voor jouw website, welke pagina's je nodig hebt en wat er op elke pagina moet staan. Binnen 48 uur in je inbox.",
+  alternates: { canonical: "/blauwdruk" },
+  openGraph: {
+    title: "Gratis blauwdruk voor jouw website",
+    description:
+      "Een concrete structuur voor jouw website, binnen 48 uur in je inbox.",
+    url: "/blauwdruk",
+    images: [OG_IMAGE],
+  },
 };
 
 const HERKENNING = [
@@ -63,7 +72,7 @@ const STAPPEN = [
   {
     title: "Wij stellen de blauwdruk samen",
     body:
-      "Op basis van jouw antwoorden bouwen we een concrete structuur voor jouw website. Geen generiek template, maar afgestemd op jouw type bedrijf.",
+      "Op basis van jouw antwoorden bouwen we een concrete structuur voor jouw website, afgestemd op jouw type bedrijf.",
   },
   {
     title: "Je ontvangt het document binnen 48 uur",
@@ -83,7 +92,7 @@ export default async function BlauwdrukPage() {
   }));
 
   return (
-    <main>
+    <div>
       <RevealInit />
       {/* 01 — Hero */}
       <section className={styles.hero}>
@@ -132,8 +141,8 @@ export default async function BlauwdrukPage() {
             ))}
           </div>
           <p className={styles.closer}>
-            De blauwdruk geeft je duidelijkheid, zodat je weet wat je nodig hebt
-            — <strong>of je nu met ons verder gaat of niet.</strong>
+            De blauwdruk geeft je duidelijkheid, zodat je weet wat je nodig hebt,
+            ook als je daarna met iemand anders verder gaat.
           </p>
         </div>
       </section>
@@ -265,6 +274,6 @@ export default async function BlauwdrukPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

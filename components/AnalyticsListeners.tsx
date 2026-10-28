@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
  * Vangt in één globale listener de kliks op die er voor conversie toe doen,
  * zodat we niet elke losse knop hoeven aan te raken:
  * - calendly_click  → elke "Plan een (strategie)gesprek"-CTA (Calendly)
- * - scan_cta_click  → elke link naar de groeiscan (/website-scan)
+ * - scan_cta_click  → elke link naar de website-scan (/website-scan)
  */
 export default function AnalyticsListeners() {
   useEffect(() => {

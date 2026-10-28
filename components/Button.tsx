@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Arrow } from "@/components/icons";
 
 type Variant = "primary" | "dark" | "white" | "ghost";
@@ -44,9 +45,24 @@ export default function Button(props: AsLink | AsButton) {
     const ext = props.href.includes("calendly.com")
       ? { target: "_blank", rel: "nofollow noopener noreferrer" }
       : {};
+    // Interne links via <Link> zodat de router prefetcht en er geen volledige
+    // paginaherlaad ontstaat. Ankerlinks (#...) en externe links blijven een <a>.
+    const internal = props.href.startsWith("/");
+    if (internal) {
+      return (
+        <Link
+          className={cls}
+          href={props.href}
+          {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+        >
+          {inner}
+        </Link>
+      );
+    }
     return (
       <a
         className={cls}
+        href={props.href}
         {...ext}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >

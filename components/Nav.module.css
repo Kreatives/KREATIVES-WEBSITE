@@ -197,12 +197,17 @@
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   clip-path: circle(0% at calc(100% - 3rem) 3rem);
-  transition: clip-path 0.7s var(--ease);
+  /* Visibility pas na de krimp-animatie uitzetten, anders knippert het menu weg. */
+  transition: clip-path 0.7s var(--ease), visibility 0s linear 0.7s;
   pointer-events: none;
+  /* Onzichtbaar én niet tabbaar zolang het menu dicht is. */
+  visibility: hidden;
 }
 .overlayOpen {
   clip-path: circle(150% at calc(100% - 3rem) 3rem);
+  transition: clip-path 0.7s var(--ease), visibility 0s;
   pointer-events: auto;
+  visibility: visible;
 }
 .overlayClose {
   position: fixed;
@@ -296,13 +301,17 @@
 .overlaySub {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s var(--ease);
+  /* Ingeklapte submenu's mogen niet tabbaar zijn; visibility pas na de animatie. */
+  visibility: hidden;
+  transition: grid-template-rows 0.4s var(--ease), visibility 0s linear 0.4s;
 }
 .overlaySub > * {
   overflow: hidden;
 }
 .overlaySubOpen {
   grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.4s var(--ease), visibility 0s;
 }
 .overlaySubInner {
   display: flex;

@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { nav, hero } from "@/lib/site";
+import { nav, hero, CALENDLY } from "@/lib/site";
+import { navEn } from "@/lib/content-en";
 import Logo from "@/components/Logo";
 import styles from "./Nav.module.css";
 
@@ -17,6 +19,10 @@ const DARK_HERO_PREFIXES = [
   "/projecten",
   "/contact",
   "/website-scan",
+  "/prijzen",
+  "/webdesign-",
+  "/sitemap-overzicht",
+  "/en",
 ];
 
 function Chevron() {
@@ -33,11 +39,18 @@ function Chevron() {
   );
 }
 
-export default function Nav() {
+export default function Nav({ locale = "nl" }: { locale?: "nl" | "en" }) {
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  const items = locale === "en" ? navEn : nav;
+  const home = locale === "en" ? "/en" : "/";
+  const cta =
+    locale === "en"
+      ? { label: "Book a strategy call", href: CALENDLY }
+      : hero.primary;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -50,6 +63,16 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Escape sluit het mobiele menu, net als bij de andere overlays.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   const darkHero =
     pathname === "/" ||
     DARK_HERO_PREFIXES.some((p) => pathname.startsWith(p));
@@ -60,19 +83,19 @@ export default function Nav() {
       className={`${styles.header} ${transparent ? styles.transparent : ""}`}
     >
       <div className={styles.bar}>
-        <a href="/" className={styles.logo} aria-label="KREATIVES home">
+        <Link href={home} className={styles.logo} aria-label="KREATIVES home">
           <Logo className={styles.logoMark} />
-        </a>
+        </Link>
 
         <nav className={styles.links} aria-label="Hoofdmenu">
-          {nav.map((n) =>
+          {items.map((n) =>
             n.children ? (
               <div key={n.label} className={styles.hasSub}>
                 {n.href ? (
-                  <a href={n.href} className={styles.subTrigger}>
+                  <Link href={n.href} className={styles.subTrigger}>
                     {n.label}
                     <Chevron />
-                  </a>
+                  </Link>
                 ) : (
                   <button type="button" className={styles.subTrigger}>
                     {n.label}
@@ -81,22 +104,27 @@ export default function Nav() {
                 )}
                 <div className={styles.dropdown}>
                   {n.children.map((c) => (
-                    <a key={c.href} href={c.href}>
+                    <Link key={c.href} href={c.href}>
                       {c.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
             ) : (
-              <a key={n.href} href={n.href}>
+              <Link key={n.href} href={n.href ?? "/"}>
                 {n.label}
-              </a>
+              </Link>
             )
           )}
         </nav>
 
-        <a href={hero.primary.href} className={styles.cta}>
-          {hero.primary.label}
+        <a
+          href={cta.href}
+          className={styles.cta}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          {cta.label}
         </a>
 
         <button
@@ -131,7 +159,7 @@ export default function Nav() {
         </button>
 
         <nav className={styles.overlayNav}>
-          {nav.map((n, i) => {
+          {items.map((n, i) => {
             const delay = { transitionDelay: `${0.05 + i * 0.05}s` };
             const index = (
               <span className={styles.overlayIndex}>
@@ -144,14 +172,14 @@ export default function Nav() {
                 <div key={n.label} className={styles.overlayGroup} style={delay}>
                   <div className={styles.overlayRow}>
                     {n.href ? (
-                      <a
+                      <Link
                         href={n.href}
                         className={styles.overlayItem}
                         onClick={() => setOpen(false)}
                       >
                         {index}
                         {n.label}
-                      </a>
+                      </Link>
                     ) : (
                       <span className={styles.overlayItem}>
                         {index}
@@ -177,13 +205,13 @@ export default function Nav() {
                   >
                     <div className={styles.overlaySubInner}>
                       {n.children.map((c) => (
-                        <a
+                        <Link
                           key={c.href}
                           href={c.href}
                           onClick={() => setOpen(false)}
                         >
                           {c.label}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -191,25 +219,27 @@ export default function Nav() {
               );
             }
             return (
-              <a
+              <Link
                 key={n.href}
-                href={n.href}
+                href={n.href ?? "/"}
                 className={styles.overlayItem}
                 onClick={() => setOpen(false)}
                 style={delay}
               >
                 {index}
                 {n.label}
-              </a>
+              </Link>
             );
           })}
         </nav>
         <a
-          href={hero.primary.href}
+          href={cta.href}
           className={styles.overlayCta}
           onClick={() => setOpen(false)}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
         >
-          {hero.primary.label}
+          {cta.label}
         </a>
 
         <div className={styles.overlayFoot}>
