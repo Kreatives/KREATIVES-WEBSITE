@@ -17,27 +17,27 @@ function Cross() {
   );
 }
 
-export default function VoorWie() {
+export default function VoorWie({ data = overOnsVoorWie }: { data?: typeof overOnsVoorWie }) {
   return (
     <section className="section" id="voor-wie">
       <div className="container">
         <div className={styles.head}>
           <span className="eyebrow" data-reveal>
-            {overOnsVoorWie.eyebrow}
+            {data.eyebrow}
           </span>
           <h2 className={`h2 ${styles.title}`} data-reveal>
-            {overOnsVoorWie.titleLead}{" "}
+            {data.titleLead}{" "}
             <span className="accent accent--orange">
-              {overOnsVoorWie.titleAccent}
+              {data.titleAccent}
             </span>
           </h2>
         </div>
 
         <div className={styles.grid}>
           <article className={`${styles.card} ${styles.cardYes}`} data-reveal>
-            <h3 className={styles.cardTitle}>{overOnsVoorWie.voor.title}</h3>
+            <h3 className={styles.cardTitle}>{data.voor.title}</h3>
             <ul className={styles.list}>
-              {overOnsVoorWie.voor.items.map((t) => (
+              {data.voor.items.map((t) => (
                 <li key={t}>
                   <span className={`${styles.tick} ${styles.tickYes}`}>
                     <Check />
@@ -49,9 +49,9 @@ export default function VoorWie() {
           </article>
 
           <article className={`${styles.card} ${styles.cardNo}`} data-reveal>
-            <h3 className={styles.cardTitle}>{overOnsVoorWie.niet.title}</h3>
+            <h3 className={styles.cardTitle}>{data.niet.title}</h3>
             <ul className={styles.list}>
-              {overOnsVoorWie.niet.items.map((t) => (
+              {data.niet.items.map((t) => (
                 <li key={t}>
                   <span className={`${styles.tick} ${styles.tickNo}`}>
                     <Cross />

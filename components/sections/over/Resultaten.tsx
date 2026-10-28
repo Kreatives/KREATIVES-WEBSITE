@@ -18,7 +18,7 @@ function Chevron({ dir }: { dir: "left" | "right" }) {
   );
 }
 
-export default function Resultaten() {
+export default function Resultaten({ data = overOnsResultaten }: { data?: typeof overOnsResultaten }) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -54,17 +54,17 @@ export default function Resultaten() {
     >
       <div className="container">
         <div className={styles.head} data-reveal>
-          <span className="eyebrow">{overOnsResultaten.eyebrow}</span>
+          <span className="eyebrow">{data.eyebrow}</span>
           <h2 className={`h2 ${styles.title}`}>
-            {overOnsResultaten.titleLead}{" "}
+            {data.titleLead}{" "}
             <span className="accent accent--orange">
-              {overOnsResultaten.titleAccent}
+              {data.titleAccent}
             </span>
           </h2>
         </div>
 
         <ul className={styles.track} ref={trackRef} onScroll={update}>
-          {overOnsResultaten.items.map((s) => (
+          {data.items.map((s) => (
             <li key={s.label} className={styles.card} data-card data-reveal>
               <span className={styles.no}>{s.number}</span>
               <div className={styles.meta}>

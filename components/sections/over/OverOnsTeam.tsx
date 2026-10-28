@@ -2,13 +2,13 @@ import Image from "next/image";
 import { overOnsTeam } from "@/lib/site";
 import styles from "./OverOnsTeam.module.css";
 
-export default function OverOnsTeam() {
+export default function OverOnsTeam({ data = overOnsTeam }: { data?: typeof overOnsTeam }) {
   return (
     <section className="section" id="over">
       <div className={`container ${styles.grid}`}>
         <div className={styles.media} data-reveal>
           <Image
-            src={overOnsTeam.portrait}
+            src={data.portrait}
             alt=""
             fill
             quality={90}            sizes="(max-width: 860px) 100vw, 45vw"
@@ -18,16 +18,16 @@ export default function OverOnsTeam() {
 
         <div className={styles.body}>
           <span className="eyebrow" data-reveal>
-            {overOnsTeam.eyebrow}
+            {data.eyebrow}
           </span>
           <h2 className={`h2 ${styles.title}`} data-reveal>
-            {overOnsTeam.titleLead}{" "}
+            {data.titleLead}{" "}
             <span className="accent accent--orange">
-              {overOnsTeam.titleAccent}
+              {data.titleAccent}
             </span>
           </h2>
           <p className={styles.text} data-reveal>
-            {overOnsTeam.body}
+            {data.body}
           </p>
         </div>
       </div>

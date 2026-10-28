@@ -8,7 +8,7 @@ import styles from "./Kernwaarden.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Kernwaarden() {
+export default function Kernwaarden({ data = overOnsKernwaarden }: { data?: typeof overOnsKernwaarden }) {
   const introRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -42,14 +42,14 @@ export default function Kernwaarden() {
     };
   }, []);
 
-  const introWords = overOnsKernwaarden.intro.split(" ");
+  const introWords = data.intro.split(" ");
 
   return (
     <section className="section section--alt" id="kernwaarden">
       <div className="container">
         <div className={styles.head}>
           <span className="eyebrow" data-reveal>
-            {overOnsKernwaarden.eyebrow}
+            {data.eyebrow}
           </span>
           <p ref={introRef} className={styles.intro}>
             {introWords.map((w, i) => (
@@ -62,7 +62,7 @@ export default function Kernwaarden() {
         </div>
 
         <ul className={styles.grid}>
-          {overOnsKernwaarden.items.map((item) => (
+          {data.items.map((item) => (
             <li key={item.title} className={styles.item} data-reveal>
               <h3 className={styles.itemTitle}>{item.title}</h3>
               <p className={styles.itemBody}>{item.body}</p>

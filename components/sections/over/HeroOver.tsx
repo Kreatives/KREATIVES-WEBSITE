@@ -2,12 +2,12 @@ import Image from "next/image";
 import { overOnsHero } from "@/lib/site";
 import styles from "./HeroOver.module.css";
 
-export default function HeroOver() {
+export default function HeroOver({ data = overOnsHero }: { data?: typeof overOnsHero }) {
   return (
     <section className={styles.hero} id="top">
       <div className={styles.bg} aria-hidden>
         <Image
-          src={overOnsHero.background}
+          src={data.background}
           alt=""
           fill
           quality={90}          priority
@@ -19,16 +19,16 @@ export default function HeroOver() {
 
       <div className={`container ${styles.inner}`}>
         <span className={`eyebrow ${styles.eyebrow}`} data-reveal>
-          {overOnsHero.eyebrow}
+          {data.eyebrow}
         </span>
 
         <h1 className={styles.title} data-reveal>
-          {overOnsHero.titleLead}{" "}
-          <span className="accent">{overOnsHero.titleAccent}</span>
+          {data.titleLead}{" "}
+          <span className="accent">{data.titleAccent}</span>
         </h1>
 
         <p className={styles.body} data-reveal>
-          {overOnsHero.body}
+          {data.body}
         </p>
       </div>
     </section>

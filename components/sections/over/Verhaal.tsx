@@ -3,12 +3,12 @@ import { overOnsVerhaal } from "@/lib/site";
 import Button from "@/components/Button";
 import styles from "./Verhaal.module.css";
 
-export default function Verhaal() {
+export default function Verhaal({ data = overOnsVerhaal }: { data?: typeof overOnsVerhaal }) {
   return (
     <section className={`section ${styles.sec}`} id="verhaal">
       <span className={styles.floatLeft} aria-hidden data-reveal>
         <Image
-          src={overOnsVerhaal.media.left}
+          src={data.media.left}
           alt=""
           fill
           quality={90}          sizes="200px"
@@ -17,7 +17,7 @@ export default function Verhaal() {
       </span>
       <span className={styles.floatRight} aria-hidden data-reveal>
         <Image
-          src={overOnsVerhaal.media.right}
+          src={data.media.right}
           alt=""
           fill
           quality={90}          sizes="220px"
@@ -28,15 +28,15 @@ export default function Verhaal() {
       <div className="container">
         <div className={styles.stage}>
           <h2 className={styles.title} data-reveal>
-            <span className={styles.titleLead}>{overOnsVerhaal.titleLead}</span>{" "}
+            <span className={styles.titleLead}>{data.titleLead}</span>{" "}
             <span className="accent accent--orange">
-              {overOnsVerhaal.titleAccent}
+              {data.titleAccent}
             </span>
           </h2>
 
           <div className={styles.mainMedia} data-reveal>
             <Image
-              src={overOnsVerhaal.media.main}
+              src={data.media.main}
               alt=""
               fill
               quality={90}              sizes="(max-width: 720px) 92vw, 640px"
@@ -47,19 +47,19 @@ export default function Verhaal() {
 
         <div className={styles.copy}>
           <h3 className={styles.subheading} data-reveal>
-            {overOnsVerhaal.subheading}
+            {data.subheading}
           </h3>
-          {overOnsVerhaal.paragraphs.map((p, i) => (
+          {data.paragraphs.map((p, i) => (
             <p key={i} className={styles.p} data-reveal>
               {p}
             </p>
           ))}
           <div className={styles.actions} data-reveal>
-            <Button href={overOnsVerhaal.primaryCta.href} variant="primary">
-              {overOnsVerhaal.primaryCta.label}
+            <Button href={data.primaryCta.href} variant="primary">
+              {data.primaryCta.label}
             </Button>
-            <Button href={overOnsVerhaal.cta.href} variant="ghost">
-              {overOnsVerhaal.cta.label}
+            <Button href={data.cta.href} variant="ghost">
+              {data.cta.label}
             </Button>
           </div>
         </div>
