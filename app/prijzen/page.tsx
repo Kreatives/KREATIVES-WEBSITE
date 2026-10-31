@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { CALENDLY, site, OG_IMAGE } from "@/lib/site";
+import PlanCards from "./PlanCards";
 import styles from "./prijzen.module.css";
 
 // Helvetica Neue zelf-gehost, alleen voor de paragraaf-teksten op deze pagina.
@@ -280,56 +281,7 @@ export default function PrijzenPage() {
             </h2>
           </div>
 
-          <div className={styles.grid}>
-            {plans.map((p) => (
-              <article
-                key={p.name}
-                className={`${styles.card} ${
-                  p.featured ? styles.cardFeatured : ""
-                }`}
-                data-reveal
-              >
-                <span className={styles.cardIcon} aria-hidden />
-
-                <div className={styles.cardHead}>
-                  <h3 className={styles.cardName}>{p.name}</h3>
-                  <p className={styles.cardIntro}>{p.intro}</p>
-                  <p className={styles.cardPrice}>
-                    {p.price} <span className={styles.cardPriceUnit}>Eenmalig</span>
-                  </p>
-                  <p className={styles.cardTermijnen}>{p.termijnen}</p>
-                </div>
-
-                <hr className={styles.cardDivider} />
-
-                <ul className={styles.listKrijgt}>
-                  {p.krijgt.map((f) => (
-                    <li key={f}>
-                      <span
-                        className={p.featured ? styles.tickOrange : styles.tick}
-                        aria-hidden
-                      >
-                        <Check />
-                      </span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  href={CALENDLY}
-                  variant={p.featured ? "primary" : "dark"}
-                  className={styles.cardCta}
-                >
-                  Plan een gesprek
-                </Button>
-
-                <p className={styles.cardDoorlooptijd}>
-                  Doorlooptijd: {p.doorlooptijd}
-                </p>
-              </article>
-            ))}
-          </div>
+          <PlanCards plans={plans} calendly={CALENDLY} />
 
           <div className={styles.trajecten} data-reveal>
             <p className={styles.trajectenLabel}>Bij alle trajecten</p>

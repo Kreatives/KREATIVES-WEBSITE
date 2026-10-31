@@ -66,6 +66,29 @@
   text-transform: none;
 }
 
+/* Tab-balk: alleen op mobiel, wisselt welke kaart zichtbaar is. */
+.planTabs {
+  display: none;
+}
+.planTab {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  padding: 0 0 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--track-tight);
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.planTabActive {
+  color: var(--text);
+  border-bottom-color: var(--ink);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -210,6 +233,14 @@
 }
 
 @media (max-width: 900px) {
+  .planTabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.75rem;
+    max-width: 34rem;
+    margin: 0 auto 1.5rem;
+  }
   .grid {
     grid-template-columns: 1fr;
     max-width: 34rem;
@@ -217,6 +248,9 @@
   }
   .cardFeatured {
     margin-block: 0;
+  }
+  .cardInactive {
+    display: none;
   }
 }
 
