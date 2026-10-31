@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Prijzen | KREATIVES",
     description:
-      "Drie trajecten, vaste prijzen, en per traject staat erbij wat er niet in zit.",
+      "Drie trajecten met een vaste prijs, en per traject zie je precies wat erin zit.",
     url: "/prijzen",
     images: [OG_IMAGE],
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Prijzen | KREATIVES",
     description:
-      "Drie trajecten, vaste prijzen, en per traject staat erbij wat er niet in zit.",
+      "Drie trajecten met een vaste prijs, en per traject zie je precies wat erin zit.",
     images: [OG_IMAGE],
   },
 };
@@ -37,7 +37,6 @@ type Plan = {
   intro: string;
   pitch: string;
   krijgt: string[];
-  niet: string[];
   doorlooptijd: string;
 };
 
@@ -52,17 +51,14 @@ const plans: Plan[] = [
     pitch:
       "Eén pagina die het gesprek voorbereidt. Je bureau draait de campagne, wij maken de plek waar die landt.",
     krijgt: [
-      "Gesprek over de campagne, het aanbod en wie er op de pagina komt",
-      "Copy geschreven door ons, jij levert cijfers en namen",
-      "Ontwerp in twee rondes, goedgekeurd voordat we bouwen",
-      "Bouw, formulier en meting op jouw eigen GA4",
-      "Briefing voor het bureau dat de campagne draait",
-      "Eén aanpassing na de eerste dertig dagen op basis van de cijfers",
-    ],
-    niet: [
-      "De campagne zelf en het advertentiebudget",
-      "Meerdere varianten om te testen",
-      "Pagina's buiten de campagne",
+      "Marketing & brand deepdive",
+      "Figma-bestand",
+      "Copywriting",
+      "2 feedbackrondes",
+      "Koppeling met analytics (GA4, pixels)",
+      "Revisieronde na 30 dagen",
+      "Web development in WordPress",
+      "Website training",
     ],
     doorlooptijd: "Twee weken na akkoord op de copy.",
   },
@@ -78,20 +74,19 @@ const plans: Plan[] = [
     pitch:
       "Tot tien pagina's in vier weken, en je ziet het ontwerp voordat er één regel code wordt geschreven.",
     krijgt: [
-      "Strategiegesprek met de eigenaar: wie je dient, wie je weigert en welke drie claims je kunt bewijzen",
-      "Boodschap en volgorde per pagina, zodat de site het salesgesprek alvast begint",
-      "Copy geschreven door ons voor alle pagina's, jij levert cases, cijfers en namen via een lijst die je op dag één krijgt",
-      "Tot tien pagina's: home, diensten, cases, team, over ons, contact en wat jouw bedrijf verder nodig heeft",
-      "Ontwerp in drie rondes, goedgekeurd voordat de bouw start",
-      "Bouw, SEO-basis, GA4 en Search Console op jouw naam",
-      "Fotobriefing en regie, zodat je niet met losse beelden blijft zitten",
-      "Eerste jaar hosting en onderhoud inbegrepen",
-      "24 maanden herstelgarantie op de techniek",
-    ],
-    niet: [
-      "Fotografie, wel de briefing en de regie",
-      "Advertenties, SEO-strategie en doorlopende content",
-      "Meer dan tien pagina's",
+      "Marketing & brand deepdive",
+      "Strategische wireframing",
+      "Copywriting",
+      "Tot 10 pagina's",
+      "3 feedbackrondes",
+      "SEO-basis",
+      "Koppeling met analytics (GA4, pixels)",
+      "Design system",
+      "Eerste jaar hosting & onderhoud inbegrepen",
+      "Revisieronde na 30 dagen",
+      "24 maanden herstelgarantie",
+      "Web development in WordPress",
+      "Website training",
     ],
     doorlooptijd: "Vier weken na akkoord op de copy.",
   },
@@ -106,18 +101,12 @@ const plans: Plan[] = [
       "Alles uit Herbouw, plus een merk dat klopt met waar je nu staat. Twaalf pagina's in zes weken, met een fotodag op locatie.",
     krijgt: [
       "Alles uit Herbouw",
-      "Logo verfijnen of een nieuw beeldmerk",
-      "Typografie, kleursysteem en beeldtaal",
-      "Tone of voice: hoe je bedrijf schrijft en praat, op één pagina",
-      "Merkhandleiding van acht pagina's, zodat ook je team en je bureau het kunnen toepassen",
+      "Volledig brandbook",
       "LinkedIn-sjablonen: banner, profielopmaak en drie postformats",
       "Fotodag op locatie, inclusief fotograaf, voor team, werk en portretten",
-      "Tot twaalf pagina's",
-    ],
-    niet: [
-      "Een nieuwe bedrijfsnaam",
-      "Campagnemateriaal, print en verpakking",
-      "Doorlopend merkbeheer",
+      "Tot 15 pagina's",
+      "Web development in WordPress",
+      "Website training",
     ],
     doorlooptijd: "Zes weken na akkoord op de copy.",
   },
@@ -183,21 +172,6 @@ function Check() {
       aria-hidden
     >
       <path d="m3 8.5 3.2 3 6.8-7" />
-    </svg>
-  );
-}
-
-function Minus() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      aria-hidden
-    >
-      <path d="M3.5 8h9" />
     </svg>
   );
 }
@@ -274,9 +248,9 @@ export default function PrijzenPage() {
               <span className="accent accent--orange">website laat zien.</span>
             </h1>
             <p className={styles.heroLead} data-reveal>
-              Drie trajecten, vaste prijzen, en per traject staat erbij wat er
-              niet in zit. Zo weet je vooraf waar je aan toe bent en hoef je niet
-              te onderhandelen over de scope.
+              Drie trajecten met een vaste prijs. Per traject zie je precies wat
+              erin zit, zodat je vooraf weet waar je aan toe bent en niet hoeft te
+              onderhandelen over de scope.
             </p>
             <div className={styles.heroCta} data-reveal>
               <Button href={CALENDLY} variant="white">
@@ -337,20 +311,6 @@ export default function PrijzenPage() {
                       <li key={f}>
                         <span className={styles.tick} aria-hidden>
                           <Check />
-                        </span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className={styles.block}>
-                  <p className={styles.blockLabel}>Wat er niet in zit</p>
-                  <ul className={styles.listNiet}>
-                    {p.niet.map((f) => (
-                      <li key={f}>
-                        <span className={styles.cross} aria-hidden>
-                          <Minus />
                         </span>
                         {f}
                       </li>
