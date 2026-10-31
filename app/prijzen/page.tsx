@@ -46,7 +46,7 @@ const plans: Plan[] = [
     price: "€2.499",
     priceNumber: "2499",
     intro:
-      "Voor bedrijven die al adverteren, via een eigen marketingverantwoordelijke of een bureau, en merken dat de pagina waar de klik landt de campagne afremt. Wij maken één pagina die het gesprek voorbereidt, terwijl je bureau de campagne blijft draaien.",
+      "Voor bedrijven die al adverteren, via een eigen marketingverantwoordelijke of een bureau, en merken dat de pagina waar de klik landt de campagne afremt.",
     krijgt: [
       "Marketing & brand deepdive",
       "Figma-bestand",
@@ -67,7 +67,7 @@ const plans: Plan[] = [
     tag: "Meest gekozen",
     featured: true,
     intro:
-      "Voor bedrijven die de afgelopen jaren hard zijn gegroeid en waarvan de website nog laat zien waar ze vier jaar geleden stonden. Je krijgt tot tien pagina's in vier weken, en je ziet het ontwerp voordat er één regel code wordt geschreven.",
+      "Voor bedrijven die de afgelopen jaren hard zijn gegroeid en waarvan de website nog laat zien waar ze vier jaar geleden stonden.",
     krijgt: [
       "Marketing & brand deepdive",
       "Strategische wireframing",
@@ -91,7 +91,7 @@ const plans: Plan[] = [
     price: "€9.945",
     priceNumber: "9945",
     intro:
-      "Voor bedrijven waarbij niet alleen de site, maar ook het logo en de uitstraling achterlopen op het niveau van het werk. Je krijgt alles uit Herbouw, plus een merk dat klopt met waar je nu staat, met een fotodag op locatie.",
+      "Voor bedrijven waarbij niet alleen de site, maar ook het logo en de uitstraling achterlopen op het niveau van het werk.",
     krijgt: [
       "Alles uit Herbouw",
       "Volledig brandbook",
@@ -165,6 +165,23 @@ function Check() {
       aria-hidden
     >
       <path d="m3 8.5 3.2 3 6.8-7" />
+    </svg>
+  );
+}
+
+function Clock() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="8" cy="8" r="6" />
+      <path d="M8 4.75V8l2.25 1.5" />
     </svg>
   );
 }
@@ -275,17 +292,17 @@ export default function PrijzenPage() {
                 }`}
                 data-reveal
               >
+                <div className={styles.cardTop}>
+                  <span className={styles.cardIcon} aria-hidden />
+                  {p.tag && <span className={styles.cardTag}>{p.tag}</span>}
+                </div>
+
                 <div className={styles.cardHead}>
-                  <div className={styles.cardMetaRow}>
-                    <span className={styles.cardNo}>
-                      {p.no} · {p.name}
-                    </span>
-                    {p.tag && <span className={styles.cardTag}>{p.tag}</span>}
-                  </div>
+                  <h3 className={styles.cardName}>{p.name}</h3>
+                  <p className={styles.cardIntro}>{p.intro}</p>
                   <p className={styles.cardPrice}>
                     {p.price} <span className={styles.cardPriceUnit}>eenmalig</span>
                   </p>
-                  <p className={styles.cardIntro}>{p.intro}</p>
                 </div>
 
                 <Button
@@ -296,25 +313,25 @@ export default function PrijzenPage() {
                   Plan een gesprek
                 </Button>
 
-                <div className={styles.block}>
-                  <p className={styles.blockLabel}>Wat je krijgt</p>
-                  <ul className={styles.listKrijgt}>
-                    {p.krijgt.map((f) => (
-                      <li key={f}>
-                        <span className={styles.tick} aria-hidden>
-                          <Check />
-                        </span>
-                        {f}
-                      </li>
-                    ))}
-                    <li>
+                <p className={styles.cardDoorlooptijd}>
+                  <span className={styles.doorIcon} aria-hidden>
+                    <Clock />
+                  </span>
+                  Doorlooptijd: {p.doorlooptijd}
+                </p>
+
+                <hr className={styles.cardDivider} />
+
+                <ul className={styles.listKrijgt}>
+                  {p.krijgt.map((f) => (
+                    <li key={f}>
                       <span className={styles.tick} aria-hidden>
                         <Check />
                       </span>
-                      Doorlooptijd: {p.doorlooptijd}
+                      {f}
                     </li>
-                  </ul>
-                </div>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>

@@ -83,7 +83,7 @@ html.lenis body {
 }
 
 body {
-  background: var(--off-white);
+  background: #fff;
   color: var(--text);
   font-family: var(--font-sans);
   font-size: var(--fs-body);
@@ -163,7 +163,7 @@ select {
 }
 
 .section--alt {
-  background: var(--off-white-2);
+  background: #fff;
 }
 
 /* Sterrenveld + subtiele oranje nebula-glow als achtergrond.

@@ -58,7 +58,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
   padding: clamp(1.75rem, 2.5vw, 2.25rem);
   border-radius: var(--radius);
   border: 1px solid var(--line);
@@ -70,38 +70,57 @@
   border-color: transparent;
 }
 
-.cardHead {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.cardMetaRow {
+.cardTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
 }
-.cardNo {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+.cardIcon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--line);
+  background: var(--off-white);
 }
-.cardFeatured .cardNo {
-  color: var(--on-dark-muted);
+.cardFeatured .cardIcon {
+  border-color: transparent;
+  background: var(--orange);
 }
 .cardTag {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
-  letter-spacing: normal;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   background: var(--orange);
   color: #fff;
   white-space: nowrap;
 }
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.cardName {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: var(--track-tight);
+  line-height: 1.2;
+}
+.cardIntro {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.cardFeatured .cardIntro {
+  color: var(--on-dark-muted);
+}
 .cardPrice {
+  margin-top: 0.75rem;
   font-size: clamp(1.7rem, 1.3rem + 1.1vw, 2.1rem);
   font-weight: 700;
   letter-spacing: var(--track-tight);
@@ -115,30 +134,43 @@
 .cardFeatured .cardPriceUnit {
   color: var(--on-dark-muted);
 }
-.cardIntro {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: var(--muted);
-}
-.cardFeatured .cardIntro {
-  color: var(--on-dark-muted);
-}
-.cardPitch {
-  font-size: 1rem;
-  line-height: 1.55;
-  font-weight: 500;
-}
 
 .cardCta {
   width: 100%;
   justify-content: center;
 }
 
-.block {
+.cardDoorlooptijd {
   display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
 }
+.cardFeatured .cardDoorlooptijd {
+  color: var(--on-dark);
+}
+.doorIcon {
+  flex: 0 0 1.05rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--orange);
+}
+.doorIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cardDivider {
+  border: none;
+  border-top: 1px dashed var(--line);
+  margin: 0;
+}
+.cardFeatured .cardDivider {
+  border-top-color: var(--line-dark);
+}
+
 .blockLabel {
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
@@ -150,58 +182,30 @@
   color: var(--on-dark-muted);
 }
 
-.listKrijgt,
-.listNiet {
+.listKrijgt {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
-.listKrijgt li,
-.listNiet li {
+.listKrijgt li {
   display: flex;
   gap: 0.65rem;
   align-items: flex-start;
   font-size: 0.95rem;
   line-height: 1.5;
 }
-.listNiet li {
-  color: var(--muted);
-}
-.cardFeatured .listNiet li {
-  color: var(--on-dark-muted);
-}
 
-.tick,
-.cross {
+.tick {
   flex: 0 0 1.05rem;
   width: 1.05rem;
   height: 1.05rem;
   margin-top: 0.15rem;
-}
-.tick {
   color: var(--orange);
 }
-.cross {
-  color: var(--muted);
-}
-.cardFeatured .cross {
-  color: var(--on-dark-muted);
-}
-.tick svg,
-.cross svg {
+.tick svg {
   width: 100%;
   height: 100%;
-}
-
-.doorlooptijd {
-  margin-top: auto;
-  padding-top: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-.cardFeatured .doorlooptijd {
-  color: var(--on-dark-muted);
 }
 
 @media (max-width: 900px) {
