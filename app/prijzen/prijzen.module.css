@@ -1,3 +1,18 @@
+/* Paragraaf-teksten in Helvetica Neue met -3% tracking.
+   Koppen, pakketnamen en prijzen blijven de merkfont (forma-djr-deck). */
+.heroLead,
+.cardIntro,
+.cardPriceUnit,
+.cardTermijnen,
+.listKrijgt li,
+.cardDoorlooptijd,
+.trajectenLabel,
+.trajectenList li,
+.garantieBody,
+.garantieVoorwaarde {
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+}
+
 /* ---------- Hero ---------- */
 .hero {
   padding-top: clamp(8rem, 7rem + 5vw, 11rem);
