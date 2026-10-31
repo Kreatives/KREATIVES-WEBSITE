@@ -10,7 +10,8 @@
 .trajectenList li,
 .garantieBody,
 .garantieVoorwaarde {
-  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-family: var(--font-helvetica), "Helvetica Neue", "Helvetica", Arial,
+    sans-serif;
 }
 
 /* ---------- Hero ---------- */
@@ -234,17 +235,17 @@
 }
 .trajectenList {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem 2.5rem;
-  max-width: 64rem;
-  margin-inline: auto;
+  align-items: center;
+  gap: 1rem 2.75rem;
 }
 .trajectenList li {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  white-space: nowrap;
   font-size: 0.9rem;
   line-height: 1.4;
   letter-spacing: -0.03em;
@@ -307,8 +308,11 @@
     grid-template-columns: 1fr;
   }
   .trajectenList {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    flex-direction: column;
     gap: 0.9rem;
+  }
+  .trajectenList li {
+    white-space: normal;
+    text-align: center;
   }
 }

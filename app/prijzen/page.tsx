@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import RevealInit from "@/components/RevealInit";
 import Button from "@/components/Button";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { CALENDLY, site, OG_IMAGE } from "@/lib/site";
 import styles from "./prijzen.module.css";
+
+// Helvetica Neue zelf-gehost, alleen voor de paragraaf-teksten op deze pagina.
+const helvetica = localFont({
+  src: [
+    { path: "../fonts/HelveticaNeue-Roman.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/HelveticaNeue-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/HelveticaNeue-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-helvetica",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Prijzen: drie trajecten, vaste prijs",
@@ -222,7 +234,7 @@ export default function PrijzenPage() {
   };
 
   return (
-    <>
+    <div className={helvetica.variable}>
       <RevealInit />
       {[serviceLd, faqLd, breadcrumbLd].map((b, i) => (
         <script
@@ -366,6 +378,6 @@ export default function PrijzenPage() {
           cta: { label: "Plan een strategiegesprek", href: CALENDLY },
         }}
       />
-    </>
+    </div>
   );
 }
