@@ -35,7 +35,6 @@ type Plan = {
   tag?: string;
   featured?: boolean;
   intro: string;
-  pitch: string;
   krijgt: string[];
   doorlooptijd: string;
 };
@@ -47,9 +46,7 @@ const plans: Plan[] = [
     price: "€2.499",
     priceNumber: "2499",
     intro:
-      "Voor bedrijven die al adverteren, via een eigen marketingverantwoordelijke of een bureau, en merken dat de pagina waar de klik landt de campagne afremt.",
-    pitch:
-      "Eén pagina die het gesprek voorbereidt. Je bureau draait de campagne, wij maken de plek waar die landt.",
+      "Voor bedrijven die al adverteren, via een eigen marketingverantwoordelijke of een bureau, en merken dat de pagina waar de klik landt de campagne afremt. Wij maken één pagina die het gesprek voorbereidt, terwijl je bureau de campagne blijft draaien.",
     krijgt: [
       "Marketing & brand deepdive",
       "Figma-bestand",
@@ -60,7 +57,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
-    doorlooptijd: "Twee weken na akkoord op de copy.",
+    doorlooptijd: "twee weken na akkoord op de copy",
   },
   {
     no: "02",
@@ -70,9 +67,7 @@ const plans: Plan[] = [
     tag: "Meest gekozen",
     featured: true,
     intro:
-      "Voor bedrijven die de afgelopen jaren hard zijn gegroeid en waarvan de website nog laat zien waar ze vier jaar geleden stonden.",
-    pitch:
-      "Tot tien pagina's in vier weken, en je ziet het ontwerp voordat er één regel code wordt geschreven.",
+      "Voor bedrijven die de afgelopen jaren hard zijn gegroeid en waarvan de website nog laat zien waar ze vier jaar geleden stonden. Je krijgt tot tien pagina's in vier weken, en je ziet het ontwerp voordat er één regel code wordt geschreven.",
     krijgt: [
       "Marketing & brand deepdive",
       "Strategische wireframing",
@@ -88,7 +83,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
-    doorlooptijd: "Vier weken na akkoord op de copy.",
+    doorlooptijd: "vier weken na akkoord op de copy",
   },
   {
     no: "03",
@@ -96,9 +91,7 @@ const plans: Plan[] = [
     price: "€9.945",
     priceNumber: "9945",
     intro:
-      "Voor bedrijven waarbij niet alleen de site, maar ook het logo en de uitstraling achterlopen op het niveau van het werk.",
-    pitch:
-      "Alles uit Herbouw, plus een merk dat klopt met waar je nu staat. Twaalf pagina's in zes weken, met een fotodag op locatie.",
+      "Voor bedrijven waarbij niet alleen de site, maar ook het logo en de uitstraling achterlopen op het niveau van het werk. Je krijgt alles uit Herbouw, plus een merk dat klopt met waar je nu staat, met een fotodag op locatie.",
     krijgt: [
       "Alles uit Herbouw",
       "Volledig brandbook",
@@ -108,7 +101,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
-    doorlooptijd: "Zes weken na akkoord op de copy.",
+    doorlooptijd: "zes weken na akkoord op de copy",
   },
 ];
 
@@ -293,7 +286,6 @@ export default function PrijzenPage() {
                     {p.price} <span className={styles.cardPriceUnit}>eenmalig</span>
                   </p>
                   <p className={styles.cardIntro}>{p.intro}</p>
-                  <p className={styles.cardPitch}>{p.pitch}</p>
                 </div>
 
                 <Button
@@ -315,12 +307,14 @@ export default function PrijzenPage() {
                         {f}
                       </li>
                     ))}
+                    <li>
+                      <span className={styles.tick} aria-hidden>
+                        <Check />
+                      </span>
+                      Doorlooptijd: {p.doorlooptijd}
+                    </li>
                   </ul>
                 </div>
-
-                <p className={styles.doorlooptijd}>
-                  Doorlooptijd: {p.doorlooptijd}
-                </p>
               </article>
             ))}
           </div>
