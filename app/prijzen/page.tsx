@@ -32,10 +32,10 @@ type Plan = {
   name: string;
   price: string;
   priceNumber: string;
-  tag?: string;
   featured?: boolean;
   intro: string;
   krijgt: string[];
+  termijnen: string;
   doorlooptijd: string;
 };
 
@@ -57,6 +57,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
+    termijnen: "Betaling mogelijk in 2 termijnen",
     doorlooptijd: "twee weken na akkoord op de copy",
   },
   {
@@ -64,7 +65,6 @@ const plans: Plan[] = [
     name: "Herbouw",
     price: "€4.995",
     priceNumber: "4995",
-    tag: "Meest gekozen",
     featured: true,
     intro:
       "Voor bedrijven die de afgelopen jaren hard zijn gegroeid en waarvan de website nog laat zien waar ze vier jaar geleden stonden.",
@@ -83,6 +83,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
+    termijnen: "Betaling mogelijk in 3 termijnen",
     doorlooptijd: "vier weken na akkoord op de copy",
   },
   {
@@ -101,19 +102,20 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
+    termijnen: "Betaling mogelijk in 3 termijnen",
     doorlooptijd: "zes weken na akkoord op de copy",
   },
 ];
 
 const garanties = [
   {
-    title: "Je ziet het ontwerp voordat er gebouwd wordt.",
+    title: "Tevreden over wat er online komt.",
     body: "Drie rondes, en je geeft pas akkoord als het klopt. Keur je na de derde ronde nog af, dan betaal je alleen het strategiedeel van €2.000 en houd je alles wat we tot dan toe hebben gemaakt. De bouw gaat dan niet door en je zit nergens aan vast.",
     voorwaarde:
       "Voorwaarde: het strategiegesprek is geweest en de boodschap per pagina ligt vast voordat we ontwerpen.",
   },
   {
-    title: "Twee weken voor Landing, vier voor Herbouw, zes voor Signatuur.",
+    title: "Zekerheid over wanneer je online gaat.",
     body: "De klok start bij akkoord op de copy. Loopt het door onze schuld uit, dan gaat er €250 per week van de prijs af, tot maximaal €1.000. De klok stopt als wij op jou wachten. Daarom krijg je op dag één een lijst met precies wat we van je nodig hebben, en briefen wij de fotograaf.",
     voorwaarde:
       "Voorwaarde: cases, cijfers en namen zijn binnen vijf werkdagen na de start compleet.",
@@ -121,8 +123,8 @@ const garanties = [
 ];
 
 const alleTrajecten = [
-  "Domein, hosting en CMS staan op jouw naam. Je zit nooit vast aan ons voor de techniek.",
-  "Je werkt rechtstreeks met de mensen die je site maken, van het eerste gesprek tot de livegang.",
+  "Domein, hosting en CMS staan op jouw naam.",
+  "Je werkt rechtstreeks met de mensen die je site maken.",
   "Alle bedragen zijn exclusief 21% btw.",
 ];
 
@@ -165,23 +167,6 @@ function Check() {
       aria-hidden
     >
       <path d="m3 8.5 3.2 3 6.8-7" />
-    </svg>
-  );
-}
-
-function Clock() {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <circle cx="8" cy="8" r="6" />
-      <path d="M8 4.75V8l2.25 1.5" />
     </svg>
   );
 }
@@ -274,6 +259,9 @@ export default function PrijzenPage() {
       <section className={`section ${styles.plansSec}`}>
         <div className="container">
           <div className={styles.plansHead}>
+            <span className="eyebrow" data-reveal>
+              Onze pakketten
+            </span>
             <h2 className={`h2 ${styles.plansTitle}`} data-reveal>
               Wat het kost, en wat je{" "}
               <span className="accent accent--orange">ervoor krijgt.</span>
@@ -289,56 +277,54 @@ export default function PrijzenPage() {
                 }`}
                 data-reveal
               >
-                <div className={styles.cardTop}>
-                  <span className={styles.cardIcon} aria-hidden />
-                  {p.tag && <span className={styles.cardTag}>{p.tag}</span>}
-                </div>
+                <span className={styles.cardIcon} aria-hidden />
 
                 <div className={styles.cardHead}>
                   <h3 className={styles.cardName}>{p.name}</h3>
                   <p className={styles.cardIntro}>{p.intro}</p>
                   <p className={styles.cardPrice}>
-                    {p.price} <span className={styles.cardPriceUnit}>eenmalig</span>
+                    {p.price} <span className={styles.cardPriceUnit}>Eenmalig</span>
                   </p>
+                  <p className={styles.cardTermijnen}>{p.termijnen}</p>
                 </div>
-
-                <Button
-                  href={CALENDLY}
-                  variant={p.featured ? "white" : "dark"}
-                  className={styles.cardCta}
-                >
-                  Plan een gesprek
-                </Button>
-
-                <p className={styles.cardDoorlooptijd}>
-                  <span className={styles.doorIcon} aria-hidden>
-                    <Clock />
-                  </span>
-                  Doorlooptijd: {p.doorlooptijd}
-                </p>
 
                 <hr className={styles.cardDivider} />
 
                 <ul className={styles.listKrijgt}>
                   {p.krijgt.map((f) => (
                     <li key={f}>
-                      <span className={styles.tick} aria-hidden>
+                      <span
+                        className={p.featured ? styles.tickOrange : styles.tick}
+                        aria-hidden
+                      >
                         <Check />
                       </span>
                       {f}
                     </li>
                   ))}
                 </ul>
+
+                <Button
+                  href={CALENDLY}
+                  variant={p.featured ? "primary" : "dark"}
+                  className={styles.cardCta}
+                >
+                  Plan een gesprek
+                </Button>
+
+                <p className={styles.cardDoorlooptijd}>
+                  Doorlooptijd: {p.doorlooptijd}
+                </p>
               </article>
             ))}
           </div>
 
-          <div className={styles.trajectenBox} data-reveal>
-            <p className={styles.blockLabel}>Bij alle trajecten</p>
-            <ul className={styles.listKrijgt}>
+          <div className={styles.trajecten} data-reveal>
+            <p className={styles.trajectenLabel}>Bij alle trajecten</p>
+            <ul className={styles.trajectenList}>
               {alleTrajecten.map((t) => (
                 <li key={t}>
-                  <span className={styles.tick} aria-hidden>
+                  <span className={styles.tickOrange} aria-hidden>
                     <Check />
                   </span>
                   {t}
@@ -349,16 +335,18 @@ export default function PrijzenPage() {
         </div>
       </section>
 
-      <section className={`section section--alt ${styles.garantieSec}`}>
+      <section className="section section--dark cosmos-bg">
         <div className="container">
           <div className={styles.garantieHead}>
-            <span className="eyebrow" data-reveal>
-              De twee garanties
-            </span>
+            <h2 className={`h2 ${styles.garantieHeading}`} data-reveal>
+              <span className="accent accent--orange">100%</span> tevredenheids-
+              en deadline-garantie
+            </h2>
           </div>
           <div className={styles.garantieGrid}>
             {garanties.map((g) => (
               <article key={g.title} className={styles.garantieCard} data-reveal>
+                <span className={styles.garantieIcon} aria-hidden />
                 <h3 className={styles.garantieTitle}>{g.title}</h3>
                 <p className={styles.garantieBody}>{g.body}</p>
                 <p className={styles.garantieVoorwaarde}>{g.voorwaarde}</p>
