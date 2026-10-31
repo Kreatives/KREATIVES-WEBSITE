@@ -254,8 +254,8 @@ export default function PrijzenPage() {
               Prijzen
             </span>
             <h1 className={styles.heroTitle} data-reveal>
-              Je bedrijf is verder dan je{" "}
-              <span className="accent accent--orange">website laat zien.</span>
+              De prijs staat vast,{" "}
+              <span className="accent accent--orange">voordat we beginnen.</span>
             </h1>
             <p className={styles.heroLead} data-reveal>
               Drie trajecten met een vaste prijs. Per traject zie je precies wat
@@ -266,9 +266,6 @@ export default function PrijzenPage() {
               <Button href={CALENDLY} variant="white">
                 Plan een strategiegesprek
               </Button>
-              <span className={styles.heroMicro}>
-                Dertig minuten, en je weet welk traject bij je situatie past.
-              </span>
             </div>
           </div>
         </div>
@@ -335,6 +332,20 @@ export default function PrijzenPage() {
               </article>
             ))}
           </div>
+
+          <div className={styles.trajectenBox} data-reveal>
+            <p className={styles.blockLabel}>Bij alle trajecten</p>
+            <ul className={styles.listKrijgt}>
+              {alleTrajecten.map((t) => (
+                <li key={t}>
+                  <span className={styles.tick} aria-hidden>
+                    <Check />
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -353,26 +364,6 @@ export default function PrijzenPage() {
                 <p className={styles.garantieVoorwaarde}>{g.voorwaarde}</p>
               </article>
             ))}
-          </div>
-          <p className={styles.geenBelofte} data-reveal>
-            Wat we bewust niet beloven: omzet. De site is één variabele; wat je
-            met de bezoekers doet bepaalt of het werkt. Daarom staat de meting op
-            jouw eigen accounts, zodat je na dertig dagen zelf ziet wat er
-            gebeurt.
-          </p>
-
-          <div className={styles.trajectenBox} data-reveal>
-            <p className={styles.blockLabel}>Bij alle trajecten</p>
-            <ul className={styles.listKrijgt}>
-              {alleTrajecten.map((t) => (
-                <li key={t}>
-                  <span className={styles.tick} aria-hidden>
-                    <Check />
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
