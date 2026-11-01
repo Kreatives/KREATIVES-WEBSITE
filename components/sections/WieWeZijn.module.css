@@ -21,7 +21,6 @@
   line-height: 1.28;
   letter-spacing: var(--track-tight);
   color: var(--ink);
-  max-width: 24ch;
 }
 .statementRest {
   color: var(--muted);
