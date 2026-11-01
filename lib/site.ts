@@ -574,6 +574,7 @@ export const pricing = {
         "Eén pagina die het gesprek voorbereidt, voor als je al adverteert.",
       price: "€1.499",
       priceUnit: "",
+      termijnen: "Betaling mogelijk in 2 termijnen",
       featured: false,
       features: [
         "Marketing & brand deepdive",
@@ -591,6 +592,7 @@ export const pricing = {
         "De site die weer klopt met waar je bedrijf nu staat.",
       price: "€3.995",
       priceUnit: "",
+      termijnen: "Betaling mogelijk in 3 termijnen",
       featured: true,
       features: [
         "Marketing & brand deepdive",
@@ -609,6 +611,7 @@ export const pricing = {
         "Alles uit Herbouw, plus een merk dat klopt met je niveau.",
       price: "€8.945",
       priceUnit: "",
+      termijnen: "Betaling mogelijk in 3 termijnen",
       featured: false,
       features: [
         "Alles uit Herbouw",

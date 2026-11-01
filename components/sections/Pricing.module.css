@@ -92,6 +92,18 @@
 .cardFeatured .cardPrice {
   color: var(--on-dark);
 }
+.cardTermijnen {
+  margin-top: 0.6rem;
+  font-family: var(--font-helvetica), "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: -0.03em;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cardFeatured .cardTermijnen {
+  color: var(--on-dark-muted);
+}
 
 .divide {
   height: 1px;

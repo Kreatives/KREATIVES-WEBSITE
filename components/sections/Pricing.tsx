@@ -58,6 +58,9 @@ export default function Pricing({ data = pricing }: { data?: typeof pricing }) {
                 <h3 className={styles.cardName}>{p.name}</h3>
                 <p className={styles.cardBody}>{p.body}</p>
                 {p.price && <p className={styles.cardPrice}>{p.price}</p>}
+                {p.termijnen && (
+                  <p className={styles.cardTermijnen}>{p.termijnen}</p>
+                )}
               </div>
 
               <div className={styles.divide} aria-hidden />

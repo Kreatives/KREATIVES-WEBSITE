@@ -156,6 +156,7 @@ export const pricingEn = {
       body: "One page that prepares the conversation, for when you already advertise.",
       price: "$2,499",
       priceUnit: "",
+      termijnen: "Payment in 2 instalments",
       featured: false,
       features: [
         "Copy and design by us",
@@ -171,6 +172,7 @@ export const pricingEn = {
       body: "The site that fits where your business stands today.",
       price: "$4,995",
       priceUnit: "",
+      termijnen: "Payment in 3 instalments",
       featured: true,
       features: [
         "Strategy, copy and design",
@@ -187,6 +189,7 @@ export const pricingEn = {
       body: "Everything in Rebuild, plus a brand that matches your level.",
       price: "$9,945",
       priceUnit: "",
+      termijnen: "Payment in 3 instalments",
       featured: false,
       features: [
         "Everything in Rebuild",
