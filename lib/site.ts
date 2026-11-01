@@ -133,14 +133,55 @@ export const usps = {
   ],
 };
 
+// Sectie 2 homepage — "Wie we zijn" + 6 kaarten.
+export const wieWeZijn = {
+  eyebrow: "Wie we zijn",
+  statementLead:
+    "KREATIVES bouwt maatwerk websites voor ondernemers die online willen laten zien wat ze offline al waarmaken.",
+  statementRest:
+    "Van strategie en ontwerp tot bouw en livegang werk je rechtstreeks met de mensen die je site maken.",
+  items: [
+    {
+      no: "01",
+      title: "Direct contact",
+      body: "Je werkt rechtstreeks met de persoon die je site ontwerpt en bouwt, zonder accountmanager ertussen.",
+    },
+    {
+      no: "02",
+      title: "Design garantie",
+      body: "Je keurt het ontwerp goed voordat we bouwen en hebt drie revisierondes. We gaan door tot het klopt, voor dezelfde prijs.",
+    },
+    {
+      no: "03",
+      title: "Live in vier weken",
+      body: "Van strategiegesprek tot live site in vier weken, met een planning die je vooraf op papier krijgt.",
+    },
+    {
+      no: "04",
+      title: "Strategie en tekst",
+      body: "We bepalen eerst wat je site moet zeggen tegen een klant die een groot traject overweegt. De teksten schrijven wij.",
+    },
+    {
+      no: "05",
+      title: "Deepdive op locatie",
+      body: "We zitten minimaal één keer bij je aan tafel. Je bedrijf begrijpen gaat sneller op locatie.",
+    },
+    {
+      no: "06",
+      title: "Support na livegang",
+      body: "Na oplevering blijven we drie maanden aan boord voor aanpassingen, vragen en kleine verbeteringen.",
+    },
+  ],
+};
+
 export const werkwijze = {
-  eyebrow: "Aanpak",
-  titleLead: "Zo werken we, van eerste gesprek tot",
-  titleAccent: "live site.",
+  eyebrow: "Onze aanpak",
+  titleLead: "Zo werken we, van",
+  titleAccent: "eerste gesprek tot live site.",
   steps: [
     {
       no: "01",
-      title: "Strategiegesprek",
+      title: "Deepdive",
       body:
         "In 30 minuten bespreken we je merk, je doelgroep en wat de site concreet moet opleveren. Jij vertelt waar je nu tegenaan loopt, wij komen met een eerste richting. Daarna weet je precies wat je kunt verwachten.",
       image: "/brand/stap-strategie.webp",

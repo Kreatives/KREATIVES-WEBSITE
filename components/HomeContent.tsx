@@ -1,7 +1,7 @@
 import RevealInit from "@/components/RevealInit";
 import Hero from "@/components/sections/Hero";
 import LogoMarquee from "@/components/sections/LogoMarquee";
-import Probleem from "@/components/sections/Probleem";
+import WieWeZijn from "@/components/sections/WieWeZijn";
 import Werkwijze from "@/components/sections/Werkwijze";
 import Cases from "@/components/sections/Cases";
 import Reviews from "@/components/sections/Reviews";
@@ -44,7 +44,7 @@ export default async function HomeContent() {
         <Hero />
         <LogoMarquee />
       </div>
-      <Probleem />
+      <WieWeZijn />
       <Werkwijze />
       <div className="cosmos-bg cosmos-wrap">
         <Cases items={cases} />
