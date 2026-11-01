@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { pricing } from "@/lib/site";
+import { helvetica } from "@/lib/fonts";
 import Button from "@/components/Button";
 import styles from "./Pricing.module.css";
 
@@ -20,7 +22,10 @@ function Check() {
 
 export default function Pricing({ data = pricing }: { data?: typeof pricing }) {
   return (
-    <section className={`section ${styles.sec}`} id="prijzen">
+    <section
+      className={`section ${styles.sec} ${helvetica.variable}`}
+      id="prijzen"
+    >
       <div className="container">
         <div className={styles.head}>
           <h2 className={`h2 ${styles.title}`} data-reveal>
@@ -41,19 +46,18 @@ export default function Pricing({ data = pricing }: { data?: typeof pricing }) {
               }`}
               data-reveal
             >
+              <Image
+                src={p.icon}
+                alt=""
+                width={44}
+                height={44}
+                className={styles.cardIcon}
+              />
+
               <div className={styles.cardHead}>
                 <h3 className={styles.cardName}>{p.name}</h3>
                 <p className={styles.cardBody}>{p.body}</p>
                 {p.price && <p className={styles.cardPrice}>{p.price}</p>}
-              </div>
-
-              <div className={styles.cardCta}>
-                <Button
-                  href={p.cta.href}
-                  variant={p.featured ? "primary" : "dark"}
-                >
-                  {p.cta.label}
-                </Button>
               </div>
 
               <div className={styles.divide} aria-hidden />
@@ -61,13 +65,26 @@ export default function Pricing({ data = pricing }: { data?: typeof pricing }) {
               <ul className={styles.features}>
                 {p.features.map((f) => (
                   <li key={f}>
-                    <span className={styles.tick} aria-hidden>
+                    <span
+                      className={p.featured ? styles.tickOrange : styles.tick}
+                      aria-hidden
+                    >
                       <Check />
                     </span>
                     {f}
                   </li>
                 ))}
               </ul>
+
+              <div className={styles.cardCta}>
+                <Button
+                  href={p.cta.href}
+                  variant={p.featured ? "primary" : "dark"}
+                  className={styles.cardCtaBtn}
+                >
+                  {p.cta.label}
+                </Button>
+              </div>
             </article>
           ))}
         </div>

@@ -1,24 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import localFont from "next/font/local";
 import RevealInit from "@/components/RevealInit";
 import Button from "@/components/Button";
 import FaqList from "@/components/funnel/FaqList";
 import ClosingCta from "@/components/funnel/ClosingCta";
 import { CALENDLY, site, OG_IMAGE } from "@/lib/site";
+import { helvetica } from "@/lib/fonts";
 import PlanCards from "./PlanCards";
 import styles from "./prijzen.module.css";
-
-// Helvetica Neue zelf-gehost, alleen voor de paragraaf-teksten op deze pagina.
-const helvetica = localFont({
-  src: [
-    { path: "../fonts/HelveticaNeue-Roman.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/HelveticaNeue-Medium.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/HelveticaNeue-Bold.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-helvetica",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Prijzen: drie trajecten, vaste prijs",
@@ -130,15 +119,11 @@ const garanties = [
     title: "Tevreden over wat er online komt.",
     icon: "/icons/prijzen/garantie-design.png",
     body: "Drie rondes, en je geeft pas akkoord als het klopt. Keur je na de derde ronde nog af, dan betaal je alleen het strategiedeel van €2.000 en houd je alles wat we tot dan toe hebben gemaakt. De bouw gaat dan niet door en je zit nergens aan vast.",
-    voorwaarde:
-      "Voorwaarde: het strategiegesprek is geweest en de boodschap per pagina ligt vast voordat we ontwerpen.",
   },
   {
     title: "Zekerheid over wanneer je online gaat.",
     icon: "/icons/prijzen/garantie-deadline.png",
     body: "De klok start bij akkoord op de copy. Loopt het door onze schuld uit, dan gaat er €250 per week van de prijs af, tot maximaal €1.000. De klok stopt als wij op jou wachten. Daarom krijg je op dag één een lijst met precies wat we van je nodig hebben, en briefen wij de fotograaf.",
-    voorwaarde:
-      "Voorwaarde: cases, cijfers en namen zijn binnen vijf werkdagen na de start compleet.",
   },
 ];
 
@@ -326,7 +311,6 @@ export default function PrijzenPage() {
                 />
                 <h3 className={styles.garantieTitle}>{g.title}</h3>
                 <p className={styles.garantieBody}>{g.body}</p>
-                <p className={styles.garantieVoorwaarde}>{g.voorwaarde}</p>
               </article>
             ))}
           </div>

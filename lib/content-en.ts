@@ -152,6 +152,7 @@ export const pricingEn = {
   plans: [
     {
       name: "Landing",
+      icon: "/icons/prijzen/landing.png",
       body: "One page that prepares the conversation, for when you already advertise.",
       price: "$2,499",
       priceUnit: "",
@@ -166,6 +167,7 @@ export const pricingEn = {
     },
     {
       name: "Rebuild",
+      icon: "/icons/prijzen/herbouw.png",
       body: "The site that fits where your business stands today.",
       price: "$4,995",
       priceUnit: "",
@@ -181,6 +183,7 @@ export const pricingEn = {
     },
     {
       name: "Signature",
+      icon: "/icons/prijzen/signatuur.png",
       body: "Everything in Rebuild, plus a brand that matches your level.",
       price: "$9,945",
       priceUnit: "",

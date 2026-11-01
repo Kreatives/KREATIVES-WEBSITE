@@ -569,6 +569,7 @@ export const pricing = {
   plans: [
     {
       name: "Landing",
+      icon: "/icons/prijzen/landing.png",
       body:
         "Eén pagina die het gesprek voorbereidt, voor als je al adverteert.",
       price: "€1.499",
@@ -585,6 +586,7 @@ export const pricing = {
     },
     {
       name: "Herbouw",
+      icon: "/icons/prijzen/herbouw.png",
       body:
         "De site die weer klopt met waar je bedrijf nu staat.",
       price: "€3.995",
@@ -602,6 +604,7 @@ export const pricing = {
     },
     {
       name: "Signatuur",
+      icon: "/icons/prijzen/signatuur.png",
       body:
         "Alles uit Herbouw, plus een merk dat klopt met je niveau.",
       price: "€8.945",
@@ -816,6 +819,7 @@ export const footer = {
     email: site.email,
     response: "Reactie binnen één werkdag",
     location: "Nederland, op afstand",
+    address: "Hortensialaan 1-a, 6851TB, Huissen",
     // KvK-nummer voor vertrouwen bij gevestigde bedrijven. Leeg = niet tonen.
     kvk: "",
   },
