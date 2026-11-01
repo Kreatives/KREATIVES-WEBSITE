@@ -66,10 +66,9 @@
   right: 0;
 }
 .cardIcon {
+  display: block;
   width: 3.5rem;
   height: 3.5rem;
-  border-radius: 0.9rem;
-  background: var(--ink);
   margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
 }
 .cardTitle {

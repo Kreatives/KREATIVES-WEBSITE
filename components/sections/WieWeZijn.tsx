@@ -23,7 +23,14 @@ export default function WieWeZijn({
           {data.items.map((it) => (
             <article key={it.no} className={styles.card} data-reveal>
               <span className={styles.cardNo}>{it.no}</span>
-              <span className={styles.cardIcon} aria-hidden />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={it.icon}
+                alt=""
+                width={56}
+                height={56}
+                className={styles.cardIcon}
+              />
               <h3 className={styles.cardTitle}>{it.title}</h3>
               <p className={styles.cardBody}>{it.body}</p>
             </article>

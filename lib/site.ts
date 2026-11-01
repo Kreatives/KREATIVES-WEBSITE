@@ -144,31 +144,37 @@ export const wieWeZijn = {
     {
       no: "01",
       title: "Direct contact",
+      icon: "/icons/wie-we-zijn/direct-contact.svg",
       body: "Je werkt rechtstreeks met de persoon die je site ontwerpt en bouwt, zonder accountmanager ertussen.",
     },
     {
       no: "02",
       title: "Design garantie",
+      icon: "/icons/wie-we-zijn/design-garantie.svg",
       body: "Je keurt het ontwerp goed voordat we bouwen en hebt drie revisierondes. We gaan door tot het klopt, voor dezelfde prijs.",
     },
     {
       no: "03",
       title: "Live in vier weken",
+      icon: "/icons/wie-we-zijn/live-in-vier-weken.svg",
       body: "Van strategiegesprek tot live site in vier weken, met een planning die je vooraf op papier krijgt.",
     },
     {
       no: "04",
       title: "Strategie en tekst",
+      icon: "/icons/wie-we-zijn/strategie.svg",
       body: "We bepalen eerst wat je site moet zeggen tegen een klant die een groot traject overweegt. De teksten schrijven wij.",
     },
     {
       no: "05",
       title: "Deepdive op locatie",
+      icon: "/icons/wie-we-zijn/deepdive.svg",
       body: "We zitten minimaal één keer bij je aan tafel. Je bedrijf begrijpen gaat sneller op locatie.",
     },
     {
       no: "06",
       title: "Support na livegang",
+      icon: "/icons/wie-we-zijn/support.svg",
       body: "Na oplevering blijven we drie maanden aan boord voor aanpassingen, vragen en kleine verbeteringen.",
     },
   ],

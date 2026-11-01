@@ -135,14 +135,51 @@
     gap: 2rem;
     align-items: start;
   }
+
+  /* Stapel-kaarten: elke stap plakt onder de vorige, zodat 02 over 01
+     schuift, 03 over 02, enz. */
+  .steps {
+    gap: 0;
+  }
+  .step {
+    position: sticky;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1.1rem;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 -6px 24px rgba(17, 17, 17, 0.06);
+  }
+  .step:last-child {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
+  }
+  .step:nth-child(1) {
+    top: 4.75rem;
+  }
+  .step:nth-child(2) {
+    top: 8rem;
+  }
+  .step:nth-child(3) {
+    top: 11.25rem;
+  }
+  .step:nth-child(4) {
+    top: 14.5rem;
+  }
+
   /* Op mobiel alle stappen open tonen */
   .stepBody {
     grid-template-rows: 1fr;
   }
   .stepHead {
+    padding: 0;
     color: var(--ink);
   }
   .stepNo {
     opacity: 1;
+  }
+  .stepBodyInner p {
+    padding-top: 0.75rem;
+    padding-bottom: 0;
   }
 }
