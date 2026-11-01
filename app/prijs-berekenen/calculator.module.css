@@ -357,6 +357,13 @@
   font-weight: 600;
   white-space: nowrap;
 }
+.panelTotaal {
+  border-top: 1.5px solid var(--ink);
+  font-weight: 700;
+}
+.panelTotaal span:last-child {
+  font-weight: 700;
+}
 .panelCta {
   width: 100%;
   justify-content: center;

@@ -42,12 +42,14 @@ const jaNeeVal = (b: boolean | null) => (b === null ? "" : b ? "ja" : "nee");
 
 const euro = (n: number) => "€" + n.toLocaleString("nl-NL");
 
+type Regel = { label: string; bedrag: number; plus?: boolean };
 type Result = {
   state: "leeg" | "ok";
   bouw: number;
   perMaand: number;
   startVanaf: number;
   reden: string;
+  regels: Regel[];
 };
 
 function bereken(
@@ -69,31 +71,31 @@ function bereken(
       perMaand,
       startVanaf: 0,
       reden: "Kies je opties hieronder voor een indicatie.",
+      regels: [],
     };
   }
 
   const isShop = type === "shopify" || type === "woo";
-  let bouw = type === "landing" ? PRIJZEN.landing : PRIJZEN.website;
-  if (isShop) bouw += PRIJZEN.webshopExtra;
-  if (brandbook === true) bouw += PRIJZEN.brandbook;
-  if (fotodag === true) bouw += PRIJZEN.fotodag;
-  if (ai === true) bouw += PRIJZEN.aiBeelden;
-
   const typeLabel = {
     website: "Website",
     landing: "Landingspagina",
     shopify: "Webshop in Shopify",
     woo: "Webshop in WooCommerce",
   }[type];
-  const extras = [
-    brandbook === true && "brandbook",
-    fotodag === true && "fotodag",
-    ai === true && "AI-beelden",
-  ].filter(Boolean) as string[];
-  const reden = extras.length
-    ? `${typeLabel}, met ${extras.join(", ")}.`
-    : `${typeLabel}.`;
 
+  const basis =
+    (type === "landing" ? PRIJZEN.landing : PRIJZEN.website) +
+    (isShop ? PRIJZEN.webshopExtra : 0);
+
+  const regels: Regel[] = [{ label: typeLabel, bedrag: basis }];
+  if (brandbook === true)
+    regels.push({ label: "Brandbook", bedrag: PRIJZEN.brandbook, plus: true });
+  if (fotodag === true)
+    regels.push({ label: "Fotodag op locatie", bedrag: PRIJZEN.fotodag, plus: true });
+  if (ai === true)
+    regels.push({ label: "Beelden met AI", bedrag: PRIJZEN.aiBeelden, plus: true });
+
+  const bouw = regels.reduce((s, rg) => s + rg.bedrag, 0);
   const termijnen = type === "landing" ? 2 : 3;
 
   return {
@@ -101,7 +103,8 @@ function bereken(
     bouw,
     perMaand,
     startVanaf: Math.round(bouw / termijnen),
-    reden,
+    reden: `${typeLabel}.`,
+    regels,
   };
 }
 
@@ -331,7 +334,7 @@ export default function Calculator() {
                       "Nee, mijn merk staat al",
                       "Ik heb logo en huisstijl",
                       "Ja, logo, huisstijl en brandbook",
-                      "+ €2.500"
+                      "Een compleet nieuw merk"
                     )}
                   />
                 )}
@@ -345,7 +348,7 @@ export default function Calculator() {
                       "Ik lever beeld zelf aan",
                       "Foto's zijn er al",
                       "Fotodag op locatie",
-                      "+ €1.000"
+                      "Fotograaf voor team en werk"
                     )}
                   />
                 )}
@@ -359,7 +362,7 @@ export default function Calculator() {
                       "Nee",
                       "Geen AI-beelden nodig",
                       "Ja, beelden met AI",
-                      "+ €1.000"
+                      "Gegenereerde beelden op maat"
                     )}
                   />
                 )}
@@ -373,7 +376,7 @@ export default function Calculator() {
                       "Nee",
                       "Zelf optimaliseren",
                       "Ja, elke maand verbeteren",
-                      "+ €500 per maand"
+                      "Doorlopende optimalisatie"
                     )}
                   />
                 )}
@@ -387,7 +390,7 @@ export default function Calculator() {
                       "Regel ik zelf",
                       "Eigen hosting of beheer",
                       "Bij KREATIVES",
-                      "Eerste jaar gratis, daarna € 49 p/m"
+                      "Eerste jaar gratis"
                     )}
                   />
                 )}
@@ -436,13 +439,22 @@ export default function Calculator() {
             <p className={styles.panelReden}>{r.reden}</p>
 
             <div className={styles.panelRows}>
+              {r.regels.map((rg) => (
+                <div key={rg.label} className={styles.panelRow}>
+                  <span>{rg.label}</span>
+                  <span>
+                    {rg.plus ? "+ " : ""}
+                    {euro(rg.bedrag)}
+                  </span>
+                </div>
+              ))}
+              <div className={`${styles.panelRow} ${styles.panelTotaal}`}>
+                <span>Totaal</span>
+                <span>{r.state === "ok" ? euro(r.bouw) : "—"}</span>
+              </div>
               <div className={styles.panelRow}>
                 <span>Per maand</span>
                 <span>{euro(r.perMaand)}</span>
-              </div>
-              <div className={styles.panelRow}>
-                <span>Eenmalige kosten</span>
-                <span>{r.state === "ok" ? euro(r.bouw) : "—"}</span>
               </div>
               <div className={styles.panelRow}>
                 <span>Daarna per jaar</span>
