@@ -11,7 +11,9 @@ import styles from "./calculator.module.css";
 ------------------------------------------------------------------ */
 const PRIJZEN = {
   landing: 1499, // landingspagina
-  website: 2995, // website (basis)
+  websiteTot5: 2995, // website tot 5 pagina's
+  websiteTot10: 3995, // website tot 10 pagina's
+  websiteMeer: 4995, // website meer dan 10 pagina's
   webshopExtra: 500, // webshop = website + 500
   brandbook: 2500, // add-on: logo, huisstijl en brandbook
   fotodag: 1000, // add-on: fotodag op locatie
@@ -21,12 +23,19 @@ const PRIJZEN = {
 };
 
 type Keuze = "website" | "landing" | "shopify" | "woo";
+type Pagina = "tot5" | "tot10" | "meer";
 
 const TYPE_OPTIES: { value: Keuze; title: string; desc: string }[] = [
   { value: "website", title: "Website", desc: "Bedrijfssite in WordPress" },
   { value: "landing", title: "Landingspagina", desc: "Eén pagina voor je campagne" },
   { value: "shopify", title: "Webshop in Shopify", desc: "Verkopen met Shopify" },
   { value: "woo", title: "Webshop in WooCommerce", desc: "Verkopen vanuit WordPress" },
+];
+
+const PAGINA_OPTIES: { value: Pagina; title: string; desc: string }[] = [
+  { value: "tot5", title: "Tot 5 pagina's", desc: "Een compacte site" },
+  { value: "tot10", title: "Tot 10 pagina's", desc: "Home, diensten, over, contact en meer" },
+  { value: "meer", title: "Meer dan 10 pagina's", desc: "Veel diensten of locaties" },
 ];
 
 const jaNee = (
@@ -54,6 +63,7 @@ type Result = {
 
 function bereken(
   type: Keuze | null,
+  pagina: Pagina | null,
   brandbook: boolean | null,
   fotodag: boolean | null,
   ai: boolean | null,
@@ -76,6 +86,18 @@ function bereken(
   }
 
   const isShop = type === "shopify" || type === "woo";
+  const heeftPaginas = type === "website" || isShop;
+  if (heeftPaginas && !pagina) {
+    return {
+      state: "leeg",
+      bouw: 0,
+      perMaand,
+      startVanaf: 0,
+      reden: "Kies het aantal pagina's voor een indicatie.",
+      regels: [],
+    };
+  }
+
   const typeLabel = {
     website: "Website",
     landing: "Landingspagina",
@@ -83,9 +105,12 @@ function bereken(
     woo: "Webshop in WooCommerce",
   }[type];
 
-  const basis =
-    (type === "landing" ? PRIJZEN.landing : PRIJZEN.website) +
-    (isShop ? PRIJZEN.webshopExtra : 0);
+  let basis: number;
+  if (type === "landing") basis = PRIJZEN.landing;
+  else if (pagina === "meer") basis = PRIJZEN.websiteMeer;
+  else if (pagina === "tot10") basis = PRIJZEN.websiteTot10;
+  else basis = PRIJZEN.websiteTot5;
+  if (isShop) basis += PRIJZEN.webshopExtra;
 
   const regels: Regel[] = [{ label: typeLabel, bedrag: basis }];
   if (brandbook === true)
@@ -103,7 +128,12 @@ function bereken(
     bouw,
     perMaand,
     startVanaf: Math.round(bouw / termijnen),
-    reden: `${typeLabel}.`,
+    reden:
+      heeftPaginas && pagina
+        ? `${typeLabel}, ${PAGINA_OPTIES.find(
+            (o) => o.value === pagina
+          )?.title.toLowerCase()}.`
+        : `${typeLabel}.`,
     regels,
   };
 }
@@ -156,6 +186,7 @@ export default function Calculator() {
   const [stap, setStap] = useState(0);
   const [lead, setLead] = useState({ naam: "", email: "", bedrijf: "", telefoon: "" });
   const [type, setType] = useState<Keuze | null>(null);
+  const [pagina, setPagina] = useState<Pagina | null>(null);
   const [brandbook, setBrandbook] = useState<boolean | null>(null);
   const [fotodag, setFotodag] = useState<boolean | null>(null);
   const [ai, setAi] = useState<boolean | null>(null);
@@ -169,10 +200,16 @@ export default function Calculator() {
       lead.telefoon.trim()
   );
 
-  const r = bereken(type, brandbook, fotodag, ai, cro, hosting);
+  const r = bereken(type, pagina, brandbook, fotodag, ai, cro, hosting);
+
+  const isWebsite = type === "website";
+  const isShop = type === "shopify" || type === "woo";
 
   const samenvatting = [
     type && TYPE_OPTIES.find((o) => o.value === type)?.title,
+    (isWebsite || isShop) &&
+      pagina &&
+      PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
     brandbook === true && "brandbook",
     fotodag === true && "fotodag",
     ai === true && "AI-beelden",
@@ -324,6 +361,15 @@ export default function Calculator() {
                   onChange={setType}
                   options={TYPE_OPTIES}
                 />
+                {(isWebsite || isShop) && (
+                  <Group
+                    title="Hoeveel pagina's?"
+                    name="pagina"
+                    value={pagina ?? ""}
+                    onChange={setPagina}
+                    options={PAGINA_OPTIES}
+                  />
+                )}
                 {type && (
                   <Group
                     title="Wil je een nieuw merk?"
