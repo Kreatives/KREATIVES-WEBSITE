@@ -62,7 +62,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
-    termijnen: "Betaling mogelijk in 2 termijnen",
+    termijnen: "Start al vanaf €750",
     doorlooptijd: "twee weken na akkoord op de copy",
   },
   {
@@ -89,7 +89,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
-    termijnen: "Betaling mogelijk in 3 termijnen",
+    termijnen: "Start al vanaf €1.332",
     doorlooptijd: "vier weken na akkoord op de copy",
   },
   {
@@ -109,7 +109,7 @@ const plans: Plan[] = [
       "Web development in WordPress",
       "Website training",
     ],
-    termijnen: "Betaling mogelijk in 3 termijnen",
+    termijnen: "Start al vanaf €2.982",
     doorlooptijd: "zes weken na akkoord op de copy",
   },
 ];

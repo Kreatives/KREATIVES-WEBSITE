@@ -85,7 +85,15 @@ export default function PlanCards({
                 {p.price}{" "}
                 <span className={styles.cardPriceUnit}>Eenmalig</span>
               </p>
-              <p className={styles.cardTermijnen}>{p.termijnen}</p>
+              <p className={styles.cardTermijnen}>
+                {p.termijnen}
+                <span className={styles.tip} tabIndex={0}>
+                  *
+                  <span className={styles.tipBox} role="tooltip">
+                    Je kunt bij ons in meerdere termijnen betalen.
+                  </span>
+                </span>
+              </p>
             </div>
 
             <hr className={styles.cardDivider} />
@@ -104,17 +112,21 @@ export default function PlanCards({
               ))}
             </ul>
 
-            <Button
-              href={calendly}
-              variant={p.featured ? "primary" : "dark"}
-              className={styles.cardCta}
-            >
-              Plan een gesprek
-            </Button>
-
-            <p className={styles.cardDoorlooptijd}>
-              Doorlooptijd: {p.doorlooptijd}
-            </p>
+            <div className={styles.cardFoot}>
+              <Button
+                href={calendly}
+                variant={p.featured ? "primary" : "dark"}
+                className={styles.cardCta}
+              >
+                Plan een gesprek
+              </Button>
+              <p className={styles.cardGarantie}>
+                100% tevredenheids &amp; deadline garantie
+              </p>
+              <p className={styles.cardDoorlooptijd}>
+                Doorlooptijd: {p.doorlooptijd}
+              </p>
+            </div>
           </article>
         ))}
       </div>
