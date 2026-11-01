@@ -179,7 +179,7 @@ export default function Calculator() {
   )}&body=${encodeURIComponent(mailBody)}`;
 
   return (
-    <div className={styles.shell}>
+    <div className={`cosmos-bg ${styles.shell}`}>
       <div className={styles.grid}>
         <div className={styles.left}>
           <div className={styles.stepper} role="tablist">
@@ -314,6 +314,27 @@ export default function Calculator() {
               </>
             )}
           </div>
+
+          <div className={styles.nav}>
+            {stap > 0 && (
+              <button
+                type="button"
+                className={styles.navPrev}
+                onClick={() => setStap(stap - 1)}
+              >
+                Vorige
+              </button>
+            )}
+            {stap < STAPPEN.length - 1 && (
+              <button
+                type="button"
+                className={styles.navNext}
+                onClick={() => setStap(stap + 1)}
+              >
+                Volgende
+              </button>
+            )}
+          </div>
         </div>
 
         <div className={styles.right}>
@@ -361,7 +382,7 @@ export default function Calculator() {
             </a>
           </div>
 
-          <SocialProof align="left" tone="light" />
+          <SocialProof align="left" tone="dark" />
         </div>
       </div>
     </div>
