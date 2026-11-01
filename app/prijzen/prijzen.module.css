@@ -44,8 +44,18 @@
   margin-top: 2rem;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.25rem 1.75rem;
   flex-wrap: wrap;
+}
+.heroCalcLink {
+  font-size: 0.95rem;
+  letter-spacing: -0.03em;
+  color: var(--on-dark-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.heroCalcLink:hover {
+  color: var(--on-dark);
 }
 
 /* ---------- Plans ---------- */

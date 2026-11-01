@@ -256,6 +256,9 @@ export default function PrijzenPage() {
               <Button href={CALENDLY} variant="white">
                 Plan een strategiegesprek
               </Button>
+              <a href="/prijs-berekenen" className={styles.heroCalcLink}>
+                Of bereken zelf een indicatie
+              </a>
             </div>
           </div>
         </div>
