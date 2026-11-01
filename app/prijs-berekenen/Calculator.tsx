@@ -6,33 +6,27 @@ import { CALENDLY } from "@/lib/site";
 import styles from "./calculator.module.css";
 
 /* ------------------------------------------------------------------
-   Prijslogica, afgeleid van de drie pakketten. Alle bedragen staan hier
-   bij elkaar. fotodag en hostingPerMaand zijn placeholders.
+   Prijslogica. Alle bedragen staan hier bij elkaar zodat ze makkelijk
+   aan te passen zijn. De add-ons stapelen bovenop de basisprijs.
 ------------------------------------------------------------------ */
 const PRIJZEN = {
   landing: 1499, // landingspagina
-  websiteTot5: 2495, // compacte website tot 5 pagina's
-  herbouw: 3995, // website tot 10 pagina's
-  signatuur: 8945, // meer dan 10 pagina's of met merk/brandbook
-  webshopExtra: 500, // webshop = dezelfde opzet + 500
-  fotodag: 750, // placeholder — zit al in Signatuur
-  hostingPerMaand: 49, // placeholder — eerste jaar inbegrepen
+  website: 2995, // website (basis)
+  webshopExtra: 500, // webshop = website + 500
+  brandbook: 2500, // add-on: logo, huisstijl en brandbook
+  fotodag: 1000, // add-on: fotodag op locatie
+  aiBeelden: 1000, // add-on: beelden met AI
+  hostingPerMaand: 49, // per maand, eerste jaar inbegrepen
+  croPerMaand: 500, // per maand: maandelijkse CRO-update
 };
 
 type Keuze = "website" | "landing" | "shopify" | "woo";
-type Pagina = "tot5" | "tot10" | "meer";
 
 const TYPE_OPTIES: { value: Keuze; title: string; desc: string }[] = [
-  { value: "website", title: "Website", desc: "Bedrijfssite met meerdere pagina's" },
+  { value: "website", title: "Website", desc: "Bedrijfssite in WordPress" },
   { value: "landing", title: "Landingspagina", desc: "Eén pagina voor je campagne" },
   { value: "shopify", title: "Webshop in Shopify", desc: "Verkopen met Shopify" },
   { value: "woo", title: "Webshop in WooCommerce", desc: "Verkopen vanuit WordPress" },
-];
-
-const PAGINA_OPTIES: { value: Pagina; title: string; desc: string }[] = [
-  { value: "tot5", title: "Tot 5 pagina's", desc: "Een compacte site" },
-  { value: "tot10", title: "Tot 10 pagina's", desc: "Home, diensten, over, contact en meer" },
-  { value: "meer", title: "Meer dan 10 pagina's", desc: "Veel diensten of locaties" },
 ];
 
 const jaNee = (
@@ -44,11 +38,12 @@ const jaNee = (
   { value: "nee" as const, title: neeTitle, desc: neeDesc },
   { value: "ja" as const, title: jaTitle, desc: jaDesc },
 ];
+const jaNeeVal = (b: boolean | null) => (b === null ? "" : b ? "ja" : "nee");
 
 const euro = (n: number) => "€" + n.toLocaleString("nl-NL");
 
 type Result = {
-  state: "leeg" | "custom" | "ok";
+  state: "leeg" | "ok";
   bouw: number;
   perMaand: number;
   startVanaf: number;
@@ -57,12 +52,15 @@ type Result = {
 
 function bereken(
   type: Keuze | null,
-  pagina: Pagina | null,
   brandbook: boolean | null,
   fotodag: boolean | null,
+  ai: boolean | null,
+  cro: boolean | null,
   hosting: boolean | null
 ): Result {
-  const perMaand = hosting === true ? PRIJZEN.hostingPerMaand : 0;
+  const perMaand =
+    (hosting === true ? PRIJZEN.hostingPerMaand : 0) +
+    (cro === true ? PRIJZEN.croPerMaand : 0);
 
   if (!type) {
     return {
@@ -75,30 +73,11 @@ function bereken(
   }
 
   const isShop = type === "shopify" || type === "woo";
-  const heeftPaginas = type === "website" || isShop;
-  if (heeftPaginas && !pagina) {
-    return {
-      state: "leeg",
-      bouw: 0,
-      perMaand,
-      startVanaf: 0,
-      reden: "Kies het aantal pagina's voor een indicatie.",
-    };
-  }
-
-  let base: number;
-  let signatuurNiveau = false;
-  if (type === "landing") base = PRIJZEN.landing;
-  else if (brandbook === true || pagina === "meer") {
-    base = PRIJZEN.signatuur;
-    signatuurNiveau = true;
-  } else if (pagina === "tot5") base = PRIJZEN.websiteTot5;
-  else base = PRIJZEN.herbouw;
-
-  if (isShop) base += PRIJZEN.webshopExtra;
-
-  let bouw = base;
-  if (fotodag === true && !signatuurNiveau) bouw += PRIJZEN.fotodag;
+  let bouw = type === "landing" ? PRIJZEN.landing : PRIJZEN.website;
+  if (isShop) bouw += PRIJZEN.webshopExtra;
+  if (brandbook === true) bouw += PRIJZEN.brandbook;
+  if (fotodag === true) bouw += PRIJZEN.fotodag;
+  if (ai === true) bouw += PRIJZEN.aiBeelden;
 
   const typeLabel = {
     website: "Website",
@@ -106,15 +85,16 @@ function bereken(
     shopify: "Webshop in Shopify",
     woo: "Webshop in WooCommerce",
   }[type];
-  const paginaLabel = pagina
-    ? { tot5: "tot 5 pagina's", tot10: "tot 10 pagina's", meer: "meer dan 10 pagina's" }[pagina]
-    : "";
-  const reden =
-    type === "landing"
-      ? "Een landingspagina, klaar om te adverteren."
-      : `${typeLabel}, ${paginaLabel}.`;
+  const extras = [
+    brandbook === true && "brandbook",
+    fotodag === true && "fotodag",
+    ai === true && "AI-beelden",
+  ].filter(Boolean) as string[];
+  const reden = extras.length
+    ? `${typeLabel}, met ${extras.join(", ")}.`
+    : `${typeLabel}.`;
 
-  const termijnen = bouw < 3000 ? 2 : 3;
+  const termijnen = type === "landing" ? 2 : 3;
 
   return {
     state: "ok",
@@ -168,19 +148,16 @@ function Group<T extends string>({
 }
 
 const STAPPEN = ["Jouw gegevens", "Jouw project"];
-const jaNeeVal = (b: boolean | null) => (b === null ? "" : b ? "ja" : "nee");
 
 export default function Calculator() {
   const [stap, setStap] = useState(0);
   const [lead, setLead] = useState({ naam: "", email: "", bedrijf: "", telefoon: "" });
   const [type, setType] = useState<Keuze | null>(null);
-  const [pagina, setPagina] = useState<Pagina | null>(null);
   const [brandbook, setBrandbook] = useState<boolean | null>(null);
   const [fotodag, setFotodag] = useState<boolean | null>(null);
+  const [ai, setAi] = useState<boolean | null>(null);
+  const [cro, setCro] = useState<boolean | null>(null);
   const [hosting, setHosting] = useState<boolean | null>(null);
-
-  const isWebsite = type === "website";
-  const isShop = type === "shopify" || type === "woo";
 
   const leadCompleet = Boolean(
     lead.naam.trim() &&
@@ -189,20 +166,20 @@ export default function Calculator() {
       lead.telefoon.trim()
   );
 
-  const r = bereken(type, pagina, brandbook, fotodag, hosting);
+  const r = bereken(type, brandbook, fotodag, ai, cro, hosting);
 
   const samenvatting = [
     type && TYPE_OPTIES.find((o) => o.value === type)?.title,
-    (isWebsite || isShop) && pagina && PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
-    (isWebsite || isShop) && brandbook !== null && (brandbook ? "met brandbook" : "zonder brandbook"),
-    fotodag !== null && (fotodag ? "met fotodag" : "zonder fotodag"),
-    hosting !== null && (hosting ? "hosting bij KREATIVES" : "eigen hosting"),
+    brandbook === true && "brandbook",
+    fotodag === true && "fotodag",
+    ai === true && "AI-beelden",
+    cro === true && "maandelijkse CRO",
+    hosting === true && "hosting bij KREATIVES",
   ]
     .filter(Boolean)
     .join(", ");
 
-  // Lead-mail: één notificatie naar KREATIVES, of 30s na stap 1 (als er geen
-  // offerte wordt aangevraagd) of direct bij een offerte-aanvraag.
+  // Lead-mail: één notificatie naar KREATIVES, 30s na stap 1 of bij offerte.
   const [bezig, setBezig] = useState(false);
   const [verzonden, setVerzonden] = useState(false);
   const sentRef = useRef(false);
@@ -233,11 +210,10 @@ export default function Calculator() {
         }),
       });
     } catch {
-      // stil falen — de bezoeker merkt er niets van
+      // stil falen
     }
   };
 
-  // 30 seconden nadat stap 1 compleet is: stuur de lead (tenzij al verzonden).
   useEffect(() => {
     if (!leadCompleet) return;
     timerRef.current = setTimeout(() => {
@@ -262,7 +238,8 @@ export default function Calculator() {
   };
 
   return (
-    <div className={`cosmos-bg ${styles.shell}`}>
+    <div className={styles.shell}>
+      <div className={`cosmos-bg ${styles.shellBg}`} aria-hidden />
       <div className={styles.grid}>
         <div className={styles.left}>
           <div className={styles.stepper} role="tablist">
@@ -344,16 +321,7 @@ export default function Calculator() {
                   onChange={setType}
                   options={TYPE_OPTIES}
                 />
-                {(isWebsite || isShop) && (
-                  <Group
-                    title="Hoeveel pagina's?"
-                    name="pagina"
-                    value={pagina ?? ""}
-                    onChange={setPagina}
-                    options={PAGINA_OPTIES}
-                  />
-                )}
-                {(isWebsite || isShop) && (
+                {type && (
                   <Group
                     title="Wil je een nieuw merk?"
                     name="brandbook"
@@ -362,8 +330,8 @@ export default function Calculator() {
                     options={jaNee(
                       "Nee, mijn merk staat al",
                       "Ik heb logo en huisstijl",
-                      "Ja, met logo, huisstijl en brandbook",
-                      "Signatuur-traject"
+                      "Ja, logo, huisstijl en brandbook",
+                      "+ €2.500"
                     )}
                   />
                 )}
@@ -377,7 +345,35 @@ export default function Calculator() {
                       "Ik lever beeld zelf aan",
                       "Foto's zijn er al",
                       "Fotodag op locatie",
-                      "Fotograaf voor team en werk"
+                      "+ €1.000"
+                    )}
+                  />
+                )}
+                {type && (
+                  <Group
+                    title="Beelden met AI?"
+                    name="ai"
+                    value={jaNeeVal(ai)}
+                    onChange={(v) => setAi(v === "ja")}
+                    options={jaNee(
+                      "Nee",
+                      "Geen AI-beelden nodig",
+                      "Ja, beelden met AI",
+                      "+ €1.000"
+                    )}
+                  />
+                )}
+                {type && (
+                  <Group
+                    title="Maandelijkse CRO-update?"
+                    name="cro"
+                    value={jaNeeVal(cro)}
+                    onChange={(v) => setCro(v === "ja")}
+                    options={jaNee(
+                      "Nee",
+                      "Zelf optimaliseren",
+                      "Ja, elke maand verbeteren",
+                      "+ €500 per maand"
                     )}
                   />
                 )}
@@ -391,7 +387,7 @@ export default function Calculator() {
                       "Regel ik zelf",
                       "Eigen hosting of beheer",
                       "Bij KREATIVES",
-                      "Eerste jaar zit erbij"
+                      "Eerste jaar gratis, daarna € 49 p/m"
                     )}
                   />
                 )}
@@ -435,9 +431,7 @@ export default function Calculator() {
                 </p>
               </>
             ) : (
-              <p className={styles.panelPriceCustom}>
-                {r.state === "custom" ? "Op aanvraag" : "—"}
-              </p>
+              <p className={styles.panelPriceCustom}>—</p>
             )}
             <p className={styles.panelReden}>{r.reden}</p>
 
@@ -448,13 +442,7 @@ export default function Calculator() {
               </div>
               <div className={styles.panelRow}>
                 <span>Eenmalige kosten</span>
-                <span>
-                  {r.state === "ok"
-                    ? euro(r.bouw)
-                    : r.state === "custom"
-                      ? "Op aanvraag"
-                      : "—"}
-                </span>
+                <span>{r.state === "ok" ? euro(r.bouw) : "—"}</span>
               </div>
               <div className={styles.panelRow}>
                 <span>Daarna per jaar</span>

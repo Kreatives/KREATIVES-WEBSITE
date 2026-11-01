@@ -20,13 +20,25 @@
 
 /* ---------- Donkere cosmos-container ---------- */
 .shell {
+  position: relative;
   background: var(--ink);
   color: var(--on-dark);
   border-radius: clamp(1.25rem, 2vw, 1.75rem);
   padding: clamp(1.5rem, 3vw, 3rem);
+}
+/* Aparte laag voor het sterrenveld, met overflow:hidden om het binnen de
+   ronde hoeken te clippen. Zo hoeft de shell zelf geen overflow:hidden te
+   hebben (dat zou het sticky resultaat-paneel breken). */
+.shellBg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   overflow: hidden;
+  z-index: 0;
 }
 .grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 23rem;
   gap: clamp(1.75rem, 3vw, 3rem);
@@ -89,6 +101,20 @@
   flex-direction: column;
   gap: clamp(1.5rem, 2.5vw, 2.25rem);
   min-height: 24rem;
+}
+.group,
+.leadForm {
+  animation: calcIn 0.3s var(--ease) both;
+}
+@keyframes calcIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 .group {
   border: none;
