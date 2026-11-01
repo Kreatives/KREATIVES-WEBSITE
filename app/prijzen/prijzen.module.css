@@ -63,7 +63,6 @@
 .plansTitle {
   max-width: 16ch;
   margin-inline: auto;
-  text-transform: none;
 }
 
 /* Tab-balk: alleen op mobiel, wisselt welke kaart zichtbaar is. */
@@ -113,13 +112,9 @@
 }
 
 .cardIcon {
+  display: block;
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 0.75rem;
-  background: var(--ink);
-}
-.cardFeatured .cardIcon {
-  background: var(--orange);
 }
 
 .cardHead {
@@ -311,8 +306,6 @@
   display: block;
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 0.75rem;
-  background: var(--orange);
   margin-bottom: 1.5rem;
 }
 .garantieTitle {

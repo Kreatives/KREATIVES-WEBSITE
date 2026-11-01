@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Button from "@/components/Button";
 import styles from "./prijzen.module.css";
 
 type Plan = {
   name: string;
+  icon: string;
   price: string;
   featured?: boolean;
   intro: string;
@@ -68,7 +70,13 @@ export default function PlanCards({
               p.featured ? styles.cardFeatured : ""
             } ${i === active ? styles.cardActive : styles.cardInactive}`}
           >
-            <span className={styles.cardIcon} aria-hidden />
+            <Image
+              src={p.icon}
+              alt=""
+              width={44}
+              height={44}
+              className={styles.cardIcon}
+            />
 
             <div className={styles.cardHead}>
               <h3 className={styles.cardName}>{p.name}</h3>

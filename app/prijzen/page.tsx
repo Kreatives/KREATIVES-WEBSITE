@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import localFont from "next/font/local";
 import RevealInit from "@/components/RevealInit";
 import Button from "@/components/Button";
@@ -43,6 +44,7 @@ export const metadata: Metadata = {
 type Plan = {
   no: string;
   name: string;
+  icon: string;
   price: string;
   priceNumber: string;
   featured?: boolean;
@@ -56,6 +58,7 @@ const plans: Plan[] = [
   {
     no: "01",
     name: "Landing",
+    icon: "/icons/prijzen/landing.png",
     price: "€1.499",
     priceNumber: "1499",
     intro:
@@ -76,6 +79,7 @@ const plans: Plan[] = [
   {
     no: "02",
     name: "Herbouw",
+    icon: "/icons/prijzen/herbouw.png",
     price: "€3.995",
     priceNumber: "3995",
     featured: true,
@@ -102,6 +106,7 @@ const plans: Plan[] = [
   {
     no: "03",
     name: "Signatuur",
+    icon: "/icons/prijzen/signatuur.png",
     price: "€8.945",
     priceNumber: "8945",
     intro:
@@ -123,12 +128,14 @@ const plans: Plan[] = [
 const garanties = [
   {
     title: "Tevreden over wat er online komt.",
+    icon: "/icons/prijzen/garantie-design.png",
     body: "Drie rondes, en je geeft pas akkoord als het klopt. Keur je na de derde ronde nog af, dan betaal je alleen het strategiedeel van €2.000 en houd je alles wat we tot dan toe hebben gemaakt. De bouw gaat dan niet door en je zit nergens aan vast.",
     voorwaarde:
       "Voorwaarde: het strategiegesprek is geweest en de boodschap per pagina ligt vast voordat we ontwerpen.",
   },
   {
     title: "Zekerheid over wanneer je online gaat.",
+    icon: "/icons/prijzen/garantie-deadline.png",
     body: "De klok start bij akkoord op de copy. Loopt het door onze schuld uit, dan gaat er €250 per week van de prijs af, tot maximaal €1.000. De klok stopt als wij op jou wachten. Daarom krijg je op dag één een lijst met precies wat we van je nodig hebben, en briefen wij de fotograaf.",
     voorwaarde:
       "Voorwaarde: cases, cijfers en namen zijn binnen vijf werkdagen na de start compleet.",
@@ -310,7 +317,13 @@ export default function PrijzenPage() {
           <div className={styles.garantieGrid}>
             {garanties.map((g) => (
               <article key={g.title} className={styles.garantieCard} data-reveal>
-                <span className={styles.garantieIcon} aria-hidden />
+                <Image
+                  src={g.icon}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className={styles.garantieIcon}
+                />
                 <h3 className={styles.garantieTitle}>{g.title}</h3>
                 <p className={styles.garantieBody}>{g.body}</p>
                 <p className={styles.garantieVoorwaarde}>{g.voorwaarde}</p>
