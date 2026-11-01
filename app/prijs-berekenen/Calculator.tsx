@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import Button from "@/components/Button";
-import { CALENDLY } from "@/lib/site";
+import SocialProof from "@/components/SocialProof";
+import { CALENDLY, site } from "@/lib/site";
 import styles from "./calculator.module.css";
 
 /* ------------------------------------------------------------------
-   Prijslogica. Alle bedragen staan hier bij elkaar zodat ze makkelijk
-   aan te passen zijn. fotodag en hostingPerMaand zijn placeholders.
+   Prijslogica, afgeleid van de drie pakketten. Alle bedragen staan hier
+   bij elkaar. fotodag en hostingPerMaand zijn placeholders.
 ------------------------------------------------------------------ */
 const PRIJZEN = {
   landing: 1499,
@@ -17,21 +18,20 @@ const PRIJZEN = {
   hostingPerMaand: 49, // placeholder — na het eerste jaar
 };
 
-type TypeKeuze = "website" | "webshop-shopify" | "webshop-woo" | "webapp";
-type PaginaKeuze = "1" | "2-10" | "11-15" | "15plus";
+type Keuze = "website" | "landing" | "shopify" | "woo";
+type Pagina = "tot5" | "tot10" | "meer";
 
-const TYPE_OPTIES: { value: TypeKeuze; title: string; desc: string }[] = [
-  { value: "website", title: "Website", desc: "Bedrijfssite of onepager in WordPress" },
-  { value: "webshop-shopify", title: "Webshop in Shopify", desc: "Verkopen met Shopify als platform" },
-  { value: "webshop-woo", title: "Webshop in WooCommerce", desc: "Verkopen vanuit WordPress" },
-  { value: "webapp", title: "Maatwerk web app", desc: "Portaal, systeem of SaaS" },
+const TYPE_OPTIES: { value: Keuze; title: string; desc: string }[] = [
+  { value: "website", title: "Website", desc: "Bedrijfssite met meerdere pagina's" },
+  { value: "landing", title: "Landingspagina", desc: "Eén pagina voor je campagne" },
+  { value: "shopify", title: "Webshop in Shopify", desc: "Verkopen met Shopify" },
+  { value: "woo", title: "Webshop in WooCommerce", desc: "Verkopen vanuit WordPress" },
 ];
 
-const PAGINA_OPTIES: { value: PaginaKeuze; title: string; desc: string }[] = [
-  { value: "1", title: "Eén pagina", desc: "Een onepager" },
-  { value: "2-10", title: "2 tot 10 pagina's", desc: "Home, diensten, over, contact" },
-  { value: "11-15", title: "11 tot 15 pagina's", desc: "Een pagina per dienst of locatie" },
-  { value: "15plus", title: "Meer dan 15 pagina's", desc: "Veel diensten, locaties of content" },
+const PAGINA_OPTIES: { value: Pagina; title: string; desc: string }[] = [
+  { value: "tot5", title: "Tot 5 pagina's", desc: "Een compacte site" },
+  { value: "tot10", title: "Tot 10 pagina's", desc: "Home, diensten, over, contact en meer" },
+  { value: "meer", title: "Meer dan 10 pagina's", desc: "Veel diensten of locaties" },
 ];
 
 const jaNee = (
@@ -55,37 +55,27 @@ type Result = {
 };
 
 function bereken(
-  type: TypeKeuze,
-  paginas: PaginaKeuze,
-  merk: boolean,
+  type: Keuze,
+  pagina: Pagina,
+  brandbook: boolean,
   fotodag: boolean,
   hosting: boolean
 ): Result {
   const perMaand = hosting ? PRIJZEN.hostingPerMaand : 0;
 
-  if (type !== "website") {
+  if (type === "shopify" || type === "woo") {
     return {
       custom: true,
       bouw: 0,
       perMaand,
       startVanaf: 0,
-      reden:
-        "Een webshop of maatwerk web app maken we op maat, buiten de drie vaste trajecten.",
-    };
-  }
-  if (paginas === "15plus") {
-    return {
-      custom: true,
-      bouw: 0,
-      perMaand,
-      startVanaf: 0,
-      reden: "Meer dan vijftien pagina's maken we op maat.",
+      reden: "Een webshop stellen we op maat samen. Plan een gesprek voor een vaste prijs.",
     };
   }
 
   let pakket: "landing" | "herbouw" | "signatuur";
-  if (merk || paginas === "11-15") pakket = "signatuur";
-  else if (paginas === "1") pakket = "landing";
+  if (type === "landing") pakket = "landing";
+  else if (brandbook || pagina === "meer") pakket = "signatuur";
   else pakket = "herbouw";
 
   const fotoInbegrepen = pakket === "signatuur";
@@ -124,9 +114,7 @@ function Group<T extends string>({
         {options.map((o) => (
           <label
             key={o.value}
-            className={`${styles.tile} ${
-              value === o.value ? styles.tileSel : ""
-            }`}
+            className={`${styles.tile} ${value === o.value ? styles.tileSel : ""}`}
           >
             <input
               type="radio"
@@ -148,17 +136,47 @@ function Group<T extends string>({
   );
 }
 
-const STAPPEN = ["Je website", "Merk en beeld", "Hosting"];
+const STAPPEN = ["Jouw gegevens", "Jouw project"];
 
 export default function Calculator() {
   const [stap, setStap] = useState(0);
-  const [type, setType] = useState<TypeKeuze>("website");
-  const [paginas, setPaginas] = useState<PaginaKeuze>("2-10");
-  const [merk, setMerk] = useState(false);
+  const [lead, setLead] = useState({ naam: "", email: "", bedrijf: "", telefoon: "" });
+  const [type, setType] = useState<Keuze>("website");
+  const [pagina, setPagina] = useState<Pagina>("tot10");
+  const [brandbook, setBrandbook] = useState(false);
   const [fotodag, setFotodag] = useState(false);
   const [hosting, setHosting] = useState(false);
 
-  const r = bereken(type, paginas, merk, fotodag, hosting);
+  const isWebsite = type === "website";
+  const isLanding = type === "landing";
+  const isShop = type === "shopify" || type === "woo";
+
+  const r = bereken(type, pagina, brandbook, fotodag, hosting);
+
+  const samenvatting = [
+    TYPE_OPTIES.find((o) => o.value === type)?.title,
+    isWebsite && PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
+    isWebsite && (brandbook ? "met brandbook" : "zonder brandbook"),
+    (isWebsite || isLanding) && (fotodag ? "met fotodag" : "zonder fotodag"),
+    !isShop && (hosting ? "hosting bij KREATIVES" : "eigen hosting"),
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  const mailBody = [
+    `Naam: ${lead.naam}`,
+    `E-mail: ${lead.email}`,
+    lead.bedrijf && `Bedrijf: ${lead.bedrijf}`,
+    lead.telefoon && `Telefoon: ${lead.telefoon}`,
+    "",
+    `Project: ${samenvatting}`,
+    r.custom ? "Indicatie bouw: op aanvraag" : `Indicatie bouw: ${euro(r.bouw)}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
+    "Offerteaanvraag via de calculator"
+  )}&body=${encodeURIComponent(mailBody)}`;
 
   return (
     <div className={styles.shell}>
@@ -182,6 +200,51 @@ export default function Calculator() {
 
           <div className={styles.stepBody}>
             {stap === 0 && (
+              <div className={styles.leadForm}>
+                <label className={styles.field}>
+                  <span className={styles.fieldLabel}>Naam</span>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={lead.naam}
+                    onChange={(e) => setLead({ ...lead, naam: e.target.value })}
+                    placeholder="Je naam"
+                  />
+                </label>
+                <label className={styles.field}>
+                  <span className={styles.fieldLabel}>E-mailadres</span>
+                  <input
+                    className={styles.input}
+                    type="email"
+                    value={lead.email}
+                    onChange={(e) => setLead({ ...lead, email: e.target.value })}
+                    placeholder="naam@bedrijf.nl"
+                  />
+                </label>
+                <label className={styles.field}>
+                  <span className={styles.fieldLabel}>Bedrijf</span>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={lead.bedrijf}
+                    onChange={(e) => setLead({ ...lead, bedrijf: e.target.value })}
+                    placeholder="Optioneel"
+                  />
+                </label>
+                <label className={styles.field}>
+                  <span className={styles.fieldLabel}>Telefoon</span>
+                  <input
+                    className={styles.input}
+                    type="tel"
+                    value={lead.telefoon}
+                    onChange={(e) => setLead({ ...lead, telefoon: e.target.value })}
+                    placeholder="Optioneel"
+                  />
+                </label>
+              </div>
+            )}
+
+            {stap === 1 && (
               <>
                 <Group
                   title="Wat wil je laten maken?"
@@ -190,56 +253,65 @@ export default function Calculator() {
                   onChange={setType}
                   options={TYPE_OPTIES}
                 />
-                <Group
-                  title="Hoeveel pagina's?"
-                  name="paginas"
-                  value={paginas}
-                  onChange={setPaginas}
-                  options={PAGINA_OPTIES}
-                />
-              </>
-            )}
-            {stap === 1 && (
-              <>
-                <Group
-                  title="Merk en uitstraling"
-                  name="merk"
-                  value={merk ? "ja" : "nee"}
-                  onChange={(v) => setMerk(v === "ja")}
-                  options={jaNee(
-                    "Alleen de site",
-                    "Mijn merk staat al",
-                    "Ook logo, huisstijl en brandbook",
-                    "Een nieuw of verfijnd merk erbij"
-                  )}
-                />
-                <Group
-                  title="Fotografie"
-                  name="fotodag"
-                  value={fotodag ? "ja" : "nee"}
-                  onChange={(v) => setFotodag(v === "ja")}
-                  options={jaNee(
-                    "Ik lever beeld zelf aan",
-                    "Foto's zijn er al",
-                    "Fotodag op locatie",
-                    "Fotograaf voor team, werk en portretten"
-                  )}
-                />
-              </>
-            )}
-            {stap === 2 && (
-              <Group
-                title="Hosting en onderhoud"
-                name="hosting"
-                value={hosting ? "ja" : "nee"}
-                onChange={(v) => setHosting(v === "ja")}
-                options={jaNee(
-                  "Regel ik zelf",
-                  "Eigen hosting of eigen beheer",
-                  "Hosting en onderhoud bij mij",
-                  "Het eerste jaar zit er gratis bij"
+                {isWebsite && (
+                  <Group
+                    title="Hoeveel pagina's?"
+                    name="pagina"
+                    value={pagina}
+                    onChange={setPagina}
+                    options={PAGINA_OPTIES}
+                  />
                 )}
-              />
+                {isWebsite && (
+                  <Group
+                    title="Wil je een nieuw merk?"
+                    name="brandbook"
+                    value={brandbook ? "ja" : "nee"}
+                    onChange={(v) => setBrandbook(v === "ja")}
+                    options={jaNee(
+                      "Nee, mijn merk staat al",
+                      "Ik heb logo en huisstijl",
+                      "Ja, met logo, huisstijl en brandbook",
+                      "Signatuur-traject"
+                    )}
+                  />
+                )}
+                {(isWebsite || isLanding) && (
+                  <Group
+                    title="Fotografie"
+                    name="fotodag"
+                    value={fotodag ? "ja" : "nee"}
+                    onChange={(v) => setFotodag(v === "ja")}
+                    options={jaNee(
+                      "Ik lever beeld zelf aan",
+                      "Foto's zijn er al",
+                      "Fotodag op locatie",
+                      "Fotograaf voor team en werk"
+                    )}
+                  />
+                )}
+                {!isShop && (
+                  <Group
+                    title="Hosting en onderhoud"
+                    name="hosting"
+                    value={hosting ? "ja" : "nee"}
+                    onChange={(v) => setHosting(v === "ja")}
+                    options={jaNee(
+                      "Regel ik zelf",
+                      "Eigen hosting of beheer",
+                      "Bij KREATIVES",
+                      "Eerste jaar zit erbij"
+                    )}
+                  />
+                )}
+                {isShop && (
+                  <p className={styles.shopNote}>
+                    Een webshop stellen we op maat samen, afhankelijk van je
+                    producten en koppelingen. Vraag een offerte aan, dan krijg je
+                    één vaste prijs.
+                  </p>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -276,11 +348,7 @@ export default function Calculator() {
               </div>
             </div>
 
-            <Button
-              href={CALENDLY}
-              variant="primary"
-              className={styles.panelCta}
-            >
+            <Button href={mailto} variant="primary" className={styles.panelCta}>
               Ontvang een offerte
             </Button>
             <a
@@ -293,15 +361,7 @@ export default function Calculator() {
             </a>
           </div>
 
-          <div className={styles.trust}>
-            <div className={styles.avatars} aria-hidden>
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-            <span className={styles.trustText}>Vertrouwd door 100+ ondernemers</span>
-          </div>
+          <SocialProof align="left" tone="light" />
         </div>
       </div>
     </div>
