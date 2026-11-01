@@ -54,6 +54,10 @@
   cursor: pointer;
   color: var(--on-dark-muted);
 }
+.step:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 .stepNo {
   display: grid;
   place-items: center;
@@ -240,6 +244,10 @@
 }
 .navNext:hover {
   opacity: 0.88;
+}
+.navNext:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 .navPrev {
   background: none;

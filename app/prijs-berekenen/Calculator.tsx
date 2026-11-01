@@ -47,7 +47,7 @@ const jaNee = (
 const euro = (n: number) => "€" + n.toLocaleString("nl-NL");
 
 type Result = {
-  custom: boolean;
+  state: "leeg" | "custom" | "ok";
   bouw: number;
   perMaand: number;
   startVanaf: number;
@@ -55,38 +55,56 @@ type Result = {
 };
 
 function bereken(
-  type: Keuze,
-  pagina: Pagina,
-  brandbook: boolean,
-  fotodag: boolean,
-  hosting: boolean
+  type: Keuze | null,
+  pagina: Pagina | null,
+  brandbook: boolean | null,
+  fotodag: boolean | null,
+  hosting: boolean | null
 ): Result {
-  const perMaand = hosting ? PRIJZEN.hostingPerMaand : 0;
+  const perMaand = hosting === true ? PRIJZEN.hostingPerMaand : 0;
 
+  if (!type) {
+    return {
+      state: "leeg",
+      bouw: 0,
+      perMaand,
+      startVanaf: 0,
+      reden: "Kies je opties hieronder voor een indicatie.",
+    };
+  }
   if (type === "shopify" || type === "woo") {
     return {
-      custom: true,
+      state: "custom",
       bouw: 0,
       perMaand,
       startVanaf: 0,
       reden: "Een webshop stellen we op maat samen. Plan een gesprek voor een vaste prijs.",
     };
   }
+  if (type === "website" && !pagina) {
+    return {
+      state: "leeg",
+      bouw: 0,
+      perMaand,
+      startVanaf: 0,
+      reden: "Kies het aantal pagina's voor een indicatie.",
+    };
+  }
 
   let pakket: "landing" | "herbouw" | "signatuur";
   if (type === "landing") pakket = "landing";
-  else if (brandbook || pagina === "meer") pakket = "signatuur";
+  else if (brandbook === true || pagina === "meer") pakket = "signatuur";
   else pakket = "herbouw";
 
   const fotoInbegrepen = pakket === "signatuur";
   let bouw = PRIJZEN[pakket];
-  if (fotodag && !fotoInbegrepen) bouw += PRIJZEN.fotodag;
+  if (fotodag === true && !fotoInbegrepen) bouw += PRIJZEN.fotodag;
 
   const namen = { landing: "Landing", herbouw: "Herbouw", signatuur: "Signatuur" };
   const termijnen = pakket === "landing" ? 2 : 3;
 
   return {
-    custom: false,
+    state: "ok",
     bouw,
     perMaand,
     startVanaf: Math.round(bouw / termijnen),
@@ -103,7 +121,7 @@ function Group<T extends string>({
 }: {
   title: string;
   name: string;
-  value: T;
+  value: string;
   onChange: (v: T) => void;
   options: { value: T; title: string; desc: string }[];
 }) {
@@ -137,28 +155,36 @@ function Group<T extends string>({
 }
 
 const STAPPEN = ["Jouw gegevens", "Jouw project"];
+const jaNeeVal = (b: boolean | null) => (b === null ? "" : b ? "ja" : "nee");
 
 export default function Calculator() {
   const [stap, setStap] = useState(0);
   const [lead, setLead] = useState({ naam: "", email: "", bedrijf: "", telefoon: "" });
-  const [type, setType] = useState<Keuze>("website");
-  const [pagina, setPagina] = useState<Pagina>("tot10");
-  const [brandbook, setBrandbook] = useState(false);
-  const [fotodag, setFotodag] = useState(false);
-  const [hosting, setHosting] = useState(false);
+  const [type, setType] = useState<Keuze | null>(null);
+  const [pagina, setPagina] = useState<Pagina | null>(null);
+  const [brandbook, setBrandbook] = useState<boolean | null>(null);
+  const [fotodag, setFotodag] = useState<boolean | null>(null);
+  const [hosting, setHosting] = useState<boolean | null>(null);
 
   const isWebsite = type === "website";
   const isLanding = type === "landing";
   const isShop = type === "shopify" || type === "woo";
 
+  const leadCompleet = Boolean(
+    lead.naam.trim() &&
+      lead.email.includes("@") &&
+      lead.bedrijf.trim() &&
+      lead.telefoon.trim()
+  );
+
   const r = bereken(type, pagina, brandbook, fotodag, hosting);
 
   const samenvatting = [
-    TYPE_OPTIES.find((o) => o.value === type)?.title,
-    isWebsite && PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
-    isWebsite && (brandbook ? "met brandbook" : "zonder brandbook"),
-    (isWebsite || isLanding) && (fotodag ? "met fotodag" : "zonder fotodag"),
-    !isShop && (hosting ? "hosting bij KREATIVES" : "eigen hosting"),
+    type && TYPE_OPTIES.find((o) => o.value === type)?.title,
+    isWebsite && pagina && PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
+    isWebsite && brandbook !== null && (brandbook ? "met brandbook" : "zonder brandbook"),
+    (isWebsite || isLanding) && fotodag !== null && (fotodag ? "met fotodag" : "zonder fotodag"),
+    !isShop && hosting !== null && (hosting ? "hosting bij KREATIVES" : "eigen hosting"),
   ]
     .filter(Boolean)
     .join(", ");
@@ -166,36 +192,42 @@ export default function Calculator() {
   const mailBody = [
     `Naam: ${lead.naam}`,
     `E-mail: ${lead.email}`,
-    lead.bedrijf && `Bedrijf: ${lead.bedrijf}`,
-    lead.telefoon && `Telefoon: ${lead.telefoon}`,
+    `Bedrijf: ${lead.bedrijf}`,
+    `Telefoon: ${lead.telefoon}`,
     "",
-    `Project: ${samenvatting}`,
-    r.custom ? "Indicatie bouw: op aanvraag" : `Indicatie bouw: ${euro(r.bouw)}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
+    `Project: ${samenvatting || "nog niet ingevuld"}`,
+    r.state === "ok" ? `Indicatie bouw: ${euro(r.bouw)}` : "Indicatie bouw: op aanvraag",
+  ].join("\n");
   const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
     "Offerteaanvraag via de calculator"
   )}&body=${encodeURIComponent(mailBody)}`;
+
+  const gaNaarStap = (i: number) => {
+    if (i === 0 || leadCompleet) setStap(i);
+  };
 
   return (
     <div className={`cosmos-bg ${styles.shell}`}>
       <div className={styles.grid}>
         <div className={styles.left}>
           <div className={styles.stepper} role="tablist">
-            {STAPPEN.map((naam, i) => (
-              <button
-                key={naam}
-                type="button"
-                role="tab"
-                aria-selected={stap === i}
-                className={`${styles.step} ${stap === i ? styles.stepActive : ""}`}
-                onClick={() => setStap(i)}
-              >
-                <span className={styles.stepNo}>{i + 1}</span>
-                <span className={styles.stepNaam}>{naam}</span>
-              </button>
-            ))}
+            {STAPPEN.map((naam, i) => {
+              const gated = i > 0 && !leadCompleet;
+              return (
+                <button
+                  key={naam}
+                  type="button"
+                  role="tab"
+                  aria-selected={stap === i}
+                  disabled={gated}
+                  className={`${styles.step} ${stap === i ? styles.stepActive : ""}`}
+                  onClick={() => gaNaarStap(i)}
+                >
+                  <span className={styles.stepNo}>{i + 1}</span>
+                  <span className={styles.stepNaam}>{naam}</span>
+                </button>
+              );
+            })}
           </div>
 
           <div className={styles.stepBody}>
@@ -206,6 +238,7 @@ export default function Calculator() {
                   <input
                     className={styles.input}
                     type="text"
+                    required
                     value={lead.naam}
                     onChange={(e) => setLead({ ...lead, naam: e.target.value })}
                     placeholder="Je naam"
@@ -216,6 +249,7 @@ export default function Calculator() {
                   <input
                     className={styles.input}
                     type="email"
+                    required
                     value={lead.email}
                     onChange={(e) => setLead({ ...lead, email: e.target.value })}
                     placeholder="naam@bedrijf.nl"
@@ -226,9 +260,10 @@ export default function Calculator() {
                   <input
                     className={styles.input}
                     type="text"
+                    required
                     value={lead.bedrijf}
                     onChange={(e) => setLead({ ...lead, bedrijf: e.target.value })}
-                    placeholder="Optioneel"
+                    placeholder="Je bedrijfsnaam"
                   />
                 </label>
                 <label className={styles.field}>
@@ -236,9 +271,10 @@ export default function Calculator() {
                   <input
                     className={styles.input}
                     type="tel"
+                    required
                     value={lead.telefoon}
                     onChange={(e) => setLead({ ...lead, telefoon: e.target.value })}
-                    placeholder="Optioneel"
+                    placeholder="Je telefoonnummer"
                   />
                 </label>
               </div>
@@ -249,7 +285,7 @@ export default function Calculator() {
                 <Group
                   title="Wat wil je laten maken?"
                   name="type"
-                  value={type}
+                  value={type ?? ""}
                   onChange={setType}
                   options={TYPE_OPTIES}
                 />
@@ -257,7 +293,7 @@ export default function Calculator() {
                   <Group
                     title="Hoeveel pagina's?"
                     name="pagina"
-                    value={pagina}
+                    value={pagina ?? ""}
                     onChange={setPagina}
                     options={PAGINA_OPTIES}
                   />
@@ -266,7 +302,7 @@ export default function Calculator() {
                   <Group
                     title="Wil je een nieuw merk?"
                     name="brandbook"
-                    value={brandbook ? "ja" : "nee"}
+                    value={jaNeeVal(brandbook)}
                     onChange={(v) => setBrandbook(v === "ja")}
                     options={jaNee(
                       "Nee, mijn merk staat al",
@@ -280,7 +316,7 @@ export default function Calculator() {
                   <Group
                     title="Fotografie"
                     name="fotodag"
-                    value={fotodag ? "ja" : "nee"}
+                    value={jaNeeVal(fotodag)}
                     onChange={(v) => setFotodag(v === "ja")}
                     options={jaNee(
                       "Ik lever beeld zelf aan",
@@ -294,7 +330,7 @@ export default function Calculator() {
                   <Group
                     title="Hosting en onderhoud"
                     name="hosting"
-                    value={hosting ? "ja" : "nee"}
+                    value={jaNeeVal(hosting)}
                     onChange={(v) => setHosting(v === "ja")}
                     options={jaNee(
                       "Regel ik zelf",
@@ -329,6 +365,7 @@ export default function Calculator() {
               <button
                 type="button"
                 className={styles.navNext}
+                disabled={!leadCompleet}
                 onClick={() => setStap(stap + 1)}
               >
                 Volgende
@@ -342,15 +379,17 @@ export default function Calculator() {
             <span className={styles.panelEyebrow}>
               Indicatie van de bouw (excl. btw)
             </span>
-            {r.custom ? (
-              <p className={styles.panelPriceCustom}>Op aanvraag</p>
-            ) : (
+            {r.state === "ok" ? (
               <>
                 <p className={styles.panelPrice}>{euro(r.bouw)}</p>
                 <p className={styles.panelStart}>
                   Start al vanaf {euro(r.startVanaf)} per termijn
                 </p>
               </>
+            ) : (
+              <p className={styles.panelPriceCustom}>
+                {r.state === "custom" ? "Op aanvraag" : "—"}
+              </p>
             )}
             <p className={styles.panelReden}>{r.reden}</p>
 
@@ -361,7 +400,13 @@ export default function Calculator() {
               </div>
               <div className={styles.panelRow}>
                 <span>Eenmalige kosten</span>
-                <span>{r.custom ? "Op aanvraag" : euro(r.bouw)}</span>
+                <span>
+                  {r.state === "ok"
+                    ? euro(r.bouw)
+                    : r.state === "custom"
+                      ? "Op aanvraag"
+                      : "—"}
+                </span>
               </div>
               <div className={styles.panelRow}>
                 <span>Daarna per jaar</span>
