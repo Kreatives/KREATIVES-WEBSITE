@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import AnalyticsListeners from "@/components/AnalyticsListeners";
-import { dmMono, TYPEKIT_CSS } from "@/lib/fonts";
+import { dmMono, helvetica, TYPEKIT_CSS } from "@/lib/fonts";
 import { site, footer } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
@@ -130,7 +130,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${dmMono.variable}`}
+      className={`${dmMono.variable} ${helvetica.variable}`}
     >
       <head>
         {/* Forma DJR Deck — Adobe Typekit (kit jop8nvp) */}

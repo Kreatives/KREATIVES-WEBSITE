@@ -85,10 +85,12 @@ html.lenis body {
 body {
   background: #fff;
   color: var(--text);
-  font-family: var(--font-sans);
+  /* Paragraaf-/body-tekst in Helvetica Neue (-3%). Koppen, knoppen en prijzen
+     houden expliciet de merkfont (forma) aan. */
+  font-family: var(--font-helvetica), "Helvetica Neue", Arial, sans-serif;
   font-size: var(--fs-body);
   line-height: 1.65;
-  letter-spacing: var(--track-body);
+  letter-spacing: -0.03em;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -306,6 +308,7 @@ h3 {
 .btn {
   display: inline-flex;
   align-items: stretch;
+  font-family: var(--font-sans);
   font-weight: 700;
   letter-spacing: normal;
   border-radius: var(--radius-btn);
