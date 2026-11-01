@@ -11,11 +11,13 @@ import styles from "./calculator.module.css";
    bij elkaar. fotodag en hostingPerMaand zijn placeholders.
 ------------------------------------------------------------------ */
 const PRIJZEN = {
-  landing: 1499,
-  herbouw: 3995,
-  signatuur: 8945,
+  landing: 1499, // landingspagina
+  websiteTot5: 2495, // compacte website tot 5 pagina's
+  herbouw: 3995, // website tot 10 pagina's
+  signatuur: 8945, // meer dan 10 pagina's of met merk/brandbook
+  webshopExtra: 500, // webshop = dezelfde opzet + 500
   fotodag: 750, // placeholder — zit al in Signatuur
-  hostingPerMaand: 49, // placeholder — na het eerste jaar
+  hostingPerMaand: 49, // placeholder — eerste jaar inbegrepen
 };
 
 type Keuze = "website" | "landing" | "shopify" | "woo";
@@ -72,16 +74,10 @@ function bereken(
       reden: "Kies je opties hieronder voor een indicatie.",
     };
   }
-  if (type === "shopify" || type === "woo") {
-    return {
-      state: "custom",
-      bouw: 0,
-      perMaand,
-      startVanaf: 0,
-      reden: "Een webshop stellen we op maat samen. Plan een gesprek voor een vaste prijs.",
-    };
-  }
-  if (type === "website" && !pagina) {
+
+  const isShop = type === "shopify" || type === "woo";
+  const heeftPaginas = type === "website" || isShop;
+  if (heeftPaginas && !pagina) {
     return {
       state: "leeg",
       bouw: 0,
@@ -91,24 +87,42 @@ function bereken(
     };
   }
 
-  let pakket: "landing" | "herbouw" | "signatuur";
-  if (type === "landing") pakket = "landing";
-  else if (brandbook === true || pagina === "meer") pakket = "signatuur";
-  else pakket = "herbouw";
+  let base: number;
+  let signatuurNiveau = false;
+  if (type === "landing") base = PRIJZEN.landing;
+  else if (brandbook === true || pagina === "meer") {
+    base = PRIJZEN.signatuur;
+    signatuurNiveau = true;
+  } else if (pagina === "tot5") base = PRIJZEN.websiteTot5;
+  else base = PRIJZEN.herbouw;
 
-  const fotoInbegrepen = pakket === "signatuur";
-  let bouw = PRIJZEN[pakket];
-  if (fotodag === true && !fotoInbegrepen) bouw += PRIJZEN.fotodag;
+  if (isShop) base += PRIJZEN.webshopExtra;
 
-  const namen = { landing: "Landing", herbouw: "Herbouw", signatuur: "Signatuur" };
-  const termijnen = pakket === "landing" ? 2 : 3;
+  let bouw = base;
+  if (fotodag === true && !signatuurNiveau) bouw += PRIJZEN.fotodag;
+
+  const typeLabel = {
+    website: "Website",
+    landing: "Landingspagina",
+    shopify: "Webshop in Shopify",
+    woo: "Webshop in WooCommerce",
+  }[type];
+  const paginaLabel = pagina
+    ? { tot5: "tot 5 pagina's", tot10: "tot 10 pagina's", meer: "meer dan 10 pagina's" }[pagina]
+    : "";
+  const reden =
+    type === "landing"
+      ? "Een landingspagina, klaar om te adverteren."
+      : `${typeLabel}, ${paginaLabel}.`;
+
+  const termijnen = bouw < 3000 ? 2 : 3;
 
   return {
     state: "ok",
     bouw,
     perMaand,
     startVanaf: Math.round(bouw / termijnen),
-    reden: `Komt overeen met ${namen[pakket]} (${euro(PRIJZEN[pakket])}).`,
+    reden,
   };
 }
 
@@ -167,7 +181,6 @@ export default function Calculator() {
   const [hosting, setHosting] = useState<boolean | null>(null);
 
   const isWebsite = type === "website";
-  const isLanding = type === "landing";
   const isShop = type === "shopify" || type === "woo";
 
   const leadCompleet = Boolean(
@@ -181,10 +194,10 @@ export default function Calculator() {
 
   const samenvatting = [
     type && TYPE_OPTIES.find((o) => o.value === type)?.title,
-    isWebsite && pagina && PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
-    isWebsite && brandbook !== null && (brandbook ? "met brandbook" : "zonder brandbook"),
-    (isWebsite || isLanding) && fotodag !== null && (fotodag ? "met fotodag" : "zonder fotodag"),
-    !isShop && hosting !== null && (hosting ? "hosting bij KREATIVES" : "eigen hosting"),
+    (isWebsite || isShop) && pagina && PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
+    (isWebsite || isShop) && brandbook !== null && (brandbook ? "met brandbook" : "zonder brandbook"),
+    fotodag !== null && (fotodag ? "met fotodag" : "zonder fotodag"),
+    hosting !== null && (hosting ? "hosting bij KREATIVES" : "eigen hosting"),
   ]
     .filter(Boolean)
     .join(", ");
@@ -289,7 +302,7 @@ export default function Calculator() {
                   onChange={setType}
                   options={TYPE_OPTIES}
                 />
-                {isWebsite && (
+                {(isWebsite || isShop) && (
                   <Group
                     title="Hoeveel pagina's?"
                     name="pagina"
@@ -298,7 +311,7 @@ export default function Calculator() {
                     options={PAGINA_OPTIES}
                   />
                 )}
-                {isWebsite && (
+                {(isWebsite || isShop) && (
                   <Group
                     title="Wil je een nieuw merk?"
                     name="brandbook"
@@ -312,7 +325,7 @@ export default function Calculator() {
                     )}
                   />
                 )}
-                {(isWebsite || isLanding) && (
+                {type && (
                   <Group
                     title="Fotografie"
                     name="fotodag"
@@ -326,7 +339,7 @@ export default function Calculator() {
                     )}
                   />
                 )}
-                {!isShop && (
+                {type && (
                   <Group
                     title="Hosting en onderhoud"
                     name="hosting"
@@ -339,13 +352,6 @@ export default function Calculator() {
                       "Eerste jaar zit erbij"
                     )}
                   />
-                )}
-                {isShop && (
-                  <p className={styles.shopNote}>
-                    Een webshop stellen we op maat samen, afhankelijk van je
-                    producten en koppelingen. Vraag een offerte aan, dan krijg je
-                    één vaste prijs.
-                  </p>
                 )}
               </>
             )}
@@ -410,7 +416,7 @@ export default function Calculator() {
               </div>
               <div className={styles.panelRow}>
                 <span>Daarna per jaar</span>
-                <span>{euro(r.perMaand * 12)}</span>
+                <span>{euro(0)}</span>
               </div>
             </div>
 
