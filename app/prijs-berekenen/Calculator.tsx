@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import Button from "@/components/Button";
+import { useEffect, useRef, useState } from "react";
 import SocialProof from "@/components/SocialProof";
-import { CALENDLY, site } from "@/lib/site";
+import { CALENDLY } from "@/lib/site";
 import styles from "./calculator.module.css";
 
 /* ------------------------------------------------------------------
@@ -202,18 +201,61 @@ export default function Calculator() {
     .filter(Boolean)
     .join(", ");
 
-  const mailBody = [
-    `Naam: ${lead.naam}`,
-    `E-mail: ${lead.email}`,
-    `Bedrijf: ${lead.bedrijf}`,
-    `Telefoon: ${lead.telefoon}`,
-    "",
-    `Project: ${samenvatting || "nog niet ingevuld"}`,
-    r.state === "ok" ? `Indicatie bouw: ${euro(r.bouw)}` : "Indicatie bouw: op aanvraag",
-  ].join("\n");
-  const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
-    "Offerteaanvraag via de calculator"
-  )}&body=${encodeURIComponent(mailBody)}`;
+  // Lead-mail: één notificatie naar KREATIVES, of 30s na stap 1 (als er geen
+  // offerte wordt aangevraagd) of direct bij een offerte-aanvraag.
+  const [bezig, setBezig] = useState(false);
+  const [verzonden, setVerzonden] = useState(false);
+  const sentRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dataRef = useRef({ lead, samenvatting, indicatie: "" });
+  dataRef.current = {
+    lead,
+    samenvatting,
+    indicatie: r.state === "ok" ? euro(r.bouw) : "op aanvraag",
+  };
+
+  const stuurLead = async (fase: string) => {
+    if (sentRef.current) return;
+    sentRef.current = true;
+    const d = dataRef.current;
+    try {
+      await fetch("/api/calculator-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          naam: d.lead.naam,
+          email: d.lead.email,
+          bedrijf: d.lead.bedrijf,
+          telefoon: d.lead.telefoon,
+          project: d.samenvatting,
+          indicatie: d.indicatie,
+          fase,
+        }),
+      });
+    } catch {
+      // stil falen — de bezoeker merkt er niets van
+    }
+  };
+
+  // 30 seconden nadat stap 1 compleet is: stuur de lead (tenzij al verzonden).
+  useEffect(() => {
+    if (!leadCompleet) return;
+    timerRef.current = setTimeout(() => {
+      stuurLead("Stap 1 ingevuld, geen offerte binnen 30s");
+    }, 30000);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leadCompleet]);
+
+  const offerteAanvragen = async () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setBezig(true);
+    await stuurLead("Offerte aangevraagd");
+    setBezig(false);
+    setVerzonden(true);
+  };
 
   const gaNaarStap = (i: number) => {
     if (i === 0 || leadCompleet) setStap(i);
@@ -420,17 +462,33 @@ export default function Calculator() {
               </div>
             </div>
 
-            <Button href={mailto} variant="primary" className={styles.panelCta}>
-              Ontvang een offerte
-            </Button>
-            <a
-              href={CALENDLY}
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              className={styles.panelCall}
-            >
-              Of plan direct een call in
-            </a>
+            {verzonden ? (
+              <p className={styles.panelDank}>
+                Bedankt, we hebben je aanvraag ontvangen en nemen snel contact
+                op.
+              </p>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className={`btn btn-primary ${styles.panelCta}`}
+                  onClick={offerteAanvragen}
+                  disabled={bezig || !leadCompleet}
+                >
+                  <span className="btn-label">
+                    {bezig ? "Versturen…" : "Ontvang een offerte"}
+                  </span>
+                </button>
+                <a
+                  href={CALENDLY}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  className={styles.panelCall}
+                >
+                  Of plan direct een call in
+                </a>
+              </>
+            )}
           </div>
 
           <SocialProof align="left" tone="dark" />

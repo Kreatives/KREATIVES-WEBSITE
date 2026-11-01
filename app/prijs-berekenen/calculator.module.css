@@ -336,6 +336,20 @@
   justify-content: center;
   margin-top: 1.5rem;
 }
+.panelCta:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.panelDank {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.75rem;
+  background: rgba(253, 109, 23, 0.1);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  letter-spacing: -0.03em;
+}
 .panelCall {
   display: block;
   text-align: center;
