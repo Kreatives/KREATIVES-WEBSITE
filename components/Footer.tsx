@@ -16,8 +16,6 @@ export default function Footer({ locale = "nl" }: { locale?: "nl" | "en" }) {
   const tagline = en ? footerEn.tagline : footer.tagline;
   const columns = en ? footerEn.columns : footer.columns;
   const contactTitle = en ? footerEn.contact.title : footer.contact.title;
-  const contactResponse = en ? footerEn.contact.response : footer.contact.response;
-  const contactLocation = en ? footerEn.contact.location : footer.contact.location;
   const contactAddress = footer.contact.address;
   const kvk = en ? "" : footer.contact.kvk;
   const rights = en ? footerEn.rights : "Alle rechten voorbehouden.";
@@ -73,8 +71,6 @@ export default function Footer({ locale = "nl" }: { locale?: "nl" | "en" }) {
             >
               {site.email}
             </a>
-            <span className={styles.contactSub}>{contactResponse}</span>
-            <span className={styles.contactSub}>{contactLocation}</span>
             {contactAddress && (
               <span className={styles.contactSub}>{contactAddress}</span>
             )}
