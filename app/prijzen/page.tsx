@@ -22,7 +22,7 @@ const helvetica = localFont({
 export const metadata: Metadata = {
   title: "Prijzen: drie trajecten, vaste prijs",
   description:
-    "Drie trajecten met een vaste prijs: Landing (€2.499), Herbouw (€4.995) en Signatuur (€9.945). Je ziet het ontwerp voordat er gebouwd wordt.",
+    "Drie trajecten met een vaste prijs: Landing (€1.499), Herbouw (€3.995) en Signatuur (€8.945). Je ziet het ontwerp voordat er gebouwd wordt.",
   alternates: { canonical: "/prijzen" },
   openGraph: {
     title: "Prijzen | KREATIVES",
@@ -56,8 +56,8 @@ const plans: Plan[] = [
   {
     no: "01",
     name: "Landing",
-    price: "€2.499",
-    priceNumber: "2499",
+    price: "€1.499",
+    priceNumber: "1499",
     intro:
       "Voor bedrijven die al adverteren, via een eigen marketingverantwoordelijke of een bureau, en merken dat de pagina waar de klik landt de campagne afremt.",
     krijgt: [
@@ -76,8 +76,8 @@ const plans: Plan[] = [
   {
     no: "02",
     name: "Herbouw",
-    price: "€4.995",
-    priceNumber: "4995",
+    price: "€3.995",
+    priceNumber: "3995",
     featured: true,
     intro:
       "Voor bedrijven die de afgelopen jaren hard zijn gegroeid en waarvan de website nog laat zien waar ze vier jaar geleden stonden.",
@@ -102,8 +102,8 @@ const plans: Plan[] = [
   {
     no: "03",
     name: "Signatuur",
-    price: "€9.945",
-    priceNumber: "9945",
+    price: "€8.945",
+    priceNumber: "8945",
     intro:
       "Voor bedrijven waarbij niet alleen de site, maar ook het logo en de uitstraling achterlopen op het niveau van het werk.",
     krijgt: [
@@ -146,8 +146,8 @@ const faq = {
   title: "Voordat je een gesprek plant",
   items: [
     {
-      q: "Waarom €4.995 en niet €1.250?",
-      a: "Bij €1.250 krijg je drie tot vijf pagina's in je bestaande huisstijl, zonder tekst en zonder iemand die meedenkt over de volgorde. Bij €4.995 zit de boodschap per pagina erin, de copy, het ontwerp, de bouw, de meting en het eerste jaar hosting en onderhoud. Dat is het verschil tussen een site die er staat en een site die het gesprek voor je doet.",
+      q: "Waarom €3.995 en niet €1.250?",
+      a: "Bij €1.250 krijg je drie tot vijf pagina's in je bestaande huisstijl, zonder tekst en zonder iemand die meedenkt over de volgorde. Bij €3.995 zit de boodschap per pagina erin, de copy, het ontwerp, de bouw, de meting en het eerste jaar hosting en onderhoud. Dat is het verschil tussen een site die er staat en een site die het gesprek voor je doet.",
     },
     {
       q: "Kan ik in termijnen betalen?",

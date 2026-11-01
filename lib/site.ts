@@ -571,7 +571,7 @@ export const pricing = {
       name: "Landing",
       body:
         "Eén pagina die het gesprek voorbereidt, voor als je al adverteert.",
-      price: "€2.499",
+      price: "€1.499",
       priceUnit: "",
       featured: false,
       features: [
@@ -586,7 +586,7 @@ export const pricing = {
       name: "Herbouw",
       body:
         "De site die weer klopt met waar je bedrijf nu staat.",
-      price: "€4.995",
+      price: "€3.995",
       priceUnit: "",
       featured: true,
       features: [
@@ -602,7 +602,7 @@ export const pricing = {
       name: "Signatuur",
       body:
         "Alles uit Herbouw, plus een merk dat klopt met je niveau.",
-      price: "€9.945",
+      price: "€8.945",
       priceUnit: "",
       featured: false,
       features: [

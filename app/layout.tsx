@@ -104,7 +104,7 @@ const jsonLd = {
   },
   knowsLanguage: "nl",
   serviceType: "Webdesign, website-ontwikkeling en branding",
-  priceRange: "€2499 - €9945",
+  priceRange: "€1499 - €8945",
   founder: {
     "@type": "Person",
     name: "Ricky Kai",

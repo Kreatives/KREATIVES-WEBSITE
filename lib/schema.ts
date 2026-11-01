@@ -12,7 +12,7 @@ export const reviewsSchema = {
   name: "KREATIVES",
   url: "https://www.kreatives.nl",
   image: "https://www.kreatives.nl/opengraph-image.png",
-  priceRange: "€2499 - €9945",
+  priceRange: "€1499 - €8945",
   telephone: "+31613066250",
   email: "info@kreatives.nl",
   address: {

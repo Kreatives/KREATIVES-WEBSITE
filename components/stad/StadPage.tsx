@@ -43,11 +43,11 @@ export default function StadPage({ slug }: { slug: string }) {
     offers: {
       "@type": "Offer",
       priceCurrency: "EUR",
-      price: "4995",
+      price: "3995",
       priceSpecification: {
         "@type": "PriceSpecification",
-        minPrice: "4995",
-        maxPrice: "9945",
+        minPrice: "3995",
+        maxPrice: "8945",
         priceCurrency: "EUR",
       },
       availability: "https://schema.org/InStock",
@@ -65,7 +65,7 @@ export default function StadPage({ slug }: { slug: string }) {
     url: site.domain,
     telephone: "+31613066250",
     email: site.email,
-    priceRange: "€2499 - €9945",
+    priceRange: "€1499 - €8945",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Arnhem",
