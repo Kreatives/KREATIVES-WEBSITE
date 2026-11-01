@@ -45,7 +45,7 @@ export default function Werkwijze({
               <span className="eyebrow" data-reveal>
                 {data.eyebrow}
               </span>
-              <h2 className={`h2 ${styles.title}`} data-reveal>
+              <h2 className={styles.title} data-reveal>
                 {data.titleLead}{" "}
                 <span className="accent accent--orange">{data.titleAccent}</span>
               </h2>
