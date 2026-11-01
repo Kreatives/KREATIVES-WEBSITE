@@ -441,7 +441,7 @@ export const kennisbankAi: Post[] = [
       "Vraag of je zelf pagina's kunt toevoegen. Laat het zien.",
       "En vraag waar in het traject AI zit en waar een mens. Wie dat niet kan aanwijzen, gebruikt het woord als verkoopargument.",
       "## Waar je op moet rekenen qua prijs",
-      "Een traject met strategie, redactie en maatwerk begint bij ons op 2.500 euro. AI verlaagt het bouwwerk met tien tot twintig procent, niet de strategie en niet de teksten.",
+      "Een traject met strategie, redactie en maatwerk begint bij ons op 3.995 euro. AI verlaagt het bouwwerk met tien tot twintig procent, niet de strategie en niet de teksten.",
       "Een aanbieding van 500 euro voor een complete site met strategie is mogelijk, maar dan zit er geen gesprek in en geen redactie. Dat mag, als je dat weet.",
       "## De rode vlaggen",
       "Een site die je binnen twee dagen krijgt zonder intake.",
