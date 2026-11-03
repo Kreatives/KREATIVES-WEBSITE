@@ -190,7 +190,7 @@ export const werkwijze = {
       title: "Deepdive",
       body:
         "In 30 minuten bespreken we je merk, je doelgroep en wat de site concreet moet opleveren. Jij vertelt waar je nu tegenaan loopt, wij komen met een eerste richting. Daarna weet je precies wat je kunt verwachten.",
-      image: "/brand/stap-strategie.webp",
+      image: "/brand/aanpak-deepdive.jpg",
     },
     {
       no: "02",
@@ -211,7 +211,7 @@ export const werkwijze = {
       title: "Livegang",
       body:
         "Binnen zes weken na de start staat de site live. Je krijgt uitleg zodat je daarna zelf teksten en projecten aanpast, en wij blijven beschikbaar voor onderhoud en doorontwikkeling.",
-      image: "/brand/work-5.webp",
+      image: "/brand/aanpak-launch.jpg",
     },
   ],
 };

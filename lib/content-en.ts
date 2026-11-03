@@ -124,7 +124,7 @@ export const werkwijzeEn = {
       title: "Deepdive",
       body:
         "In 30 minutes we discuss your brand, your audience and what the site needs to deliver. You tell us where you get stuck now, we come with a first direction. After that you know exactly what to expect.",
-      image: "/brand/stap-strategie.webp",
+      image: "/brand/aanpak-deepdive.jpg",
     },
     {
       no: "02",
@@ -145,7 +145,7 @@ export const werkwijzeEn = {
       title: "Launch",
       body:
         "Within six weeks of the start the site goes live. You get a walkthrough so you can edit text and projects yourself, and we stay available for maintenance and further development.",
-      image: "/brand/work-5.webp",
+      image: "/brand/aanpak-launch.jpg",
     },
   ],
 };
