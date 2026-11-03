@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { hero } from "@/lib/site";
-import { Star } from "@/components/icons";
 import Button from "@/components/Button";
+import SocialProof from "@/components/SocialProof";
 import HeroVideo from "./HeroVideo";
 import styles from "./Hero.module.css";
 
@@ -25,43 +25,13 @@ export default function Hero({ data = hero }: { data?: typeof hero }) {
 
       <div className={`container ${styles.inner}`}>
         <div className={styles.content}>
-          <div className={styles.proof} data-reveal>
-            <div className={styles.avatars} aria-hidden>
-              {data.socialProof.avatars.map((a, i) => (
-                <span
-                  key={i}
-                  className={styles.avatar}
-                  style={
-                    a.photo
-                      ? {
-                          backgroundImage: `url(${a.photo})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }
-                      : { background: a.color }
-                  }
-                >
-                  {!a.photo && a.initials}
-                </span>
-              ))}
-            </div>
-            <div className={styles.proofMeta}>
-              <span className={styles.proofTop}>
-                <span className={styles.stars} aria-hidden>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} />
-                  ))}
-                </span>
-                <span className={styles.proofRating}>
-                  <strong>{data.socialProof.rating}</strong>{" "}
-                  {data.socialProof.label}
-                </span>
-              </span>
-              <span className={styles.proofLabel}>
-                {data.socialProof.trust}
-              </span>
-            </div>
-          </div>
+          <SocialProof
+            align="left"
+            tone="dark"
+            rating={data.socialProof.rating}
+            label={data.socialProof.label}
+            trust={data.socialProof.trust}
+          />
 
           <h1 className={`h-hero ${styles.title}`} data-reveal>
             {data.titleLead}

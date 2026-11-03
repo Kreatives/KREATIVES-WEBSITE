@@ -9,9 +9,15 @@ import styles from "./SocialProof.module.css";
 export default function SocialProof({
   align = "center",
   tone = "dark",
+  rating = hero.socialProof.rating,
+  label = hero.socialProof.label,
+  trust = hero.socialProof.trust,
 }: {
   align?: "center" | "left";
   tone?: "dark" | "light";
+  rating?: string;
+  label?: string;
+  trust?: string;
 }) {
   return (
     <div
@@ -47,10 +53,10 @@ export default function SocialProof({
             ))}
           </span>
           <span className={styles.rating}>
-            <strong>{hero.socialProof.rating}</strong> {hero.socialProof.label}
+            <strong>{rating}</strong> {label}
           </span>
         </div>
-        <span className={styles.trust}>{hero.socialProof.trust}</span>
+        <span className={styles.trust}>{trust}</span>
       </div>
     </div>
   );
