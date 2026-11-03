@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RevealInit from "@/components/RevealInit";
 import Hero from "@/components/sections/Hero";
 import LogoMarquee from "@/components/sections/LogoMarquee";
-import Probleem from "@/components/sections/Probleem";
+import WieWeZijn from "@/components/sections/WieWeZijn";
 import Werkwijze from "@/components/sections/Werkwijze";
 import Cases from "@/components/sections/Cases";
 import Reviews from "@/components/sections/Reviews";
@@ -13,8 +13,7 @@ import { site } from "@/lib/site";
 import {
   heroEn,
   marqueeEn,
-  probleemEn,
-  uspsEn,
+  wieWeZijnEn,
   werkwijzeEn,
   casesEn,
   reviewsMetaEn,
@@ -66,7 +65,7 @@ export default async function EnHome() {
         <Hero data={heroEn} />
         <LogoMarquee label={marqueeEn.label} />
       </div>
-      <Probleem data={probleemEn} usps={uspsEn} />
+      <WieWeZijn data={wieWeZijnEn} />
       <Werkwijze data={werkwijzeEn} />
       <div className="cosmos-bg cosmos-wrap">
         <Cases

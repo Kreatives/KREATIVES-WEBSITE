@@ -68,14 +68,60 @@ export const uspsEn = {
   ],
 };
 
+export const wieWeZijnEn = {
+  eyebrow: "Who we are",
+  statementLead:
+    "KREATIVES builds custom websites for business owners who want to show online what they already deliver offline.",
+  statementRest:
+    "From strategy and design to build and launch, you work directly with the people who make your site.",
+  items: [
+    {
+      no: "01",
+      title: "Direct contact",
+      icon: "/icons/wie-we-zijn/direct-contact.svg",
+      body: "You work directly with the person who designs and builds your site, with no account manager in between.",
+    },
+    {
+      no: "02",
+      title: "Design guarantee",
+      icon: "/icons/wie-we-zijn/design-garantie.svg",
+      body: "You approve the design before we build, with three revision rounds. We keep going until it's right, for the same price.",
+    },
+    {
+      no: "03",
+      title: "Live in four weeks",
+      icon: "/icons/wie-we-zijn/live-in-vier-weken.svg",
+      body: "From strategy call to live site in four weeks, with a plan you get on paper up front.",
+    },
+    {
+      no: "04",
+      title: "Strategy and copy",
+      icon: "/icons/wie-we-zijn/strategie.svg",
+      body: "We first decide what your site should say to a client considering a big project. We write the copy.",
+    },
+    {
+      no: "05",
+      title: "On-location deep dive",
+      icon: "/icons/wie-we-zijn/deepdive.svg",
+      body: "We sit down with you at least once. Understanding your business goes faster on location.",
+    },
+    {
+      no: "06",
+      title: "Support after launch",
+      icon: "/icons/wie-we-zijn/support.svg",
+      body: "After launch we stay on board for three months for tweaks, questions and small improvements.",
+    },
+  ],
+};
+
 export const werkwijzeEn = {
-  eyebrow: "Approach",
-  titleLead: "How we work, from first call to",
-  titleAccent: "live site.",
+  eyebrow: "Our approach",
+  titleLead: "How we work, from",
+  titleAccent: "first call to live site.",
   steps: [
     {
       no: "01",
-      title: "Strategy call",
+      title: "Deepdive",
       body:
         "In 30 minutes we discuss your brand, your audience and what the site needs to deliver. You tell us where you get stuck now, we come with a first direction. After that you know exactly what to expect.",
       image: "/brand/stap-strategie.webp",
