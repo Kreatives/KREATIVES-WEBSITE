@@ -619,15 +619,31 @@ function CallBlok({ coldLead }: { coldLead: boolean }) {
           aanpakt.
         </p>
       </div>
-      <div className={styles.calendly}>
-        <iframe
-          src={SCAN_BOOKING}
-          title="Plan een website-analyse"
-          className={styles.calendlyFrame}
-          loading="lazy"
-        />
-      </div>
+      <CalendlyEmbed />
     </section>
+  );
+}
+
+function CalendlyEmbed() {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className={styles.calendly}>
+      {/* Verbinding met Calendly alvast opwarmen zodat de agenda sneller laadt */}
+      <link rel="preconnect" href="https://calendly.com" />
+      <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="" />
+      {!loaded && (
+        <div className={styles.calendlyLoading} aria-hidden>
+          <span className={styles.calendlySpinner} />
+          <span>Agenda laden…</span>
+        </div>
+      )}
+      <iframe
+        src={SCAN_BOOKING}
+        title="Plan een website-analyse"
+        className={styles.calendlyFrame}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
   );
 }
 
