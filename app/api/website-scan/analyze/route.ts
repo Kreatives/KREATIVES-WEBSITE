@@ -6,6 +6,7 @@ import {
   findCachedScan,
   rateLimited,
   saveScan,
+  SiteUnreachableError,
 } from "@/lib/scan-server";
 
 export const runtime = "nodejs";
@@ -89,9 +90,12 @@ export async function POST(req: NextRequest) {
         } catch {
           /* negeren */
         }
+        const bestaatNiet = e instanceof SiteUnreachableError;
         send({
           type: "error",
-          message: "We konden je website niet goed bekijken.",
+          message: bestaatNiet
+            ? "We konden deze website niet vinden. Controleer of het adres klopt — bijvoorbeeld jouwbedrijf.nl."
+            : "We konden je website niet goed bekijken.",
         });
       } finally {
         controller.close();

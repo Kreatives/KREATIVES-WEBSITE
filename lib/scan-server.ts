@@ -181,6 +181,37 @@ type SiteData = {
   proof: string[];
 };
 
+// Gegooid wanneer het domein echt niet bestaat of onbereikbaar is. De route
+// vertaalt dit naar een duidelijke foutmelding voor de bezoeker.
+export class SiteUnreachableError extends Error {
+  constructor(message = "De website kon niet bereikt worden.") {
+    super(message);
+    this.name = "SiteUnreachableError";
+  }
+}
+
+// Echte Chrome-headers: veel sites blokkeren een kaal User-Agent met 403.
+const BROWSER_HEADERS: Record<string, string> = {
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+  Accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "Accept-Language": "nl-NL,nl;q=0.9,en;q=0.8",
+};
+
+// DNS-fout = het domein bestaat niet. Timeouts/geweigerde verbindingen vallen
+// hier bewust NIET onder; die proberen we eerst nog via de render-crawler.
+function isDnsFailure(e: unknown): boolean {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const err = e as any;
+  const code = err?.cause?.code ?? err?.code;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+  return (
+    typeof code === "string" &&
+    ["ENOTFOUND", "EAI_AGAIN", "ERR_NAME_NOT_RESOLVED"].includes(code)
+  );
+}
+
 function stripTags(html: string): string {
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
@@ -191,18 +222,7 @@ function stripTags(html: string): string {
     .trim();
 }
 
-async function fetchSiteData(target: string): Promise<SiteData> {
-  const res = await fetch(target, {
-    redirect: "follow",
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (compatible; KreativesScan/1.0; +https://www.kreatives.nl)",
-    },
-    signal: AbortSignal.timeout(15000),
-  });
-  if (!res.ok) throw new Error(`Website gaf status ${res.status}.`);
-  const html = await res.text();
-
+function parseHtml(html: string): SiteData {
   const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? "")
     .trim()
     .slice(0, 200);
@@ -250,6 +270,71 @@ async function fetchSiteData(target: string): Promise<SiteData> {
     contact,
     proof,
   };
+}
+
+// Directe fetch. Geeft HTML terug bij 2xx, null bij een blokkade (403/5xx) of
+// timeout zodat de render-crawler het overneemt. Gooit alleen bij een DNS-fout.
+async function fetchDirectHtml(target: string): Promise<string | null> {
+  try {
+    const res = await fetch(target, {
+      redirect: "follow",
+      headers: BROWSER_HEADERS,
+      signal: AbortSignal.timeout(15000),
+    });
+    return res.ok ? await res.text() : null;
+  } catch (e) {
+    if (isDnsFailure(e)) throw new SiteUnreachableError();
+    return null;
+  }
+}
+
+// Render-crawler: Jina Reader laadt de pagina in een echte browser (voert JS
+// uit) en geeft de volledige HTML terug. Vangt SPA's en sites die bots blokken.
+// Zonder key gratis; JINA_API_KEY verhoogt alleen de rate limit.
+async function fetchRenderedHtml(target: string): Promise<string | null> {
+  try {
+    const headers: Record<string, string> = {
+      "X-Return-Format": "html",
+      "X-Timeout": "25",
+      Accept: "text/html",
+    };
+    if (process.env.JINA_API_KEY)
+      headers.Authorization = `Bearer ${process.env.JINA_API_KEY}`;
+    const res = await fetch(`https://r.jina.ai/${target}`, {
+      headers,
+      signal: AbortSignal.timeout(35000),
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    return html.length > 50 ? html : null;
+  } catch {
+    return null;
+  }
+}
+
+// Weinig leesbare inhoud wijst op een JS-site of bot-blokkade: render-crawler.
+function isThin(d: SiteData): boolean {
+  return d.text.length < 500 || d.headings.length === 0;
+}
+
+async function fetchSiteData(target: string): Promise<SiteData> {
+  const directHtml = await fetchDirectHtml(target);
+  let data = directHtml ? parseHtml(directHtml) : null;
+
+  // Niets bruikbaars uit de directe fetch, of te weinig tekst → render-crawler.
+  if (!data || isThin(data)) {
+    const renderedHtml = await fetchRenderedHtml(target);
+    const rendered = renderedHtml ? parseHtml(renderedHtml) : null;
+    // Kies de rijkste bron (meeste leesbare tekst).
+    if (rendered && (!data || rendered.text.length > data.text.length)) {
+      data = rendered;
+    }
+  }
+
+  if (!data || (!data.text && data.headings.length === 0)) {
+    throw new SiteUnreachableError("De website kon niet gelezen worden.");
+  }
+  return data;
 }
 
 /* ---------- Claude-analyse ---------- */

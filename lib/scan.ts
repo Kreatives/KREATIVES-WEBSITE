@@ -10,20 +10,25 @@ export const scan = {
 export const SCAN_BOOKING = "https://calendly.com/info-jtw/website-analyse";
 
 export type Branche =
-  | "Horeca & food"
-  | "Coach of personal brand"
   | "Dienstverlening"
+  | "B2B dienstverlening"
+  | "Coach of personal brand"
   | "Webshop"
+  | "Horeca & food"
   | "Anders";
 
 export const brancheOpties: { value: Branche; label: string }[] = [
-  { value: "Horeca & food", label: "Horeca & food" },
-  { value: "Coach of personal brand", label: "Coach of personal brand" },
   {
     value: "Dienstverlening",
     label: "Dienstverlening (installatie, bouw, schoonmaak)",
   },
+  {
+    value: "B2B dienstverlening",
+    label: "B2B dienstverlening (zakelijke klanten)",
+  },
+  { value: "Coach of personal brand", label: "Coach of personal brand" },
   { value: "Webshop", label: "Webshop" },
+  { value: "Horeca & food", label: "Horeca & food" },
   { value: "Anders", label: "Anders" },
 ];
 

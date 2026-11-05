@@ -33,6 +33,42 @@ function isValidUrl(raw: string): boolean {
   }
 }
 
+// Antwoorden die te algemeen zijn voor een scherpe analyse. We blokkeren niet,
+// maar vragen eerst of de ondernemer wil aanvullen of wil doorgaan.
+const GENERIEKE_KLANT = new Set([
+  "iedereen",
+  "mensen",
+  "klanten",
+  "bedrijven",
+  "consumenten",
+  "particulieren",
+  "ondernemers",
+  "iedereen eigenlijk",
+]);
+
+type VaagPunt = { vraag: string; stap: number; reden: string };
+
+function vageAntwoorden(a: ScanAnswers): VaagPunt[] {
+  const punten: VaagPunt[] = [];
+  const klant = a.idealeKlant.trim().toLowerCase();
+  if (klant.length < 15 || GENERIEKE_KLANT.has(klant)) {
+    punten.push({
+      vraag: "Wie is je ideale klant?",
+      stap: 2,
+      reden:
+        "Dit is nog vrij algemeen. Hoe specifieker (wie, waar, wat speelt er), hoe scherper de analyse wordt.",
+    });
+  }
+  if (a.branche === "Anders" && a.brancheAnders.trim().length < 4) {
+    punten.push({
+      vraag: "In welke branche zit je?",
+      stap: 1,
+      reden: "Vertel kort iets concreter wat je doet.",
+    });
+  }
+  return punten;
+}
+
 export default function WebsiteScanFlow() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<ScanAnswers>(emptyAnswers);
@@ -40,6 +76,9 @@ export default function WebsiteScanFlow() {
   // Honeypot: voor mensen onzichtbaar, bots vullen hem in. De analyze-route
   // breekt de aanvraag af zodra dit veld gevuld binnenkomt.
   const [hp, setHp] = useState("");
+  // Vaag-check: te algemene antwoorden tonen we vóór de scan ter bevestiging.
+  const [vaag, setVaag] = useState<VaagPunt[] | null>(null);
+  const [vaagBevestigd, setVaagBevestigd] = useState(false);
 
   function update<K extends keyof ScanAnswers>(key: K, value: ScanAnswers[K]) {
     setAnswers((a) => ({ ...a, [key]: value }));
@@ -180,11 +219,34 @@ export default function WebsiteScanFlow() {
         </Step>
       )}
 
-      {step === 3 && (
+      {step === 3 && vaag && (
+        <VaagCheck
+          punten={vaag}
+          onAanpassen={() => {
+            const terug = Math.min(...vaag.map((p) => p.stap));
+            setVaag(null);
+            setStep(terug);
+          }}
+          onDoorgaan={() => {
+            setVaag(null);
+            setVaagBevestigd(true);
+            setStep(4);
+          }}
+        />
+      )}
+
+      {step === 3 && !vaag && (
         <Step
           title="Doel, timing en budget"
           onBack={() => setStep(2)}
-          onNext={() => setStep(4)}
+          onNext={() => {
+            const punten = vageAntwoorden(answers);
+            if (punten.length && !vaagBevestigd) {
+              setVaag(punten);
+              return;
+            }
+            setStep(4);
+          }}
           nextLabel="Start de scan"
           nextDisabled={
             answers.doel.length === 0 || !answers.timing || !answers.budget
@@ -338,6 +400,43 @@ function MultiGroup({
         })}
       </div>
     </fieldset>
+  );
+}
+
+function VaagCheck({
+  punten,
+  onAanpassen,
+  onDoorgaan,
+}: {
+  punten: VaagPunt[];
+  onAanpassen: () => void;
+  onDoorgaan: () => void;
+}) {
+  return (
+    <div className={styles.step}>
+      <h2 className={styles.stepTitle}>Even checken voor ik begin</h2>
+      <div className={styles.stepBody}>
+        <p className={styles.loadingSub}>
+          Een paar antwoorden zijn nog wat algemeen. Je kunt ze aanvullen voor
+          een scherpere analyse, of doorgaan met wat je nu hebt ingevuld.
+        </p>
+        <ul className={styles.list}>
+          {punten.map((p) => (
+            <li key={p.vraag}>
+              <strong>{p.vraag}</strong> — {p.reden}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className={styles.stepNav}>
+        <button type="button" className={styles.back} onClick={onAanpassen}>
+          Antwoorden aanpassen
+        </button>
+        <button type="button" className={styles.next} onClick={onDoorgaan}>
+          Ga verder met deze antwoorden
+        </button>
+      </div>
+    </div>
   );
 }
 

@@ -40,8 +40,7 @@ export default function WebsiteScanPage() {
           </h1>
           <p className={styles.heroLead}>
             In een paar minuten bekijk ik je homepage door de ogen van je ideale
-            klant en geef ik een eerlijke, concrete diagnose. Geen laadsnelheid
-            of SEO, alleen of je bezoeker overtuigd raakt en contact opneemt.
+            klant en geef ik een eerlijke, concrete diagnose.
           </p>
         </div>
       </section>
