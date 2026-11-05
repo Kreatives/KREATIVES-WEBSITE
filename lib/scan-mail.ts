@@ -32,6 +32,38 @@ function esc(s: string): string {
   );
 }
 
+/** Vroege notificatie: zodra naam + WhatsApp binnen zijn, nog vóór de scan af is. */
+export async function sendEarlyLeadNotification(
+  contact: ScanContact,
+  url: string | null
+): Promise<void> {
+  if (!user || !pass) throw new Error("SMTP niet geconfigureerd.");
+  const rows: [string, string][] = [
+    ["Naam", contact.voornaam],
+    ["WhatsApp", contact.telefoon || "-"],
+    ["Website", url || "nog geen website"],
+  ];
+  const table = rows
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td style="padding:4px 0"><strong>${esc(
+          String(v)
+        )}</strong></td></tr>`
+    )
+    .join("");
+
+  await transport().sendMail({
+    from: `"KREATIVES Scan" <${user}>`,
+    to: NOTIFY(),
+    subject: `Nieuwe scan-lead (scan loopt nog): ${contact.voornaam || contact.telefoon}`,
+    html: `<div style="font-family:Arial,sans-serif;font-size:15px;color:#111">
+      <h2>Nieuwe scan-lead</h2>
+      <p>Deze bezoeker heeft zijn gegevens achtergelaten en is net de scan gestart. Zodra de scan klaar is volgt een tweede mail met het volledige rapport.</p>
+      <table>${table}</table></div>`,
+    text: rows.map(([k, v]) => `${k}: ${v}`).join("\n"),
+  });
+}
+
 /** Notificatie naar KREATIVES bij elke lead met contactgegevens. */
 export async function sendLeadNotification(
   row: ScanRow,

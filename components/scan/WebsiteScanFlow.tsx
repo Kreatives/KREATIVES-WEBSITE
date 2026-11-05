@@ -79,6 +79,26 @@ export default function WebsiteScanFlow() {
   // Vaag-check: te algemene antwoorden tonen we vóór de scan ter bevestiging.
   const [vaag, setVaag] = useState<VaagPunt[] | null>(null);
   const [vaagBevestigd, setVaagBevestigd] = useState(false);
+  // Vroege lead-capture: éénmalig naam + WhatsApp versturen zodra stap 2 klaar is.
+  const [leadSent, setLeadSent] = useState(false);
+
+  function sendLeadEarly() {
+    if (leadSent) return;
+    setLeadSent(true);
+    void fetch("/api/website-scan/lead-start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        naam: answers.naam,
+        whatsapp: answers.whatsapp,
+        url: answers.url,
+        geenWebsite: answers.geenWebsite,
+        company_url: hp,
+      }),
+    }).catch(() => {
+      /* niet blokkeren — de volledige verzending gebeurt bij het afronden */
+    });
+  }
 
   // Eigenaar-bypass: /website-scan?vrij=<key> wordt eenmalig onthouden zodat
   // Ricky op dit apparaat onbeperkt kan scannen, los van zijn IP.
@@ -182,7 +202,9 @@ export default function WebsiteScanFlow() {
           title="Waar mag ik je uitkomsten naartoe sturen?"
           onBack={() => setStep(0)}
           onNext={() => {
-            if (naamOk && whatsappOk) setStep(2);
+            if (!naamOk || !whatsappOk) return;
+            sendLeadEarly();
+            setStep(2);
           }}
           nextDisabled={!naamOk || !whatsappOk}
         >
