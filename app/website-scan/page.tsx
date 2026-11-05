@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import WebsiteScanFlow from "@/components/scan/WebsiteScanFlow";
+import SocialProof from "@/components/SocialProof";
+import RevealInit from "@/components/RevealInit";
 import { scan } from "@/lib/scan";
 import { OG_IMAGE } from "@/lib/site";
 import styles from "@/components/scan/scan.module.css";
@@ -33,6 +35,7 @@ export default function WebsiteScanPage() {
     <div className={styles.scanPage}>
       <section className={styles.hero}>
         <div className={styles.heroInner}>
+          <SocialProof />
           <span className={styles.heroEyebrow}>{scan.name}</span>
           <h1 className={styles.heroKop}>
             Zou jouw klant op je website{" "}
@@ -48,6 +51,7 @@ export default function WebsiteScanPage() {
       <section className={styles.flowWrap}>
         <WebsiteScanFlow />
       </section>
+      <RevealInit />
     </div>
   );
 }

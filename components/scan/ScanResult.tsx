@@ -434,7 +434,6 @@ function bedrijfUitUrl(url: string): string {
 // voornaam + e-mail; het bedrijf leiden we af uit de gescande URL. Hangt op de
 // bestaande /api/website-scan/lead (bewaren + Notion + mail naar bezoeker/ons).
 function LeadBlok({ id, answers }: { id: string; answers: ScanAnswers }) {
-  const [voornaam, setVoornaam] = useState("");
   const [email, setEmail] = useState("");
   const [hp, setHp] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
@@ -442,7 +441,7 @@ function LeadBlok({ id, answers }: { id: string; answers: ScanAnswers }) {
   );
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const canSend = voornaam.trim().length >= 2 && emailOk && status !== "sending";
+  const canSend = emailOk && status !== "sending";
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -454,7 +453,6 @@ function LeadBlok({ id, answers }: { id: string; answers: ScanAnswers }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id,
-          voornaam: voornaam.trim(),
           email: email.trim(),
           bedrijf: bedrijfUitUrl(answers.url),
           company_url: hp,
@@ -488,19 +486,10 @@ function LeadBlok({ id, answers }: { id: string; answers: ScanAnswers }) {
     <section className={styles.leadBlok}>
       <h2 className={styles.leadTitle}>Dit rapport in je mail?</h2>
       <p className={styles.leadBody}>
-        Laat je naam en e-mailadres achter, dan sturen we je de volledige
-        analyse na zodat je hem rustig kunt teruglezen.
+        Laat je e-mailadres achter, dan sturen we je de volledige analyse na
+        zodat je hem rustig kunt teruglezen.
       </p>
       <form className={styles.leadForm} onSubmit={submit} noValidate>
-        <input
-          type="text"
-          className={styles.leadInput}
-          placeholder="Voornaam"
-          value={voornaam}
-          onChange={(e) => setVoornaam(e.target.value)}
-          autoComplete="given-name"
-          aria-label="Voornaam"
-        />
         <input
           type="email"
           className={styles.leadInput}

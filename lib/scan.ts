@@ -66,6 +66,8 @@ export const scanChecks = [
 export type ScanAnswers = {
   url: string;
   geenWebsite: boolean;
+  naam: string;
+  whatsapp: string;
   branche: Branche | "";
   brancheAnders: string;
   idealeKlant: string;
@@ -77,6 +79,8 @@ export type ScanAnswers = {
 export const emptyAnswers: ScanAnswers = {
   url: "",
   geenWebsite: false,
+  naam: "",
+  whatsapp: "",
   branche: "",
   brancheAnders: "",
   idealeKlant: "",

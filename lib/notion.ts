@@ -185,8 +185,8 @@ export async function createLeadPage(
   };
   properties["E-mail"] =
     emailType === "email"
-      ? { email: contact.email }
-      : { phone_number: contact.email };
+      ? { email: contact.email || null }
+      : { phone_number: contact.email || null };
 
   const blocks = buildBlocks(row, contact, resultUrl);
   const first = blocks.slice(0, 100);

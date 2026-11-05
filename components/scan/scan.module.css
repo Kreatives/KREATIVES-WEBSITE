@@ -169,6 +169,11 @@
   color: #c0392b;
   font-size: 0.9rem;
 }
+.fieldHint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
 .textLink {
   align-self: flex-start;
   background: none;

@@ -3,15 +3,53 @@ import { emptyAnswers, type ScanAnswers } from "@/lib/scan";
 import {
   analyzeSite,
   assertSafeUrl,
-  findCachedScan,
+  attachLead,
+  getScanRow,
   isOwnerBypass,
   rateLimited,
   saveScan,
   SiteUnreachableError,
+  type ScanContact,
 } from "@/lib/scan-server";
+import { createLeadPageWithRetry, resultUrlFor } from "@/lib/notion";
+import { sendLeadNotification } from "@/lib/scan-mail";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
+
+function bedrijfVanUrl(answers: ScanAnswers): string {
+  if (answers.geenWebsite || !answers.url) return "Onbekend";
+  try {
+    return new URL(assertSafeUrl(answers.url).toString()).hostname.replace(
+      /^www\./,
+      ""
+    );
+  } catch {
+    return "Onbekend";
+  }
+}
+
+// Zet de lead (naam + WhatsApp) meteen in Notion en mailt KREATIVES. Best-effort:
+// alleen wanneer er een WhatsApp-nummer is en de lead nog niet is aangemaakt.
+async function registerLead(id: string): Promise<void> {
+  const row = await getScanRow(id);
+  if (!row || !row.contact?.telefoon || row.notion_page_id) return;
+  const resultUrl = resultUrlFor(id);
+  let notionPageId: string | null = null;
+  let notionFailed = false;
+  try {
+    notionPageId = await createLeadPageWithRetry(row, row.contact, resultUrl);
+    await attachLead(id, row.contact, notionPageId);
+  } catch (e) {
+    notionFailed = true;
+    console.error("[website-scan] Notion (lead) faalde:", e);
+  }
+  try {
+    await sendLeadNotification(row, row.contact, resultUrl, notionPageId, notionFailed);
+  } catch (e) {
+    console.error("[website-scan] notificatiemail (lead) faalde:", e);
+  }
+}
 
 export async function POST(req: NextRequest) {
   const raw = await req.json().catch(() => ({}));
@@ -39,17 +77,33 @@ export async function POST(req: NextRequest) {
           return;
         }
 
+        // Lead-gegevens (verplicht vooraf ingevuld: naam + WhatsApp).
+        const contact: ScanContact = {
+          voornaam: answers.naam.trim(),
+          email: "",
+          telefoon: answers.whatsapp.trim(),
+          bedrijf: bedrijfVanUrl(answers),
+        };
+
         if (answers.geenWebsite) {
           quickSteps();
-          const id = await saveScan({ answers, report: null, ip, status: "done" });
+          const id = await saveScan({
+            answers,
+            report: null,
+            ip,
+            status: "done",
+            contact,
+          });
+          await registerLead(id).catch((e) =>
+            console.error("[website-scan] registerLead faalde:", e)
+          );
           send({ type: "done", id });
           return;
         }
 
         // SSRF + geldige URL
-        let target: string;
         try {
-          target = assertSafeUrl(answers.url).toString();
+          assertSafeUrl(answers.url);
         } catch {
           send({
             type: "error",
@@ -66,17 +120,19 @@ export async function POST(req: NextRequest) {
           return;
         }
 
-        const cached = await findCachedScan(target, answers);
-        if (cached) {
-          quickSteps();
-          send({ type: "done", id: cached });
-          return;
-        }
-
         const report = await analyzeSite(answers, (step) =>
           send({ type: "step", step })
         );
-        const id = await saveScan({ answers, report, ip, status: "done" });
+        const id = await saveScan({
+          answers,
+          report,
+          ip,
+          status: "done",
+          contact,
+        });
+        await registerLead(id).catch((e) =>
+          console.error("[website-scan] registerLead faalde:", e)
+        );
         send({ type: "done", id });
       } catch (e) {
         console.error("[website-scan] analyse mislukt:", e);

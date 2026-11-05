@@ -16,7 +16,7 @@ import {
 } from "@/lib/scan";
 import styles from "./scan.module.css";
 
-const TOTAL_STEPS = 5; // URL, branche, klant, doel/timing/budget, analyse
+const TOTAL_STEPS = 6; // URL, lead, branche, klant, doel/timing/budget, analyse
 
 function normalizeUrl(raw: string): string {
   const trimmed = raw.trim();
@@ -54,7 +54,7 @@ function vageAntwoorden(a: ScanAnswers): VaagPunt[] {
   if (klant.length < 15 || GENERIEKE_KLANT.has(klant)) {
     punten.push({
       vraag: "Wie is je ideale klant?",
-      stap: 2,
+      stap: 3,
       reden:
         "Dit is nog vrij algemeen. Hoe specifieker (wie, waar, wat speelt er), hoe scherper de analyse wordt.",
     });
@@ -62,7 +62,7 @@ function vageAntwoorden(a: ScanAnswers): VaagPunt[] {
   if (a.branche === "Anders" && a.brancheAnders.trim().length < 4) {
     punten.push({
       vraag: "In welke branche zit je?",
-      stap: 1,
+      stap: 2,
       reden: "Vertel kort iets concreter wat je doet.",
     });
   }
@@ -96,11 +96,14 @@ export default function WebsiteScanFlow() {
   }
 
   const urlOk = isValidUrl(answers.url);
+  const naamOk = answers.naam.trim().length >= 2;
+  const whatsappDigits = answers.whatsapp.replace(/\D/g, "");
+  const whatsappOk = whatsappDigits.length >= 8 && whatsappDigits.length <= 15;
   const progress = Math.round(((step + 1) / (TOTAL_STEPS - 1)) * 100);
 
   return (
     <div className={styles.flow}>
-      {step !== 4 && (
+      {step !== 5 && (
         <>
           <div className={styles.progressHead}>
             <span className={styles.progressLabel}>
@@ -176,9 +179,54 @@ export default function WebsiteScanFlow() {
 
       {step === 1 && (
         <Step
-          title="In welke branche zit je?"
+          title="Waar mag ik je uitkomsten naartoe sturen?"
           onBack={() => setStep(0)}
-          onNext={() => setStep(2)}
+          onNext={() => {
+            if (naamOk && whatsappOk) setStep(2);
+          }}
+          nextDisabled={!naamOk || !whatsappOk}
+        >
+          <label className={styles.srOnly} htmlFor="scan-naam">
+            Je naam
+          </label>
+          <input
+            id="scan-naam"
+            type="text"
+            className={styles.input}
+            placeholder="Je naam"
+            value={answers.naam}
+            autoFocus
+            autoComplete="name"
+            onChange={(e) => update("naam", e.target.value)}
+          />
+          <label className={styles.srOnly} htmlFor="scan-wa">
+            WhatsApp-nummer
+          </label>
+          <input
+            id="scan-wa"
+            type="tel"
+            inputMode="tel"
+            className={styles.input}
+            placeholder="WhatsApp-nummer"
+            value={answers.whatsapp}
+            autoComplete="tel"
+            onChange={(e) => update("whatsapp", e.target.value)}
+          />
+          {answers.whatsapp !== "" && !whatsappOk && (
+            <p className={styles.error}>Vul een geldig WhatsApp-nummer in.</p>
+          )}
+          <p className={styles.fieldHint}>
+            Je diagnose verschijnt zo op je scherm. Ik gebruik dit alleen om je
+            de uitkomsten te sturen en met je mee te denken.
+          </p>
+        </Step>
+      )}
+
+      {step === 2 && (
+        <Step
+          title="In welke branche zit je?"
+          onBack={() => setStep(1)}
+          onNext={() => setStep(3)}
           nextDisabled={
             !answers.branche ||
             (answers.branche === "Anders" && !answers.brancheAnders.trim())
@@ -212,11 +260,11 @@ export default function WebsiteScanFlow() {
         </Step>
       )}
 
-      {step === 2 && (
+      {step === 3 && (
         <Step
           title="Wie is je ideale klant?"
-          onBack={() => setStep(1)}
-          onNext={() => setStep(3)}
+          onBack={() => setStep(2)}
+          onNext={() => setStep(4)}
           nextDisabled={!answers.idealeKlant.trim()}
         >
           <textarea
@@ -232,7 +280,7 @@ export default function WebsiteScanFlow() {
         </Step>
       )}
 
-      {step === 3 && vaag && (
+      {step === 4 && vaag && (
         <VaagCheck
           punten={vaag}
           onAanpassen={() => {
@@ -243,22 +291,22 @@ export default function WebsiteScanFlow() {
           onDoorgaan={() => {
             setVaag(null);
             setVaagBevestigd(true);
-            setStep(4);
+            setStep(5);
           }}
         />
       )}
 
-      {step === 3 && !vaag && (
+      {step === 4 && !vaag && (
         <Step
           title="Doel, timing en budget"
-          onBack={() => setStep(2)}
+          onBack={() => setStep(3)}
           onNext={() => {
             const punten = vageAntwoorden(answers);
             if (punten.length && !vaagBevestigd) {
               setVaag(punten);
               return;
             }
-            setStep(4);
+            setStep(5);
           }}
           nextLabel="Start de scan"
           nextDisabled={
@@ -294,7 +342,7 @@ export default function WebsiteScanFlow() {
         </Step>
       )}
 
-      {step === 4 && (
+      {step === 5 && (
         <AnalyseStep answers={answers} hp={hp} onBack={() => setStep(0)} />
       )}
     </div>
@@ -480,7 +528,7 @@ function AnalyseStep({
         setError("We konden je website niet goed bekijken.");
       }
     };
-    const timeout = setTimeout(fail, 150000);
+    const timeout = setTimeout(fail, 180000);
 
     (async () => {
       try {

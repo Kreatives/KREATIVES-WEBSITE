@@ -603,6 +603,7 @@ export async function saveScan(input: {
   ip: string | null;
   status: "done" | "failed";
   error?: string;
+  contact?: ScanContact | null;
 }): Promise<string> {
   const supabase = createServiceClient();
   const id = makeId();
@@ -625,6 +626,7 @@ export async function saveScan(input: {
     status: input.status,
     ip: input.ip,
     error: input.error ?? null,
+    contact: input.contact ?? null,
   });
   return id;
 }
