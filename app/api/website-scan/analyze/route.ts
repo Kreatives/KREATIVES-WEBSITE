@@ -59,8 +59,7 @@ export async function POST(req: NextRequest) {
         if (await rateLimited(ip)) {
           send({
             type: "error",
-            message:
-              "Je hebt het maximum aantal scans voor vandaag bereikt. Plan een gesprek, dan kijk ik er zelf naar.",
+            message: "Je hebt het maximum aantal scans voor vandaag bereikt.",
           });
           return;
         }

@@ -542,8 +542,19 @@ function makeId(): string {
   return id;
 }
 
+// IP's die de scan onbeperkt mogen draaien (Ricky zelf, voor testen/demo).
+// Extra IP's toevoegen kan via env SCAN_BYPASS_IPS (komma-gescheiden).
+const SCAN_BYPASS_IPS = new Set(
+  [
+    "94.157.35.84",
+    "2001:4860:7:61f::f8",
+    ...(process.env.SCAN_BYPASS_IPS?.split(",").map((s) => s.trim()) ?? []),
+  ].filter(Boolean)
+);
+
 export async function rateLimited(ip: string | null): Promise<boolean> {
   if (!ip) return false;
+  if (SCAN_BYPASS_IPS.has(ip)) return false;
   const supabase = createServiceClient();
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
   const { count } = await supabase

@@ -178,12 +178,14 @@ export default function WebsiteScanFlow() {
               <button
                 key={o.value}
                 type="button"
+                aria-pressed={answers.branche === o.value}
                 className={`${styles.option} ${
                   answers.branche === o.value ? styles.optionActive : ""
                 }`}
                 onClick={() => update("branche", o.value as Branche)}
               >
-                {o.label}
+                <span className={styles.optionMain}>{o.label}</span>
+                <span className={styles.radio} aria-hidden />
               </button>
             ))}
           </div>
@@ -353,7 +355,8 @@ function Group({
             }`}
             onClick={() => onSelect(o)}
           >
-            {o}
+            <span className={styles.optionMain}>{o}</span>
+            <span className={styles.radio} aria-hidden />
           </button>
         ))}
       </div>
@@ -391,10 +394,12 @@ function MultiGroup({
               className={`${styles.option} ${on ? styles.optionActive : ""}`}
               onClick={() => onToggle(o)}
             >
-              <span className={styles.optionCheck} aria-hidden>
-                {on ? "✓" : ""}
+              <span className={styles.optionMain}>
+                <span className={styles.optionCheck} aria-hidden>
+                  {on ? "✓" : ""}
+                </span>
+                {o}
               </span>
-              {o}
             </button>
           );
         })}
