@@ -80,6 +80,17 @@ export default function WebsiteScanFlow() {
   const [vaag, setVaag] = useState<VaagPunt[] | null>(null);
   const [vaagBevestigd, setVaagBevestigd] = useState(false);
 
+  // Eigenaar-bypass: /website-scan?vrij=<key> wordt eenmalig onthouden zodat
+  // Ricky op dit apparaat onbeperkt kan scannen, los van zijn IP.
+  useEffect(() => {
+    try {
+      const k = new URLSearchParams(window.location.search).get("vrij");
+      if (k) localStorage.setItem("scan_owner_key", k);
+    } catch {
+      /* localStorage niet beschikbaar — negeren */
+    }
+  }, []);
+
   function update<K extends keyof ScanAnswers>(key: K, value: ScanAnswers[K]) {
     setAnswers((a) => ({ ...a, [key]: value }));
   }
@@ -473,10 +484,20 @@ function AnalyseStep({
 
     (async () => {
       try {
+        let ownerKey = "";
+        try {
+          ownerKey = localStorage.getItem("scan_owner_key") ?? "";
+        } catch {
+          /* negeren */
+        }
         const res = await fetch("/api/website-scan/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...answers, company_url: hp }),
+          body: JSON.stringify({
+            ...answers,
+            company_url: hp,
+            bypass_key: ownerKey,
+          }),
         });
         if (!res.body) throw new Error("no stream");
         const reader = res.body.getReader();

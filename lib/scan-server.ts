@@ -552,6 +552,16 @@ const SCAN_BYPASS_IPS = new Set(
   ].filter(Boolean)
 );
 
+// Eigenaar-bypass, los van IP. Bezoek eenmalig /website-scan?vrij=<key>; de
+// client onthoudt 'm in localStorage en stuurt 'm mee bij elke scan.
+// Overschrijfbaar via env SCAN_OWNER_KEY.
+export const SCAN_OWNER_KEY =
+  process.env.SCAN_OWNER_KEY || "kreatives-vrij-7q2x";
+
+export function isOwnerBypass(key: string | null | undefined): boolean {
+  return typeof key === "string" && key !== "" && key === SCAN_OWNER_KEY;
+}
+
 export async function rateLimited(ip: string | null): Promise<boolean> {
   if (!ip) return false;
   if (SCAN_BYPASS_IPS.has(ip)) return false;
