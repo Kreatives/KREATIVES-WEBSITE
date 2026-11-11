@@ -19,6 +19,27 @@
   color: #fe6d17;
 }
 
+/* zachte overgangen op alle interactieve checkout-elementen */
+.upsell,
+.choice,
+.method,
+.plan,
+.input,
+.fieldInput,
+.primaryBtn,
+.mobileBarBtn,
+.pkgBarBtn,
+.stepper button,
+.choiceRadio,
+.radioDot {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+    background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.primaryBtn:active,
+.mobileBarBtn:active {
+  transform: translateY(1px);
+}
+
 /* globals.css forceert hoofdletters + forma-font op koppen — hier terugdraaien */
 .wrap :is(h1, h2, h3, h4) {
   font-family: var(--font-helvetica), "Helvetica Neue", Arial, sans-serif;
@@ -872,6 +893,139 @@
   color: #111;
   flex: none;
   margin-top: 1px;
+}
+
+/* ---------- gegevens-modal ---------- */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  width: min(560px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  animation: modalUp 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.modalHd {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.modalSub {
+  font-size: 13px;
+  color: #8a8a8a;
+  margin-top: 0.15rem;
+}
+.modalClose {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #f2f2f2;
+  border: 0;
+  font-size: 20px;
+  line-height: 1;
+  color: #555;
+  cursor: pointer;
+}
+.modalClose:hover {
+  background: #e8e8e8;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.fieldWide {
+  grid-column: 1 / -1;
+}
+.fieldLabel {
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+}
+.opt {
+  color: #a9a9a9;
+  font-weight: 400;
+}
+.fieldInput {
+  width: 100%;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  font-size: 15px;
+  background: #fff;
+}
+.fieldInput:focus {
+  outline: none;
+  border-color: #fe6d17;
+}
+.formErr {
+  font-size: 13px;
+  color: #e23b3b;
+}
+.modalFine {
+  font-size: 12px;
+  color: #9a9a9a;
+  text-align: center;
+  line-height: 1.5;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes modalUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 560px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .modalOverlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .modal {
+    max-height: 90vh;
+    border-radius: 18px 18px 0 0;
+    padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* mobiele sticky betaalbalk — verborgen op desktop */

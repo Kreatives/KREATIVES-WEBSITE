@@ -68,7 +68,7 @@ function Side({ data }: { data: typeof LEFT }) {
 
 export default function DrieManieren() {
   return (
-    <section className={styles.compare}>
+    <section className={styles.compare} data-reveal>
       <div className={styles.container}>
         <div className={styles.compareHead}>
           <span className={styles.pill}>Website laten maken</span>

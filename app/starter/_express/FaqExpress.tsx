@@ -39,7 +39,7 @@ export default function FaqExpress() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className={styles.faq}>
+    <section className={styles.faq} data-reveal>
       <div className={styles.container}>
         <div className={styles.faqHead}>
           <span className={styles.pill}>Veelgestelde vragen</span>

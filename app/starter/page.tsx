@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
+import RevealInit from "@/components/RevealInit";
 import Topbar from "./_express/Topbar";
 import Hero from "./_express/Hero";
 import WatJeKrijgt from "./_express/WatJeKrijgt";
@@ -43,6 +44,7 @@ export const metadata: Metadata = {
 export default function StarterPage() {
   return (
     <>
+      <RevealInit />
       <main className={styles.page}>
         <Topbar />
         <Hero />

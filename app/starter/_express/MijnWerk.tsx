@@ -18,7 +18,7 @@ const CASES = [
 
 export default function MijnWerk() {
   return (
-    <section className={styles.werk}>
+    <section className={styles.werk} data-reveal>
       <div className={styles.werkGlowA} aria-hidden />
       <div className={styles.werkGlowB} aria-hidden />
       <div className={styles.container}>

@@ -51,6 +51,22 @@ export default function CheckoutOpties({
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState({
+    voornaam: "",
+    achternaam: "",
+    email: email,
+    telefoon: "",
+    bedrijf: "",
+    straat: "",
+    postcode: "",
+    plaats: "",
+    land: "NL",
+    kvk: "",
+  });
+  const setField =
+    (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+      setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const t = totals(pkg, usePlus, counts);
   const orderName = usePlus ? pkg.plus.name : pkg.name;
@@ -60,14 +76,28 @@ export default function CheckoutOpties({
   const bump = (id: string, d: number) =>
     setCounts((c) => ({ ...c, [id]: Math.max(0, (c[id] || 0) + d) }));
 
-  async function pay() {
+  function openForm() {
+    setErr("");
+    setShowForm(true);
+  }
+
+  async function pay(e: React.FormEvent) {
+    e.preventDefault();
     setLoading(true);
     setErr("");
     try {
       const res = await fetch("/api/checkout/mollie", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pakket: pkg.id, usePlus, method, plan, counts, email }),
+        body: JSON.stringify({
+          pakket: pkg.id,
+          usePlus,
+          method,
+          plan,
+          counts,
+          email: form.email,
+          details: form,
+        }),
       });
       const data = await res.json();
       if (!res.ok || !data.checkoutUrl) {
@@ -92,7 +122,7 @@ export default function CheckoutOpties({
 
       <main className={styles.opties}>
         <div className={styles.container}>
-          <div className={styles.optiesTop}>
+          <div className={styles.optiesTop} data-reveal>
             <h1 className={styles.optiesTitle}>Jouw opties</h1>
             <div className={styles.rating}>
               <span className={styles.stars}>★★★★★</span>
@@ -306,12 +336,10 @@ export default function CheckoutOpties({
               <button
                 type="button"
                 className={styles.primaryBtn}
-                onClick={pay}
-                disabled={loading}
-                style={loading ? { opacity: 0.7, cursor: "wait" } : undefined}
+                onClick={openForm}
               >
                 <span className={styles.lbl}>
-                  {loading ? "Bezig…" : `Verder naar betalen · ${euro(payNow)}`}
+                  Verder naar betalen · {euro(payNow)}
                 </span>
                 <span className={styles.arw} aria-hidden>
                   <svg viewBox="0 0 18 18" fill="none">
@@ -367,10 +395,9 @@ export default function CheckoutOpties({
         <button
           type="button"
           className={styles.mobileBarBtn}
-          onClick={pay}
-          disabled={loading}
+          onClick={openForm}
         >
-          {loading ? "Bezig…" : "Verder naar betalen"}
+          Verder naar betalen
           <span aria-hidden>
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
@@ -389,6 +416,109 @@ export default function CheckoutOpties({
           </nav>
         </div>
       </footer>
+
+      {showForm && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => !loading && setShowForm(false)}
+        >
+          <form
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+            onSubmit={pay}
+          >
+            <div className={styles.modalHd}>
+              <div>
+                <div className={styles.modalTitle}>Je gegevens</div>
+                <div className={styles.modalSub}>
+                  Zodat ik je factuur en website op de juiste naam zet.
+                </div>
+              </div>
+              <button
+                type="button"
+                className={styles.modalClose}
+                onClick={() => setShowForm(false)}
+                aria-label="Sluiten"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className={styles.formGrid}>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Voornaam</span>
+                <input className={styles.fieldInput} value={form.voornaam} onChange={setField("voornaam")} required autoComplete="given-name" />
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Achternaam</span>
+                <input className={styles.fieldInput} value={form.achternaam} onChange={setField("achternaam")} required autoComplete="family-name" />
+              </label>
+              <label className={`${styles.field} ${styles.fieldWide}`}>
+                <span className={styles.fieldLabel}>E-mailadres</span>
+                <input type="email" className={styles.fieldInput} value={form.email} onChange={setField("email")} required autoComplete="email" />
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Telefoon <span className={styles.opt}>(optioneel)</span></span>
+                <input type="tel" className={styles.fieldInput} value={form.telefoon} onChange={setField("telefoon")} autoComplete="tel" />
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Bedrijfsnaam <span className={styles.opt}>(optioneel)</span></span>
+                <input className={styles.fieldInput} value={form.bedrijf} onChange={setField("bedrijf")} autoComplete="organization" />
+              </label>
+              <label className={`${styles.field} ${styles.fieldWide}`}>
+                <span className={styles.fieldLabel}>Straat en huisnummer</span>
+                <input className={styles.fieldInput} value={form.straat} onChange={setField("straat")} required autoComplete="street-address" />
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Postcode</span>
+                <input className={styles.fieldInput} value={form.postcode} onChange={setField("postcode")} required autoComplete="postal-code" />
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Plaats</span>
+                <input className={styles.fieldInput} value={form.plaats} onChange={setField("plaats")} required autoComplete="address-level2" />
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>Land</span>
+                <select className={styles.fieldInput} value={form.land} onChange={setField("land")}>
+                  <option value="NL">Nederland</option>
+                  <option value="BE">België</option>
+                  <option value="DE">Duitsland</option>
+                </select>
+              </label>
+              <label className={styles.field}>
+                <span className={styles.fieldLabel}>KvK-nummer <span className={styles.opt}>(optioneel)</span></span>
+                <input className={styles.fieldInput} value={form.kvk} onChange={setField("kvk")} />
+              </label>
+            </div>
+
+            {err && (
+              <p className={styles.formErr} role="alert">
+                {err}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className={styles.primaryBtn}
+              disabled={loading}
+              style={loading ? { opacity: 0.7, cursor: "wait" } : undefined}
+            >
+              <span className={styles.lbl}>
+                {loading ? "Bezig…" : `Verder naar betalen · ${euro(payNow)}`}
+              </span>
+              <span className={styles.arw} aria-hidden>
+                <svg viewBox="0 0 18 18" fill="none">
+                  <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </button>
+            <p className={styles.modalFine}>
+              Je gegevens gaan versleuteld naar Mollie.{" "}
+              {method === "ideal" ? "Je betaalt via iDEAL." : "Je betaalt met creditcard."}
+            </p>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

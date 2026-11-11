@@ -46,6 +46,9 @@ const nextConfig = {
       { source: "/cases", destination: "/projecten", permanent: true },
       { source: "/kennisbank", destination: "/blog", permanent: true },
       { source: "/diensten/redesign", destination: "/diensten/webdesign", permanent: true },
+      // Meervoudsvorm van de express-landing. Mensen en LLM's typen /starters
+      // vaker dan /starter; nu 404'en ze. 301 naar de echte route.
+      { source: "/starters", destination: "/starter", permanent: true },
     ];
   },
 };

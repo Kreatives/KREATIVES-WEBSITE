@@ -25,7 +25,7 @@ const TILES = [
 
 export default function WatJeKrijgt() {
   return (
-    <section className={styles.value}>
+    <section className={styles.value} data-reveal>
       <div className={`${styles.container} ${styles.valueInner}`}>
         <div>
           <span className={styles.pill}>Wat je krijgt</span>

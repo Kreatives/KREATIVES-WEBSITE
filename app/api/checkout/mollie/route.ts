@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { createMollieClient } from "@mollie/api-client";
 import { findPakket, totals } from "@/app/starter/afrekenen/checkout-express-data";
 
+function str(v: unknown): string {
+  return typeof v === "string" ? v.trim() : "";
+}
+
 // Maakt een Mollie-betaling aan. Het bedrag wordt hier SERVER-SIDE herberekend
 // uit het pakket + de add-ons — nooit het door de client gestuurde bedrag vertrouwen.
+// De klantgegevens worden als billingAddress + Mollie-klant meegestuurd, zodat ze
+// in het Mollie-dashboard zichtbaar zijn.
 export async function POST(request: NextRequest) {
   const apiKey = process.env.MOLLIE_API_KEY;
   if (!apiKey) {
@@ -28,7 +34,31 @@ export async function POST(request: NextRequest) {
     body.counts && typeof body.counts === "object"
       ? (body.counts as Record<string, number>)
       : {};
-  const email = typeof body.email === "string" ? body.email : "";
+
+  // Klantgegevens
+  const d =
+    body.details && typeof body.details === "object"
+      ? (body.details as Record<string, unknown>)
+      : {};
+  const voornaam = str(d.voornaam);
+  const achternaam = str(d.achternaam);
+  const email = str(d.email) || str(body.email);
+  const telefoon = str(d.telefoon);
+  const bedrijf = str(d.bedrijf);
+  const straat = str(d.straat);
+  const postcode = str(d.postcode);
+  const plaats = str(d.plaats);
+  const land = (str(d.land) || "NL").toUpperCase().slice(0, 2);
+  const kvk = str(d.kvk);
+  const naam = `${voornaam} ${achternaam}`.trim();
+
+  // Minimaal nodig voor een echte factuur/betaling
+  if (!voornaam || !achternaam || !email || !straat || !postcode || !plaats) {
+    return NextResponse.json(
+      { error: "Vul je naam, e-mail en adres in." },
+      { status: 400 }
+    );
+  }
 
   const t = totals(pkg, usePlus, counts);
   const orderName = usePlus ? pkg.plus.name : pkg.name;
@@ -44,21 +74,18 @@ export async function POST(request: NextRequest) {
   try {
     const mollie = createMollieClient({ apiKey });
 
-    // Bij 2 termijnen: een Mollie-klant + mandaat aanmaken (sequenceType "first"),
-    // zodat de tweede termijn later automatisch afgeschreven kan worden.
+    // Altijd een Mollie-klant aanmaken met de echte gegevens, zodat de contact-
+    // info in Mollie staat. Bij 2 termijnen zet dit ook het mandaat op.
     let customerId: string | undefined;
-    if (plan === "split") {
-      try {
-        const customer = await mollie.customers.create({
-          name: email || "KREATIVES Express klant",
-          email: email || undefined,
-          metadata: { pakket: pkg.id },
-        });
-        customerId = customer.id;
-      } catch {
-        // Lukt het klant aanmaken niet, dan toch de eerste termijn als losse betaling.
-        customerId = undefined;
-      }
+    try {
+      const customer = await mollie.customers.create({
+        name: naam || email,
+        email,
+        metadata: { pakket: pkg.id, bedrijf, telefoon, kvk },
+      });
+      customerId = customer.id;
+    } catch {
+      customerId = undefined;
     }
 
     const description =
@@ -66,19 +93,41 @@ export async function POST(request: NextRequest) {
         ? `KREATIVES Express — ${orderName} (termijn 1 van 2)`
         : `KREATIVES Express — ${orderName}`;
 
+    const billingAddress = {
+      givenName: voornaam,
+      familyName: achternaam,
+      ...(bedrijf ? { organizationName: bedrijf } : {}),
+      streetAndNumber: straat,
+      postalCode: postcode,
+      city: plaats,
+      country: land,
+      email,
+    };
+
     const base = {
       amount: { currency: "EUR", value: amountNow.toFixed(2) },
       description,
       redirectUrl: `${origin}/starter/afrekenen/bedankt`,
       method: method as never,
+      billingAddress: billingAddress as never,
+      ...(customerId ? { customerId } : {}),
       metadata: {
         pakket: pkg.id,
         plus: usePlus,
-        email,
         plan,
+        naam,
+        email,
+        telefoon,
+        bedrijf,
+        kvk,
+        adres: `${straat}, ${postcode} ${plaats} (${land})`,
         total: t.total,
         nu: amountNow,
         rest: plan === "split" ? rest : 0,
+        addons: pkg.addons
+          .filter((a) => counts[a.id])
+          .map((a) => `${a.label} x${counts[a.id]}`)
+          .join(", "),
       },
     };
 
@@ -88,7 +137,6 @@ export async function POST(request: NextRequest) {
         // Mét mandaat → tweede termijn kan later automatisch afgeschreven worden.
         payment = await mollie.payments.create({
           ...base,
-          customerId,
           sequenceType: "first" as never,
         });
       } catch {

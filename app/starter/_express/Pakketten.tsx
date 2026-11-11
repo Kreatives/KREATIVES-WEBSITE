@@ -102,7 +102,7 @@ const BTN_CLASS = { light: styles.pakBtnLight, dark: styles.pakBtnDark, orange: 
 
 export default function Pakketten() {
   return (
-    <section className={styles.pak} id="pakketten">
+    <section className={styles.pak} id="pakketten" data-reveal>
       <div className={styles.container}>
         <div className={styles.pakHead}>
           <span className={styles.pill}>Pakketten</span>

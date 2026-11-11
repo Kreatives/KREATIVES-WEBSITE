@@ -20,7 +20,7 @@ export default function Beloftes() {
   };
 
   return (
-    <section className={styles.belofte}>
+    <section className={styles.belofte} data-reveal>
       <div className={styles.belofteGlowA} aria-hidden />
       <div className={styles.belofteGlowB} aria-hidden />
       <div className={styles.container}>

@@ -16,7 +16,7 @@ const STATS = [
 
 export default function OverRicky() {
   return (
-    <section className={styles.over}>
+    <section className={styles.over} data-reveal>
       <div className={`${styles.container} ${styles.overInner}`}>
         <div>
           <h2 className={styles.overTitle}>

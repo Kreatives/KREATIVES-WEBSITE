@@ -24,7 +24,7 @@ const CARDS = [
 
 export default function KiesMens() {
   return (
-    <section className={styles.mens}>
+    <section className={styles.mens} data-reveal>
       <div className={styles.mensGlowA} aria-hidden />
       <div className={styles.mensGlowB} aria-hidden />
       <div className={styles.container}>

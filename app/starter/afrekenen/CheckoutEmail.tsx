@@ -53,7 +53,7 @@ export default function CheckoutEmail({ pakketId }: { pakketId: string }) {
           </div>
         </div>
 
-        <form className={styles.emailCard} onSubmit={submit}>
+        <form className={styles.emailCard} onSubmit={submit} data-reveal>
           <span className={styles.pill}>
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden>
               <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.6" />

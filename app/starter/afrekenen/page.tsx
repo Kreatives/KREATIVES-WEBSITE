@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import RevealInit from "@/components/RevealInit";
 import { findPakket } from "./checkout-express-data";
 import CheckoutEmail from "./CheckoutEmail";
 
@@ -13,5 +14,10 @@ export default async function CheckoutStap1({
   searchParams: Promise<{ pakket?: string }>;
 }) {
   const { pakket } = await searchParams;
-  return <CheckoutEmail pakketId={findPakket(pakket).id} />;
+  return (
+    <>
+      <RevealInit />
+      <CheckoutEmail pakketId={findPakket(pakket).id} />
+    </>
+  );
 }

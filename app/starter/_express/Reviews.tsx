@@ -57,7 +57,7 @@ export default function Reviews() {
   const rowB = REVIEWS.slice(mid);
 
   return (
-    <section className={styles.reviews}>
+    <section className={styles.reviews} data-reveal>
       <div className={styles.reviewsHead}>
         <span className={styles.pill} style={{ background: "#fff", border: "1px solid #eee" }}>
           Reviews

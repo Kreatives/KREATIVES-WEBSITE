@@ -29,7 +29,7 @@ const STAPPEN = [
 
 export default function Werkwijze() {
   return (
-    <section className={styles.werkwijze}>
+    <section className={styles.werkwijze} data-reveal>
       <div className={styles.container}>
         <div className={styles.werkwijzeHead}>
           <span className={styles.pill}>Werkwijze</span>
