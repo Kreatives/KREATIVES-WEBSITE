@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { findPakket } from "./checkout-data";
-import Checkout1 from "./Checkout1";
+import { findPakket } from "./checkout-express-data";
+import CheckoutEmail from "./CheckoutEmail";
 
 export const metadata: Metadata = {
   title: "Afrekenen",
@@ -13,5 +13,5 @@ export default async function CheckoutStap1({
   searchParams: Promise<{ pakket?: string }>;
 }) {
   const { pakket } = await searchParams;
-  return <Checkout1 pakketId={findPakket(pakket).id} />;
+  return <CheckoutEmail pakketId={findPakket(pakket).id} />;
 }

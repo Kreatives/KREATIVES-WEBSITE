@@ -126,7 +126,7 @@ export default async function RootLayout({
   const bare =
     pathname.startsWith("/login") ||
     pathname.startsWith("/admin") ||
-    pathname.startsWith("/starter/afrekenen");
+    pathname.startsWith("/starter");
   // Engelse variant op /en: schakelt de taal van <html>, de nav en de footer om.
   const locale: "nl" | "en" = pathname.startsWith("/en") ? "en" : "nl";
 
