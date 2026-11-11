@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
         bedrijf: str("bedrijf"),
         adres: str("adres"),
         kvk: str("kvk"),
+        pakket: str("pakket"),
         product: str("product") || "KREATIVES Express",
         total: euro(num("total")),
         betaaldNu: euro(num("nu")),

@@ -7,18 +7,22 @@ const ITEMS = [
   {
     title: "Eerst zien, dan bouwen",
     body: "Je keurt het ontwerp goed voordat ik ga bouwen. Zo weet je precies wat je krijgt.",
+    obj: "vanjou-pen",
   },
   {
     title: "Een opbouw die aanvragen oplevert",
     body: "De pagina is opgebouwd rond één duidelijke actie, zodat bezoekers sneller contact opnemen of een offerte aanvragen.",
+    obj: "obj-feedback",
   },
   {
     title: "Ziet er goed uit op elke telefoon",
     body: "Het ontwerp begint bij de telefoon en werkt daarna net zo goed op tablet en desktop.",
+    obj: "obj-intake",
   },
   {
     title: "Zelf aan te passen in WordPress",
     body: "Je past teksten en foto's zelf aan in WordPress. Je krijgt een korte uitlegvideo zodat je meteen weg kunt.",
+    obj: "obj-overdracht",
   },
 ];
 
@@ -87,7 +91,14 @@ export default function VanJou() {
             </div>
             <div className={styles.vanjouImg}>
               <img className={styles.vanjouBg} src="/starter/vanjou-bg.webp" alt="" />
-              <img className={styles.vanjouPen} src="/starter/vanjou-pen.webp" alt="" />
+              {ITEMS.map((it, i) => (
+                <img
+                  key={it.obj}
+                  className={`${styles.vanjouObj} ${i === active ? styles.vanjouObjOn : ""}`}
+                  src={`/starter/${it.obj}.webp`}
+                  alt=""
+                />
+              ))}
             </div>
           </div>
         </section>

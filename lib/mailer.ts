@@ -73,6 +73,7 @@ export type OrderMailData = {
   bedrijf?: string;
   adres?: string;
   kvk?: string;
+  pakket?: string; // id: basis / website / website-plus (voor de intake-link)
   product: string; // bv. "Website+"
   total: string; // geformatteerd, bv. "€1.566,95"
   betaaldNu: string; // bedrag dat nu is betaald
@@ -98,6 +99,11 @@ export async function sendOrderConfirmation(o: OrderMailData): Promise<void> {
     ? `Je hebt nu ${o.betaaldNu} betaald. De tweede termijn van ${o.rest} schrijf ik automatisch via Mollie af zodra je het ontwerp hebt goedgekeurd. Het totaal is ${o.total}.`
     : `Je hebt ${o.total} in één keer betaald.`;
 
+  const ip = new URLSearchParams();
+  if (o.pakket) ip.set("pakket", o.pakket);
+  if (o.email) ip.set("email", o.email);
+  const intakeUrl = `https://kreatives.nl/starter/intake${ip.toString() ? `?${ip}` : ""}`;
+
   const text = `Hoi ${o.voornaam},
 
 Bedankt voor je bestelling. Hieronder staat kort wat je hebt gekozen.
@@ -107,6 +113,8 @@ ${o.product}${o.addons ? `\nExtra's: ${o.addons}` : ""}
 ${betaling}
 
 De volgende stap is de intake, een kort formulier zodat ik precies weet wat je nodig hebt. Zodra je spullen binnen zijn, zie je het eerste ontwerp binnen 48 uur.
+
+Heb je de intake nog niet ingevuld? Vul 'm hier in: ${intakeUrl}
 
 Heb je een vraag? Reageer gewoon op deze mail.
 
@@ -141,6 +149,9 @@ KREATIVES`;
             </td></tr>
           </table>
           <p style="margin:24px 0 16px;">De volgende stap is de intake, een kort formulier zodat ik precies weet wat je nodig hebt. Zodra je spullen binnen zijn, zie je het eerste ontwerp binnen <strong>48 uur</strong>.</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;"><tr><td style="border-radius:11px;background:#fe6d17;">
+            <a href="${intakeUrl}" style="display:inline-block;padding:13px 22px;color:#ffffff;font-weight:600;font-size:15px;line-height:1;text-decoration:none;">Heb je de intake nog niet ingevuld? Vul 'm hier in &rarr;</a>
+          </td></tr></table>
           <p style="margin:0 0 24px;">Heb je een vraag? Reageer gewoon op deze mail.</p>
           <p style="margin:0;">Groet,<br><strong style="color:#111;">Ricky</strong><br><span style="color:#888;">KREATIVES</span></p>
         </td></tr>

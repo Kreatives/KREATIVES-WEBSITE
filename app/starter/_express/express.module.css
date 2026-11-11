@@ -841,13 +841,37 @@
   height: 100%;
   object-fit: cover;
 }
-.vanjouPen {
+/* Het zwevende object wisselt per scroll-stap; de achtergrond blijft gelijk.
+   Alle objecten liggen op elkaar, alleen het actieve is zichtbaar (cross-fade). */
+.vanjouObj {
   position: absolute;
-  width: 76%;
+  width: 66%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
   filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  animation: vanjouFloat 4s ease-in-out infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.vanjouObjOn {
+  opacity: 1;
+}
+@keyframes vanjouFloat {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -58%) rotate(-2.5deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vanjouObj {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
 }
 @media (max-width: 820px) {
   .vanjouScroll {
