@@ -21,12 +21,12 @@ import styles from "./_express/express.module.css";
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "Een website vanaf €695, binnen 5 werkdagen",
+  title: "Een website vanaf €695, eerste ontwerp binnen 48 uur",
   description:
     "KREATIVES Express: een website die je serieus neemt. Door een mens ontworpen, eerste ontwerp binnen 48 uur, vanaf €695. In twee termijnen te betalen en alles komt op jouw naam te staan.",
   alternates: { canonical: "/starter" },
   openGraph: {
-    title: "Een website vanaf €695 | KREATIVES",
+    title: "Een website vanaf €695, eerste ontwerp binnen 48 uur | KREATIVES",
     description:
       "Door een mens ontworpen. Eerste ontwerp binnen 48 uur, alles komt op jouw naam te staan.",
     url: "/starter",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Een website vanaf €695 | KREATIVES",
+    title: "Een website vanaf €695, eerste ontwerp binnen 48 uur | KREATIVES",
     description:
       "Door een mens ontworpen. Eerste ontwerp binnen 48 uur, alles komt op jouw naam te staan.",
     images: [OG_IMAGE],

@@ -44,7 +44,7 @@ const MID = [
   "Vaste prijs, vooraf bekend",
   "Revisierondes inbegrepen",
   "Alles op jouw naam",
-  "Geld terug als het ontwerp niet bevalt",
+  "Aanbetaling terug als het ontwerp niet bevalt",
 ];
 
 function Side({ data }: { data: typeof LEFT }) {

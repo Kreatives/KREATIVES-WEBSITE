@@ -70,6 +70,8 @@ export async function POST(request: NextRequest) {
     request.headers.get("x-forwarded-host") ?? request.headers.get("host");
   const proto = request.headers.get("x-forwarded-proto") ?? "https";
   const origin = `${proto}://${host}`;
+  // Mollie accepteert alleen een publiek bereikbare webhook-URL (niet localhost).
+  const isPublicHost = !/localhost|127\.0\.0\.1/.test(host ?? "");
 
   try {
     const mollie = createMollieClient({ apiKey });
@@ -108,11 +110,15 @@ export async function POST(request: NextRequest) {
       amount: { currency: "EUR", value: amountNow.toFixed(2) },
       description,
       redirectUrl: `${origin}/starter/afrekenen/bedankt`,
+      ...(isPublicHost
+        ? { webhookUrl: `${origin}/api/checkout/mollie/webhook` }
+        : {}),
       method: method as never,
       billingAddress: billingAddress as never,
       ...(customerId ? { customerId } : {}),
       metadata: {
         pakket: pkg.id,
+        product: orderName,
         plus: usePlus,
         plan,
         naam,

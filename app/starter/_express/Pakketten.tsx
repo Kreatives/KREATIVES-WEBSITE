@@ -43,7 +43,7 @@ const PLANS: Plan[] = [
     price: "€695",
     term: "Of in twee termijnen van €347,50",
     cta: "Start met Basis",
-    meta: "Live binnen 1 week · 1 revisieronde",
+    meta: "Eerste ontwerp binnen 48 uur · 1 revisieronde",
     features: [
       "Eén pagina, op maat ontworpen",
       "Eerste ontwerp binnen 48 uur",
@@ -65,7 +65,7 @@ const PLANS: Plan[] = [
     price: "€1.295",
     term: "Of in twee termijnen van €647,50",
     cta: "Start met Website",
-    meta: "Live binnen 2 weken · 2 revisierondes",
+    meta: "Eerste ontwerp binnen 48 uur · 2 revisierondes",
     features: [
       "Alles uit Basis",
       "Vijf pagina's in plaats van één",
@@ -84,7 +84,7 @@ const PLANS: Plan[] = [
     price: "€1.795",
     term: "Of in twee termijnen van €897,50",
     cta: "Start met Website Plus",
-    meta: "Live binnen 3 weken · 3 revisierondes",
+    meta: "Eerste ontwerp binnen 48 uur · 3 revisierondes",
     features: [
       "Alles uit Website",
       "Tot acht pagina's naar keuze",
@@ -172,7 +172,7 @@ export default function Pakketten() {
         <div className={styles.pakGuarantee}>
           <h3 className={styles.pakGuaranteeTitle}>
             Niet tevreden met het ontwerp?{" "}
-            <span className={styles.accent}>Dan krijg je je geld terug.</span>
+            <span className={styles.accent}>Dan krijg je je aanbetaling terug.</span>
           </h3>
           <div>
             <p className={styles.pakGuaranteeBody}>

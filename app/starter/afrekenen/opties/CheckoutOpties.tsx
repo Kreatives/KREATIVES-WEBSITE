@@ -224,13 +224,7 @@ export default function CheckoutOpties({
                   <li key={o.text}>
                     <Check orange />
                     {usePlus && o.plus ? (
-                      <span className={styles.upgradeItem}>
-                        <s className={styles.wasText}>{o.text}</s>
-                        <span className={styles.upgradeArrow} aria-hidden>
-                          →
-                        </span>
-                        <span className={styles.nowText}>{o.plus}</span>
-                      </span>
+                      <span className={styles.nowText}>{o.plus}</span>
                     ) : (
                       <span>{o.text}</span>
                     )}
@@ -280,8 +274,8 @@ export default function CheckoutOpties({
               </div>
               <div className={styles.sumDivider} />
               <div className={styles.sumTotal}>
-                <span>Totaal</span>
-                <b>{euro(t.total)}</b>
+                <span>{plan === "split" ? "Totaal nu te betalen" : "Totaal"}</span>
+                <b>{euro(payNow)}</b>
               </div>
 
               <div className={styles.planToggle} role="radiogroup" aria-label="Betaalplan">
@@ -358,7 +352,7 @@ export default function CheckoutOpties({
               <div className={styles.guarantee}>
                 <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V6z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /><path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 <span>
-                  <b>Geld terug als het ontwerp niet bevalt.</b> Ben je na je
+                  <b>Aanbetaling terug als het ontwerp niet bevalt.</b> Ben je na je
                   revisierondes niet tevreden, dan krijg je je aanbetaling terug.
                 </span>
               </div>
@@ -396,7 +390,7 @@ export default function CheckoutOpties({
 
       <footer className={styles.footer}>
         <div className={`${styles.container} ${styles.footerInner}`}>
-          <span>© 2026 KREATIVES · KvK [nummer] · Hortensialaan 1-a, 6851 TB Huissen</span>
+          <span>© 2026 KREATIVES</span>
           <nav className={styles.footerLinks}>
             <Link href="/voorwaarden">Algemene voorwaarden</Link>
             <Link href="/privacy">Privacy</Link>

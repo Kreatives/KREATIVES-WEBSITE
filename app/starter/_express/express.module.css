@@ -136,7 +136,7 @@
 }
 .checks {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0.95rem;
   list-style: none;

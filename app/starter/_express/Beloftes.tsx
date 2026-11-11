@@ -27,7 +27,7 @@ export default function Beloftes() {
         <div className={styles.belofteHead}>
           <span className={styles.pill}>Beloftes</span>
           <h2 className={styles.belofteTitle}>
-            Vijf beloftes van{" "}
+            Vier beloftes van{" "}
             <span className={styles.accent}>KREATIVES Express.</span>
           </h2>
         </div>
@@ -64,7 +64,7 @@ export default function Beloftes() {
             </span>
           </Link>
           <p className={styles.belofteCtaNote}>
-            Bevalt het ontwerp niet? Dan krijg je je geld terug.
+            Bevalt het ontwerp niet? Dan krijg je je aanbetaling terug.
           </p>
         </div>
       </div>

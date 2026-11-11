@@ -7,7 +7,7 @@ const LOGOS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 const CHECKS = [
   "Eerste ontwerp binnen 48 uur",
-  "Geld terug garantie",
+  "Aanbetaling terug als het ontwerp niet bevalt",
   "Door een mens ontworpen",
   "Alles op jouw naam",
 ];

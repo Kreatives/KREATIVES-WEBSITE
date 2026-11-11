@@ -40,7 +40,7 @@ export const PAKKETTEN: Record<string, Pakket> = {
       features: [
         "Eerste ontwerp binnen 24 uur in plaats van 48",
         "Drie revisierondes in plaats van één",
-        "Geld terug als het ontwerp niet bevalt",
+        "Aanbetaling terug als het ontwerp niet bevalt",
       ],
     },
     continueSub: "Eén pagina · 1 revisieronde · €695",
@@ -53,7 +53,7 @@ export const PAKKETTEN: Record<string, Pakket> = {
       { text: "Zelf je teksten en foto's aanpassen" },
       { text: "Alles op jouw naam, geen abonnement" },
     ],
-    plusExtra: ["Geld terug als het ontwerp niet bevalt"],
+    plusExtra: ["Aanbetaling terug als het ontwerp niet bevalt"],
     addons: [
       { id: "concept", label: "Extra ontwerpconcept", desc: "Een tweede richting voor je pagina, zodat je kunt kiezen.", price: 150 },
       { id: "revisie", label: "Extra revisieronde", desc: "Nog een ronde aanpassingen na je eerste.", price: 95 },
@@ -71,7 +71,7 @@ export const PAKKETTEN: Record<string, Pakket> = {
         "Eerste ontwerp binnen 24 uur in plaats van 48",
         "Drie revisierondes in plaats van twee",
         "Metingen van je bezoekers en aanvragen",
-        "Geld terug als het ontwerp niet bevalt",
+        "Aanbetaling terug als het ontwerp niet bevalt",
       ],
     },
     continueSub: "Vijf pagina's · 2 revisierondes · €1.295",
@@ -86,7 +86,7 @@ export const PAKKETTEN: Record<string, Pakket> = {
     ],
     plusExtra: [
       "Metingen van je bezoekers en aanvragen",
-      "Geld terug als het ontwerp niet bevalt",
+      "Aanbetaling terug als het ontwerp niet bevalt",
     ],
     addons: [
       { id: "pagina", label: "Extra pagina", desc: "Een pagina erbij, naast de vijf uit je pakket.", price: 125 },
@@ -104,7 +104,7 @@ export const PAKKETTEN: Record<string, Pakket> = {
       features: [
         "Eerste ontwerp binnen 24 uur in plaats van 48",
         "Een tweede ontwerpconcept erbij",
-        "Geld terug als het ontwerp niet bevalt",
+        "Aanbetaling terug als het ontwerp niet bevalt",
       ],
     },
     continueSub: "Tot acht pagina's · 3 revisierondes · €1.795",
@@ -120,7 +120,7 @@ export const PAKKETTEN: Record<string, Pakket> = {
     ],
     plusExtra: [
       "Een tweede ontwerpconcept erbij",
-      "Geld terug als het ontwerp niet bevalt",
+      "Aanbetaling terug als het ontwerp niet bevalt",
     ],
     addons: [
       { id: "pagina", label: "Extra pagina", desc: "Een pagina erbij, naast de acht uit je pakket.", price: 125 },

@@ -127,7 +127,7 @@ export default async function Bedankt() {
 
       <footer className={styles.footer}>
         <div className={`${styles.container} ${styles.footerInner}`}>
-          <span>© 2026 KREATIVES · KvK [nummer] · Hortensialaan 1-a, 6851 TB Huissen</span>
+          <span>© 2026 KREATIVES</span>
           <nav className={styles.footerLinks}>
             <Link href="/voorwaarden">Algemene voorwaarden</Link>
             <Link href="/privacy">Privacy</Link>
