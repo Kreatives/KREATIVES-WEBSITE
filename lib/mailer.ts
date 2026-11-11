@@ -200,3 +200,88 @@ export async function sendOrderNotification(o: OrderMailData): Promise<void> {
     html: asHtml(text),
   });
 }
+
+// ---------- Intake ----------
+
+export type IntakeItem = { label: string; value: string };
+export type IntakeMailData = {
+  email: string;
+  whatsapp: string;
+  pakketLabel: string;
+  orderFound: boolean;
+  product?: string;
+  items: IntakeItem[];
+};
+
+/** Alle intake-antwoorden naar KREATIVES, met pakket/e-mail/WhatsApp bovenaan. */
+export async function sendIntakeNotification(d: IntakeMailData): Promise<void> {
+  if (!mailerConfigured()) return;
+  const header = [
+    "Nieuwe intake via /starter/intake.",
+    "",
+    `Pakket: ${d.pakketLabel}`,
+    `E-mailadres: ${d.email}`,
+    `WhatsApp: ${d.whatsapp}`,
+    d.orderFound
+      ? `Bestelling gevonden: ja${d.product ? ` (${d.product})` : ""}`
+      : "Bestelling gevonden: nee (geen bestelling gevonden)",
+  ].join("\n");
+  const body = d.items
+    .map((it) => `${it.label}\n${it.value || "—"}`)
+    .join("\n\n");
+  const text = `${header}\n\n----------------------------------------\n\n${body}`;
+  await transport().sendMail({
+    from: `"KREATIVES intake" <${user}>`,
+    to,
+    replyTo: d.email ? `<${d.email}>` : undefined,
+    subject: `Nieuwe intake: ${d.pakketLabel} — ${d.email}`,
+    text,
+    html: asHtml(text),
+  });
+}
+
+/** Korte, gebrande bevestiging naar de klant dat de intake binnen is. */
+export async function sendIntakeConfirmation(email: string): Promise<void> {
+  if (!mailerConfigured() || !email) return;
+  const text = `Bedankt, ik heb je intake binnen.
+
+Je ziet je eerste ontwerp binnen 48 uur in je mail. Heb je nog iets vergeten of wil je iets toevoegen? Reageer gewoon op deze mail.
+
+Groet,
+Ricky
+KREATIVES`;
+  const html = `<!doctype html><html lang="nl"><body style="margin:0;padding:0;background:#f4f4f4;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:28px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #ececec;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+        <tr><td style="background:#111111;padding:20px 28px;">
+          <img src="cid:kreatives-logo" width="199" height="24" alt="KREATIVES" style="display:block;border:0;outline:none;width:199px;height:24px;" />
+        </td></tr>
+        <tr><td style="background:#fe6d17;line-height:4px;font-size:4px;height:4px;">&nbsp;</td></tr>
+        <tr><td style="padding:30px 28px 10px;color:#1a1a1a;font-size:15px;line-height:1.6;">
+          <p style="margin:0 0 14px;font-size:19px;font-weight:600;color:#111;">Bedankt, ik heb je intake binnen.</p>
+          <p style="margin:0 0 20px;">Je ziet je eerste ontwerp binnen <strong>48 uur</strong> in je mail. Heb je nog iets vergeten of wil je iets toevoegen? Reageer gewoon op deze mail.</p>
+          <p style="margin:0;">Groet,<br><strong style="color:#111;">Ricky</strong><br><span style="color:#888;">KREATIVES</span></p>
+        </td></tr>
+        <tr><td style="padding:22px 28px;border-top:1px solid #ececec;color:#9a9a9a;font-size:12px;line-height:1.5;">Deze mail gaat over je intake op <a href="https://kreatives.nl/starter" style="color:#9a9a9a;">kreatives.nl</a>.</td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+  await transport().sendMail({
+    from: `"Ricky · KREATIVES" <${user}>`,
+    to: email,
+    replyTo: `"Ricky · KREATIVES" <${user}>`,
+    subject: "Je intake bij KREATIVES is binnen",
+    text,
+    html,
+    attachments: [
+      {
+        filename: "kreatives.png",
+        content: Buffer.from(EMAIL_LOGO_PNG_BASE64, "base64"),
+        cid: "kreatives-logo",
+        contentType: "image/png",
+      },
+    ],
+  });
+}

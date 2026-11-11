@@ -41,7 +41,49 @@ create table if not exists public.faqs (
   answer text not null
 );
 
+-- Bestellingen (KREATIVES Express). Wordt gevuld door de Mollie-webhook zodra
+-- een betaling "paid" is, zodat de intake eraan gekoppeld kan worden.
+create table if not exists public.orders (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  mollie_payment_id text unique,
+  email text,
+  naam text,
+  telefoon text,
+  bedrijf text,
+  pakket text,            -- basis / website / website-plus
+  product text,           -- bv. "Website+"
+  plan text,              -- full / split
+  total numeric,
+  betaald_nu numeric,
+  rest numeric,
+  addons text,
+  status text default 'paid'
+);
+create index if not exists orders_email_idx on public.orders (lower(email));
+
+-- Intake-inzendingen. Gekoppeld aan een bestelling via e-mail (order_id), of
+-- los opgeslagen met order_found = false als er geen bestelling is gevonden.
+create table if not exists public.intakes (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  order_id uuid references public.orders(id) on delete set null,
+  order_found boolean not null default false,
+  email text,
+  whatsapp text,
+  pakket text,
+  answers jsonb not null default '{}'::jsonb
+);
+create index if not exists intakes_email_idx on public.intakes (lower(email));
+create index if not exists intakes_order_idx on public.intakes (order_id);
+
 -- ========== Row Level Security ==========
+
+-- orders + intakes: privé. Geen publieke policies → alleen de service-role
+-- (die RLS omzeilt) schrijft en leest. Nooit via de anon-client benaderen.
+alter table public.orders enable row level security;
+alter table public.intakes enable row level security;
+
 
 alter table public.projects enable row level security;
 alter table public.reviews enable row level security;

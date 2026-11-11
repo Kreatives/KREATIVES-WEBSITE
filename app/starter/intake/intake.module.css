@@ -1,0 +1,409 @@
+/* ============================================================
+   KREATIVES Express — intakeformulier (Typeform-stijl)
+   Zelfde huisstijl als /starter: oranje #fe6d17, zwart, off-white,
+   Helvetica Neue.
+   ============================================================ */
+
+.screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-y: auto;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-helvetica), "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.screen :is(h1, h2, h3) {
+  font-family: inherit;
+  text-transform: none;
+}
+
+.center {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+  padding: 5.5rem 1.5rem 6.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* voortgang + navigatie */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: #ededed;
+  z-index: 10;
+}
+.progressBar {
+  height: 100%;
+  background: #fe6d17;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.backBtn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 11;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 0;
+  color: #9a9a9a;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+}
+.backBtn:hover {
+  color: #111;
+}
+.backBtn svg {
+  width: 16px;
+  height: 16px;
+}
+.counter {
+  position: fixed;
+  bottom: 14px;
+  right: 18px;
+  font-size: 13px;
+  color: #b4b4b4;
+  letter-spacing: -0.01em;
+}
+
+/* vraag */
+.qWrap {
+  animation: qin 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes qin {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qWrap {
+    animation: none;
+  }
+}
+.qNum {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fe6d17;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
+}
+.qNum span {
+  opacity: 0.6;
+}
+.optional {
+  color: #b4b4b4;
+  font-weight: 400;
+}
+.qTitle {
+  margin: 0;
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.05rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.qHelp {
+  margin-top: 0.9rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #6f6f6f;
+  letter-spacing: -0.01em;
+}
+.qExtra {
+  margin-top: 0.9rem;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5a4535;
+  background: #fff6ef;
+  border-left: 3px solid #fe6d17;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* velden */
+.field {
+  margin-top: 1.6rem;
+}
+.input,
+.textarea {
+  width: 100%;
+  font-family: inherit;
+  color: #111;
+  letter-spacing: -0.01em;
+  box-sizing: border-box;
+}
+.input {
+  border: 0;
+  border-bottom: 2px solid #e4e4e4;
+  background: transparent;
+  padding: 0.6rem 0.15rem;
+  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+}
+.textarea {
+  border: 2px solid #e4e4e4;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  resize: vertical;
+  line-height: 1.5;
+  font-size: clamp(1.02rem, 1rem + 0.4vw, 1.2rem);
+}
+.input::placeholder,
+.textarea::placeholder {
+  color: #c6c6c6;
+}
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #fe6d17;
+}
+
+/* keuzes */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1.5px solid #e4e4e4;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  font-size: 1.05rem;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  color: #111;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.choice:hover {
+  border-color: #c9c9c9;
+}
+.choiceOn {
+  border-color: #fe6d17;
+  background: #fff6ef;
+}
+.choiceKey {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border: 1.5px solid #d4d4d4;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8a8a8a;
+}
+.choiceOn .choiceKey {
+  border-color: #fe6d17;
+  color: #fe6d17;
+}
+
+/* websites-lijst */
+.websites {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.webRow {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+.webIdx {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: #f1f1f1;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  margin-top: 0.5rem;
+}
+.webFields {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.webFields .input {
+  border: 1.5px solid #e4e4e4;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+}
+.webFields .textarea {
+  font-size: 1rem;
+}
+.addBtn {
+  align-self: flex-start;
+  background: #f2f2f2;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  font-family: inherit;
+  cursor: pointer;
+}
+.addBtn:hover {
+  background: #ececec;
+}
+
+/* akkoord */
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #222;
+  cursor: pointer;
+}
+.consent input {
+  margin-top: 0.25rem;
+  width: 22px;
+  height: 22px;
+  accent-color: #fe6d17;
+  flex: none;
+}
+
+/* acties */
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #fe6d17;
+  color: #fff;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.85rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: inset 0 -5px 4px rgba(255, 255, 255, 0.2);
+}
+.primary:hover {
+  background: #e85f0c;
+}
+.primary:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.arrow svg {
+  width: 16px;
+  height: 16px;
+}
+.hint {
+  font-size: 13px;
+  color: #a6a6a6;
+  letter-spacing: -0.01em;
+}
+.hint b {
+  color: #777;
+  font-weight: 600;
+}
+.error {
+  margin-top: 0.9rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e23b3b;
+}
+
+/* start- en eindscherm */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.introCenter {
+  align-items: center;
+  text-align: center;
+}
+.kicker {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fe6d17;
+  letter-spacing: 0.02em;
+}
+.introTitle {
+  margin: 0.7rem 0 0;
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+.introText {
+  margin-top: 1.2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4a4a4a;
+  letter-spacing: -0.01em;
+  max-width: 560px;
+}
+.intro .primary {
+  margin-top: 1.9rem;
+}
+.resumeNote {
+  margin-top: 1.1rem;
+  font-size: 13px;
+  color: #a6a6a6;
+}
+.checkBig {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: #fff6ef;
+  color: #fe6d17;
+  margin-bottom: 0.6rem;
+}
+.checkBig svg {
+  width: 32px;
+  height: 32px;
+}

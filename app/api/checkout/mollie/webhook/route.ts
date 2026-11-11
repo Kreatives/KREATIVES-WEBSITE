@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createMollieClient } from "@mollie/api-client";
 import { euro } from "@/app/starter/afrekenen/checkout-express-data";
 import { sendOrderConfirmation, sendOrderNotification } from "@/lib/mailer";
+import { createServiceClient } from "@/lib/supabase/service";
 
 // Mollie roept deze webhook aan zodra de betaalstatus wijzigt. Bij een geslaagde
 // (eerste) betaling sturen we de klant een korte bevestiging en KREATIVES een
@@ -53,6 +54,31 @@ export async function POST(request: NextRequest) {
         split,
         addons: str("addons"),
       };
+
+      // Bestelling vastleggen zodat de intake eraan gekoppeld kan worden.
+      try {
+        const sb = createServiceClient();
+        await sb.from("orders").upsert(
+          {
+            mollie_payment_id: payment.id,
+            email: str("email"),
+            naam,
+            telefoon: str("telefoon"),
+            bedrijf: str("bedrijf"),
+            pakket: str("pakket"),
+            product: str("product"),
+            plan: str("plan"),
+            total: num("total"),
+            betaald_nu: num("nu"),
+            rest: num("rest"),
+            addons: str("addons"),
+            status: "paid",
+          },
+          { onConflict: "mollie_payment_id" }
+        );
+      } catch (e) {
+        console.error("Order opslaan mislukt:", e instanceof Error ? e.message : e);
+      }
 
       await sendOrderConfirmation(data).catch(() => {});
       await sendOrderNotification(data).catch(() => {});

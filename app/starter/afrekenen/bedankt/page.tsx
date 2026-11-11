@@ -15,6 +15,7 @@ type View = {
   body: string;
   amount?: string;
   desc?: string;
+  intakeHref?: string;
 };
 
 async function resolve(): Promise<View> {
@@ -35,12 +36,20 @@ async function resolve(): Promise<View> {
       maximumFractionDigits: 2,
     })}`;
     if (p.status === "paid") {
+      const meta = (p.metadata || {}) as Record<string, unknown>;
+      const pakket = typeof meta.pakket === "string" ? meta.pakket : "";
+      const email = typeof meta.email === "string" ? meta.email : "";
+      const params = new URLSearchParams();
+      if (pakket) params.set("pakket", pakket);
+      if (email) params.set("email", email);
+      const qs = params.toString();
       return {
         state: "paid",
         title: "Betaling gelukt",
-        body: "Je bestelling staat klaar. Je ontvangt een bevestiging per e-mail en daarna vul je nog even de intake in.",
+        body: "Je bestelling staat klaar. Je ontvangt een bevestiging per e-mail. Vul nu de intake in, zodat ik je website kan ontwerpen.",
         amount,
         desc: p.description,
+        intakeHref: `/starter/intake${qs ? `?${qs}` : ""}`,
       };
     }
     if (p.status === "open" || p.status === "pending" || p.status === "authorized") {
@@ -114,8 +123,12 @@ export default async function Bedankt() {
           )}
           <p className={styles.emailSub}>{v.body}</p>
 
-          <Link href="/starter" className={styles.primaryBtn} style={{ marginTop: "0.6rem" }}>
-            <span className={styles.lbl}>{ok ? "Terug naar de site" : "Opnieuw proberen"}</span>
+          <Link
+            href={ok ? v.intakeHref || "/starter/intake" : "/starter"}
+            className={styles.primaryBtn}
+            style={{ marginTop: "0.6rem" }}
+          >
+            <span className={styles.lbl}>{ok ? "Vul de intake in" : "Opnieuw proberen"}</span>
             <span className={styles.arw} aria-hidden>
               <svg viewBox="0 0 18 18" fill="none">
                 <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
