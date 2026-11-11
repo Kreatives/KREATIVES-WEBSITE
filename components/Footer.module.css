@@ -134,37 +134,6 @@
   color: var(--on-dark);
 }
 
-/* Groot wordmark, half afgesneden onderaan (image #59) */
-.wordmarkWrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  overflow: hidden;
-  user-select: none;
-  margin-top: -0.5rem;
-}
-.wordmark {
-  width: min(122rem, 116%);
-  height: auto;
-  flex: none;
-  color: var(--on-dark);
-  opacity: 0.16;
-  transform: translateY(14%);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    rgba(0, 0, 0, 0.4) 62%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    rgba(0, 0, 0, 0.4) 62%,
-    transparent 100%
-  );
-}
-
 @media (max-width: 1100px) {
   .top {
     grid-template-columns: 1fr 1fr 1fr;

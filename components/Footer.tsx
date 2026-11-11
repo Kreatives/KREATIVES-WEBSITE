@@ -90,10 +90,6 @@ export default function Footer({ locale = "nl" }: { locale?: "nl" | "en" }) {
           </div>
         </div>
       </div>
-
-      <div className={styles.wordmarkWrap} aria-hidden>
-        <Logo className={styles.wordmark} title="" />
-      </div>
     </footer>
   );
 }

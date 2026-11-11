@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ShaderBackground } from "@/components/ui/static-mesh-gradient";
 import styles from "./express.module.css";
 
 const DEVICES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -32,7 +31,6 @@ function Check() {
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <ShaderBackground className={styles.heroShader} />
       <div className={styles.heroInner}>
         <div className={styles.proof}>
           <div className={styles.avatars}>
