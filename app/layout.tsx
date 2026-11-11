@@ -123,7 +123,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = (await headers()).get("x-pathname") || "";
-  const bare = pathname.startsWith("/login") || pathname.startsWith("/admin");
+  const bare =
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/starter/afrekenen");
   // Engelse variant op /en: schakelt de taal van <html>, de nav en de footer om.
   const locale: "nl" | "en" = pathname.startsWith("/en") ? "en" : "nl";
 

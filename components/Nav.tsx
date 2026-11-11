@@ -20,6 +20,7 @@ const DARK_HERO_PREFIXES = [
   "/contact",
   "/website-scan",
   "/prijzen",
+  "/starter",
   "/webdesign-",
   "/sitemap-overzicht",
   "/en",

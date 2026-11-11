@@ -61,6 +61,10 @@ export default function BookCallButton() {
   // zijn eigen boekingslijn in het resultaat.
   if (pathname?.startsWith("/website-scan")) return null;
 
+  // /starter heeft zijn eigen sticky onderbalk met de CTA; twee vaste
+  // elementen onderaan overlappen elkaar op mobiel.
+  if (pathname?.startsWith("/starter")) return null;
+
   // Engelse variant op /en.
   const en = pathname?.startsWith("/en") ?? false;
   const options = [
