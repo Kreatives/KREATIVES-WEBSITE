@@ -4,6 +4,10 @@ import { euro } from "@/app/starter/afrekenen/checkout-express-data";
 import { sendOrderConfirmation, sendOrderNotification } from "@/lib/mailer";
 import { createServiceClient } from "@/lib/supabase/service";
 
+// Nodemailer + Supabase hebben de Node-runtime nodig.
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 // Mollie roept deze webhook aan zodra de betaalstatus wijzigt. Bij een geslaagde
 // (eerste) betaling sturen we de klant een korte bevestiging en KREATIVES een
 // melding. We geven altijd 200 terug, anders blijft Mollie het herhalen.

@@ -7,6 +7,7 @@ export type Choice = {
   value: string;
   label: string;
   withInput?: boolean;
+  inputType?: "text" | "textarea";
   inputPlaceholder?: string;
 };
 
@@ -83,10 +84,19 @@ export const QUESTIONS: Question[] = [
   {
     id: "huidige_site",
     num: "2",
-    type: "longtext",
-    optional: true,
+    type: "choiceInput",
     title: "Heb je nu al een website?",
     help: "Stuur de link en schrijf wat je er niet goed aan vindt. Geef voorbeelden.",
+    options: [
+      {
+        value: "ja",
+        label: "Ja, deze:",
+        withInput: true,
+        inputType: "textarea",
+        inputPlaceholder: "Link + wat je er niet goed aan vindt",
+      },
+      { value: "nee", label: "Nee, ik heb nog geen website" },
+    ],
   },
   {
     id: "wat_doe_je",
@@ -119,7 +129,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "actie",
     num: "7",
-    type: "choice",
+    type: "choiceInput",
     title: "Wat moet een bezoeker op je website doen?",
     help: "Kies er één. De hele site wordt daaromheen gebouwd.",
     options: [
@@ -128,6 +138,7 @@ export const QUESTIONS: Question[] = [
       { value: "formulier", label: "Een formulier invullen" },
       { value: "afspraak", label: "Een afspraak maken" },
       { value: "langskomen", label: "Langskomen" },
+      { value: "anders", label: "Iets anders", withInput: true, inputPlaceholder: "Wat dan?" },
     ],
   },
   {

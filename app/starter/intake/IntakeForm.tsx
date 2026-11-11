@@ -114,11 +114,12 @@ export default function IntakeForm({
       return "";
     }
     if (q.type === "choice") {
-      return typeof v === "string" && v ? "" : "Kies een optie.";
+      if (typeof v === "string" && v) return "";
+      return q.optional ? "" : "Kies een optie.";
     }
     if (q.type === "choiceInput") {
       const ci = (v && typeof v === "object" ? v : { choice: "", detail: "" }) as ChoiceInput;
-      if (!ci.choice) return "Kies een optie.";
+      if (!ci.choice) return q.optional ? "" : "Kies een optie.";
       const opt = q.options?.find((o) => o.value === ci.choice);
       if (opt?.withInput && !ci.detail.trim()) return "Vul ook het veld in.";
       return "";
@@ -193,10 +194,12 @@ export default function IntakeForm({
   function onKeyDown(e: React.KeyboardEvent<HTMLFormElement>) {
     if (!current) return;
     // Cijfertoets kiest een optie bij keuzevragen.
+    const tagNow = (e.target as HTMLElement).tagName;
     if (
       (current.type === "choice" || current.type === "choiceInput") &&
       /^[1-9]$/.test(e.key) &&
-      (e.target as HTMLElement).tagName !== "INPUT"
+      tagNow !== "INPUT" &&
+      tagNow !== "TEXTAREA"
     ) {
       const idx = Number(e.key) - 1;
       const opt = current.options?.[idx];
@@ -390,16 +393,27 @@ export default function IntakeForm({
                     <span className={styles.choiceKey}>{i + 1}</span>
                     {o.label}
                   </button>
-                  {on && o.withInput && (
-                    <input
-                      className={styles.input}
-                      style={{ marginTop: "0.6rem" }}
-                      placeholder={o.inputPlaceholder}
-                      value={ci.detail}
-                      onChange={(e) => set(q.id, { choice: o.value, detail: e.target.value })}
-                      autoFocus
-                    />
-                  )}
+                  {on && o.withInput &&
+                    (o.inputType === "textarea" ? (
+                      <textarea
+                        className={styles.textarea}
+                        style={{ marginTop: "0.6rem" }}
+                        rows={3}
+                        placeholder={o.inputPlaceholder}
+                        value={ci.detail}
+                        onChange={(e) => set(q.id, { choice: o.value, detail: e.target.value })}
+                        autoFocus
+                      />
+                    ) : (
+                      <input
+                        className={styles.input}
+                        style={{ marginTop: "0.6rem" }}
+                        placeholder={o.inputPlaceholder}
+                        value={ci.detail}
+                        onChange={(e) => set(q.id, { choice: o.value, detail: e.target.value })}
+                        autoFocus
+                      />
+                    ))}
                 </div>
               );
             })}

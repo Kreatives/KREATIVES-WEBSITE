@@ -12,7 +12,18 @@ import {
   type IntakeItem,
 } from "@/lib/mailer";
 
+// Nodemailer heeft de Node-runtime nodig; zonder dit faalt het versturen.
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 type Answers = Record<string, unknown>;
+
+function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    p,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error("timeout")), ms)),
+  ]);
+}
 
 function str(v: unknown): string {
   return typeof v === "string" ? v.trim() : "";
@@ -72,7 +83,9 @@ export async function POST(request: NextRequest) {
   const pakketLabel = PAKKET_LABEL[pakket as Pakket] ?? (pakket || "Onbekend");
   const items = formatAnswers(pakket, answers);
 
-  // Bestelling opzoeken + intake opslaan (best-effort: de e-mail is leidend).
+  // Twee kanalen: opslaan in de database én mailen. De inzending slaagt zolang
+  // minstens één kanaal lukt, zodat de klant nooit vastloopt op een foutmelding.
+  let dbOk = false;
   let orderFound = false;
   let product: string | undefined;
   try {
@@ -88,7 +101,7 @@ export async function POST(request: NextRequest) {
       orderFound = true;
       product = (order as { product?: string }).product;
     }
-    await sb.from("intakes").insert({
+    const { error: insErr } = await sb.from("intakes").insert({
       order_id: order?.id ?? null,
       order_found: orderFound,
       email,
@@ -96,24 +109,33 @@ export async function POST(request: NextRequest) {
       pakket,
       answers,
     });
+    dbOk = !insErr;
+    if (insErr) console.error("Intake opslaan mislukt:", insErr.message);
   } catch (e) {
-    // Supabase niet beschikbaar (bv. lokaal zonder service-key) → doorgaan.
-    console.error("Intake opslaan mislukt:", e instanceof Error ? e.message : e);
+    // Supabase niet beschikbaar (bv. lokaal zonder service-key) → mail blijft over.
+    console.error("Supabase intake mislukt:", e instanceof Error ? e.message : e);
   }
 
-  // E-mails versturen. De interne mail is cruciaal; de klantmail is bijzaak.
+  let emailOk = false;
   try {
-    await sendIntakeNotification({ email, whatsapp, pakketLabel, orderFound, product, items });
+    await withTimeout(
+      sendIntakeNotification({ email, whatsapp, pakketLabel, orderFound, product, items }),
+      15000
+    );
+    emailOk = true;
   } catch (e) {
     console.error("Intake-notificatie mislukt:", e instanceof Error ? e.message : e);
+  }
+  // Bevestiging naar de klant is altijd best-effort.
+  withTimeout(sendIntakeConfirmation(email), 15000).catch((e) =>
+    console.error("Intake-bevestiging naar klant mislukt:", e instanceof Error ? e.message : e)
+  );
+
+  if (!dbOk && !emailOk) {
     return NextResponse.json(
       { error: "Versturen is niet gelukt. Probeer het zo nog eens." },
       { status: 502 }
     );
   }
-  await sendIntakeConfirmation(email).catch((e) =>
-    console.error("Intake-bevestiging naar klant mislukt:", e)
-  );
-
   return NextResponse.json({ ok: true, orderFound });
 }
