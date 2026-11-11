@@ -5,6 +5,7 @@ import {
   buildConfirmationEmail,
   type ContactMail,
 } from "@/lib/email-templates";
+import { EMAIL_LOGO_PNG_BASE64 } from "@/lib/email-logo";
 
 export type { ContactMail };
 
@@ -124,7 +125,7 @@ KREATIVES`;
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #ececec;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
         <tr><td style="background:#111111;padding:20px 28px;">
-          <span style="color:#ffffff;font-weight:700;letter-spacing:3px;font-size:16px;">KREATIVES</span>
+          <img src="cid:kreatives-logo" width="199" height="24" alt="KREATIVES" style="display:block;border:0;outline:none;width:199px;height:24px;" />
         </td></tr>
         <tr><td style="background:#fe6d17;line-height:4px;font-size:4px;height:4px;">&nbsp;</td></tr>
         <tr><td style="padding:30px 28px 6px;color:#1a1a1a;font-size:15px;line-height:1.6;">
@@ -158,6 +159,14 @@ KREATIVES`;
     subject: `Je bestelling bij KREATIVES — ${o.product}`,
     text,
     html,
+    attachments: [
+      {
+        filename: "kreatives.png",
+        content: Buffer.from(EMAIL_LOGO_PNG_BASE64, "base64"),
+        cid: "kreatives-logo",
+        contentType: "image/png",
+      },
+    ],
   });
 }
 
