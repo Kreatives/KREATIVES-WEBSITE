@@ -87,21 +87,8 @@
   letter-spacing: -0.05em;
   margin: 0;
 }
-/* Oranje accent-tekst loopt in een verloop van merkoranje naar zacht blauw.
-   OKLCH-interpolatie houdt de tussenkleuren fris (geen grijze "mud"); de
-   sRGB-regel erboven is de fallback. box-decoration-break + wat padding
-   voorkomen dat de laatste letter wordt afgeknipt door negatieve tracking. */
 .accent {
   color: #fe6d17;
-  background: linear-gradient(90deg, #fe6d17, #ff8a4c 48%, #89baff);
-  background: linear-gradient(90deg in oklch, #fe6d17, #89baff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding-inline-end: 0.08em;
-  margin-inline-end: -0.08em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 .sub {
   font-size: 15px;
@@ -1979,6 +1966,320 @@
   line-height: 1.6;
   color: #7f7f7f;
   letter-spacing: -0.02em;
+}
+
+/* ---------- Vergelijking (Express of maatwerk) ---------- */
+.vgl {
+  background: #fafafa;
+  padding: 4.5rem 0 5.5rem;
+}
+.vglHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.75rem;
+}
+.vglTitle {
+  font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+.vglSub {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #7f7f7f;
+  letter-spacing: -0.02em;
+}
+
+/* --- Desktop: volledige tabel --- */
+.vglTable {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+  column-gap: 1.25rem;
+  row-gap: 0;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+.vglRowContents {
+  display: contents;
+}
+.vglCell {
+  position: relative;
+  padding: 0.95rem 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+/* Express-kolom = donker en uitgelicht; Maatwerk = licht met randje */
+.vglExpress {
+  background: #161616;
+  color: #fff;
+}
+.vglMaatwerk {
+  background: #fff;
+  color: #111;
+  border-inline: 1px solid #e6e6e6;
+}
+
+.vglIntro {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  padding: 1.6rem 0 1.75rem;
+}
+.vglIntroTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+.vglIntroSub {
+  font-size: 13px;
+  color: #8a8a8a;
+  letter-spacing: -0.02em;
+}
+
+.vglHeadTop {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 1.6rem 1.6rem 1.75rem;
+  border-radius: 14px 14px 0 0;
+}
+.vglHeadTop.vglExpress {
+  background: radial-gradient(135% 120% at 18% -10%, #c2621a 0%, #161616 52%);
+}
+.vglHeadTop.vglMaatwerk {
+  border-top: 1px solid #e6e6e6;
+}
+.vglCardName {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.vglCardTagline {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+.vglExpress .vglCardTagline {
+  color: rgba(255, 255, 255, 0.72);
+}
+.vglMaatwerk .vglCardTagline {
+  color: #7f7f7f;
+}
+.vglCardPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+.vglCardPrice b {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.vglCardPrice span {
+  font-size: 13px;
+}
+.vglExpress .vglCardPrice span {
+  color: rgba(255, 255, 255, 0.6);
+}
+.vglMaatwerk .vglCardPrice span {
+  color: #8a8a8a;
+}
+.vglBtn {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 11px;
+  padding: 0.6rem 0.55rem 0.6rem 1.1rem;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  box-shadow: inset 0 -5px 4px 0 rgba(255, 255, 255, 0.2);
+}
+.vglBtnLbl {
+  flex: 1;
+  text-align: left;
+}
+.vglBtnArrow {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  flex: none;
+}
+.vglBtnArrow svg {
+  width: 17px;
+  height: 17px;
+}
+.vglBtnOrange {
+  background: #fe6d17;
+  color: #fff;
+}
+.vglBtnOrange:hover {
+  background: #e85f0c;
+}
+.vglBtnDark {
+  background: #161616;
+  color: #fff;
+}
+.vglBtnDark:hover {
+  background: #000;
+}
+
+.vglLabel {
+  color: #555;
+  min-height: 54px;
+}
+.vglVal {
+  justify-content: flex-end;
+  text-align: right;
+  min-height: 54px;
+}
+.vglExpress.vglVal {
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+.vglMaatwerk.vglVal {
+  border-top: 1px solid #ececec;
+}
+.vglBottom {
+  border-radius: 0 0 14px 14px;
+}
+.vglMaatwerk.vglBottom {
+  border-bottom: 1px solid #e6e6e6;
+}
+.vglText {
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.vglExpress .vglText {
+  color: rgba(255, 255, 255, 0.82);
+}
+.vglMaatwerk .vglText {
+  color: #333;
+}
+.vglCheck {
+  width: 20px;
+  height: 20px;
+  color: #fe6d17;
+  flex: none;
+}
+.vglCross {
+  width: 18px;
+  height: 18px;
+  color: #c6c6c6;
+  flex: none;
+}
+.vglCrossDark {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* --- Mobiel: schakelaar + één kaart --- */
+.vglMobile {
+  display: none;
+}
+.vglToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  background: #ededed;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 1.25rem;
+}
+.vglToggleBtn {
+  border: 0;
+  background: none;
+  border-radius: 9px;
+  padding: 0.7rem;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #8a8a8a;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+.vglToggleDark {
+  background: #161616;
+  color: #fff;
+}
+.vglToggleLight {
+  background: #fff;
+  color: #111;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+}
+.vglCard {
+  border-radius: 16px;
+  overflow: hidden;
+}
+.vglCard.vglMaatwerk {
+  border: 1px solid #e6e6e6;
+}
+.vglCardTop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1.6rem 1.5rem 1.75rem;
+}
+.vglCard.vglExpress .vglCardTop {
+  background: radial-gradient(130% 90% at 15% -12%, #c2621a 0%, transparent 55%);
+}
+.vglCardRows {
+  padding: 0 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+}
+.vglCardRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid #ececec;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+.vglCard.vglExpress .vglCardRow {
+  border-top-color: rgba(255, 255, 255, 0.09);
+}
+.vglCardRowLabel {
+  flex: none;
+  max-width: 50%;
+}
+.vglCard.vglExpress .vglCardRowLabel {
+  color: rgba(255, 255, 255, 0.78);
+}
+.vglCard.vglMaatwerk .vglCardRowLabel {
+  color: #555;
+}
+.vglCardRowVal {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+}
+@media (max-width: 860px) {
+  .vglTable {
+    display: none;
+  }
+  .vglMobile {
+    display: block;
+  }
 }
 
 /* ---------- Topbalk ---------- */

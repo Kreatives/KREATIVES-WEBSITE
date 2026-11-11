@@ -14,6 +14,7 @@ import Reviews from "./_express/Reviews";
 import OverRicky from "./_express/OverRicky";
 import KiesMens from "./_express/KiesMens";
 import FaqExpress from "./_express/FaqExpress";
+import Vergelijking from "./_express/Vergelijking";
 import Footer from "@/components/Footer";
 import styles from "./_express/express.module.css";
 
@@ -59,6 +60,7 @@ export default function StarterPage() {
         <OverRicky />
         <KiesMens />
         <FaqExpress />
+        <Vergelijking />
       </main>
       <Footer />
     </>
