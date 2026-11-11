@@ -551,6 +551,11 @@
   font-size: 13px;
   color: #8a8a8a;
 }
+.idealLogo {
+  height: 30px;
+  width: auto;
+  flex: none;
+}
 .cardTags {
   display: flex;
   gap: 0.4rem;
@@ -632,6 +637,24 @@
   color: #fe6d17;
   flex: none;
   margin-top: 1px;
+}
+/* "1 revisieronde → 3 revisierondes": oude waarde gedimd, nieuwe geaccentueerd */
+.upgradeItem {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.wasText {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+.upgradeArrow {
+  color: #fe6d17;
+  font-weight: 700;
+}
+.nowText {
+  font-weight: 600;
 }
 .sumCheck svg {
   width: 15px;

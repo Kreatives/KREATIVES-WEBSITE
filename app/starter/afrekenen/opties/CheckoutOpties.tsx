@@ -153,6 +153,7 @@ export default function CheckoutOpties({
                   <div className={styles.methodName}>iDEAL</div>
                   <div className={styles.methodSub}>Je betaalt via je eigen bank</div>
                 </span>
+                <img src="/starter/icons/ideal.svg" alt="iDEAL" className={styles.idealLogo} />
               </button>
               <button
                 type="button"
@@ -200,10 +201,28 @@ export default function CheckoutOpties({
               <div className={styles.sumPkg}>{orderName}</div>
               <ul className={styles.sumList}>
                 {pkg.order.map((o) => (
-                  <li key={o}>
-                    <Check orange /> {o}
+                  <li key={o.text}>
+                    <Check orange />
+                    {usePlus && o.plus ? (
+                      <span className={styles.upgradeItem}>
+                        <s className={styles.wasText}>{o.text}</s>
+                        <span className={styles.upgradeArrow} aria-hidden>
+                          →
+                        </span>
+                        <span className={styles.nowText}>{o.plus}</span>
+                      </span>
+                    ) : (
+                      <span>{o.text}</span>
+                    )}
                   </li>
                 ))}
+                {usePlus &&
+                  pkg.plusExtra.map((f) => (
+                    <li key={f}>
+                      <Check orange />
+                      <span className={styles.nowText}>{f}</span>
+                    </li>
+                  ))}
               </ul>
 
               <span className={styles.addToggle}>★ Voeg toe aan je bestelling</span>

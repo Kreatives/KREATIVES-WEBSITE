@@ -3,6 +3,10 @@
 
 export type Addon = { id: string; label: string; desc: string; price: number };
 
+// Een regel in "Je bestelling". `plus` = de opgewaardeerde variant bij het "+"-pakket
+// (dan tonen we de oude waarde gedimd met een pijl naar de nieuwe).
+export type OrderItem = { text: string; plus?: string };
+
 export type Pakket = {
   id: string;
   name: string;
@@ -17,7 +21,9 @@ export type Pakket = {
   // "Ga verder met X" — subregel
   continueSub: string;
   // Rechterkolom "Je bestelling"
-  order: string[];
+  order: OrderItem[];
+  // Regels die er alleen bij het "+"-pakket bij komen
+  plusExtra: string[];
   // Bij te bestellen extra's (met stepper)
   addons: Addon[];
 };
@@ -39,14 +45,15 @@ export const PAKKETTEN: Record<string, Pakket> = {
     },
     continueSub: "Eén pagina · 1 revisieronde · €695",
     order: [
-      "Eén pagina, op maat ontworpen",
-      "Eerste ontwerp binnen 48 uur",
-      "1 revisieronde",
-      "Contactformulier en WhatsApp-knop",
-      "Goed leesbaar op elke telefoon",
-      "Zelf je teksten en foto's aanpassen",
-      "Alles op jouw naam, geen abonnement",
+      { text: "Eén pagina, op maat ontworpen" },
+      { text: "Eerste ontwerp binnen 48 uur", plus: "Eerste ontwerp binnen 24 uur" },
+      { text: "1 revisieronde", plus: "3 revisierondes" },
+      { text: "Contactformulier en WhatsApp-knop" },
+      { text: "Goed leesbaar op elke telefoon" },
+      { text: "Zelf je teksten en foto's aanpassen" },
+      { text: "Alles op jouw naam, geen abonnement" },
     ],
+    plusExtra: ["Geld terug als het ontwerp niet bevalt"],
     addons: [
       { id: "concept", label: "Extra ontwerpconcept", desc: "Een tweede richting voor je pagina, zodat je kunt kiezen.", price: 150 },
       { id: "revisie", label: "Extra revisieronde", desc: "Nog een ronde aanpassingen na je eerste.", price: 95 },
@@ -69,13 +76,17 @@ export const PAKKETTEN: Record<string, Pakket> = {
     },
     continueSub: "Vijf pagina's · 2 revisierondes · €1.295",
     order: [
-      "Vijf pagina's, op maat ontworpen",
-      "Eerste ontwerp binnen 48 uur",
-      "2 revisierondes",
-      "Aanvraag- of offertepagina",
-      "Ik scherp je teksten aan",
-      "Subtiele animaties",
-      "Alles op jouw naam, geen abonnement",
+      { text: "Vijf pagina's, op maat ontworpen" },
+      { text: "Eerste ontwerp binnen 48 uur", plus: "Eerste ontwerp binnen 24 uur" },
+      { text: "2 revisierondes", plus: "3 revisierondes" },
+      { text: "Aanvraag- of offertepagina" },
+      { text: "Ik scherp je teksten aan" },
+      { text: "Subtiele animaties" },
+      { text: "Alles op jouw naam, geen abonnement" },
+    ],
+    plusExtra: [
+      "Metingen van je bezoekers en aanvragen",
+      "Geld terug als het ontwerp niet bevalt",
     ],
     addons: [
       { id: "pagina", label: "Extra pagina", desc: "Een pagina erbij, naast de vijf uit je pakket.", price: 125 },
@@ -98,14 +109,18 @@ export const PAKKETTEN: Record<string, Pakket> = {
     },
     continueSub: "Tot acht pagina's · 3 revisierondes · €1.795",
     order: [
-      "Tot acht pagina's, op maat ontworpen",
-      "Eerste ontwerp binnen 48 uur",
-      "3 revisierondes",
-      "Ik schrijf je teksten voor je",
-      "Pagina met je projecten of nieuws",
-      "Subtiele animaties",
-      "30 dagen nazorg",
-      "Alles op jouw naam, geen abonnement",
+      { text: "Tot acht pagina's, op maat ontworpen" },
+      { text: "Eerste ontwerp binnen 48 uur", plus: "Eerste ontwerp binnen 24 uur" },
+      { text: "3 revisierondes" },
+      { text: "Ik schrijf je teksten voor je" },
+      { text: "Pagina met je projecten of nieuws" },
+      { text: "Subtiele animaties" },
+      { text: "30 dagen nazorg" },
+      { text: "Alles op jouw naam, geen abonnement" },
+    ],
+    plusExtra: [
+      "Een tweede ontwerpconcept erbij",
+      "Geld terug als het ontwerp niet bevalt",
     ],
     addons: [
       { id: "pagina", label: "Extra pagina", desc: "Een pagina erbij, naast de acht uit je pakket.", price: 125 },
