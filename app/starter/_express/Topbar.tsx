@@ -1,8 +1,9 @@
 import styles from "./express.module.css";
 
 export default function Topbar() {
+  // Eerste ontwerp = binnen 48 uur, dus vandaag + 2 dagen.
   const d = new Date();
-  d.setDate(d.getDate() + 1);
+  d.setDate(d.getDate() + 2);
   const datum = new Intl.DateTimeFormat("nl-NL", {
     day: "numeric",
     month: "long",

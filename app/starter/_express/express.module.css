@@ -23,7 +23,16 @@
   flex-direction: column;
   align-items: center;
 }
+/* Static mesh-gradient (wit + merkoranje) als achtergrond van de hero. */
+.heroShader {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 .heroInner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,7 +90,12 @@
   letter-spacing: -0.05em;
   margin: 0;
 }
+/* Oranje accent-tekst loopt in een verloop van merkoranje naar zacht blauw. */
 .accent {
+  background: linear-gradient(90deg, #fe6d17 0%, #89baff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: #fe6d17;
 }
 .sub {
@@ -170,6 +184,7 @@
   margin-top: 3.25rem;
   width: 100%;
   position: relative;
+  z-index: 1;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
 }
@@ -204,6 +219,8 @@
 
 /* logo marquee */
 .logoWrap {
+  position: relative;
+  z-index: 1;
   margin-top: 3rem;
   width: 100%;
   padding-bottom: 1.5rem;
@@ -343,6 +360,11 @@
   flex-direction: column;
   gap: 0.7rem;
 }
+.vTileText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 .vTile:nth-child(1) {
   padding: 0 2.4rem 2.4rem 0;
 }
@@ -387,8 +409,15 @@
   .valueGrid::after {
     display: none;
   }
+  /* Op mobiel: icoon links, titel + tekst rechts ernaast. */
   .vTile {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
     padding: 0 !important;
+  }
+  .vTileIcon {
+    flex: none;
   }
 }
 
@@ -1969,9 +1998,26 @@
   border-radius: 999px;
   background: #fe6d17;
   flex: none;
+  animation: topPulse 1.8s ease-in-out infinite;
+}
+@keyframes topPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(254, 109, 23, 0.55);
+  }
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 0 5px rgba(254, 109, 23, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topDot {
+    animation: none;
+  }
 }
 .topbar b {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* ---------- Footer ---------- */

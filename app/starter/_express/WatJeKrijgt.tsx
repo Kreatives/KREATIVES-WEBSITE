@@ -43,8 +43,10 @@ export default function WatJeKrijgt() {
           {TILES.map((t) => (
             <div className={styles.vTile} key={t.title}>
               <img className={styles.vTileIcon} src={`/starter/icons/tiles/${t.icon}.webp`} alt="" />
-              <h3 className={styles.vTileTitle}>{t.title}</h3>
-              <p className={styles.vTileBody}>{t.body}</p>
+              <div className={styles.vTileText}>
+                <h3 className={styles.vTileTitle}>{t.title}</h3>
+                <p className={styles.vTileBody}>{t.body}</p>
+              </div>
             </div>
           ))}
         </div>

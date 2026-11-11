@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { findPakket, totals, euro, euroShort } from "../checkout-express-data";
 import styles from "../checkout.module.css";
@@ -46,7 +46,6 @@ export default function CheckoutOpties({
 }) {
   const pkg = findPakket(pakketId);
   const [usePlus, setUsePlus] = useState(false);
-  const [method, setMethod] = useState<"ideal" | "card">("ideal");
   const [plan, setPlan] = useState<"full" | "split">("full");
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(false);
@@ -67,6 +66,17 @@ export default function CheckoutOpties({
   const setField =
     (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  // Zet de achtergrond vast zolang de gegevens-modal open is, zodat je in het
+  // formulier kunt scrollen in plaats van de pagina eronder.
+  useEffect(() => {
+    if (!showForm) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [showForm]);
 
   const t = totals(pkg, usePlus, counts);
   const orderName = usePlus ? pkg.plus.name : pkg.name;
@@ -92,7 +102,7 @@ export default function CheckoutOpties({
         body: JSON.stringify({
           pakket: pkg.id,
           usePlus,
-          method,
+          method: "ideal",
           plan,
           counts,
           email: form.email,
@@ -173,34 +183,14 @@ export default function CheckoutOpties({
               </button>
 
               <div className={styles.sectionLabel}>Betaalmethode</div>
-              <button
-                type="button"
-                className={`${styles.method} ${method === "ideal" ? styles.methodOn : ""}`}
-                onClick={() => setMethod("ideal")}
-              >
+              <div className={`${styles.method} ${styles.methodOn}`}>
                 <span className={styles.choiceRadio} />
                 <span className={styles.methodText}>
                   <div className={styles.methodName}>iDEAL</div>
-                  <div className={styles.methodSub}>Je betaalt via je eigen bank</div>
+                  <div className={styles.methodSub}>Je betaalt veilig via je eigen bank</div>
                 </span>
                 <img src="/starter/icons/ideal.svg" alt="iDEAL" className={styles.idealLogo} />
-              </button>
-              <button
-                type="button"
-                className={`${styles.method} ${method === "card" ? styles.methodOn : ""}`}
-                onClick={() => setMethod("card")}
-              >
-                <span className={styles.choiceRadio} />
-                <span className={styles.methodText}>
-                  <div className={styles.methodName}>Creditcard</div>
-                  <div className={styles.methodSub}>Je gegevens worden niet bewaard</div>
-                </span>
-                <span className={styles.cardTags}>
-                  <span className={styles.cardTag}>Visa</span>
-                  <span className={styles.cardTag}>Mastercard</span>
-                  <span className={styles.cardTag}>Amex</span>
-                </span>
-              </button>
+              </div>
 
               <div className={styles.trustGrid}>
                 <div className={styles.trustItem}>
@@ -360,11 +350,9 @@ export default function CheckoutOpties({
                 </p>
               )}
 
-              <div className={styles.payIcons}>
-                <span>iDEAL</span>
-                <span>Visa</span>
-                <span>Mastercard</span>
-                <span>Apple Pay</span>
+              <div className={styles.paySafe}>
+                <img src="/starter/icons/ideal.svg" alt="iDEAL" className={styles.paySafeLogo} />
+                <span>Betaal veilig met iDEAL</span>
               </div>
 
               <div className={styles.guarantee}>
@@ -458,8 +446,8 @@ export default function CheckoutOpties({
                 <input type="email" className={styles.fieldInput} value={form.email} onChange={setField("email")} required autoComplete="email" />
               </label>
               <label className={styles.field}>
-                <span className={styles.fieldLabel}>Telefoon <span className={styles.opt}>(optioneel)</span></span>
-                <input type="tel" className={styles.fieldInput} value={form.telefoon} onChange={setField("telefoon")} autoComplete="tel" />
+                <span className={styles.fieldLabel}>Telefoon</span>
+                <input type="tel" className={styles.fieldInput} value={form.telefoon} onChange={setField("telefoon")} required autoComplete="tel" />
               </label>
               <label className={styles.field}>
                 <span className={styles.fieldLabel}>Bedrijfsnaam <span className={styles.opt}>(optioneel)</span></span>
@@ -512,9 +500,12 @@ export default function CheckoutOpties({
                 </svg>
               </span>
             </button>
+            <div className={styles.paySafe}>
+              <img src="/starter/icons/ideal.svg" alt="iDEAL" className={styles.paySafeLogo} />
+              <span>Betaal veilig met iDEAL</span>
+            </div>
             <p className={styles.modalFine}>
-              Je gegevens gaan versleuteld naar Mollie.{" "}
-              {method === "ideal" ? "Je betaalt via iDEAL." : "Je betaalt met creditcard."}
+              Je gegevens gaan versleuteld naar Mollie. Je betaalt via iDEAL.
             </p>
           </form>
         </div>
