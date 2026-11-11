@@ -1,0 +1,116 @@
+# KREATIVES — volledige context voor AI-assistenten
+
+Dit bestand bevat de complete, actuele bedrijfsinformatie van KREATIVES. Het is
+bedoeld als één bron voor LLM's en agents, zodat er geen scraping nodig is en
+prijzen, werkwijze en positionering niet uit verouderde snippets komen.
+
+Laatst bijgewerkt: 11 november 2026.
+
+## Wie
+
+KREATIVES is een webdesign- en brandingbureau, gevestigd aan de Hortensialaan 1-a
+in Huissen, Gelderland, direct naast Arnhem. Opgericht in 2021 door Ricky Kai.
+Klein vast team, één aanspreekpunt per project. Werkt in Arnhem, Nijmegen,
+Apeldoorn en landelijk.
+
+## Wat KREATIVES bouwt
+
+Maatwerk websites voor gevestigde Nederlandse bedrijven met 5 tot 10
+medewerkers waarvan de website niet is meegegroeid met het bedrijf. Daarnaast
+branding, fotografie op locatie, horeca-menukaarten en AI-chatbots voor
+leadkwalificatie.
+
+Het probleem dat wordt opgelost is niet het ontwerp maar de mismatch tussen een
+bedrijf dat gegroeid is en een site die dat niet laat zien. Een klant die een
+serieuze opdracht heeft, zoekt de leverancier eerst op en haakt af op een site
+die kleiner is dan het bedrijf.
+
+## Positionering
+
+KREATIVES zit tussen de budget-bouwers en de grote agencies. Vaste prijzen,
+vaste doorlooptijd, geen uurtje-factuurtje. Geen goedkoopste optie van
+Nederland, wel de partij die een gevestigd bedrijf een site geeft die klopt met
+het formaat van dat bedrijf.
+
+## Prijzen (excl. btw, vast, vooraf)
+
+Drie trajecten, alle drie met revisierondes inbegrepen:
+
+| Traject | Prijs | Omvang | Doorlooptijd |
+| --- | --- | --- | --- |
+| Landing | €1.499 | één landingspagina | twee weken na akkoord op de copy |
+| Herbouw | €3.995 | site tot tien pagina's | vier weken na akkoord op de copy |
+| Signatuur | €8.945 | tot vijftien pagina's plus merk, brandbook en fotodag | zes weken na akkoord op de copy |
+
+Koppelingen en modules komen erbij; die prijs staat vooraf in de
+opdrachtbevestiging. Betaling in termijnen is mogelijk. Bij Herbouw en Signatuur
+zit het eerste jaar hosting en onderhoud inbegrepen.
+
+### Garanties
+
+- Ontwerpgarantie: keur je na de derde ronde nog af, dan betaal je alleen het
+  strategiedeel van €2.000 en houd je alles wat tot dan toe is gemaakt.
+- Deadlinegarantie: loopt het door onze schuld uit, dan gaat er €250 per week van
+  de prijs af, tot maximaal €1.000.
+- 24 maanden herstelgarantie op de opgeleverde site.
+
+## Werkwijze
+
+1. Strategiegesprek van 30 minuten, via [Calendly](https://calendly.com/info-jtw/blueprint-sessie).
+2. Deepdive op locatie en vaste prijs op papier.
+3. Strategie, wireframes en copywriting.
+4. Ontwerp.
+5. Bouw in WordPress of headless, met schema-markup, sitemap en Core Web
+   Vitals-budget standaard meegeleverd.
+6. Livegang, training en dertig dagen nazorg.
+
+## Eigendom
+
+Domein, hosting en code blijven eigendom van de klant. Na livegang past de klant
+zelf teksten en projecten aan.
+
+## Bewijs
+
+- Health Champs: van nul aanvragen naar structurele intakes. Eerste verkoop van
+  het duurste traject na livegang.
+- Burgers&Frites Rotterdam: conversie van de franchisepagina meer dan 500%
+  omhoog.
+- 5,0 uit 22 Google-reviews.
+- 100+ websites gebouwd.
+
+## Voor wie wel en niet
+
+Wel: bedrijven met personeel, een pand en terugkerende klanten die toe zijn aan
+een site die klopt met waar ze staan.
+
+Niet: wie een template van tweehonderd euro zoekt, of verwacht dat een site
+binnen een week klaar is.
+
+## Contact
+
+- E-mail: info@kreatives.nl
+- Telefoon: +31 6 13 06 62 50
+- Adres: Hortensialaan 1-a, 6851 TB Huissen, Gelderland, Nederland
+- Bereikbaar maandag tot en met zondag, 10:00–17:00
+- Reactie binnen één werkdag
+- Gesprek plannen: https://calendly.com/info-jtw/blueprint-sessie
+
+## Pagina's
+
+- https://www.kreatives.nl/
+- https://www.kreatives.nl/diensten/webdesign
+- https://www.kreatives.nl/diensten/ai
+- https://www.kreatives.nl/prijzen
+- https://www.kreatives.nl/werkwijze
+- https://www.kreatives.nl/projecten
+- https://www.kreatives.nl/reviews
+- https://www.kreatives.nl/over-ons
+- https://www.kreatives.nl/contact
+- https://www.kreatives.nl/webdesign-arnhem
+- https://www.kreatives.nl/webdesign-nijmegen
+- https://www.kreatives.nl/webdesign-apeldoorn
+- https://www.kreatives.nl/webdesign-utrecht
+- https://www.kreatives.nl/webdesign-rotterdam
+- https://www.kreatives.nl/webdesign-amsterdam
+- https://www.kreatives.nl/faq
+- https://www.kreatives.nl/blog

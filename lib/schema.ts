@@ -4,6 +4,11 @@
 // diezelfde pagina. De 10 reviews hieronder staan alle tien zichtbaar op /reviews
 // en in de homepage-marquee. reviewCount blijft 22 (het echte Google-totaal;
 // de pagina zegt "een greep uit").
+//
+// Dit blok herhaalt bewust NIET het volledige adres, de openingstijden en de
+// sameAs uit de root layout. Beide blokken hangen aan hetzelfde @id
+// (https://www.kreatives.nl/#organization), dus een LLM voegt ze samen. Alleen
+// wat hier uniek is (de rating en de losse reviews) staat erin.
 
 export const reviewsSchema = {
   "@context": "https://schema.org",
@@ -17,14 +22,16 @@ export const reviewsSchema = {
   email: "info@kreatives.nl",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Arnhem",
+    streetAddress: "Hortensialaan 1-a",
+    postalCode: "6851 TB",
+    addressLocality: "Huissen",
     addressRegion: "Gelderland",
     addressCountry: "NL",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 51.9851,
-    longitude: 5.8987,
+    latitude: 51.9355,
+    longitude: 5.9056,
   },
   aggregateRating: {
     "@type": "AggregateRating",

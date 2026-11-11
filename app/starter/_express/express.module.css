@@ -880,7 +880,7 @@
   display: grid;
   grid-template-columns: 1fr 1.06fr 1fr;
   gap: 1.25rem;
-  align-items: center;
+  align-items: stretch;
 }
 .pakCard {
   position: relative;
@@ -899,8 +899,6 @@
 .pakCardDark {
   background: #161616;
   color: #fff;
-  margin-block: -1.6rem;
-  padding-block: 3.5rem;
   z-index: 1;
   box-shadow: 2px 4px 34px rgba(0, 0, 0, 0.55);
 }

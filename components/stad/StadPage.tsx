@@ -1,7 +1,8 @@
+import Link from "next/link";
 import RevealInit from "@/components/RevealInit";
 import PostContent, { splitPostBlocks, stripInline } from "@/components/PostContent";
 import PostFaq from "@/components/PostFaq";
-import { getStad } from "@/lib/steden";
+import { getStad, steden } from "@/lib/steden";
 import { site } from "@/lib/site";
 import styles from "./stad.module.css";
 
@@ -120,7 +121,37 @@ export default function StadPage({ slug }: { slug: string }) {
     ],
   };
 
-  const blobs = [serviceLd, orgLd, faqLd, breadcrumbLd].filter(Boolean);
+  // ItemList met alle steden, zodat een LLM dat deze pagina leest meteen de
+  // volledige lijst heeft in plaats van één stad. Ontbreekt de afsluitende CTA
+  // naar de andere steden, dan blijft de pagina een dood spoor.
+  const andereSteden = steden.filter((s) => s.slug !== stad.slug);
+  const itemListLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${url}#steden`,
+    name: "Webdesign per stad",
+    numberOfItems: steden.length,
+    itemListElement: steden.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: `Webdesign ${s.city}`,
+      url: `${site.domain}/${s.slug}`,
+      item: {
+        "@type": "Service",
+        name: `Webdesign ${s.city}`,
+        areaServed: { "@type": "City", name: s.city },
+        provider: {
+          "@type": "ProfessionalService",
+          "@id": `${site.domain}/#organization`,
+          name: "KREATIVES",
+        },
+      },
+    })),
+  };
+
+  const blobs = [serviceLd, orgLd, faqLd, breadcrumbLd, itemListLd].filter(
+    Boolean
+  );
 
   return (
     <>
@@ -155,6 +186,29 @@ export default function StadPage({ slug }: { slug: string }) {
                   <PostContent blocks={afterBlocks} />
                 </div>
               )}
+
+              <div className={styles.after}>
+                <h2 className={styles.blokKop}>Ook in deze steden</h2>
+                <ul className={styles.stadLijst}>
+                  {andereSteden.map((s) => (
+                    <li key={s.slug}>
+                      <Link href={`/${s.slug}`}>Webdesign {s.city}</Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <h2 className={styles.blokKop}>
+                  Bureaus in {stad.city} vergelijken
+                </h2>
+                <p>
+                  Wil je eerst zien wie er in {stad.city} zitten en wat zij
+                  rekenen voordat je kiest?{" "}
+                  <Link href="/blog/webdesignbureaus-arnhem">
+                    Zet de opties naast elkaar
+                  </Link>{" "}
+                  en vergelijk op aanpak, prijs en eigendom van de code.
+                </p>
+              </div>
             </div>
           </div>
         </section>

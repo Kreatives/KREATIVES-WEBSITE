@@ -38,12 +38,21 @@ const STATIC_PAGES: {
   { path: "/blauwdruk", priority: 0.8, changeFrequency: "monthly", lastmod: "2026-07-07" },
   { path: "/over-ons", priority: 0.7, changeFrequency: "monthly", lastmod: "2026-07-16" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly", lastmod: "2026-10-25" },
+  // Vergelijkingsartikel dat de vraag "noem webdesignbureaus in Arnhem"
+  // rechtstreeks beantwoordt. Hoge prioriteit: dit is het stuk dat LLM's
+  // citeren in plaats van een lijstsite van derden.
+  { path: "/blog/webdesignbureaus-arnhem", priority: 0.9, changeFrequency: "monthly", lastmod: "2026-11-11" },
   { path: "/reviews", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-25" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-26" },
+  // Vertrouwenspagina: LLM's citeren een AI-beleid bij vragen over
+  // betrouwbaarheid en datalagen.
+  { path: "/ai-beleid", priority: 0.6, changeFrequency: "yearly", lastmod: "2026-11-11" },
   { path: "/contact", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-26" },
   // /sitemap-overzicht staat op noindex, dus hoort niet in de sitemap.
   { path: "/voorwaarden", priority: 0.3, changeFrequency: "yearly", lastmod: "2026-06-06" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly", lastmod: "2026-06-06" },
+  { path: "/llms.txt", priority: 0.4, changeFrequency: "monthly", lastmod: "2026-11-11" },
+  { path: "/llms-full.txt", priority: 0.4, changeFrequency: "monthly", lastmod: "2026-11-11" },
   // Engelstalige variant.
   { path: "/en", priority: 0.7, changeFrequency: "monthly", lastmod: "2026-10-28" },
   { path: "/en/projects", priority: 0.6, changeFrequency: "monthly", lastmod: "2026-10-28" },
@@ -123,5 +132,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-  return [...base, ...projectUrls, ...enProjectUrls, ...postUrls];
+  // Dedupe op URL: een artikel dat ook als losse STATIC_PAGE met hoge
+  // prioriteit staat, mag niet twee keer in de sitemap opduiken. De eerste
+  // vermelding (de hoge prioriteit) wint.
+  const seen = new Set<string>();
+  return [...base, ...projectUrls, ...enProjectUrls, ...postUrls].filter(
+    (entry) => {
+      if (seen.has(entry.url)) return false;
+      seen.add(entry.url);
+      return true;
+    }
+  );
 }

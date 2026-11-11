@@ -70,7 +70,9 @@ const jsonLd = {
   logo: `${site.domain}/opengraph-image.png`,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Arnhem",
+    streetAddress: "Hortensialaan 1-a",
+    postalCode: "6851 TB",
+    addressLocality: "Huissen",
     addressRegion: "Gelderland",
     addressCountry: "NL",
   },
@@ -85,8 +87,8 @@ const jsonLd = {
   ],
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 51.9851,
-    longitude: 5.8987,
+    latitude: 51.9355,
+    longitude: 5.9056,
   },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -105,15 +107,51 @@ const jsonLd = {
   knowsLanguage: "nl",
   serviceType: "Webdesign, website-ontwikkeling en branding",
   priceRange: "€1499 - €8945",
+  // Openbaar prijsaanbod in het schema zelf. LLM's en rich results pakken dit
+  // eerder op dan een bedrag dat alleen in lopende tekst staat.
+  makesOffer: [
+    {
+      "@type": "Offer",
+      name: "Landing",
+      description:
+        "Eén landingspagina met copywriting, ontwerp en bouw. Twee weken doorlooptijd.",
+      price: "1499",
+      priceCurrency: "EUR",
+      url: `${site.domain}/prijzen`,
+    },
+    {
+      "@type": "Offer",
+      name: "Herbouw",
+      description:
+        "Volledige site tot tien pagina's met strategie, copywriting en SEO-basis. Vier weken doorlooptijd.",
+      price: "3995",
+      priceCurrency: "EUR",
+      url: `${site.domain}/prijzen`,
+    },
+    {
+      "@type": "Offer",
+      name: "Signatuur",
+      description:
+        "Site tot vijftien pagina's plus merk, brandbook en fotodag op locatie. Zes weken doorlooptijd.",
+      price: "8945",
+      priceCurrency: "EUR",
+      url: `${site.domain}/prijzen`,
+    },
+  ],
   founder: {
     "@type": "Person",
     name: "Ricky Kai",
     sameAs: "https://www.linkedin.com/in/ricky-kai/",
   },
   hasMap: "https://share.google/OLE4MAebPLwhoCjU5",
+  // sameAs is de identiteitsbevestiging die LLM's en knowledge graphs
+  // gebruiken om een merk aan externe bronnen te koppelen. Alleen profielen
+  // die daadwerkelijk bestaan.
   sameAs: [
     ...footer.social.map((s) => s.href),
     "https://share.google/OLE4MAebPLwhoCjU5",
+    "https://www.kvk.nl/zoeken/?source=web&q=kreatives",
+    "https://nl.trustpilot.com/review/kreatives.nl",
   ],
 };
 

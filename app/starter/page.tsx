@@ -13,7 +13,7 @@ import Reviews from "./_express/Reviews";
 import OverRicky from "./_express/OverRicky";
 import KiesMens from "./_express/KiesMens";
 import FaqExpress from "./_express/FaqExpress";
-import ExpressFooter from "./_express/ExpressFooter";
+import Footer from "@/components/Footer";
 import styles from "./_express/express.module.css";
 
 export const revalidate = 1800;
@@ -42,21 +42,23 @@ export const metadata: Metadata = {
 
 export default function StarterPage() {
   return (
-    <main className={styles.page}>
-      <Topbar />
-      <Hero />
-      <WatJeKrijgt />
-      <DrieManieren />
-      <MijnWerk />
-      <VanJou />
-      <Pakketten />
-      <Beloftes />
-      <Werkwijze />
-      <Reviews />
-      <OverRicky />
-      <KiesMens />
-      <FaqExpress />
-      <ExpressFooter />
-    </main>
+    <>
+      <main className={styles.page}>
+        <Topbar />
+        <Hero />
+        <WatJeKrijgt />
+        <DrieManieren />
+        <MijnWerk />
+        <VanJou />
+        <Pakketten />
+        <Beloftes />
+        <Werkwijze />
+        <Reviews />
+        <OverRicky />
+        <KiesMens />
+        <FaqExpress />
+      </main>
+      <Footer />
+    </>
   );
 }

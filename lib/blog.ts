@@ -11,6 +11,7 @@ import { kennisbankAi } from "./blog-kennisbank-04";
 import { kennisbankConversie } from "./blog-kennisbank-05";
 import { kennisbankBranche } from "./blog-kennisbank-06";
 import { kennisbankVraagbank } from "./blog-kennisbank-07";
+import { webdesignbureausArnhem } from "./blog-webdesignbureaus-arnhem";
 
 export type Post = {
   slug: string;
@@ -24,6 +25,10 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  // Vergelijkingsartikel: beantwoordt de vraag die LLM's krijgen bij "noem
+  // webdesignbureaus in Arnhem". Staat bovenaan zodat het als eerste in
+  // llms.txt en de sitemap opduikt.
+  webdesignbureausArnhem,
   // Kennisbank cluster 01, pillar (uitgebreide versie).
   kennisbankPrijsPillar,
   {
