@@ -38,6 +38,29 @@ const PAGINA_OPTIES: { value: Pagina; title: string; desc: string }[] = [
   { value: "meer", title: "Meer dan 10 pagina's", desc: "Veel diensten of locaties" },
 ];
 
+type Situatie = "start" | "custom";
+
+const SITUATIE_OPTIES: { value: Situatie; title: string; desc: string }[] = [
+  { value: "start", title: "Ik begin net", desc: "Je eerste website, snel en betaalbaar live" },
+  { value: "custom", title: "Ik heb al een website", desc: "Je wilt iets groters of volledig op maat" },
+];
+
+// De starterpakketten van kreatives.nl/starter. Prijzen en pagina+aantallen
+// komen één-op-één van die pagina.
+type StarterId = "basis" | "premium" | "ecosysteem";
+
+const STARTER_PAKKETTEN: {
+  value: StarterId;
+  title: string;
+  desc: string;
+  price: number;
+  label: string;
+}[] = [
+  { value: "basis", title: "Eén pagina", desc: "Eén sterke pagina, snel live", price: 695, label: "Starter Basis" },
+  { value: "premium", title: "Tot 5 pagina's", desc: "Home, over, diensten, contact en meer", price: 1495, label: "Starter Premium" },
+  { value: "ecosysteem", title: "Tot 8 pagina's", desc: "Een complete site die aanvragen oplevert", price: 2495, label: "Starter Ecosysteem" },
+];
+
 const jaNee = (
   neeTitle: string,
   neeDesc: string,
@@ -138,6 +161,19 @@ function bereken(
   };
 }
 
+// Starterprijs: één vast pakket, in twee termijnen, geen maandbedrag.
+function berekenStarter(id: StarterId): Result {
+  const p = STARTER_PAKKETTEN.find((x) => x.value === id)!;
+  return {
+    state: "ok",
+    bouw: p.price,
+    perMaand: 0,
+    startVanaf: Math.round(p.price / 2),
+    reden: `${p.label}, ${p.title.toLowerCase()}.`,
+    regels: [{ label: p.label, bedrag: p.price }],
+  };
+}
+
 function Group<T extends string>({
   title,
   name,
@@ -185,6 +221,10 @@ const STAPPEN = ["Jouw gegevens", "Jouw project"];
 export default function Calculator() {
   const [stap, setStap] = useState(0);
   const [lead, setLead] = useState({ naam: "", email: "", bedrijf: "", telefoon: "" });
+  const [situatie, setSituatie] = useState<Situatie | null>(null);
+  const [drieD, setDrieD] = useState<boolean | null>(null);
+  const [plugins, setPlugins] = useState<boolean | null>(null);
+  const [starterPakket, setStarterPakket] = useState<StarterId | null>(null);
   const [type, setType] = useState<Keuze | null>(null);
   const [pagina, setPagina] = useState<Pagina | null>(null);
   const [brandbook, setBrandbook] = useState<boolean | null>(null);
@@ -200,21 +240,53 @@ export default function Calculator() {
       lead.telefoon.trim()
   );
 
-  const r = bereken(type, pagina, brandbook, fotodag, ai, cro, hosting);
+  // Maatwerk als iemand dat zelf kiest, of als een starter 3D of custom
+  // functies wil. Starterpakket alleen als allebei die vragen "nee" zijn.
+  const toonMaatwerk =
+    situatie === "custom" ||
+    (situatie === "start" && (drieD === true || plugins === true));
+  const toonStarterPakket =
+    situatie === "start" && drieD === false && plugins === false;
+
+  const maat = bereken(type, pagina, brandbook, fotodag, ai, cro, hosting);
+  const leeg: Result = {
+    state: "leeg",
+    bouw: 0,
+    perMaand: 0,
+    startVanaf: 0,
+    reden: "",
+    regels: [],
+  };
+  const r: Result = toonMaatwerk
+    ? maat
+    : situatie === "start" && starterPakket
+      ? berekenStarter(starterPakket)
+      : leeg;
+
+  const toonPaneel = r.state === "ok";
+  const bureauPrijs = Math.max(Math.round((r.bouw * 2.5) / 500) * 500, 5000);
 
   const isWebsite = type === "website";
   const isShop = type === "shopify" || type === "woo";
 
   const samenvatting = [
-    type && TYPE_OPTIES.find((o) => o.value === type)?.title,
-    (isWebsite || isShop) &&
+    situatie === "start" && "Begint net",
+    situatie === "custom" && "Heeft al een website",
+    situatie === "start" && drieD === true && "wil 3D-animatie",
+    situatie === "start" && plugins === true && "wil custom functies",
+    toonStarterPakket &&
+      starterPakket &&
+      STARTER_PAKKETTEN.find((p) => p.value === starterPakket)?.label,
+    toonMaatwerk && type && TYPE_OPTIES.find((o) => o.value === type)?.title,
+    toonMaatwerk &&
+      (isWebsite || isShop) &&
       pagina &&
       PAGINA_OPTIES.find((o) => o.value === pagina)?.title,
-    brandbook === true && "brandbook",
-    fotodag === true && "fotodag",
-    ai === true && "AI-beelden",
-    cro === true && "maandelijkse CRO",
-    hosting === true && "hosting bij KREATIVES",
+    toonMaatwerk && brandbook === true && "brandbook",
+    toonMaatwerk && fotodag === true && "fotodag",
+    toonMaatwerk && ai === true && "AI-beelden",
+    toonMaatwerk && cro === true && "maandelijkse CRO",
+    toonMaatwerk && hosting === true && "hosting bij KREATIVES",
   ]
     .filter(Boolean)
     .join(", ");
@@ -355,6 +427,52 @@ export default function Calculator() {
             {stap === 1 && (
               <>
                 <Group
+                  title="Waar sta je nu?"
+                  name="situatie"
+                  value={situatie ?? ""}
+                  onChange={setSituatie}
+                  options={SITUATIE_OPTIES}
+                />
+                {situatie === "start" && (
+                  <Group
+                    title="Wil je een 3D-animatie op je website?"
+                    name="drieD"
+                    value={jaNeeVal(drieD)}
+                    onChange={(v) => setDrieD(v === "ja")}
+                    options={jaNee(
+                      "Nee",
+                      "Een snelle, vlakke site",
+                      "Ja, met 3D",
+                      "Dat wordt maatwerk"
+                    )}
+                  />
+                )}
+                {situatie === "start" && drieD === false && (
+                  <Group
+                    title="Wil je custom plugins of functies?"
+                    name="plugins"
+                    value={jaNeeVal(plugins)}
+                    onChange={(v) => setPlugins(v === "ja")}
+                    options={jaNee(
+                      "Nee",
+                      "Een standaard website",
+                      "Ja, eigen functies",
+                      "Dat wordt maatwerk"
+                    )}
+                  />
+                )}
+                {toonStarterPakket && (
+                  <Group
+                    title="Hoeveel pagina's heb je nodig?"
+                    name="starterPakket"
+                    value={starterPakket ?? ""}
+                    onChange={setStarterPakket}
+                    options={STARTER_PAKKETTEN}
+                  />
+                )}
+                {toonMaatwerk && (
+                  <>
+                <Group
                   title="Wat wil je laten maken?"
                   name="type"
                   value={type ?? ""}
@@ -440,6 +558,8 @@ export default function Calculator() {
                     )}
                   />
                 )}
+                  </>
+                )}
               </>
             )}
           </div>
@@ -468,74 +588,109 @@ export default function Calculator() {
         </div>
 
         <div className={styles.right}>
-          <div className={styles.panel}>
-            <span className={styles.panelEyebrow}>
-              Indicatie van de bouw (excl. btw)
-            </span>
-            {r.state === "ok" ? (
-              <>
+          {toonPaneel && (
+            <>
+              <div className={styles.panel}>
+                <span className={styles.panelEyebrow}>
+                  Indicatie van de bouw (excl. btw)
+                </span>
                 <p className={styles.panelPrice}>{euro(r.bouw)}</p>
                 <p className={styles.panelStart}>
                   Start al vanaf {euro(r.startVanaf)} per termijn
                 </p>
-              </>
-            ) : (
-              <p className={styles.panelPriceCustom}>—</p>
-            )}
-            <p className={styles.panelReden}>{r.reden}</p>
+                <p className={styles.panelReden}>{r.reden}</p>
 
-            <div className={styles.panelRows}>
-              {r.regels.map((rg) => (
-                <div key={rg.label} className={styles.panelRow}>
-                  <span>{rg.label}</span>
-                  <span>
-                    {rg.plus ? "+ " : ""}
-                    {euro(rg.bedrag)}
+                <div className={styles.panelRows}>
+                  {r.regels.map((rg) => (
+                    <div key={rg.label} className={styles.panelRow}>
+                      <span>{rg.label}</span>
+                      <span>
+                        {rg.plus ? "+ " : ""}
+                        {euro(rg.bedrag)}
+                      </span>
+                    </div>
+                  ))}
+                  <div className={`${styles.panelRow} ${styles.panelTotaal}`}>
+                    <span>Totaal</span>
+                    <span>{euro(r.bouw)}</span>
+                  </div>
+                  <div className={styles.panelRow}>
+                    <span>Per maand</span>
+                    <span>{euro(r.perMaand)}</span>
+                  </div>
+                  <div className={styles.panelRow}>
+                    <span>Daarna per jaar</span>
+                    <span>{euro(0)}</span>
+                  </div>
+                </div>
+
+                {verzonden ? (
+                  <p className={styles.panelDank}>
+                    Bedankt, we hebben je aanvraag ontvangen en nemen snel
+                    contact op.
+                  </p>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className={`btn btn-primary ${styles.panelCta}`}
+                      onClick={offerteAanvragen}
+                      disabled={bezig || !leadCompleet}
+                    >
+                      <span className="btn-label">
+                        {bezig ? "Versturen…" : "Ontvang een offerte"}
+                      </span>
+                    </button>
+                    <a
+                      href={CALENDLY}
+                      target="_blank"
+                      rel="nofollow noopener noreferrer"
+                      className={styles.panelCall}
+                    >
+                      Of plan direct een call in
+                    </a>
+                  </>
+                )}
+              </div>
+
+              <div className={styles.vergelijk}>
+                <span className={styles.vergelijkTitle}>
+                  Wat je elders betaalt
+                </span>
+                <div className={styles.vergelijkRij}>
+                  <span className={styles.vergelijkNaam}>
+                    AI-bouwer of goedkope freelancer
+                    <span className={styles.vergelijkNote}>
+                      Een template die je overal terugziet, zonder eigendom.
+                    </span>
+                  </span>
+                  <span className={styles.vergelijkPrijs}>€0 – €500</span>
+                </div>
+                <div
+                  className={`${styles.vergelijkRij} ${styles.vergelijkHier}`}
+                >
+                  <span className={styles.vergelijkNaam}>
+                    Bij KREATIVES
+                    <span className={styles.vergelijkNote}>
+                      Eigen ontwerp, code en copyright. Live of je geld terug.
+                    </span>
+                  </span>
+                  <span className={styles.vergelijkPrijs}>{euro(r.bouw)}</span>
+                </div>
+                <div className={styles.vergelijkRij}>
+                  <span className={styles.vergelijkNaam}>
+                    Een groot bureau
+                    <span className={styles.vergelijkNote}>
+                      Hetzelfde werk, met een accountmanager erbovenop.
+                    </span>
+                  </span>
+                  <span className={styles.vergelijkPrijs}>
+                    {euro(bureauPrijs)}+
                   </span>
                 </div>
-              ))}
-              <div className={`${styles.panelRow} ${styles.panelTotaal}`}>
-                <span>Totaal</span>
-                <span>{r.state === "ok" ? euro(r.bouw) : "—"}</span>
               </div>
-              <div className={styles.panelRow}>
-                <span>Per maand</span>
-                <span>{euro(r.perMaand)}</span>
-              </div>
-              <div className={styles.panelRow}>
-                <span>Daarna per jaar</span>
-                <span>{euro(0)}</span>
-              </div>
-            </div>
-
-            {verzonden ? (
-              <p className={styles.panelDank}>
-                Bedankt, we hebben je aanvraag ontvangen en nemen snel contact
-                op.
-              </p>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  className={`btn btn-primary ${styles.panelCta}`}
-                  onClick={offerteAanvragen}
-                  disabled={bezig || !leadCompleet}
-                >
-                  <span className="btn-label">
-                    {bezig ? "Versturen…" : "Ontvang een offerte"}
-                  </span>
-                </button>
-                <a
-                  href={CALENDLY}
-                  target="_blank"
-                  rel="nofollow noopener noreferrer"
-                  className={styles.panelCall}
-                >
-                  Of plan direct een call in
-                </a>
-              </>
-            )}
-          </div>
+            </>
+          )}
 
           <SocialProof align="left" tone="dark" />
         </div>
