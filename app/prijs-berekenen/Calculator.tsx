@@ -289,7 +289,7 @@ export default function Calculator() {
     situatie === "start" && plugins === true && "wil custom functies",
     toonStarterPakket &&
       starterPakket &&
-      STARTER_PAKKETTEN.find((p) => p.value === starterPakket)?.label,
+      STARTER_PAKKETTEN.find((p) => p.value === starterPakket)?.title,
     toonMaatwerk && type && TYPE_OPTIES.find((o) => o.value === type)?.title,
     toonMaatwerk &&
       (isWebsite || isShop) &&
@@ -304,21 +304,25 @@ export default function Calculator() {
     .filter(Boolean)
     .join(", ");
 
-  // Lead-mail: één notificatie naar KREATIVES, 30s na stap 1 of bij offerte.
+  // Lead-mail: direct zodra de gegevens compleet zijn, en nog een keer
+  // (met de volledige indicatie) wanneer iemand een offerte aanvraagt.
   const [bezig, setBezig] = useState(false);
   const [verzonden, setVerzonden] = useState(false);
-  const sentRef = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const gegevensSent = useRef(false);
+  const offerteSent = useRef(false);
   const dataRef = useRef({ lead, samenvatting, indicatie: "" });
   dataRef.current = {
     lead,
     samenvatting,
-    indicatie: r.state === "ok" ? euro(r.bouw) : "op aanvraag",
+    indicatie:
+      r.state !== "ok"
+        ? "op aanvraag"
+        : toonMaatwerk
+          ? `~${euro(maatLaag)} – ${euro(maatHoog)}`
+          : euro(r.bouw),
   };
 
   const stuurLead = async (fase: string) => {
-    if (sentRef.current) return;
-    sentRef.current = true;
     const d = dataRef.current;
     try {
       await fetch("/api/calculator-lead", {
@@ -339,19 +343,20 @@ export default function Calculator() {
     }
   };
 
+  // Debounce: vang de lead 1,5s nadat iemand klaar is met typen.
   useEffect(() => {
-    if (!leadCompleet) return;
-    timerRef.current = setTimeout(() => {
-      stuurLead("Stap 1 ingevuld, geen offerte binnen 30s");
-    }, 30000);
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
+    if (!leadCompleet || gegevensSent.current) return;
+    const t = setTimeout(() => {
+      gegevensSent.current = true;
+      stuurLead("Gegevens ingevuld op de calculator");
+    }, 1500);
+    return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [leadCompleet]);
+  }, [leadCompleet, lead]);
 
   const offerteAanvragen = async () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
+    if (offerteSent.current) return;
+    offerteSent.current = true;
     setBezig(true);
     await stuurLead("Offerte aangevraagd");
     setBezig(false);
