@@ -45,20 +45,21 @@ const SITUATIE_OPTIES: { value: Situatie; title: string; desc: string }[] = [
   { value: "custom", title: "Ik heb al een website", desc: "Je wilt iets groters of volledig op maat" },
 ];
 
-// De starterpakketten van kreatives.nl/starter. Prijzen en pagina+aantallen
-// komen één-op-één van die pagina.
-type StarterId = "basis" | "premium" | "ecosysteem";
+// De starterpakketten van /starter. Namen, prijzen en termijnen komen
+// één-op-één van die pagina (app/starter/_express/Pakketten.tsx).
+type StarterId = "basis" | "website" | "website-plus";
 
 const STARTER_PAKKETTEN: {
   value: StarterId;
   title: string;
   desc: string;
   price: number;
-  label: string;
+  pages: string;
+  termijn: string;
 }[] = [
-  { value: "basis", title: "Eén pagina", desc: "Eén sterke pagina, snel live", price: 695, label: "Starter Basis" },
-  { value: "premium", title: "Tot 5 pagina's", desc: "Home, over, diensten, contact en meer", price: 1495, label: "Starter Premium" },
-  { value: "ecosysteem", title: "Tot 8 pagina's", desc: "Een complete site die aanvragen oplevert", price: 2495, label: "Starter Ecosysteem" },
+  { value: "basis", title: "Basis", desc: "Eén pagina waar je trots op bent", price: 695, pages: "één pagina", termijn: "€347,50" },
+  { value: "website", title: "Website", desc: "Tot 5 pagina's, home tot contact", price: 1295, pages: "tot 5 pagina's", termijn: "€647,50" },
+  { value: "website-plus", title: "Website Plus", desc: "Tot 8 pagina's naar keuze", price: 1795, pages: "tot 8 pagina's", termijn: "€897,50" },
 ];
 
 const jaNee = (
@@ -169,8 +170,8 @@ function berekenStarter(id: StarterId): Result {
     bouw: p.price,
     perMaand: 0,
     startVanaf: Math.round(p.price / 2),
-    reden: `${p.label}, ${p.title.toLowerCase()}.`,
-    regels: [{ label: p.label, bedrag: p.price }],
+    reden: `${p.title}, ${p.pages}.`,
+    regels: [{ label: p.title, bedrag: p.price }],
   };
 }
 
@@ -264,6 +265,18 @@ export default function Calculator() {
       : leeg;
 
   const toonPaneel = r.state === "ok";
+  const starterData =
+    !toonMaatwerk && starterPakket
+      ? STARTER_PAKKETTEN.find((p) => p.value === starterPakket)
+      : null;
+
+  // Maatwerk is een indicatie: toon een band van €1.000 onder en boven,
+  // met de laagste prijs als vertrekpunt voor de termijnen.
+  const maatLaag = Math.max(r.bouw - 1000, 0);
+  const maatHoog = r.bouw + 1000;
+  const maatTermijn = Math.floor(maatLaag / 4);
+  const maatPerMaand = Math.floor(maatLaag / 12);
+
   const bureauPrijs = Math.max(Math.round((r.bouw * 2.5) / 500) * 500, 5000);
 
   const isWebsite = type === "website";
@@ -441,9 +454,9 @@ export default function Calculator() {
                     onChange={(v) => setDrieD(v === "ja")}
                     options={jaNee(
                       "Nee",
-                      "Een snelle, vlakke site",
-                      "Ja, met 3D",
-                      "Dat wordt maatwerk"
+                      "Wel met micro-animaties",
+                      "Ja, met 3D-animaties",
+                      "Bijvoorbeeld scroll-animaties"
                     )}
                   />
                 )}
@@ -457,18 +470,23 @@ export default function Calculator() {
                       "Nee",
                       "Een standaard website",
                       "Ja, eigen functies",
-                      "Dat wordt maatwerk"
+                      "Bijv. boekingen of een login"
                     )}
                   />
                 )}
                 {toonStarterPakket && (
-                  <Group
-                    title="Hoeveel pagina's heb je nodig?"
-                    name="starterPakket"
-                    value={starterPakket ?? ""}
-                    onChange={setStarterPakket}
-                    options={STARTER_PAKKETTEN}
-                  />
+                  <>
+                    <Group
+                      title="Welk pakket past bij jou?"
+                      name="starterPakket"
+                      value={starterPakket ?? ""}
+                      onChange={setStarterPakket}
+                      options={STARTER_PAKKETTEN}
+                    />
+                    <a href="/starter#pakketten" className={styles.pakketLink}>
+                      Bekijk het volledige pakket hier
+                    </a>
+                  </>
                 )}
                 {toonMaatwerk && (
                   <>
@@ -594,10 +612,27 @@ export default function Calculator() {
                 <span className={styles.panelEyebrow}>
                   Indicatie van de bouw (excl. btw)
                 </span>
-                <p className={styles.panelPrice}>{euro(r.bouw)}</p>
-                <p className={styles.panelStart}>
-                  Start al vanaf {euro(r.startVanaf)} per termijn
-                </p>
+                {toonMaatwerk ? (
+                  <>
+                    <p className={styles.panelPriceCustom}>
+                      ~{euro(maatLaag)} – {euro(maatHoog)}
+                    </p>
+                    <p className={styles.panelStart}>
+                      Start al vanaf {euro(maatTermijn)} per termijn
+                    </p>
+                    <p className={styles.panelStart}>
+                      Of betaal in termijnen van {euro(maatPerMaand)} per maand
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className={styles.panelPrice}>{euro(r.bouw)}</p>
+                    <p className={styles.panelStart}>
+                      Start al vanaf {starterData?.termijn ?? euro(r.startVanaf)}{" "}
+                      per termijn
+                    </p>
+                  </>
+                )}
                 <p className={styles.panelReden}>{r.reden}</p>
 
                 <div className={styles.panelRows}>
@@ -624,30 +659,44 @@ export default function Calculator() {
                   </div>
                 </div>
 
-                {verzonden ? (
-                  <p className={styles.panelDank}>
-                    Bedankt, we hebben je aanvraag ontvangen en nemen snel
-                    contact op.
-                  </p>
+                {toonMaatwerk ? (
+                  verzonden ? (
+                    <p className={styles.panelDank}>
+                      Bedankt, we hebben je aanvraag ontvangen en nemen snel
+                      contact op.
+                    </p>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className={`btn btn-primary ${styles.panelCta}`}
+                        onClick={offerteAanvragen}
+                        disabled={bezig || !leadCompleet}
+                      >
+                        <span className="btn-label">
+                          {bezig ? "Versturen…" : "Ontvang een offerte"}
+                        </span>
+                      </button>
+                      <a
+                        href={CALENDLY}
+                        target="_blank"
+                        rel="nofollow noopener noreferrer"
+                        className={styles.panelCall}
+                      >
+                        Of plan direct een call in
+                      </a>
+                    </>
+                  )
                 ) : (
                   <>
-                    <button
-                      type="button"
-                      className={`btn btn-primary ${styles.panelCta}`}
-                      onClick={offerteAanvragen}
-                      disabled={bezig || !leadCompleet}
-                    >
-                      <span className="btn-label">
-                        {bezig ? "Versturen…" : "Ontvang een offerte"}
-                      </span>
-                    </button>
                     <a
-                      href={CALENDLY}
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      className={styles.panelCall}
+                      href="/starter#pakketten"
+                      className={`btn btn-primary ${styles.panelCta}`}
                     >
-                      Of plan direct een call in
+                      <span className="btn-label">Bekijk pakketten</span>
+                    </a>
+                    <a href="/starter#pakketten" className={styles.panelCall}>
+                      Bekijk het volledige pakket
                     </a>
                   </>
                 )}
@@ -675,7 +724,10 @@ export default function Calculator() {
                       Eigen ontwerp, code en copyright. Live of je geld terug.
                     </span>
                   </span>
-                  <span className={styles.vergelijkPrijs}>{euro(r.bouw)}</span>
+                  <span className={styles.vergelijkPrijs}>
+                    {toonMaatwerk ? "~" : ""}
+                    {euro(r.bouw)}
+                  </span>
                 </div>
                 <div className={styles.vergelijkRij}>
                   <span className={styles.vergelijkNaam}>

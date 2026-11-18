@@ -397,6 +397,22 @@
   color: var(--text);
 }
 
+/* Link onder de starterpakketten naar de volledige /starter-pagina. */
+.pakketLink {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: -0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pakketLink:hover {
+  color: var(--on-dark);
+}
+
 /* ---------- Vergelijking (op donkere shell) ---------- */
 .vergelijk {
   display: flex;
