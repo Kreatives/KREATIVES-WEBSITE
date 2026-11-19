@@ -479,7 +479,7 @@
   }
   .right {
     position: static;
-    order: -1;
+    order: 1;
   }
   .stepBody {
     min-height: 0;
