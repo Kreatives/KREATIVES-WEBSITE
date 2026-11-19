@@ -271,11 +271,13 @@ export default function Calculator() {
       : null;
 
   // Maatwerk is een indicatie: toon een band van €1.000 onder en boven,
-  // met de laagste prijs als vertrekpunt voor de termijnen.
-  const maatLaag = Math.max(r.bouw - 1000, 0);
+  // met de laagste prijs als vertrekpunt voor de termijnen. De ondergrens
+  // zakt nooit onder €1.295 (anders komt er een onlogisch lage schatting uit).
+  const maatLaag = Math.max(r.bouw - 1000, 1295);
   const maatHoog = r.bouw + 1000;
-  const maatTermijn = Math.floor(maatLaag / 4);
-  const maatPerMaand = Math.floor(maatLaag / 12);
+  // Hooguit twee termijnen, en onder €2.000 bieden we geen termijnen aan.
+  const maatTermijnen = r.bouw >= 2000;
+  const maatTermijn = Math.floor(maatLaag / 2);
 
   const bureauPrijs = Math.max(Math.round((r.bouw * 2.5) / 500) * 500, 5000);
 
@@ -622,12 +624,11 @@ export default function Calculator() {
                     <p className={styles.panelPriceCustom}>
                       ~{euro(maatLaag)} – {euro(maatHoog)}
                     </p>
-                    <p className={styles.panelStart}>
-                      Start al vanaf {euro(maatTermijn)} per termijn
-                    </p>
-                    <p className={styles.panelStart}>
-                      Of betaal in termijnen van {euro(maatPerMaand)} per maand
-                    </p>
+                    {maatTermijnen && (
+                      <p className={styles.panelStart}>
+                        Of betaal in twee termijnen vanaf {euro(maatTermijn)}
+                      </p>
+                    )}
                   </>
                 ) : (
                   <>
