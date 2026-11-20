@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendContactMail, mailerConfigured } from "@/lib/mailer";
+import { valideerLead } from "@/lib/lead-validation";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -25,8 +26,9 @@ export async function POST(req: NextRequest) {
   const indicatie = String(raw?.indicatie ?? "").trim();
   const fase = String(raw?.fase ?? "").trim();
 
-  if (!naam || !email.includes("@")) {
-    return NextResponse.json({ ok: false, error: "incomplete" }, { status: 400 });
+  const fouten = valideerLead({ naam, email, telefoon, bedrijf });
+  if (Object.keys(fouten).length > 0) {
+    return NextResponse.json({ ok: false, error: "invalid", fouten }, { status: 400 });
   }
   if (!mailerConfigured()) {
     return NextResponse.json({ ok: false, error: "mailer" }, { status: 500 });

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import SocialProof from "@/components/SocialProof";
 import { CALENDLY } from "@/lib/site";
+import { valideerLead, type LeadVeld } from "@/lib/lead-validation";
 import styles from "./calculator.module.css";
 
 /* ------------------------------------------------------------------
@@ -234,12 +235,22 @@ export default function Calculator() {
   const [cro, setCro] = useState<boolean | null>(null);
   const [hosting, setHosting] = useState<boolean | null>(null);
 
-  const leadCompleet = Boolean(
-    lead.naam.trim() &&
-      lead.email.includes("@") &&
-      lead.bedrijf.trim() &&
-      lead.telefoon.trim()
-  );
+  // Echte validatie: geldige naam, e-mail, bedrijf én telefoonnummer.
+  const fouten = valideerLead(lead);
+  const leadCompleet = Object.keys(fouten).length === 0;
+
+  // Foutmelding pas tonen nadat iemand een veld verlaten heeft (blur), niet
+  // al tijdens het eerste typen.
+  const [aangeraakt, setAangeraakt] = useState<Record<LeadVeld, boolean>>({
+    naam: false,
+    email: false,
+    telefoon: false,
+    bedrijf: false,
+  });
+  const markeerAangeraakt = (veld: LeadVeld) =>
+    setAangeraakt((v) => ({ ...v, [veld]: true }));
+  const foutVoor = (veld: LeadVeld) =>
+    aangeraakt[veld] ? fouten[veld] : undefined;
 
   // Maatwerk als iemand dat zelf kiest, of als een starter 3D of custom
   // functies wil. Starterpakket alleen als allebei die vragen "nee" zijn.
@@ -369,6 +380,16 @@ export default function Calculator() {
     if (i === 0 || leadCompleet) setStap(i);
   };
 
+  // "Volgende": is alles geldig, ga door; zo niet, laat de fouten zien zodat
+  // iemand weet wat er misgaat in plaats van een dode knop.
+  const probeerVolgende = () => {
+    if (leadCompleet) {
+      setStap((s) => s + 1);
+    } else {
+      setAangeraakt({ naam: true, email: true, telefoon: true, bedrijf: true });
+    }
+  };
+
   return (
     <div className={styles.shell}>
       <div className={`cosmos-bg ${styles.shellBg}`} aria-hidden />
@@ -400,46 +421,66 @@ export default function Calculator() {
                 <label className={styles.field}>
                   <span className={styles.fieldLabel}>Naam</span>
                   <input
-                    className={styles.input}
+                    className={`${styles.input} ${foutVoor("naam") ? styles.inputFout : ""}`}
                     type="text"
                     required
                     value={lead.naam}
                     onChange={(e) => setLead({ ...lead, naam: e.target.value })}
+                    onBlur={() => markeerAangeraakt("naam")}
+                    aria-invalid={Boolean(foutVoor("naam"))}
                     placeholder="Je naam"
                   />
+                  {foutVoor("naam") && (
+                    <span className={styles.veldFout}>{foutVoor("naam")}</span>
+                  )}
                 </label>
                 <label className={styles.field}>
                   <span className={styles.fieldLabel}>E-mailadres</span>
                   <input
-                    className={styles.input}
+                    className={`${styles.input} ${foutVoor("email") ? styles.inputFout : ""}`}
                     type="email"
                     required
                     value={lead.email}
                     onChange={(e) => setLead({ ...lead, email: e.target.value })}
+                    onBlur={() => markeerAangeraakt("email")}
+                    aria-invalid={Boolean(foutVoor("email"))}
                     placeholder="naam@bedrijf.nl"
                   />
+                  {foutVoor("email") && (
+                    <span className={styles.veldFout}>{foutVoor("email")}</span>
+                  )}
                 </label>
                 <label className={styles.field}>
                   <span className={styles.fieldLabel}>Bedrijf</span>
                   <input
-                    className={styles.input}
+                    className={`${styles.input} ${foutVoor("bedrijf") ? styles.inputFout : ""}`}
                     type="text"
                     required
                     value={lead.bedrijf}
                     onChange={(e) => setLead({ ...lead, bedrijf: e.target.value })}
+                    onBlur={() => markeerAangeraakt("bedrijf")}
+                    aria-invalid={Boolean(foutVoor("bedrijf"))}
                     placeholder="Je bedrijfsnaam"
                   />
+                  {foutVoor("bedrijf") && (
+                    <span className={styles.veldFout}>{foutVoor("bedrijf")}</span>
+                  )}
                 </label>
                 <label className={styles.field}>
                   <span className={styles.fieldLabel}>Telefoon</span>
                   <input
-                    className={styles.input}
+                    className={`${styles.input} ${foutVoor("telefoon") ? styles.inputFout : ""}`}
                     type="tel"
                     required
                     value={lead.telefoon}
                     onChange={(e) => setLead({ ...lead, telefoon: e.target.value })}
+                    onBlur={() => markeerAangeraakt("telefoon")}
+                    aria-invalid={Boolean(foutVoor("telefoon"))}
                     placeholder="Je telefoonnummer"
                   />
+                  {foutVoor("telefoon") && (
+                    <span className={styles.veldFout}>{foutVoor("telefoon")}</span>
+                  )}
                 </label>
               </div>
             )}
@@ -603,8 +644,7 @@ export default function Calculator() {
               <button
                 type="button"
                 className={styles.navNext}
-                disabled={!leadCompleet}
-                onClick={() => setStap(stap + 1)}
+                onClick={probeerVolgende}
               >
                 Volgende
               </button>

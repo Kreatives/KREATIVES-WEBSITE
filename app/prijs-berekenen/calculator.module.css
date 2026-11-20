@@ -240,6 +240,15 @@
   outline: none;
   border-color: var(--orange);
 }
+.inputFout,
+.inputFout:focus {
+  border-color: #e06a5a;
+}
+.veldFout {
+  font-size: 0.8rem;
+  letter-spacing: -0.02em;
+  color: #e9a194;
+}
 
 .shopNote {
   font-size: 0.95rem;
