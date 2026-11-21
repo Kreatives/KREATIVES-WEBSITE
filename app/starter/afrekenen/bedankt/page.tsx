@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { createMollieClient } from "@mollie/api-client";
+import PurchaseTracker from "./PurchaseTracker";
 import styles from "../checkout.module.css";
 
 export const metadata: Metadata = {
@@ -14,8 +15,11 @@ type View = {
   title: string;
   body: string;
   amount?: string;
+  amountValue?: number;
   desc?: string;
   intakeHref?: string;
+  paymentId?: string;
+  pakket?: string;
 };
 
 async function resolve(): Promise<View> {
@@ -48,8 +52,11 @@ async function resolve(): Promise<View> {
         title: "Betaling gelukt",
         body: "Je bestelling staat klaar. Je ontvangt een bevestiging per e-mail. Vul nu de intake in, zodat ik je website kan ontwerpen.",
         amount,
+        amountValue: Number(p.amount.value),
         desc: p.description,
         intakeHref: `/starter/intake${qs ? `?${qs}` : ""}`,
+        paymentId: p.id,
+        pakket,
       };
     }
     if (p.status === "open" || p.status === "pending" || p.status === "authorized") {
@@ -83,6 +90,13 @@ export default async function Bedankt() {
 
   return (
     <div className={styles.wrap}>
+      {ok && v.amountValue != null && (
+        <PurchaseTracker
+          value={v.amountValue}
+          paymentId={v.paymentId}
+          pakket={v.pakket}
+        />
+      )}
       <div className={styles.emailPage}>
         <div className={styles.emailCard} style={{ textAlign: "center", alignItems: "center" }}>
           <span

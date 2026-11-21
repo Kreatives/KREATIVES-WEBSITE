@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { packages, upsells, type Pakket } from "./data";
+import { trackPixel } from "@/lib/meta-pixel";
 import styles from "./starters.module.css";
 
 function Check() {
@@ -39,7 +40,17 @@ function Kaart({ p }: { p: Pakket }) {
       </p>
       <p className={styles.pakTermijn}>{p.termijn}</p>
 
-      <Link href={`/starter/afrekenen?pakket=${p.id}`} className={styles.pakCta}>
+      <Link
+        href={`/starter/afrekenen?pakket=${p.id}`}
+        className={styles.pakCta}
+        onClick={() =>
+          trackPixel("InitiateCheckout", {
+            value: Number(p.priceNumber),
+            currency: "EUR",
+            content_name: p.name,
+          })
+        }
+      >
         <span>Dit pakket afrekenen</span>
         <svg viewBox="0 0 16 16" fill="none" aria-hidden>
           <path

@@ -9,6 +9,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import BookCallButton from "@/components/BookCallButton";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -211,6 +212,7 @@ gtag('config', '${GA_ID}');`}
             <BookCallButton />
           </SmoothScroll>
         )}
+        <CookieConsent />
         <Analytics />
         <AnalyticsListeners />
       </body>

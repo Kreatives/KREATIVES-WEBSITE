@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import SocialProof from "@/components/SocialProof";
 import { CALENDLY } from "@/lib/site";
 import { valideerLead, type LeadVeld } from "@/lib/lead-validation";
+import { trackPixel } from "@/lib/meta-pixel";
 import styles from "./calculator.module.css";
 
 /* ------------------------------------------------------------------
@@ -323,6 +324,7 @@ export default function Calculator() {
   const [verzonden, setVerzonden] = useState(false);
   const gegevensSent = useRef(false);
   const offerteSent = useRef(false);
+  const leadGetrackt = useRef(false);
   const dataRef = useRef({ lead, samenvatting, indicatie: "" });
   dataRef.current = {
     lead,
@@ -338,7 +340,7 @@ export default function Calculator() {
   const stuurLead = async (fase: string) => {
     const d = dataRef.current;
     try {
-      await fetch("/api/calculator-lead", {
+      const res = await fetch("/api/calculator-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -351,6 +353,11 @@ export default function Calculator() {
           fase,
         }),
       });
+      // Meta Lead: één keer, zodra de lead voor het eerst goed is verstuurd.
+      if (res.ok && !leadGetrackt.current) {
+        leadGetrackt.current = true;
+        trackPixel("Lead", { content_name: "Prijscalculator" });
+      }
     } catch {
       // stil falen
     }
