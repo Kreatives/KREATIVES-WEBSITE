@@ -13,6 +13,16 @@ export default function CheckoutEmail({ pakketId }: { pakketId: string }) {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    // Melding naar KREATIVES dat er een opt-in binnen is. Fire-and-forget met
+    // keepalive, zodat de call de navigatie hieronder overleeft.
+    if (email) {
+      fetch("/api/starter-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, pakket: pkg.id }),
+        keepalive: true,
+      }).catch(() => {});
+    }
     const q = `pakket=${pkg.id}${email ? `&email=${encodeURIComponent(email)}` : ""}`;
     router.push(`/starter/afrekenen/opties?${q}`);
   }
