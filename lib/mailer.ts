@@ -63,6 +63,38 @@ export async function sendConfirmationMail(data: ContactMail): Promise<void> {
   });
 }
 
+// ---------- Starter opt-in (e-mail vóór afrekenen) ----------
+
+export type StarterLeadData = {
+  email: string;
+  pakketName: string; // bv. "Website Plus"
+  pakketPrice: string; // geformatteerd, bv. "€1.795"
+};
+
+/**
+ * Interne melding naar KREATIVES dat iemand zijn e-mailadres heeft achtergelaten
+ * op de afreken-pagina. Het gekozen pakket staat vooraan in het onderwerp, zodat
+ * je in je inbox meteen ziet wat er is geklikt.
+ */
+export async function sendStarterLeadNotification(d: StarterLeadData): Promise<void> {
+  if (!mailerConfigured()) return;
+  const text = [
+    "Nieuwe opt-in via /starter/afrekenen.",
+    "Iemand heeft zijn e-mailadres achtergelaten, maar nog niet afgerekend.",
+    "",
+    `Gekozen pakket: ${d.pakketName} (${d.pakketPrice})`,
+    `E-mailadres: ${d.email}`,
+  ].join("\n");
+  await transport().sendMail({
+    from: `"KREATIVES opt-in" <${user}>`,
+    to,
+    replyTo: d.email ? `<${d.email}>` : undefined,
+    subject: `Opt-in ${d.pakketName} (${d.pakketPrice}) — ${d.email}`,
+    text,
+    html: asHtml(text),
+  });
+}
+
 // ---------- Bestelbevestiging (Express-checkout) ----------
 
 export type OrderMailData = {

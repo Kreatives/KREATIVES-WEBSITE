@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendContactMail, mailerConfigured } from "@/lib/mailer";
+import { sendStarterLeadNotification, mailerConfigured } from "@/lib/mailer";
 import { valideerEmail } from "@/lib/lead-validation";
 import { findPakket, euroShort } from "@/app/starter/afrekenen/checkout-express-data";
 
@@ -32,20 +32,11 @@ export async function POST(req: NextRequest) {
 
   const pkg = findPakket(pakketId);
 
-  const message = [
-    "Iemand heeft zijn e-mailadres achtergelaten op de afreken-pagina,",
-    "maar nog niet afgerekend.",
-    "",
-    `Gekozen pakket: ${pkg.name} (${euroShort(pkg.price)})`,
-  ].join("\n");
-
   try {
-    await sendContactMail({
-      name: email,
+    await sendStarterLeadNotification({
       email,
-      subject: `Opt-in op /starter — ${pkg.name}`,
-      message,
-      source: "starter opt-in",
+      pakketName: pkg.name,
+      pakketPrice: euroShort(pkg.price),
     });
   } catch (e) {
     console.error("[starter-lead] mail faalde:", e);
