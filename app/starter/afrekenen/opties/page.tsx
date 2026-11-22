@@ -11,13 +11,15 @@ export const metadata: Metadata = {
 export default async function CheckoutStap2({
   searchParams,
 }: {
-  searchParams: Promise<{ pakket?: string; email?: string }>;
+  searchParams: Promise<{ pakket?: string }>;
 }) {
-  const { pakket, email } = await searchParams;
+  const { pakket } = await searchParams;
+  // De e-mail komt niet meer via de URL binnen (geen PII in de URL), maar uit
+  // sessionStorage — CheckoutOpties leest 'm client-side om voor te vullen.
   return (
     <>
       <RevealInit />
-      <CheckoutOpties pakketId={findPakket(pakket).id} email={email ?? ""} />
+      <CheckoutOpties pakketId={findPakket(pakket).id} />
     </>
   );
 }

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { findPakket, euroShort } from "./checkout-express-data";
+import { findPakket, euroShort, EMAIL_STORAGE_KEY } from "./checkout-express-data";
+import { trackStarterStep } from "@/lib/starter-funnel";
 import styles from "./checkout.module.css";
 
 export default function CheckoutEmail({ pakketId }: { pakketId: string }) {
@@ -13,18 +14,28 @@ export default function CheckoutEmail({ pakketId }: { pakketId: string }) {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    // Melding naar KREATIVES dat er een opt-in binnen is. Fire-and-forget met
-    // keepalive, zodat de call de navigatie hieronder overleeft.
     if (email) {
+      // Melding naar KREATIVES dat er een opt-in binnen is. Fire-and-forget met
+      // keepalive, zodat de call de navigatie hieronder overleeft.
       fetch("/api/starter-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, pakket: pkg.id }),
         keepalive: true,
       }).catch(() => {});
+      // E-mail bewaren voor de checkout zonder 'm in de URL te zetten.
+      try {
+        window.sessionStorage.setItem(EMAIL_STORAGE_KEY, email);
+      } catch {
+        // storage niet beschikbaar — dan vult de klant 'm straks zelf in
+      }
+      // Funnel-stap: StarterEmailSubmitted (met pakket, één keer per sessie).
+      trackStarterStep("StarterEmailSubmitted", {
+        pakket: pkg.id,
+        onceKey: "email-submitted",
+      });
     }
-    const q = `pakket=${pkg.id}${email ? `&email=${encodeURIComponent(email)}` : ""}`;
-    router.push(`/starter/afrekenen/opties?${q}`);
+    router.push(`/starter/afrekenen/opties?pakket=${pkg.id}`);
   }
 
   return (

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import StarterLink from "./StarterLink";
 import styles from "./express.module.css";
 
 const CARDS = [
@@ -38,14 +38,14 @@ export default function KiesMens() {
               AI maakt in tien seconden een website, en dat zie je eraan af.
               Klanten merken of er iemand over heeft nagedacht.
             </p>
-            <Link href="#pakketten" className={`${styles.btn} ${styles.mensBtn}`}>
+            <StarterLink href="#pakketten" className={`${styles.btn} ${styles.mensBtn}`}>
               Bekijk pakketten
               <span className={styles.btnArrow} aria-hidden>
                 <svg viewBox="0 0 18 18" fill="none">
                   <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
-            </Link>
+            </StarterLink>
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import StarterLink from "./StarterLink";
 import styles from "./express.module.css";
 
 const CARDS = [
@@ -55,14 +55,14 @@ export default function Beloftes() {
         </div>
 
         <div className={styles.belofteCta}>
-          <Link href="#pakketten" className={styles.btn}>
+          <StarterLink href="#pakketten" className={styles.btn}>
             Bekijk pakketten
             <span className={styles.btnArrow} aria-hidden>
               <svg viewBox="0 0 18 18" fill="none">
                 <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-          </Link>
+          </StarterLink>
           <p className={styles.belofteCtaNote}>
             Bevalt het ontwerp niet? Dan krijg je je aanbetaling terug.
           </p>

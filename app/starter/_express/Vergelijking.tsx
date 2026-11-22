@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { CALENDLY } from "@/lib/site";
+import { trackStarterStep } from "@/lib/starter-funnel";
 import styles from "./express.module.css";
 
 type Val = boolean | string;
@@ -73,7 +74,17 @@ function Cta({ plan, orange }: { plan: typeof EXPRESS; orange?: boolean }) {
     </>
   );
   return plan.href.startsWith("#") ? (
-    <Link href={plan.href} className={cls}>{inner}</Link>
+    <Link
+      href={plan.href}
+      className={cls}
+      onClick={() =>
+        trackStarterStep("StarterPackagesClicked", {
+          onceKey: "packages-clicked",
+        })
+      }
+    >
+      {inner}
+    </Link>
   ) : (
     <a href={plan.href} className={cls} target="_blank" rel="noopener noreferrer">{inner}</a>
   );

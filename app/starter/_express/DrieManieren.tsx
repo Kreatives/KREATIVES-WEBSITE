@@ -1,4 +1,4 @@
-import Link from "next/link";
+import StarterLink from "./StarterLink";
 import styles from "./express.module.css";
 
 function X() {
@@ -91,10 +91,10 @@ export default function DrieManieren() {
             <p className={styles.compCardDesc}>
               Eerste ontwerp binnen 48 uur. Betalen kan in twee termijnen.
             </p>
-            <Link href="#pakketten" className={styles.cardBtn}>
+            <StarterLink href="#pakketten" className={styles.cardBtn}>
               <span className={styles.lbl}>Bekijk pakketten</span>
               <Arrow />
-            </Link>
+            </StarterLink>
             <hr className={styles.compLineDark} style={{ border: 0, borderTop: "1px solid rgba(255,255,255,0.15)", width: "100%", margin: 0 }} />
             <ul className={styles.compListDark}>
               {MID.map((p) => (

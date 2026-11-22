@@ -17,6 +17,11 @@ function getFbq(): Fbq | null {
   return typeof fbq === "function" ? fbq : null;
 }
 
+/** True zodra de pixel geladen is — dus alleen na toestemming. */
+export function pixelActief(): boolean {
+  return getFbq() !== null;
+}
+
 export function heeftCookieToestemming(): boolean {
   if (typeof window === "undefined") return false;
   try {
@@ -75,10 +80,31 @@ export function trackPixel(
   params?: Record<string, unknown>,
   eventId?: string
 ): void {
+  vuur("track", event, params, eventId);
+}
+
+/**
+ * Zoals trackPixel, maar voor eigen (niet-standaard) events. Meta wil deze via
+ * "trackCustom" binnenkrijgen, anders ziet het ze als een onbekend standaard-event.
+ */
+export function trackPixelCustom(
+  event: string,
+  params?: Record<string, unknown>,
+  eventId?: string
+): void {
+  vuur("trackCustom", event, params, eventId);
+}
+
+function vuur(
+  methode: "track" | "trackCustom",
+  event: string,
+  params?: Record<string, unknown>,
+  eventId?: string
+): void {
   const fbq = getFbq();
   if (!fbq) return;
   const opts = eventId ? { eventID: eventId } : undefined;
-  if (params && opts) fbq("track", event, params, opts);
-  else if (params) fbq("track", event, params);
-  else fbq("track", event);
+  if (params && opts) fbq(methode, event, params, opts);
+  else if (params) fbq(methode, event, params);
+  else fbq(methode, event);
 }

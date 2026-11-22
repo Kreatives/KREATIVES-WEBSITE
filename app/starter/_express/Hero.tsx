@@ -1,4 +1,4 @@
-import Link from "next/link";
+import StarterLink from "./StarterLink";
 import styles from "./express.module.css";
 
 const DEVICES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -58,7 +58,7 @@ export default function Hero() {
         </p>
 
         <div className={styles.ctaBlock}>
-          <Link href="#pakketten" className={styles.btn}>
+          <StarterLink href="#pakketten" className={styles.btn}>
             Bekijk pakketten
             <span className={styles.btnArrow} aria-hidden>
               <svg viewBox="0 0 18 18" fill="none">
@@ -71,7 +71,7 @@ export default function Hero() {
                 />
               </svg>
             </span>
-          </Link>
+          </StarterLink>
           <ul className={styles.checks}>
             {CHECKS.map((c) => (
               <li key={c}>

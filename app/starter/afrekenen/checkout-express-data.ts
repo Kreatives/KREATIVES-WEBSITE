@@ -1,6 +1,10 @@
 // Dynamische checkout-data per pakket (KREATIVES Express).
 // Bedragen eenmalig, excl. gedoe: btw 21%, totaal, en de eerste termijn (helft).
 
+// sessionStorage-sleutel waarin het e-mailadres uit de opt-in staat. Zo blijft
+// het vooringevuld in de checkout zonder dat het in de URL komt te staan.
+export const EMAIL_STORAGE_KEY = "kreatives-checkout-email";
+
 export type Addon = { id: string; label: string; desc: string; price: number };
 
 // Een regel in "Je bestelling". `plus` = de opgewaardeerde variant bij het "+"-pakket

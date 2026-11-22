@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { findPakket, totals, euro, euroShort } from "../checkout-express-data";
+import {
+  findPakket,
+  totals,
+  euro,
+  euroShort,
+  EMAIL_STORAGE_KEY,
+} from "../checkout-express-data";
+import { trackStarterStep } from "@/lib/starter-funnel";
 import styles from "../checkout.module.css";
 
 function Check({ orange }: { orange?: boolean }) {
@@ -37,13 +44,7 @@ function Steps() {
   );
 }
 
-export default function CheckoutOpties({
-  pakketId,
-  email = "",
-}: {
-  pakketId: string;
-  email?: string;
-}) {
+export default function CheckoutOpties({ pakketId }: { pakketId: string }) {
   const pkg = findPakket(pakketId);
   const [usePlus, setUsePlus] = useState(false);
   const [plan, setPlan] = useState<"full" | "split">("full");
@@ -54,7 +55,7 @@ export default function CheckoutOpties({
   const [form, setForm] = useState({
     voornaam: "",
     achternaam: "",
-    email: email,
+    email: "",
     telefoon: "",
     bedrijf: "",
     straat: "",
@@ -66,6 +67,16 @@ export default function CheckoutOpties({
   const setField =
     (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  // Vul de e-mail voor vanuit de opt-in (via sessionStorage, niet via de URL).
+  useEffect(() => {
+    try {
+      const opgeslagen = window.sessionStorage.getItem(EMAIL_STORAGE_KEY);
+      if (opgeslagen) setForm((f) => (f.email ? f : { ...f, email: opgeslagen }));
+    } catch {
+      // storage niet beschikbaar — klant vult de e-mail dan zelf in
+    }
+  }, []);
 
   // Zet de achtergrond vast zolang de gegevens-modal open is, zodat je in het
   // formulier kunt scrollen in plaats van de pagina eronder.
@@ -89,10 +100,21 @@ export default function CheckoutOpties({
   function openForm() {
     setErr("");
     setShowForm(true);
+    // Funnel-stap: de gegevens-modal (eerste oranje knop) is geopend.
+    trackStarterStep("StarterBillingOpened", {
+      pakket: pkg.id,
+      onceKey: `billing-${pkg.id}`,
+    });
   }
 
   async function pay(e: React.FormEvent) {
     e.preventDefault();
+    // Funnel-stap: verplichte gegevens geldig ingevuld (native validatie van het
+    // formulier heeft dit al afgedwongen) en op de oranje knop naar Mollie geklikt.
+    trackStarterStep("StarterPaymentSubmitted", {
+      pakket: pkg.id,
+      onceKey: `payment-${pkg.id}`,
+    });
     setLoading(true);
     setErr("");
     try {

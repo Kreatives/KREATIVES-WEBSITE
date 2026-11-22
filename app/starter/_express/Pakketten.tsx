@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { findPakket } from "@/app/starter/afrekenen/checkout-express-data";
+import { trackPakketKeuze } from "@/lib/starter-funnel";
 import styles from "./express.module.css";
 
 function Check({ white }: { white?: boolean }) {
@@ -129,7 +133,11 @@ export default function Pakketten() {
                 <div className={styles.pakTerm}>{p.term}</div>
               </div>
               <div>
-                <Link href={`/starter/afrekenen?pakket=${p.id}`} className={`${styles.pakBtn} ${BTN_CLASS[p.theme]}`}>
+                <Link
+                  href={`/starter/afrekenen?pakket=${p.id}`}
+                  className={`${styles.pakBtn} ${BTN_CLASS[p.theme]}`}
+                  onClick={() => trackPakketKeuze(p.id, findPakket(p.id).price)}
+                >
                   <span className={styles.lbl}>{p.cta}</span>
                   <span className={styles.pakBtnArrow} aria-hidden><Arrow /></span>
                 </Link>
