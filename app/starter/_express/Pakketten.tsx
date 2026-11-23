@@ -110,10 +110,19 @@ export default function Pakketten() {
       <div className={styles.container}>
         <div className={styles.pakHead}>
           <span className={styles.pill}>Pakketten</span>
-          <h2 className={styles.pakTitle}>
-            Kies wat je nodig hebt.{" "}
-            <span className={styles.accent}>De prijs staat vast.</span>
-          </h2>
+          <div className={styles.pakTitleRow}>
+            <h2 className={styles.pakTitle}>
+              Kies wat je nodig hebt.{" "}
+              <span className={styles.accent}>De prijs staat vast.</span>
+            </h2>
+            <a
+              href="https://wa.me/31613066250?text=Hoi%20Ricky%2C%20ik%20twijfel%20welk%20pakket%20bij%20me%20past."
+              className={styles.pakTwijfel}
+            >
+              Twijfel je welk pakket past?{" "}
+              <span className={styles.pakTwijfelLink}>App Ricky</span>
+            </a>
+          </div>
         </div>
 
         <div className={styles.pakGrid}>

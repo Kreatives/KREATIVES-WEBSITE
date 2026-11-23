@@ -918,6 +918,38 @@
   line-height: 1.05;
   max-width: 420px;
 }
+/* Titel + 'App Ricky': mobiel onder elkaar (link vóór de eerste kaart),
+   op desktop de link rechts naast de titel. */
+.pakTitleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.pakTwijfel {
+  font-size: 0.95rem;
+  color: #595959;
+  text-decoration: none;
+}
+.pakTwijfelLink {
+  color: #111;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pakTwijfel:hover .pakTwijfelLink {
+  color: #fe6d17;
+}
+@media (min-width: 860px) {
+  .pakTitleRow {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.4rem;
+  }
+  .pakTwijfel {
+    white-space: nowrap;
+  }
+}
 .pakGrid {
   display: grid;
   grid-template-columns: 1fr 1.06fr 1fr;
