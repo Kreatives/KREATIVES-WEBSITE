@@ -15,6 +15,7 @@ import OverRicky from "./_express/OverRicky";
 import KiesMens from "./_express/KiesMens";
 import FaqExpress from "./_express/FaqExpress";
 import Vergelijking from "./_express/Vergelijking";
+import WhatsAppWidget from "./_express/WhatsAppWidget";
 import Footer from "@/components/Footer";
 import styles from "./_express/express.module.css";
 
@@ -63,6 +64,7 @@ export default function StarterPage() {
         <Vergelijking />
       </main>
       <Footer />
+      <WhatsAppWidget />
     </>
   );
 }

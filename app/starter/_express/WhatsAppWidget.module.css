@@ -1,0 +1,94 @@
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  height: 60px;
+  border-radius: 999px;
+  background: #fe6d17;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(254, 109, 23, 0.38), 0 2px 8px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  animation: waIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(254, 109, 23, 0.46), 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fab:focus-visible {
+  outline: 3px solid rgba(254, 109, 23, 0.4);
+  outline-offset: 3px;
+}
+
+/* Vast vierkant links houdt de knop rond zolang het label is ingeklapt. */
+.icon {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+}
+
+.label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: max-width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease, padding-right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fab:hover .label,
+.fab:focus-visible .label,
+.fab[data-open="true"] .label {
+  max-width: 260px;
+  opacity: 1;
+  padding-right: 22px;
+}
+
+@keyframes waIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .fab {
+    right: 14px;
+    bottom: 14px;
+    height: 54px;
+  }
+  .icon {
+    width: 54px;
+    height: 54px;
+  }
+  .label {
+    font-size: 0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab,
+  .label {
+    animation: none;
+    transition: opacity 0.2s ease;
+  }
+  .fab:hover {
+    transform: none;
+  }
+}
